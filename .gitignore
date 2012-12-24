@@ -1,8 +1,17 @@
-/web/bundles/
+# Bootstrap
 /app/bootstrap*
+
+# Symfony directories
+/web/bundles/
 /app/cache/*
 /app/logs/*
 /vendor/
+
+# Configuration files
 /app/config/parameters.yml
+
+# Composer
 composer.phar
+
+# Configuration files
 .DS_Store
