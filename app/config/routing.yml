@@ -1,6 +1,6 @@
 coasters_world_news:
     resource: "@CoastersWorldNewsBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /news
 
 # Internal routing configuration to handle ESI
 #_internal:
