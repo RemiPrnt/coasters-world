@@ -1,3 +1,11 @@
-coasters_world_news_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: CoastersWorldNewsBundle:Default:index }
+coasters_world_news_list:
+    pattern:  /list
+    defaults: { _controller: CoastersWorldNewsBundle:News:list }
+
+coasters_world_news_view:
+    pattern:  /view/{slug}
+    defaults: { _controller: CoastersWorldNewsBundle:News:view }
+
+coasters_world_news_edit:
+    pattern:  /edit/{id}
+    defaults: { _controller: CoastersWorldNewsBundle:News:edit }
