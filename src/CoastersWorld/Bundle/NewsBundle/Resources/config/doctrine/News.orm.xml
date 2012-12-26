@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="CoastersWorld\Bundle\NewsBundle\Entity\News" table="news">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="title" type="string" column="title" length="128" nullable="true"/>
+    <field name="slug" type="string" column="slug" length="128" nullable="true"/>
+    <field name="body" type="text" column="body" nullable="true"/>
+    <field name="publishedAt" type="datetime" column="published_at" nullable="true"/>
+    <one-to-one field="user" target-entity="User">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </one-to-one>
+    <many-to-one field="coaster" target-entity="Coaster">
+      <join-columns>
+        <join-column name="coaster_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="tag" target-entity="Tag" inversed-by="news">
+      <join-table name="news_tag">
+        <join-columns>
+          <join-column name="news_id" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="tag_id" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>
