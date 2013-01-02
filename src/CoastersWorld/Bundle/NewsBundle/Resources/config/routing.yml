@@ -6,6 +6,10 @@ coasters_world_news_view:
     pattern:  /view/{slug}
     defaults: { _controller: CoastersWorldNewsBundle:News:view }
 
+coasters_world_news_new:
+    pattern:  /new
+    defaults: { _controller: CoastersWorldNewsBundle:News:edit }
+
 coasters_world_news_edit:
     pattern:  /edit/{id}
     defaults: { _controller: CoastersWorldNewsBundle:News:edit }

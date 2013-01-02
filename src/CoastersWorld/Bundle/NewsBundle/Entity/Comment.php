@@ -2,8 +2,6 @@
 
 namespace CoastersWorld\Bundle\NewsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * CoastersWorld\Bundle\NewsBundle\Entity\Comment
  */
@@ -25,7 +23,7 @@ class Comment
     private $id;
 
     /**
-     * @var CoastersWorld\Bundle\NewsBundle\Entity\User
+     * @var CoastersWorld\Bundle\UserBundle\Entity\User
      */
     private $user;
 
@@ -44,14 +42,14 @@ class Comment
     public function setBody($body)
     {
         $this->body = $body;
-    
+
         return $this;
     }
 
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -67,14 +65,14 @@ class Comment
     public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
-    
+
         return $this;
     }
 
     /**
      * Get publishedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPublishedAt()
     {
@@ -84,7 +82,7 @@ class Comment
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -94,20 +92,20 @@ class Comment
     /**
      * Set user
      *
-     * @param CoastersWorld\Bundle\NewsBundle\Entity\User $user
+     * @param CoastersWorld\Bundle\UserBundle\Entity\User $user
      * @return Comment
      */
-    public function setUser(\CoastersWorld\Bundle\NewsBundle\Entity\User $user = null)
+    public function setUser(\CoastersWorld\Bundle\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return CoastersWorld\Bundle\NewsBundle\Entity\User 
+     * @return CoastersWorld\Bundle\UserBundle\Entity\User
      */
     public function getUser()
     {
@@ -123,14 +121,14 @@ class Comment
     public function setNews(\CoastersWorld\Bundle\NewsBundle\Entity\News $news = null)
     {
         $this->news = $news;
-    
+
         return $this;
     }
 
     /**
      * Get news
      *
-     * @return CoastersWorld\Bundle\NewsBundle\Entity\News 
+     * @return CoastersWorld\Bundle\NewsBundle\Entity\News
      */
     public function getNews()
     {

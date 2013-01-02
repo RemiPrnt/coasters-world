@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+     - Accueil des news
+{% endblock %}
+
+{% if news.getId() %}
+    {% set action = path("coasters_world_news_edit", { "id": news.getId() }) %}
+{% else %}
+    {% set action = path("coasters_world_news_new") %}
+{% endif %}
+
+{% form_theme form with 'CoastersWorldNewsBundle:Form:fields.html.twig' %}
+
+{% block body %}
+    <div class="sixteen columns bottom-2">
+        <h2 class="title">Form Element 1<span class="line"></span></h2>
+        <form action="{{ action }}" class="form-elements" method="post" {{ form_enctype(form) }}>
+            {{ form_row(form) }}
+
+          <div class="clear"></div>
+          <a onclick="$(this).closest('form').submit();" class="button small color">Save Button</a>
+          <a href="" class="button small gray">Reset Button</a>
+        </form>
+    </div>
+{% endblock %}

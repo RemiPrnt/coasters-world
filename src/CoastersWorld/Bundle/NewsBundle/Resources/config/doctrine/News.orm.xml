@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="CoastersWorld\Bundle\NewsBundle\Entity\News" table="news">
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+  <entity name="CoastersWorld\Bundle\NewsBundle\Entity\News" table="news"
+    repository-class="CoastersWorld\Bundle\NewsBundle\Entity\Repository\NewsRepository">
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="title" type="string" column="title" length="128" nullable="true"/>
-    <field name="slug" type="string" column="slug" length="128" nullable="true"/>
-    <field name="body" type="text" column="body" nullable="true"/>
-    <field name="publishedAt" type="datetime" column="published_at" nullable="true"/>
-    <one-to-one field="user" target-entity="User">
+    <field name="title" type="string" column="title" length="128" nullable="false"/>
+    <field name="slug" type="string" column="slug" length="128" nullable="false">
+      <gedmo:slug unique="true" fields="title" />
+    </field>
+    <field name="body" type="text" column="body" nullable="false"/>
+    <field name="publishedAt" type="datetime" column="published_at" nullable="false"/>
+    <many-to-one field="user" target-entity="CoastersWorld\Bundle\UserBundle\Entity\User">
       <join-columns>
         <join-column name="user_id" referenced-column-name="id"/>
       </join-columns>
-    </one-to-one>
+    </many-to-one>
     <many-to-one field="coaster" target-entity="Coaster">
       <join-columns>
         <join-column name="coaster_id" referenced-column-name="id"/>
