@@ -1,13 +1,79 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="fr"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="fr"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="fr"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="fr"><!--<![endif]-->
     <head>
         <meta charset="UTF-8" />
+        <meta name="description" content="">
+        <meta name="author" content="">
+
         <title>{% block title %}Coasters World{% endblock %}</title>
+
+        <!-- Mobile Specific Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <!-- CSS Style -->
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+        <!-- Color Skins -->
+        <link rel="stylesheet" href="{{ asset('css/skins/blue.css') }}" title="blue">
+        <link rel="alternate stylesheet" href="{{ asset('css/skins/orange.css') }}" title="orange">
+        <link rel="alternate stylesheet" href="{{ asset('css/skins/green.css') }}" title="green">
+        <link rel="alternate stylesheet" href="{{ asset('css/skins/red.css') }}" title="red">
+        <link rel="alternate stylesheet" href="{{ asset('css/skins/purple.css') }}" title="purple">
+
+        <!-- Small Icons -->
+        <link rel="stylesheet" href="{{ asset('css/icons.css') }}">
+
+
+        <script src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('js/colortip.js') }}"></script>
+        <script src="{{ asset('js/tytabs.js') }}"></script>
+        <script src="{{ asset('js/carousel.js') }}"></script>
+        <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
+        <script src="{{ asset('js/jquery.isotope.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.eislideshow.js') }}"></script>
+        <script src="{{ asset('js/selectnav.js') }}"></script>
+        <script src="{{ asset('js/ddsmoothmenu.js') }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="{{ asset('js/jquery.tweet.js') }}"></script>
+        <script src="{{ asset('js/jquery.ui.totop.js') }}"></script>
+        <script src="{{ asset('js/jquery.iconmenu.js') }}"></script>
+        <script src="{{ asset('js/jquery.flexslider.js') }}"></script>
+        <script type='text/javascript'>
+        jQuery(function($){
+          $(".tweet").tweet({
+            join_text: false,
+            username: "CoastersWorld", // Change username here
+            avatar_size: false, // you can active avatar
+            count: 2, // number of tweets
+            seconds_ago_text: "about %d seconds ago",
+            a_minutes_ago_text: "about a minute ago",
+            minutes_ago_text: "about %d minutes ago",
+            a_hours_ago_text: "about an hour ago",
+            hours_ago_text: "il y a %d heures",
+            a_day_ago_text: "about a day ago",
+            days_ago_text: "about %d days ago",
+            view_text: "view tweet on twitter"
+            });
+        });
+        </script>
+
         {% block stylesheets %}{% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% include '::header.html.twig' %}
+
+        <div class="container clearfix">
+            {% block body %}{% endblock %}
+        </div>
+
         {% block javascripts %}{% endblock %}
+
+        {% include '::footer.html.twig' %}
     </body>
 </html>
