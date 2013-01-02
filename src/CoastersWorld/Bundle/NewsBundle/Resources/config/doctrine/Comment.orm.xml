@@ -4,8 +4,8 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="body" type="text" column="body" nullable="true"/>
-    <field name="publishedAt" type="datetime" column="published_at" nullable="true"/>
+    <field name="body" type="text" column="body" nullable="false"/>
+    <field name="publishedAt" type="datetime" column="published_at" nullable="false"/>
     <one-to-one field="user" target-entity="CoastersWorld\Bundle\UserBundle\Entity\User">
       <join-columns>
         <join-column name="user_id" referenced-column-name="id"/>

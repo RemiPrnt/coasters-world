@@ -5,25 +5,23 @@ namespace CoastersWorld\Bundle\NewsBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use CoastersWorld\Bundle\NewsBundle\Entity\News;
+use CoastersWorld\Bundle\NewsBundle\Entity\Comment;
 
-class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
+class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $news = new News();
-        $news->setTitle('Titre test !')
-            ->setBody('Body test !')
+        $comment = new Comment();
+        $comment->setBody('Test commentaire.')
             ->setUser($this->getReference('admin-user'))
+            ->setNews($this->getReference('news'))
             ->setPublishedAt(new \DateTime());
 
-        $manager->persist($news);
+        $manager->persist($comment);
         $manager->flush();
-
-        $this->addReference('news', $news);
     }
 
     /**
@@ -31,6 +29,6 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 4;
     }
 }
