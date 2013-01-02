@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="sixteen columns bottom-2">
+        <h2 class="title">Login<span class="line"></span></h2>
+        {% if error %}
+            <div>{{ error.message }}</div>
+        {% endif %}
+
+        <form action="{{ path('login_check') }}" class="form-elements" method="post">
+            <fieldset>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            </fieldset>
+            <fieldset>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="_password" />
+            </fieldset>
+            <a onclick="$(this).closest('form').submit();" class="button small color">Login</a>
+        </form>
+    </div>
+{% endblock %}
+
