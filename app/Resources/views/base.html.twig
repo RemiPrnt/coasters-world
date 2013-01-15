@@ -13,7 +13,7 @@
         <title>{% block title %}Coasters World{% endblock %}</title>
 
         {% stylesheets
-            '../app/Resources/public/css/*' output='css/base.css' filter='?yui_css,cssrewrite' %}
+            '../app/Resources/public/css/*' output='css/base.css' filter='?yui_css' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
         {% block stylesheets %}{% endblock %}
