@@ -10,6 +10,9 @@
 # Configuration files
 /app/config/parameters.yml
 
+# Backup entities
+*~
+
 # Composer
 composer.phar
 
