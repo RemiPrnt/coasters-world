@@ -421,6 +421,7 @@ html[xmlns] .slides{
 	border-right:1px solid #eaeaea;
 	border-left:1px solid #eaeaea;
 	border-bottom:5px solid #e5e5e5;
+	text-align:center; /* updated */
 }
 
 .sti-menu li a:hover {
@@ -432,14 +433,15 @@ html[xmlns] .slides{
 .sti-menu li a h2{
 	position:absolute;
 	top:109px;
-	/*left:0;*/
-	padding: 0 22%;
+	left:0; /* updated */
+	width:100%; /* updated */
+	/*padding: 0 22%;*/
 }
 .sti-menu li a p{
 	position:absolute;
 	top:150px;
 	left:0;
-	padding: 0 5%;
+	/*padding: 0 5%;*/ /* updated */
 }
 .sti-icon{
 	position:absolute;
@@ -719,9 +721,9 @@ html[xmlns] .slides{
 }
 	
 
-#sidebar.thumbs li img { display: inline-block; max-width:83px; min-height:75px; }
+#sidebar.thumbs li img { display: inline-block; width:83px; height:75px; } /* updated */
 
-#footer.thumbs li img { display: block; max-width: 96px; min-height: 75px; border:2px solid #505050;}
+#footer.thumbs li img { display: block; width: 96px; height: 75px; border:2px solid #505050;} /* updated */
 
 .thumbs li a img { border: none; opacity:.7; filter:alpha(opacity=70); /* IE patch */}
 
@@ -1006,3 +1008,36 @@ div.dark_rounded #pp_full_res .pp_inline,div.dark_square #pp_full_res .pp_inline
 * html .pp_top .pp_middle,* html .pp_bottom .pp_middle{left:0;position:static}
 .pp_top .pp_right,.pp_bottom .pp_right{height:20px;left:auto;position:absolute;right:0;top:0;width:20px}
 .pp_fade,.pp_gallery li.default a img{display:none}
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+.pp_content{min-height:250px !important;min-width:286px !important; max-height:300px !important;max-width:286px !important; overflow:hidden;}
+* html .pp_content{max-height:250px !important;max-width:286px !important; overflow:hidden;} 
+
+#fullResImage /*, iframe */ {
+min-height:200px !important;min-width:286px !important;
+max-height:250px !important;max-width:286px !important;
+}
+
+.pp_gallery, .pp_expand {
+display:none !important;
+}
+
+.pp_next {
+margin-right:-25px !important;
+}
+
+.pp_details {
+width:100% !important;
+}
+
+.pp_pic_holder {
+left:20% !important;
+overflow:hidden;
+min-height:300px;min-width:320px; max-height:300px;max-width:320px; overflow:hidden;
+
+}
+
+
+}

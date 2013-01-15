@@ -7,73 +7,36 @@
         <meta charset="UTF-8" />
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         <title>{% block title %}Coasters World{% endblock %}</title>
 
-        <!-- Mobile Specific Metas -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-        <!-- CSS Style -->
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
-        <!-- Color Skins -->
-        <link rel="stylesheet" href="{{ asset('css/skins/blue.css') }}" title="blue">
-        <link rel="alternate stylesheet" href="{{ asset('css/skins/orange.css') }}" title="orange">
-        <link rel="alternate stylesheet" href="{{ asset('css/skins/green.css') }}" title="green">
-        <link rel="alternate stylesheet" href="{{ asset('css/skins/red.css') }}" title="red">
-        <link rel="alternate stylesheet" href="{{ asset('css/skins/purple.css') }}" title="purple">
-
-        <!-- Small Icons -->
-        <link rel="stylesheet" href="{{ asset('css/icons.css') }}">
-
-
-        <script src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-        <script src="{{ asset('js/colortip.js') }}"></script>
-        <script src="{{ asset('js/tytabs.js') }}"></script>
-        <script src="{{ asset('js/carousel.js') }}"></script>
-        <script src="{{ asset('js/jquery.prettyPhoto.js') }}"></script>
-        <script src="{{ asset('js/jquery.isotope.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.eislideshow.js') }}"></script>
-        <script src="{{ asset('js/selectnav.js') }}"></script>
-        <script src="{{ asset('js/ddsmoothmenu.js') }}"></script>
-        <script src="{{ asset('js/custom.js') }}"></script>
-        <script src="{{ asset('js/jquery.tweet.js') }}"></script>
-        <script src="{{ asset('js/jquery.ui.totop.js') }}"></script>
-        <script src="{{ asset('js/jquery.iconmenu.js') }}"></script>
-        <script src="{{ asset('js/jquery.flexslider.js') }}"></script>
-        <script type='text/javascript'>
-        jQuery(function($){
-          $(".tweet").tweet({
-            join_text: false,
-            username: "CoastersWorld", // Change username here
-            avatar_size: false, // you can active avatar
-            count: 2, // number of tweets
-            seconds_ago_text: "about %d seconds ago",
-            a_minutes_ago_text: "about a minute ago",
-            minutes_ago_text: "about %d minutes ago",
-            a_hours_ago_text: "about an hour ago",
-            hours_ago_text: "il y a %d heures",
-            a_day_ago_text: "about a day ago",
-            days_ago_text: "about %d days ago",
-            view_text: "view tweet on twitter"
-            });
-        });
-        </script>
-
+        {% stylesheets
+            '../app/Resources/public/css/*' output='css/base.css' filter='?yui_css,cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
         {% block stylesheets %}{% endblock %}
 
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% include '::header.html.twig' %}
+        <div id="wrap" class="boxed">
+            {% include '::header.html.twig' %}
 
-        <div class="container clearfix">
-            {% block body %}{% endblock %}
+            <div class="container clearfix">
+                {% block body %}{% endblock %}
+            </div>
+
+            {% include '::footer.html.twig' %}
         </div>
 
-        {% block javascripts %}{% endblock %}
+        {% javascripts
+            '../app/Resources/public/js/thirdparty/jquery-1.8.3.min.js'
+            '../app/Resources/public/js/thirdparty/*'
+            '../app/Resources/public/js/*' output='js/base.js' filter='?yui_js'  %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
 
-        {% include '::footer.html.twig' %}
+        {% block javascripts %}{% endblock %}
     </body>
 </html>
