@@ -5,6 +5,6 @@
       <generator strategy="IDENTITY"/>
     </id>
     <field name="name" type="string" column="name" length="32" nullable="false"/>
-    <many-to-many field="news" target-entity="News" mapped-by="tag"/>
+    <many-to-many field="news" target-entity="News" mapped-by="tags"/>
   </entity>
 </doctrine-mapping>

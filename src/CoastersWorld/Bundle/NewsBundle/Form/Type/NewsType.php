@@ -10,14 +10,14 @@ class NewsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title');
-        $builder->add('body', 'textarea');
+        $builder->add('body');
         $builder->add('publishedAt', 'datetime', array(
             'input'  => 'datetime',
             'widget' => 'choice',
             'date_format' => 'd/MMMM/y',
         ));
-        $builder->add('user', 'entity', array(
-            'class' => 'CoastersWorldNewsBundle:User',
+        $builder->add('author', 'entity', array(
+            'class' => 'CoastersWorldUserBundle:User',
             'property' => 'username',
         ));
     }

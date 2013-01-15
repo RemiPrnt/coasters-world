@@ -10,14 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Tag
 {
     /**
-     * @var string $name
-     */
-    private $name;
-
-    /**
      * @var integer $id
      */
     private $id;
+
+    /**
+     * @var string $name
+     */
+    private $name;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -31,7 +31,17 @@ class Tag
     {
         $this->news = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * Set name
      *
@@ -41,28 +51,18 @@ class Tag
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -74,7 +74,7 @@ class Tag
     public function addNew(\CoastersWorld\Bundle\NewsBundle\Entity\News $news)
     {
         $this->news[] = $news;
-    
+
         return $this;
     }
 
@@ -91,7 +91,7 @@ class Tag
     /**
      * Get news
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getNews()
     {

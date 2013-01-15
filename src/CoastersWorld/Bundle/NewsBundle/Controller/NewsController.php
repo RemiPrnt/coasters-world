@@ -3,22 +3,31 @@
 namespace CoastersWorld\Bundle\NewsBundle\Controller;
 
 use CoastersWorld\Bundle\NewsBundle\Entity\News;
+use CoastersWorld\Bundle\NewsBundle\Entity\Comment;
+use CoastersWorld\Bundle\NewsBundle\Form\Type\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class NewsController extends Controller
 {
-    public function listAction()
+    public function listAction($page)
     {
-        $listNews = $this->getDoctrine()
+        $queryNews = $this->getDoctrine()
             ->getEntityManager()
             ->getRepository('CoastersWorldNewsBundle:News')
             ->findAllOrderedByDateDesc()
         ;
 
+        $paginator = $this->get('knp_paginator');
+        $listNews = $paginator->paginate(
+            $queryNews,
+            $page,
+            1
+        );
+
         if (count($listNews) == 0) {
-            throw new NotFoundHttpException("No news was found");
+            //@todo exception
         }
 
         return $this->render('CoastersWorldNewsBundle:News:list.html.twig', array(

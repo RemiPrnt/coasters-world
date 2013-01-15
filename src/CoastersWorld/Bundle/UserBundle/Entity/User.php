@@ -53,11 +53,17 @@ class User implements UserInterface, \Serializable
     private $group;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $comments;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->group = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
     }
@@ -283,5 +289,38 @@ class User implements UserInterface, \Serializable
         list (
             $this->id,
         ) = unserialize($serialized);
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \CoastersWorld\BundleNewsBundle\Entity\Comment $comments
+     * @return User
+     */
+    public function addComment(\CoastersWorld\Bundle\NewsBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \CoastersWorld\Bundle\NewsBundle\Entity\Comment $comments
+     */
+    public function removeComment(\CoastersWorld\Bundle\NewsBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

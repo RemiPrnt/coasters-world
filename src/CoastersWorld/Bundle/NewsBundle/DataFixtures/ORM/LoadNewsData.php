@@ -17,7 +17,7 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
         $news = new News();
         $news->setTitle('Titre test !')
             ->setBody('Body test !')
-            ->setUser($this->getReference('admin-user'))
+            ->setAuthor($this->getReference('admin-user'))
             ->setPublishedAt(new \DateTime());
 
         $manager->persist($news);

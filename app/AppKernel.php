@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
 
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
@@ -25,7 +27,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
+            new Symfony\Bundle\TwigBundle\TwigBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

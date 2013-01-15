@@ -12,7 +12,7 @@ class NewsRepository extends EntityRepository
             ->createQueryBuilder('n')
             ->addOrderBy('n.publishedAt', 'DESC')
             ->getQuery()
-            ->getResult()
+            //->getResult()
         ;
     }
 }

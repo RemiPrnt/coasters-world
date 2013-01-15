@@ -1,6 +1,8 @@
 coasters_world_news_list:
-    pattern:  /list
-    defaults: { _controller: CoastersWorldNewsBundle:News:list }
+    pattern:  /list/{page}
+    defaults: { _controller: CoastersWorldNewsBundle:News:list, page: 1 }
+    requirements:
+        page: \d+
 
 coasters_world_news_view:
     pattern:  /view/{slug}
@@ -13,3 +15,10 @@ coasters_world_news_new:
 coasters_world_news_edit:
     pattern:  /edit/{id}
     defaults: { _controller: CoastersWorldNewsBundle:News:edit }
+
+coasters_world_news_comment_create:
+    pattern:  /comment/{id}
+    defaults: { _controller: CoastersWorldNewsBundle:Comment:create }
+    requirements:
+        _method:  POST
+        id: \d+

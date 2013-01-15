@@ -10,12 +10,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class News
 {
     /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
      * @var string $title
      */
     private $title;
 
     /**
-     *
      * @var string $slug
      */
     private $slug;
@@ -31,14 +35,9 @@ class News
     private $publishedAt;
 
     /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
      * @var CoastersWorld\Bundle\UserBundle\Entity\User
      */
-    private $user;
+    private $author;
 
     /**
      * @var CoastersWorld\Bundle\NewsBundle\Entity\Coaster
@@ -48,15 +47,31 @@ class News
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      */
-    private $tag;
+    private $tags;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     */
+    private $comments;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->publishedAt = new \DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -152,36 +167,26 @@ class News
     }
 
     /**
-     * Get id
+     * Set author
      *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set user
-     *
-     * @param CoastersWorld\Bundle\UserBundle\Entity\User $user
+     * @param CoastersWorld\Bundle\UserBundle\Entity\User $author
      * @return News
      */
-    public function setUser(\CoastersWorld\Bundle\UserBundle\Entity\User $user = null)
+    public function setAuthor(\CoastersWorld\Bundle\UserBundle\Entity\User $author = null)
     {
-        $this->user = $user;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get author
      *
      * @return CoastersWorld\Bundle\UserBundle\Entity\User
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 
     /**
@@ -215,7 +220,7 @@ class News
      */
     public function addTag(\CoastersWorld\Bundle\NewsBundle\Entity\Tag $tag)
     {
-        $this->tag[] = $tag;
+        $this->tags[] = $tag;
 
         return $this;
     }
@@ -227,7 +232,7 @@ class News
      */
     public function removeTag(\CoastersWorld\Bundle\NewsBundle\Entity\Tag $tag)
     {
-        $this->tag->removeElement($tag);
+        $this->tags->removeElement($tag);
     }
 
     /**
@@ -235,40 +240,41 @@ class News
      *
      * @return Doctrine\Common\Collections\Collection
      */
-    public function getTag()
+    public function getTags()
     {
-        return $this->tag;
+        return $this->tags;
     }
 
-    // /**
-    //  * Handle slug
-    //  *
-    //  * @return Doctrine\Common\Collections\Collection
-    //  */
-    // public function handleSlug()
-    // {
-    //     $text = $this->getTitle();
+    /**
+     * Add comments
+     *
+     * @param \CoastersWorld\Bundle\NewsBundle\Entity\Comment $comments
+     * @return News
+     */
+    public function addComment(\CoastersWorld\Bundle\NewsBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
 
+        return $this;
+    }
 
+    /**
+     * Remove comments
+     *
+     * @param \CoastersWorld\Bundle\NewsBundle\Entity\Comment $comments
+     */
+    public function removeComment(\CoastersWorld\Bundle\NewsBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
 
-    //     $this->setSlug($text);
-    // }
-
-    // private function slugify($text)
-    // {
-    //     // Replace non letter or digits by -
-    //     $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
-    //     // Trim
-    //     $text = trim($text, '-');
-    //     // Transliterate
-    //     if (function_exists('iconv')) {
-    //         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-    //     }
-    //     // Lowercase
-    //     $text = strtolower($text);
-    //     // Remove unwanted characters
-    //     $text = preg_replace('#[^-\w]+#', '', $text);
-
-    //     return $text;
-    // }
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 }

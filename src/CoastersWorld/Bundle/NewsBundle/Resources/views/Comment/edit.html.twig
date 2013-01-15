@@ -1,0 +1,7 @@
+<form action="{{ path('coasters_world_news_comment_create', {'id': comment.news.id})  }}" class="form-elements" method="post" {{ form_enctype(form) }}>
+            {{ form_row(form) }}
+
+          <div class="clear"></div>
+          <a onclick="$(this).closest('form').submit();" class="button small color">Save Button</a>
+          <a href="" class="button small gray">Reset Button</a>
+        </form>
