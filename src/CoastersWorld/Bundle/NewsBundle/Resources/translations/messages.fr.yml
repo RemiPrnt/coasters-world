@@ -1,0 +1,19 @@
+# Translation for news
+news:
+    title:
+        home: Toutes les news
+        create: Rédiger une news
+    read.more: Lire la suite...
+    author: Ecrit par
+    comments: %count% commentaire|%count% commentaires
+    retour.liste: Toutes les news
+    save: Enregistrer la news
+    reset: Effacer
+
+# Translation for comments
+comments:
+    number: '{0} Pas de commentaire|{1} %count% commentaire :|]1,Inf] %count% commentaires :'
+    reply: Répondre
+    add: Ajouter un commentaire
+    save: Enregistrer le commentaire
+    reset: Effacer

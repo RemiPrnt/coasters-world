@@ -1,4 +1,7 @@
-<h4 class="title">Comments ({{ comments|length }})<span class="line"></span></h4>
+<h4 class="title">
+    {% transchoice comments|length with {'%count%': comments|length} %}comments.number{% endtranschoice %}
+ <span class="line"></span>
+ </h4>
 
 {% for comment in comments %}
 <ul class="comments">
@@ -6,7 +9,7 @@
        <div class="avatar"><img src="{{ asset('images/img/blog/avatar.jpg') }}" alt="" /></div>
        <div class="comment">
          <h4 class="title">{{ comment.author.username }}
-         <span class="right">{{ comment.publishedAt|date("F jS \\a\\t g:ia") }} / <a href="#">Reply</a> </span>
+         <span class="right">{{ comment.publishedAt|date("F jS \\a\\t g:ia") }} / <a href="#">{{ 'comments.reply'|trans }}</a> </span>
          </h4>
          <p>{{ comment.body }}</p>
        </div>

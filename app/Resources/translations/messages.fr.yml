@@ -1,0 +1,19 @@
+# Translation footer
+footer:
+    about: A propos
+    latest:
+        twitter: Derniers tweets
+    rights: © Tous droits réservés
+    origin: 2003
+
+# Translation for header menu
+menu:
+    home: Accueil
+    news:
+        list: News
+        new: Poster une news
+    database: Base de Données
+    logout: Se déconnecter
+
+# General translation
+website: Coasters World

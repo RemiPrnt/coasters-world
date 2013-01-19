@@ -1,0 +1,5 @@
+#Translation for login
+login:
+    title: Se connecter
+    username: Pseudo :
+    password: Mot de passe :

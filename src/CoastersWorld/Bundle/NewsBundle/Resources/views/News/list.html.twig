@@ -1,9 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}
-    {{ parent() }}
-     - Accueil des news
-{% endblock %}
+{% block title %}{{ 'news.title.home'|trans }}{% endblock %}
 
 {% block body %}
     <div class="sixteen columns">
@@ -28,15 +25,15 @@
                   Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit.
                   Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus.Vestibulum libero nisl...
                 </p>
-                <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}" class="button small color">Read More</a>
+                <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}" class="button small color">{{ 'news.read.more'|trans }}</a>
             </div>
             <hr class="bottom-2" />
 
             <div class="post-meta bottom-2 transparent">
                 <div class="meta"><span class="history icon gray"></span>{{ news.publishedAt|date("d/m/Y") }}</div>
                 <div class="meta"><span class="more-items icon gray"></span><a href="#">Web Design</a></div>
-                <div class="meta"><span class="user icon gray"></span>De {{ news.author.username }}</div>
-                <div class="meta"><span class="conversation icon gray"></span> With 12 Comments </div>
+                <div class="meta"><span class="user icon gray"></span>{{ 'news.author'|trans }} {{ news.author.username }}</div>
+                <div class="meta"><span class="conversation icon gray"></span>{% transchoice news.comments|length with {'%count%': news.comments|length} %}news.comments{% endtranschoice %}</div>
             </div>
         </div>
         {% endfor %}

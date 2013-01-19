@@ -3,24 +3,24 @@
         <div class="one-third column">
             <div class="logo">
                 <a href="index.html">
-                    <img src="{{ asset('images/logo.png') }}" alt="Crevision - Creative Template" />
+                    <img src="{{ asset('images/logo.png') }}" alt="{{ 'website'|trans }}" />
                 </a>
             </div>
         </div>
         <div class="two-thirds column">
             <nav id="menu" class="navigation">
                 <ul id="nav">
-                    <li><a href class="active">Home</a></li>
-                    <li><a href="{{ path('coasters_world_news_list') }}">News</a>
+                    <li><a href class="active">{{ 'menu.home'|trans }}</a></li>
+                    <li><a href="{{ path('coasters_world_news_list') }}">{{ 'menu.news.list'|trans }}</a>
                         <ul>
-                            <li><a href="{{ path("coasters_world_news_new") }}">Poster une news</a></li>
+                            <li><a href="{{ path("coasters_world_news_new") }}">
+                                {{ 'news.title.create'|trans }}
+                            </a></li>
                         </ul>
                     </li>
-                    <li><a href>Features</a></li>
-                    <li><a href>Portfolio</a></li>
-                    <li><a href>Blog</a></li>
+                    <li><a href>{{ 'menu.database'|trans }}</a></li>
                     {% if app.user %}
-                    <li><a href="{{ path('logout') }}">Logout</a></li>
+                    <li><a href="{{ path('logout') }}">{{ 'menu.logout'|trans }}</a></li>
                     {% endif %}
                 </ul>
             </nav>
