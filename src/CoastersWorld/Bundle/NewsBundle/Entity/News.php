@@ -40,7 +40,7 @@ class News
     private $author;
 
     /**
-     * @var CoastersWorld\Bundle\NewsBundle\Entity\Coaster
+     * @var CoastersWorld\Bundle\DatabaseBundle\Entity\Coaster
      */
     private $coaster;
 
@@ -192,10 +192,10 @@ class News
     /**
      * Set coaster
      *
-     * @param CoastersWorld\Bundle\NewsBundle\Entity\Coaster $coaster
+     * @param CoastersWorld\Bundle\DatabaseBundle\Entity\Coaster $coaster
      * @return News
      */
-    public function setCoaster(\CoastersWorld\Bundle\NewsBundle\Entity\Coaster $coaster = null)
+    public function setCoaster(\CoastersWorld\Bundle\DatabaseBundle\Entity\Coaster $coaster = null)
     {
         $this->coaster = $coaster;
 
@@ -205,7 +205,7 @@ class News
     /**
      * Get coaster
      *
-     * @return CoastersWorld\Bundle\NewsBundle\Entity\Coaster
+     * @return CoastersWorld\Bundle\DatabaseBundle\Entity\Coaster
      */
     public function getCoaster()
     {

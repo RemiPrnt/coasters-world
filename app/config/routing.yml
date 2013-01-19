@@ -1,13 +1,17 @@
 coasters_world_core:
     resource: "@CoastersWorldCoreBundle/Resources/config/routing.yml"
 
-coasters_world_user:
-    resource: "@CoastersWorldUserBundle/Resources/config/routing.yml"
-    prefix:   /user
+coasters_world_database:
+    resource: "@CoastersWorldDatabaseBundle/Resources/config/routing.yml"
+    prefix:   /coaster
 
 coasters_world_news:
     resource: "@CoastersWorldNewsBundle/Resources/config/routing.yml"
     prefix:   /news
+
+coasters_world_user:
+    resource: "@CoastersWorldUserBundle/Resources/config/routing.yml"
+    prefix:   /user
 
 login:
     pattern:   /login

@@ -18,12 +18,13 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
         $news->setTitle('Titre test !')
             ->setBody('Body test !')
             ->setAuthor($this->getReference('admin-user'))
+            ->setCoaster($this->getReference('coaster-tdz'))
             ->setPublishedAt(new \DateTime());
 
         $manager->persist($news);
         $manager->flush();
 
-        $this->addReference('news', $news);
+        $this->addReference('news1', $news);
     }
 
     /**
@@ -31,6 +32,6 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 4;
     }
 }

@@ -1,0 +1,7 @@
+parameters:
+#    coasters_world_database.example.class: CoastersWorld\Bundle\DatabaseBundle\Example
+
+services:
+#    coasters_world_database.example:
+#        class: %coasters_world_database.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

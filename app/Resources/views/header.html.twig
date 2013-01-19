@@ -33,7 +33,15 @@
                             </a></li>
                         </ul>
                     </li>
-                    <li><a href>{{ 'menu.database'|trans }}</a></li>
+                    <li>
+                        <a href="{{ path('coasters_world_database_index') }}"
+                            {% if 'coasters_world_database' in app.request.get('_route') %}
+                                class="active"
+                            {% endif %}
+                        >
+                            {{ 'menu.database'|trans }}
+                        </a>
+                    </li>
                     {% if app.user %}
                     <li><a href="{{ path('logout') }}">{{ 'menu.logout'|trans }}</a></li>
                     {% endif %}

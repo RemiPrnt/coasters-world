@@ -1,11 +1,11 @@
 <?php
 
-namespace CoastersWorld\Bundle\NewsBundle\Entity;
+namespace CoastersWorld\Bundle\DatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CoastersWorld\Bundle\NewsBundle\Entity\Coaster
+ * CoastersWorld\Bundle\DatabaseBundle\Entity\Coaster
  */
 class Coaster
 {
@@ -19,6 +19,11 @@ class Coaster
      */
     private $id;
 
+    /**
+     * @var string $slug
+     */
+    private $slug;
+
 
     /**
      * Set name
@@ -29,14 +34,14 @@ class Coaster
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -46,10 +51,33 @@ class Coaster
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return News
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
