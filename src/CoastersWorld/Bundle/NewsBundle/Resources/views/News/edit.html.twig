@@ -14,8 +14,12 @@
     <div class="sixteen columns bottom-2">
         <h2 class="title">{{ 'news.title.create'|trans }}<span class="line"></span></h2>
         <form action="{{ action }}" class="form-elements" method="post" {{ form_enctype(form) }}>
-            {{ form_row(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.body) }}
+            {{ form_row(form.publishedAt) }}
+            {{ form_row(form.author) }}
 
+            {{ form_rest(form) }}
           <div class="clear"></div>
           <a onclick="$(this).closest('form').submit();" class="button small color">{{ 'news.save'|trans }}</a>
           <a href="" class="button small gray">{{ 'news.reset'|trans }}</a>

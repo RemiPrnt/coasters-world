@@ -9,17 +9,24 @@ class NewsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title');
-        $builder->add('body');
-        $builder->add('publishedAt', 'datetime', array(
-            'input'  => 'datetime',
-            'widget' => 'choice',
-            'date_format' => 'd/MMMM/y',
-        ));
-        $builder->add('author', 'entity', array(
-            'class' => 'CoastersWorldUserBundle:User',
-            'property' => 'username',
-        ));
+        $builder
+            ->add('title', 'text', array(
+                'label' => 'test',
+            ))
+            ->add('body', 'textarea', array(
+                'label' => 'test',
+            ))
+            ->add('publishedAt', 'datetime', array(
+                'input'  => 'datetime',
+                'widget' => 'choice',
+                'date_format' => 'd/MMMM/y',
+            ))
+            ->add('author', 'entity', array(
+                'class' => 'CoastersWorldUserBundle:User',
+                'property' => 'username',
+                'label' => 'test',
+            ))
+        ;
     }
 
     public function getName()
