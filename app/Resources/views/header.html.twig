@@ -10,8 +10,23 @@
         <div class="two-thirds column">
             <nav id="menu" class="navigation">
                 <ul id="nav">
-                    <li><a href class="active">{{ 'menu.home'|trans }}</a></li>
-                    <li><a href="{{ path('coasters_world_news_list') }}">{{ 'menu.news.list'|trans }}</a>
+                    <li>
+                        <a href="{{ path('coasters_world_core_homepage') }}"
+                            {% if app.request.get('_route') == 'coasters_world_core_homepage' %}
+                                class="active"
+                            {% endif %}
+                        >
+                            {{ 'menu.home'|trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('coasters_world_news_list') }}"
+                            {% if 'coasters_world_news' in app.request.get('_route') %}
+                                class="active"
+                            {% endif %}
+                        >
+                            {{ 'menu.news.list'|trans }}
+                        </a>
                         <ul>
                             <li><a href="{{ path("coasters_world_news_new") }}">
                                 {{ 'news.title.create'|trans }}

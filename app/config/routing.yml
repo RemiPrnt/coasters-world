@@ -1,3 +1,6 @@
+coasters_world_core:
+    resource: "@CoastersWorldCoreBundle/Resources/config/routing.yml"
+
 coasters_world_user:
     resource: "@CoastersWorldUserBundle/Resources/config/routing.yml"
     prefix:   /user

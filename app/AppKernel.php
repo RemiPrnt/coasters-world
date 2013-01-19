@@ -8,6 +8,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            new CoastersWorld\Bundle\CoreBundle\CoastersWorldCoreBundle(),
             new CoastersWorld\Bundle\NewsBundle\CoastersWorldNewsBundle(),
             new CoastersWorld\Bundle\UserBundle\CoastersWorldUserBundle(),
 
@@ -27,7 +28,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle()
+            new Symfony\Bundle\TwigBundle\TwigBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
