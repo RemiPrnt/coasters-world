@@ -8,6 +8,14 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CoastersWorldCoreBundle:Default:index.html.twig');
+        $listNews = $this->getDoctrine()
+            ->getEntityManager()
+            ->getRepository('CoastersWorldNewsBundle:News')
+            ->findTwoLatest()
+        ;
+
+        return $this->render('CoastersWorldCoreBundle:Default:index.html.twig', array(
+            'listNews' => $listNews
+        ));
     }
 }

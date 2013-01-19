@@ -11,7 +11,7 @@
         {% for news in listNews %}
         <div class="post bottom">
             <h2 class="title bottom top-2">
-                <a href="single_post.html">{{ news.title }}</a><span class="line"></span>
+                <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}">{{ news.title }}</a><span class="line"></span>
             </h2>
 
             <div class="image-post bottom left">
