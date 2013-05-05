@@ -1,7 +1,3 @@
-jms_security_extra:
-    secure_all_services: false
-    expressions: true
-
 security:
     encoders:
         CoastersWorld\Bundle\UserBundle\Entity\User:
@@ -40,4 +36,3 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/news/new, roles: ROLE_ADMIN }
-        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

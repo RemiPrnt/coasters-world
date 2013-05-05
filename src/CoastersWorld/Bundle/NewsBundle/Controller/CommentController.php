@@ -12,6 +12,12 @@ class CommentController extends Controller
     {
         $news = $this->getNews($id);
 
+        if (! $this->get('security.context')->isGranted('ROLE_USER')) {
+            $uri = $this->get('router')->generate('coasters_world_news_view', array('slug' => $news->getSlug()), true);
+            $this->getRequest()->getSession()->set('_security.secured_area.target_path', $uri);
+            return $this->render('CoastersWorldUserBundle:Security:redirectLogin.html.twig');
+        }
+
         $comment = new Comment();
         $comment->setNews($news);
         $comment->setAuthor($this->getUser());
@@ -36,8 +42,6 @@ class CommentController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-
-            //echo '<pre>'; var_dump($comment); exit;
 
             $em->persist($comment);
             $em->flush();

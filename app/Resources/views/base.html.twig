@@ -24,19 +24,19 @@
         <div id="wrap" class="boxed">
             {% include '::header.html.twig' %}
 
+            {% javascripts
+            '../app/Resources/public/js/thirdparty/jquery-1.8.3.min.js'
+            '../app/Resources/public/js/thirdparty/*'
+            '../app/Resources/public/js/*' output='js/base.js' filter='?yui_js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
             <div class="container clearfix">
                 {% block body %}{% endblock %}
             </div>
 
             {% include '::footer.html.twig' %}
         </div>
-
-        {% javascripts
-            '../app/Resources/public/js/thirdparty/jquery-1.8.3.min.js'
-            '../app/Resources/public/js/thirdparty/*'
-            '../app/Resources/public/js/*' output='js/base.js' filter='?yui_js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
 
         {% block javascripts %}{% endblock %}
     </body>

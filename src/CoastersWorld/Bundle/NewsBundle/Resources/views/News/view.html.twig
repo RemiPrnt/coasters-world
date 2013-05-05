@@ -43,7 +43,7 @@
         {% include 'CoastersWorldNewsBundle:Comment:list.html.twig' with { 'comments': news.comments } %}
 
         <h4 class="title">{{ 'comments.add'|trans }}<span class="line"></span></h4>
-        {% render 'CoastersWorldNewsBundle:Comment:new' with { 'id': news.id } %}
+        {{ render(controller('CoastersWorldNewsBundle:Comment:new', { 'id': news.id })) }}
         {# {% include 'CoastersWorldNewsBundle:Comment:edit.html.twig' with { 'comment': comment } %} #}
     </div>
 {% endblock %}

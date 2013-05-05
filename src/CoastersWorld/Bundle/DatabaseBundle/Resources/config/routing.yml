@@ -5,3 +5,7 @@ coasters_world_database_index:
 coasters_world_database_view:
     pattern:  /view/{slug}
     defaults: { _controller: CoastersWorldDatabaseBundle:Coaster:view }
+
+coasters_world_database_search_ajax:
+    pattern:  /search
+    defaults: { _controller: CoastersWorldDatabaseBundle:Coaster:searchAjax }

@@ -44,6 +44,6 @@
         {% endfor %}
 
         {# display navigation #}
-        {{ listNews.render()|raw }}
+        {{ knp_pagination_render(listNews) }}
     </div>
 {% endblock %}

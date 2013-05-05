@@ -15,7 +15,12 @@ class LoadCoasterData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $coaster = new Coaster();
-        $coaster->setName('Tonnerre de Zeus');
+        $coaster
+            ->setName('Tonnerre de Zeus')
+            ->setRefCoaster($this->getReference('refCoaster-tdz'))
+            ->setPark($this->getReference('park-asterix'))
+            ->setStatus($this->getReference('status-open'))
+        ;
 
         $manager->persist($coaster);
         $manager->flush();
@@ -28,6 +33,6 @@ class LoadCoasterData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 20;
     }
 }

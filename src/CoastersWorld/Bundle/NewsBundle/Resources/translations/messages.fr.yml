@@ -3,10 +3,12 @@ news:
     title:
         home: Toutes les news
         create: Rédiger une news
-    read.more: Lire la suite...
+    read:
+        more: Lire la suite...
     author: Ecrit par
     comments: %count% commentaire|%count% commentaires
-    retour.liste: Toutes les news
+    retour:
+        liste: Toutes les news
     save: Enregistrer la news
     reset: Effacer
 

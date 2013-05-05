@@ -29,6 +29,40 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
+        $userFlorian = new User();
+        $userFlorian->setUsername('florian');
+        $userFlorian->setSalt(md5(uniqid()));
+
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($userFlorian)
+        ;
+        $userFlorian->setPassword($encoder->encodePassword('florian', $userFlorian->getSalt()));
+
+        $userFlorian->setEmail('florian@coastersworld.fr');
+        $userFlorian->setCreatedAt(new \DateTime());
+        $userFlorian->setIsActive(1);
+
+        $manager->persist($userFlorian);
+        $this->addReference('user-florian', $userFlorian);
+
+        $userBenj = new User();
+        $userBenj->setUsername('BenJ');
+        $userBenj->setSalt(md5(uniqid()));
+
+        $encoder = $this->container
+            ->get('security.encoder_factory')
+            ->getEncoder($userBenj)
+        ;
+        $userBenj->setPassword($encoder->encodePassword('BenJ', $userBenj->getSalt()));
+
+        $userBenj->setEmail('benj@gmail.com');
+        $userBenj->setCreatedAt(new \DateTime());
+        $userBenj->setIsActive(1);
+
+        $manager->persist($userBenj);
+        $this->addReference('user-benj', $userBenj);
+
         $userAdmin = new User();
         $userAdmin->setUsername('admin');
         $userAdmin->setSalt(md5(uniqid()));
@@ -37,16 +71,16 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             ->get('security.encoder_factory')
             ->getEncoder($userAdmin)
         ;
-        $userAdmin->setPassword($encoder->encodePassword('adminpass', $userAdmin->getSalt()));
+        $userAdmin->setPassword($encoder->encodePassword('admin', $userAdmin->getSalt()));
 
         $userAdmin->setEmail('test@coastersworld.fr');
         $userAdmin->setCreatedAt(new \DateTime());
         $userAdmin->setIsActive(1);
 
         $manager->persist($userAdmin);
-        $manager->flush();
+        $this->addReference('user-admin', $userAdmin);
 
-        $this->addReference('admin-user', $userAdmin);
+        $manager->flush();
     }
 
     /**

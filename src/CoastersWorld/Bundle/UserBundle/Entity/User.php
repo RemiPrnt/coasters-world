@@ -323,4 +323,42 @@ class User implements UserInterface, \Serializable
     {
         return $this->comments;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ratings;
+
+
+    /**
+     * Add ratings
+     *
+     * @param \CoastersWorld\Bundle\DatabaseBundle\Entity\Rating $ratings
+     * @return User
+     */
+    public function addRating(\CoastersWorld\Bundle\DatabaseBundle\Entity\Rating $ratings)
+    {
+        $this->ratings[] = $ratings;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ratings
+     *
+     * @param \CoastersWorld\Bundle\DatabaseBundle\Entity\Rating $ratings
+     */
+    public function removeRating(\CoastersWorld\Bundle\DatabaseBundle\Entity\Rating $ratings)
+    {
+        $this->ratings->removeElement($ratings);
+    }
+
+    /**
+     * Get ratings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRatings()
+    {
+        return $this->ratings;
+    }
 }

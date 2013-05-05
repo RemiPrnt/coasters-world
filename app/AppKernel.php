@@ -11,13 +11,10 @@ class AppKernel extends Kernel
             new CoastersWorld\Bundle\CoreBundle\CoastersWorldCoreBundle(),
             new CoastersWorld\Bundle\NewsBundle\CoastersWorldNewsBundle(),
             new CoastersWorld\Bundle\UserBundle\CoastersWorldUserBundle(),
+            new CoastersWorld\Bundle\DatabaseBundle\CoastersWorldDatabaseBundle(),
 
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-
-            new JMS\AopBundle\JMSAopBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
-            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
 
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
@@ -29,12 +26,10 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new CoastersWorld\Bundle\DatabaseBundle\CoastersWorldDatabaseBundle(),
+            new CoastersWorld\Bundle\SiteBundle\CoastersWorldSiteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
-
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
 

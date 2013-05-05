@@ -1,3 +1,7 @@
+coasters_world_site:
+    resource: "@CoastersWorldSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 coasters_world_core:
     resource: "@CoastersWorldCoreBundle/Resources/config/routing.yml"
 
@@ -22,8 +26,3 @@ login_check:
 
 logout:
     pattern:   /logout
-
-# Internal routing configuration to handle ESI
-#_internal:
-#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#    prefix:   /_internal

@@ -1,5 +1,36 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Index de la BDD{% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<input type="text" id="toto" style="width:300px"/>
+
+	<script type="text/javascript">
+		$(function() {
+    		$('#toto').select2({
+    			placeholder: 'Chercher un coaster...',
+    			minimumInputLength: 2,
+    			ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+			        url: "{{ path('coasters_world_database_search_ajax') }}",
+			        dataType: 'json',
+			        data: function (term, page) {
+			            return {
+			                q: term
+			            };
+			        },
+			        results: function (data, page) { // parse the results into the format expected by Select2.
+			            return {results: data };
+			        }
+			    },
+			    formatResult: function (data) {
+			        return "<div class='select2-user-result'><span class='heart icon'></span>" + data.name + "</div>";
+			    },
+    		});
+    	});
+	</script>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/coastersworlddatabase/js/select2.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('bundles/coastersworlddatabase/css/select2.css') }}" />
+{% endblock %}
