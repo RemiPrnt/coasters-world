@@ -1,0 +1,15 @@
+# Translation for database
+info:
+    type : Type
+    speed: Vitesse max
+    height: Hauteur max
+    duration: Durée
+    length: Longueur
+    manufacturer: Constructeur
+    inversion_number: Inversions
+    g_force: Forces G
+
+units:
+    speed: km/h
+    length: m
+    force: G

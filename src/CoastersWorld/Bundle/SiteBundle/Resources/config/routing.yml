@@ -1,0 +1,3 @@
+coasters_world_site_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: CoastersWorldSiteBundle:Default:index }

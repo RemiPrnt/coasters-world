@@ -1,0 +1,27 @@
+{% block rating_widget %}
+    {% spaceless %}
+    {{ block('hidden_widget') }}
+
+    <div id="rating_number"></div>
+
+    <script type="text/javascript">
+      $(function() {
+        $('#rating_number').raty({
+            starOff: '{{ asset('bundles/coastersworlddatabase/images/star-off-big.png') }}',
+            starOn: '{{ asset('bundles/coastersworlddatabase/images/star-on-big.png') }}',
+            starHalf: '{{ asset('bundles/coastersworlddatabase/images/star-half-big.png') }}',
+            half: true,
+            size: 24,
+            target:  '#{{id}}',
+            targetType: 'number',
+            targetKeep: true,
+            score: {{value ? value : '0'}},
+            click: function() {
+                console.log($('#{{id}}').val());
+                $(this).closest("form").submit();
+            }
+        });
+      });
+    </script>
+    {% endspaceless %}
+{% endblock %}
