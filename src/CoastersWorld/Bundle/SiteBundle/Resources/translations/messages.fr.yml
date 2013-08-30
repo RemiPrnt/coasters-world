@@ -1,0 +1,56 @@
+# Translation for database
+info:
+    type : Type
+    speed: Vitesse max
+    height: Hauteur max
+    duration: Durée
+    length: Longueur
+    manufacturer: Constructeur
+    inversion_number: Inversions
+    g_force: Forces G
+    configuration: Trains
+tab:
+    caracteristics: Caractéristiques
+    photos: Photos
+    videos: Vidéos
+    feedbacks: Avis
+rating:
+    mark: Moyenne des notes
+    vote: A vous de voter !
+
+units:
+    speed: km/h
+    length: m
+    force: G
+
+# Translation for news
+news:
+    title:
+        home: Toutes les news
+        create: Rédiger une news
+    read:
+        more: Lire la suite...
+    author: Ecrit par
+    comments: %count% commentaire|%count% commentaires
+    retour:
+        liste: Toutes les news
+    save: Enregistrer la news
+    reset: Effacer
+
+# Translation for comments
+comments:
+    number: '{0} Pas de commentaire|{1} %count% commentaire :|]1,Inf] %count% commentaires :'
+    reply: Répondre
+    add: Ajouter un commentaire
+    save: Poster le commentaire
+    reset: Effacer
+    here: Ecrivez votre commentaire ici...
+
+#Translation for login
+login:
+    title: Se connecter
+    username: Pseudo
+    password: Mot de passe
+    create_account: S'enregistrer
+    password_forgot: Mot de passe oublié ?
+

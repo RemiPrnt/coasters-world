@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ 'login.title'|trans }}{% endblock %}
+
+{% block body %}
+<section id="login">
+    <div class="row">
+        {% if error %}
+            <div class="alert alert-error">{{ error.message }}</div>
+        {% endif %}
+        <div class="span4 offset4">
+            <div class="login">
+                <div class="header">
+                    <h2>{{ 'login.title'|trans }}</h2>
+                </div>
+                <div class="internal-login">
+                    <form action="{{ path('login_check') }}" method="post">
+                        <div class="control-group">
+                            <div class="controls">
+                                <i class="icon-user"></i>
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" class="input-block-level" placeholder="{{ 'login.username'|trans }}">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <i class="icon-key"></i>
+                                <input type="password" id="password" name="_password" class="input-block-level" placeholder="{{ 'login.password'|trans }}">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <ul class="unstyled">
+                                <li><a href="#">{{ 'login.create_account'|trans }}</a></li>
+                                <li><a href="#">{{ 'login.password_forgot'|trans }}</a></li>
+                            </ul>
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-large">{{ 'login.title'|trans }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

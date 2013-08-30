@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ news.title }}{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="span8">
+        <div class="content">
+            <section id="blog">
+                <div class="blog blog-page">
+                    <div class="page-header">
+                        <h1>{{ news.title }}</h1>
+                    </div>
+                    <div class="meta">
+                        <small class="date"><i class="icon-calendar"></i> {{ news.publishedAt|date("d/m/Y") }}</small>
+                        <small><i class="icon-pencil"></i> {{ 'news.author'|trans }} {{ news.author.username }}</small>
+                        <small class="pull-right">
+                            <a href="{{ path('coasters_world_database_view', {'slug': news.coaster.slug})  }}">
+                                <span class="label"><i class="icon-tag"></i>{{ news.coaster.name }}</span>
+                            </a>
+                        </small>
+                    </div>
+                    <div class="body">
+                        <p>{{ news.body }}</p>
+                    </div>
+                    <hr class="dotted">
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': news.comments } only %}
+
+{{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': news.id })) }}
+{# {% include 'CoastersWorldSiteBundle:Comment:edit.html.twig' with { 'comment': comment } %} #}
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ coaster.name }}{% endblock %}
+
+{% block body %}
+<div class="row">
+  <div class="span12">
+    <div class="page-header">
+      <h1>
+        <i id="status" data-toggle='tooltip' title="{{ coaster.status.name }}"
+          class={% if coaster.status.idTechnical == 1 %}"icon-ok-sign"
+          {% elseif coaster.status.idTechnical == 2 %}"icon-lock"
+          {% elseif coaster.status.idTechnical == 3 %}"icon-wrench"
+          {% elseif coaster.status.idTechnical == 4 %}"icon-share-alt"
+          {% else %}"icon-question-sign"{% endif %}
+        >
+        </i>
+        {{ coaster.name }}
+        <small>{{ coaster.park.name }}, {{ coaster.park.country.name }}</small>
+      </h1>
+    </div>
+  </div>
+  <!-- Left side -->
+  <div class="span8">
+    <div class="content">
+      <div class="page">
+        <div id="tab">
+          <div class="bs-docs-example">
+            <!-- Tabs Widget -->
+            <ul id="tabs" class="tabs nav nav-tabs">
+              <li class="active"><a href="#caracs" data-toggle="tab"><i class="icon-cogs"></i> {{ 'tab.caracteristics'|trans }}</a></li>
+              <li><a href="#photos" data-toggle="tab"><i class="icon-camera"></i> {{ 'tab.photos'|trans }}</a></li>
+              <li><a href="#videos" data-toggle="tab"><i class="icon-facetime-video"></i> {{ 'tab.videos'|trans }}</a></li>
+              <li><a href="#feedbacks" data-toggle="tab"><i class="icon-group"></i> {{ 'tab.feedbacks'|trans }}</a></li>
+            </ul>
+            <div id="tabsContent" class="tab-content">
+              <div class="tab-pane fade in active" id="caracs">
+                <dl class="dl-horizontal">
+                  <dt>{% spaceless %}{{ 'info.type'|trans }}</dt>
+                  <dd>{% for type in coaster.refCoaster.types %}
+                    {{ type.name }} {% if not loop.last %}|{% endif %}
+                    {% endfor %}
+                    {% endspaceless %}
+                  </dd>
+                  <dt>{{ 'info.manufacturer'|trans }}</dt>
+                  <dd>{{ coaster.refCoaster.manufacturer.name|default('-') }}</dd>
+                  <dt>{{ 'info.speed'|trans }}</dt>
+                  <dd>{{ coaster.refCoaster.speed }} {{ 'units.speed'|trans }}</dd>
+                  <dt>{{ 'info.height'|trans }}</dt>
+                  <dd>{{ coaster.refCoaster.height }} {{ 'units.length'|trans }}</dd>
+                  <dt>{{ 'info.length'|trans }}</dt>
+                  <dd>{{ coaster.refCoaster.length }} {{ 'units.length'|trans }}</dd>
+                  <dt>{{ 'info.inversion_number'|trans }}</dt>
+                  <dd>{{ coaster.refCoaster.inversionNumber }}</dd>
+                  <dt>{{ 'info.g_force'|trans }}</dt>
+                  <dd>{{ coaster.refCoaster.gForce }} {{ 'units.force'|trans }}</dd>
+                  <dt>{{ 'info.duration'|trans }}</dt>
+                  <dd>{{ coaster.refCoaster.duration|date("i\\m\\i\\n s\\s") }}</dd>
+                  <dt>{{ 'info.configuration'|trans }}</dt>
+                  <dd>|{{ coaster.refCoaster.restraint.name|default('-') }}</dd>
+                </dl>
+              </div>
+              <div class="tab-pane fade in" id="photos">
+              </div>
+              <div class="tab-pane fade in" id="videos">
+              </div>
+              <div class="tab-pane fade in" id="feedbacks">
+                <div class="latest-blog">
+                  <article>
+                    <span class="icon"><i class="icon-quote-left"></i></span>
+                    <h3>Une phrase d'accroche écrit par l'utilisateur !
+                      <small><i class="icon-calendar"></i> 6 mai 2013</small>
+                      <small><i class="icon-pencil"></i> {{ 'news.author'|trans }} Florian</small>
+                    </h3>
+                    <p>Texte de l'avis du rider :
+                    Tout simplement mon meilleur coaster ,un truc indéfinissable !
+                    A tester absolument au dernier rang en fin de journée, une fois qu'il est chaud bouillant et la c'est le voile noir assuré (je conseille la place la extérieure gauche ;) )
+                    Cette helix est d'une intensité ! Et ce loop aussi ! Et ce dernier flat spin "nom de dieu" !
+                    </p>
+                  </article>
+                  <article>
+                    <span class="icon"><i class="icon-quote-left"></i></span>
+                    <h3>Le meilleur wooden coaster français !!
+                      <small>2 mai 2013</small>
+                    </h3>
+                    <p>DEUXIEME AVIS :
+                    Tout simplement mon meilleur coaster ,un truc indéfinissable !
+                    A tester absolument au dernier rang en fin de journée, une fois qu'il est chaud bouillant et la c'est le voile noir assuré (je conseille la place la extérieure gauche ;) )
+                    Cette helix est d'une intensité ! Et ce loop aussi ! Et ce dernier flat spin "nom de dieu" !
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="fadeout">
+  </div>
+  <!-- End left side -->
+
+  <!-- Right side -->
+  <div class="span4">
+    <aside>
+      <div class="widget">
+        <div class="balloon" id="rating">
+          <div class="icon"><i class="icon-trophy icon-4x"></i></div>
+          <h3>{{ 'rating.mark'|trans }}</h3>
+          <div class="text-center"><h4>{{ coaster.rate|number_format(1, ',') }} / 10</h4></div>
+        </div>
+      </div>
+      <div class="widget">
+        <div class="simple-box">
+          <i class="icon-bullhorn icon-2x icon-round"><span></span></i><h3>Mon vote :</h3>
+                    <form action="{{ path("coasters_world_database_view", { "slug": coaster.slug }) }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form.value) }}
+            {{ form_rest(form) }}
+          </form>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <!-- End right side -->
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/jquery.raty.min.js') }}"></script>
+    <script type="text/javascript">
+      jQuery('#status').tooltip();
+    </script>
+{% endblock %}
