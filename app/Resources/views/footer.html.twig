@@ -1,53 +1,93 @@
 <footer>
-  <div class="container">
-    <div class="one-third column">
-      <div class="about">
-        <h3 class="title">{{ 'footer.about'|trans }}<span class="line"></span></h3>
-        <p>
-        Consectetur adipiscing elit aeneane lorem lipsum, condimentum ultrices consequat eu, vehicula mauris lipsum adipiscing
-        lipsum aenean orci lorem Asequat. <br /> lorem ipsum dolor lorem sit amet, consectetur adipiscing dolor .
-        </p>
-      </div>
-    </div>
+  <!-- Footer Block -->
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <!-- Logo -->
+          <div class="logo">
+            <a href="index.html"><img id="logo-footer" src="{{ asset('bundles/coastersworldsite/images/logos/logo_footer_default.png') }}" alt="City Nightlife" /></a>
+            <script type="text/javascript">
+              jQuery.noConflict();
 
-    <div class="one-third column">
-      <div class="tweets">
-        <h3 class="title">{{ 'footer.latest.twitter'|trans }}<span class="line"></span></h3>
-          <div class='tweet query footer'></div>
-      </div>
-    </div>
+              (function($) {
+                $(function() {
+                  $(window).on('resize', function() {
+                    // Logo Footer
+                    $('.footer').each(function() {
+                      if (Modernizr.mq('screen and (min-width: 768px)')) {
+                        var maxHeight = Math.max.apply(null, $(this).find('.row').map(function() {
+                          return $(this).height();
+                        }).get());
 
-    <div class="one-third column">
-      <div class="subscribe">
-        <h3 class="title">Subscribe<span class="line"></span></h3>
-        <p>Subscribe to our e-mail newsletter to receive updates.</p>
-        <form action="#">
-          <input type="text" class="mail" value="Enter your Email" onBlur="if(this.value == '') { this.value = 'Enter your Email'; }"
-          onfocus="if(this.value == 'Enter your Email') { this.value = ''; }"/>
-          <input type="submit" value="Submit" class="submit" />
-        </form>
-      </div>
-    </div>
+                        var logo_height = $(this).find('.logo').height();
 
-    <div class="sixteen columns"><hr class="bottom" /></div>
-
-    <div class="eight columns">
-      <span class="copyright">
-        <a href="index.html">{{ 'website'|trans }}</a>.
-        {{ 'footer.origin'|trans }} - {{ "now"|date('Y') }}.
-        {{ 'footer.rights'|trans }}.
-      </span>
-    </div>
-
-    <div class="eight columns">
-      <div class="social">
-        <a href="#"><img src="{{ asset('images/icons/twitter.png') }}" alt="" /></a>
-        <a href="#"><img src="{{ asset('images/icons/facebook.png') }}" alt="" /></a>
-        <a href="#"><img src="{{ asset('images/icons/skype.png') }}" alt="" /></a>
-        <a href="#"><img src="{{ asset('images/icons/digg.png') }}" alt="" /></a>
-        <a href="#"><img src="{{ asset('images/icons/linkedin.png') }}" alt="" /></a>
-        <a href="#"><img src="{{ asset('images/icons/vimeo.png') }}" alt="" /></a>
+                        $(this).find('.logo').css('margin-top', (maxHeight / 2) - (logo_height / 2));
+                      } else {
+                        $(this).find('.logo').removeAttr('style');
+                      }
+                    });
+                  }).resize();
+                });
+              })(jQuery);
+            </script>
+          </div>
+          <!-- End Logo -->
+        </div>
+        <div class="span2">
+          <!-- Menus -->
+          <h3><i class="icon-plus-sign"></i> Register</h3>
+          <ul class="menu-footer unstyled register">
+            <li class="active"><a href="single.html"><i class="icon-plus"></i> Event</a></li>
+            <li><a href="single.html"><i class="icon-plus"></i> Company</a></li>
+          </ul>
+          <!-- End Menus -->
+        </div>
+        <div class="span3">
+          <!-- About us -->
+          <h3><i class="icon-book"></i> About Us</h3>
+          <p>The City Nightlife is a Premium Theme with HTML5, CSS3, jQuery, Sliders, Widgets working together to build your portal site, business site or personal site.</p>
+          <div class="count">
+            <div class="pull-left">
+              <h6><i class="icon-download"></i> Download</h6>
+              <h4>18.110.897</h4>
+            </div>
+            <div class="pull-left">
+              <h6><i class="icon-user"></i> Members</h6>
+              <h4>621.301</h4>
+            </div>
+          </div>
+          <!-- End About us -->
+        </div>
+        <div class="span4">
+          <!-- Social Widget -->
+          <ul class="social-icons inline">
+            <li><a href="#" data-toggle="tooltip" title="Facebook" class="facebook"><i class="icon-facebook"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="Twitter" class="twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="Google+" class="google-plus"><i class="icon-google-plus"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="LinkedIn" class="linkedin"><i class="icon-linkedin"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="Pinterest" class="pinterest"><i class="icon-pinterest"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="GitHub" class="github"><i class="icon-github-alt"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="Vimeo" class="vimeo"><i class="icon-vimeo"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="Dribbble" class="dribbble"><i class="icon-dribbble"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="Email" class="email"><i class="icon-envelope"></i></a></li>
+            <li><a href="#" data-toggle="tooltip" title="RSS" class="rss"><i class="icon-rss"></i></a></li>
+          </ul>
+          <!-- End Social Widget -->
+        </div>
       </div>
     </div>
   </div>
+  <!-- End Footer Block -->
+  <!-- Copyright -->
+  <div class="copyright">
+    <div class="container">
+      <div class="row">
+        <div class="span5">
+          <p>Copyright &copy; 2013 City Nightlife. <span class="author">Design by <a href="http://www.atomtech.com.br" target="_blank">AtomTech</a>.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Copyright -->
 </footer>

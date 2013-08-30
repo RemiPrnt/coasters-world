@@ -1,53 +1,96 @@
 <header>
-    <div class="container clearfix">
-        <div class="one-third column">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="{{ asset('images/logo.png') }}" alt="{{ 'website'|trans }}" />
-                </a>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <!-- Social Top -->
+                    <div class="social-top">
+                        <ul class="unstyled">
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="facebook"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="twitter"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Google+" class="google-plus"><i class="icon-google-plus"></i></a></li>
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Linkedin" class="linkedin"><i class="icon-linkedin"></i></a></li>
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Pinterest" class="pinterest"><i class="icon-pinterest"></i></a></li>
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Vimeo" class="vimeo"><i class="icon-vimeo"></i></a></li>
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Dribbble" class="dribbble"><i class="icon-dribbble"></i></a></li>
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Email" class="email"><i class="icon-envelope"></i></a></li>
+                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="RSS" class="rss"><i class="icon-rss"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- End Social Top -->
+                </div>
+                <div class="span7 hidden-phone">
+                    <div class="pull-right">
+                        <!-- Menu Top -->
+                        <ul class="menu-top unstyled inline">
+                            <li><a href="sitemap.html">Sitemap</a></li>
+                            <li><a href="why.html">Why City Nightlife?</a></li>
+                            <li><a href="http://themeforest.net/item/city-nightlife-responsive-multipurpose-theme/4540302">Purchase Now</a></li>
+                            <li><a href="http://www.atomtech.com.br/forum/index.html?p=/categories/city-nightlife" class="visible-desktop" target="_blank">Forum Support</a></li>
+                        </ul>
+                    <!-- End Menu Top -->
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="two-thirds column">
-            <nav id="menu" class="navigation">
-                <ul id="nav">
-                    <li>
-                        <a href="{{ path('coasters_world_core_homepage') }}"
-                            {% if app.request.get('_route') == 'coasters_world_core_homepage' %}
-                                class="active"
-                            {% endif %}
-                        >
-                            {{ 'menu.home'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('coasters_world_news_list') }}"
-                            {% if 'coasters_world_news' in app.request.get('_route') %}
-                                class="active"
-                            {% endif %}
-                        >
-                            {{ 'menu.news.list'|trans }}
-                        </a>
-                        <ul>
-                            <li><a href="{{ path("coasters_world_news_new") }}">
-                                {{ 'news.title.create'|trans }}
-                            </a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{{ path('coasters_world_database_index') }}"
-                            {% if 'coasters_world_database' in app.request.get('_route') %}
-                                class="active"
-                            {% endif %}
-                        >
-                            {{ 'menu.database'|trans }}
-                        </a>
-                    </li>
-                    {% if app.user %}
-                    <li><a href="{{ path('logout') }}">{{ 'menu.logout'|trans }}</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
-        <div class="sixteen columns"><hr /></div>
     </div>
+    <!-- End Top Bar -->
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="span4">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index.html"><img id="logo" src="{{ asset('bundles/coastersworldsite/images/logos/logo_default.png') }}" alt="City Nightlife"></a>
+                        <h2>City Nightlife - Entertainment, Cities Guide and Promotions</h2>
+                    </div>
+                    <!-- End Logo -->
+                </div>
+                <div class="span8">
+                    <div class="pull-left">
+                        <!-- Search -->
+                        <div class="medium-search">
+                            <div class="search-input">
+                                <form action="#" method="post" class="form-inline">
+                                    <div class="input-append">
+                                        <input name="searchword" maxlength="20" class="inputbox input-xlarge" type="text" size="20" value="" placeholder="What are you looking for?" />
+                                        <button class="btn" data-toggle="tooltip" title="Random Search"><i class="icon-random"></i></button>
+                                        <button class="btn" data-toggle="tooltip" title="Advanced Search"><i class="icon-tasks"></i></button>
+                                        <button class="btn"><i class="icon-search"></i> <span class="hidden-phone">Search</span></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Search -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header -->
+    <!-- Navigation -->
+    <nav id="nav" class="navigation lwhite">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <ul class="menu fading">
+                        <li class="active"><a href="index.html">Accueil</a></li>
+                        <li><a href="{{ path('coasters_world_news_list') }}">News</a>
+                            <ul>
+                                <li><a href="slider-revolution.html"><i class="icon-desktop"></i> News 1</a></li>
+                                <li><a href="camera.html"><i class="icon-desktop"></i> News 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="active"><a href="{{ path('coasters_world_database_index') }}">Base de données</a></li>
+                        <li class="active"><a href="index.html">Coasters Counter</a></li>
+                        <li class="active"><a href="index.html">Forum</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navigation -->
 </header>
+<!-- End Header -->

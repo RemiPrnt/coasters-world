@@ -1,7 +1,0 @@
-parameters:
-#    coasters_world_user.example.class: CoastersWorld\Bundle\UserBundle\Example
-
-services:
-#    coasters_world_user.example:
-#        class: %coasters_world_user.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

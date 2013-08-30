@@ -2,24 +2,9 @@ coasters_world_site:
     resource: "@CoastersWorldSiteBundle/Resources/config/routing.yml"
     prefix:   /
 
-coasters_world_core:
-    resource: "@CoastersWorldCoreBundle/Resources/config/routing.yml"
-
-coasters_world_database:
-    resource: "@CoastersWorldDatabaseBundle/Resources/config/routing.yml"
-    prefix:   /coaster
-
-coasters_world_news:
-    resource: "@CoastersWorldNewsBundle/Resources/config/routing.yml"
-    prefix:   /news
-
-coasters_world_user:
-    resource: "@CoastersWorldUserBundle/Resources/config/routing.yml"
-    prefix:   /user
-
 login:
     pattern:   /login
-    defaults:  { _controller: CoastersWorldUserBundle:Security:login }
+    defaults:  { _controller: CoastersWorldSiteBundle:Security:login }
 
 login_check:
     pattern:   /login_check

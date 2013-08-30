@@ -1,1 +1,32 @@
-Hello {{ name }}!
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ 'news.title.home'|trans }}{% endblock %}
+
+{% block body %}
+  <div id="welcome">
+    <div class="sixteen columns">
+      <div class="welcome">
+        <p>
+          Welcome to <span class="color" >Crevision</span> Clean & Responsive HTML Template.This intro text can be modified and is a good way to say hello to the visitor.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-thirds column">
+    <div class="recent-blog">
+      <h2 class="title">Recent Blog <span class="line"></span></h2>
+      {% for news in listNews %}
+      <div class="blog-item">
+        <div class="date"><span class="day">{{ news.publishedAt|date('d') }}</span><span class="month">{{ news.publishedAt|date('M') }}</span></div>
+        <h3><a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}">{{ news.title }}</a></h3>
+        <p>Start jozoor website by jozor we love design and more u can talk we about any thing for design and branding design we love the design.</p>
+        <span class="tags-comments">
+          <a href="#">Jozoor</a>, <a href="#">Webdesign</a>, <a href="#">Branding</a> |
+          {% transchoice news.comments|length with {'%count%': news.comments|length} %}news.comments{% endtranschoice %}
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

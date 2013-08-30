@@ -1,8 +1,0 @@
-parameters:
-   coasters_world_news.form.news_type.class: CoastersWorld\Bundle\NewsBundle\Form\Type\NewsType
-
-services:
-    coasters_world_news.form.news_type:
-       class: %coasters_world_news.form.news_type.class%
-       tags:
-            - { name: form.type, alias: news_type }

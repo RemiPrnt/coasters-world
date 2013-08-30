@@ -1,7 +1,0 @@
-parameters:
-#    coasters_world_core.example.class: CoastersWorld\Bundle\CoreBundle\Example
-
-services:
-#    coasters_world_core.example:
-#        class: %coasters_world_core.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

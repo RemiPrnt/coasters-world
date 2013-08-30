@@ -1,7 +1,8 @@
 parameters:
-#    coasters_world_site.example.class: CoastersWorld\Bundle\SiteBundle\Example
+   coasters_world_news.form.news_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\NewsType
 
 services:
-#    coasters_world_site.example:
-#        class: %coasters_world_site.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    coasters_world_news.form.news_type:
+       class: %coasters_world_news.form.news_type.class%
+       tags:
+            - { name: form.type, alias: news_type }

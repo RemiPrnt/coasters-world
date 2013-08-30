@@ -25,7 +25,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - 'CoastersWorldDatabaseBundle:Form:fields.html.twig'
+            - 'CoastersWorldSiteBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:

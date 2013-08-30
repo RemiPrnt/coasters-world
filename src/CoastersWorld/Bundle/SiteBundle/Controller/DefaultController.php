@@ -6,8 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('CoastersWorldSiteBundle:Default:index.html.twig', array('name' => $name));
+        $listNews = $this->getDoctrine()
+            ->getEntityManager()
+            ->getRepository('CoastersWorldSiteBundle:News')
+            ->findTwoLatest()
+        ;
+
+        return $this->render('CoastersWorldSiteBundle:Default:index.html.twig', array(
+            'listNews' => $listNews
+        ));
     }
 }
