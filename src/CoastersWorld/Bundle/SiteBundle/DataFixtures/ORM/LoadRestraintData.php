@@ -17,10 +17,15 @@ class LoadRestraintData extends AbstractFixture implements OrderedFixtureInterfa
         $restraint = new Restraint();
         $restraint->setName('Lap Bar');
 
+        $restraint2 = new Restraint();
+        $restraint2->setName('Horse Collar');
+
         $manager->persist($restraint);
+        $manager->persist($restraint2);
         $manager->flush();
 
         $this->addReference('restraint-lapbar', $restraint);
+        $this->addReference('restraint-horsecollar', $restraint2);
     }
 
     /**

@@ -369,4 +369,42 @@ class RefCoaster
     {
         return $this->types;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $users;
+
+
+    /**
+     * Add users
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $users
+     * @return RefCoaster
+     */
+    public function addUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+    
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $users
+     */
+    public function removeUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
 }

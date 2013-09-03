@@ -2,27 +2,28 @@
 
 {% block title %}{{ 'news.title.create'|trans }}{% endblock %}
 
-{% if news.getId() %}
-    {% set action = path("coasters_world_news_edit", { "id": news.getId() }) %}
-{% else %}
-    {% set action = path("coasters_world_news_new") %}
-{% endif %}
-
-{% form_theme form with 'CoastersWorldSiteBundle:Form:fields.html.twig' %}
+{# form_theme form with 'CoastersWorldSiteBundle:Form:fields.html.twig' #}
 
 {% block body %}
-    <div class="sixteen columns bottom-2">
-        <h2 class="title">{{ 'news.title.create'|trans }}<span class="line"></span></h2>
-        <form action="{{ action }}" class="form-elements" method="post" {{ form_enctype(form) }}>
-            {{ form_row(form.title) }}
-            {{ form_row(form.body) }}
-            {{ form_row(form.publishedAt) }}
-            {{ form_row(form.author) }}
-
-            {{ form_rest(form) }}
-          <div class="clear"></div>
-          <a onclick="$(this).closest('form').submit();" class="button small color">{{ 'news.save'|trans }}</a>
-          <a href="" class="button small gray">{{ 'news.reset'|trans }}</a>
-        </form>
+    <div class="row">
+        <div class="span8">
+            <div class="content">
+                <section class="blog">
+                    <div class="page-header">
+                        <h1>{{ 'news.title.create'|trans }}</h1>
+                    </div>
+                    {{ form_start(form) }}
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.body) }}
+                        {{ form_row(form.publishedAt) }}
+                        {{ form_row(form.author) }}
+                    
+                        {{ form_rest(form) }}
+                        <button type="submit" id="submit" class="btn btn-large">{{ 'news.save'|trans }}</button>
+                        {#<button type="submit" id="submit" class="btn btn-large">{{ 'news.reset'|trans }}</button>#}
+                    {{ form_end(form) }}
+                </section>
+            </div>
+        </div>
     </div>
 {% endblock %}

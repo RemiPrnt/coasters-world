@@ -1,38 +1,48 @@
 {% if pageCount > 1 %}
-<hr />
-<ul class="pagination color">
-    {% if first is defined and current != first %}
-        <li>
-            <a href="{{ path(route, query|merge({(pageParameterName): first})) }}" class="previ">&lt;&lt;</a>
-        </li>
-    {% endif %}
-
-    {% if previous is defined %}
-        <li>
-            <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}" class="previ">&lt;</a>
-        </li>
-    {% endif %}
-
-    {% for page in pagesInRange %}
-        <li>
-        {% if page != current %}
-            <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+<div class="pagination">
+    <ul>
+        {% if first is defined and current != first %}
+            <li>
+                <a href="{{ path(route, query|merge({(pageParameterName): first})) }}">Start</a>
+            </li>
         {% else %}
-            <a class="current">{{ page }}</a>
+            <li class="disabled"><a>Start</a></li>
         {% endif %}
-        </li>
-    {% endfor %}
 
-    {% if next is defined %}
-        <li>
-            <a href="{{ path(route, query|merge({(pageParameterName): next})) }}" class="next">&gt;</a>
-        </li>
-    {% endif %}
+        {% if previous is defined %}
+            <li>
+                <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&lt;&lt;</a>
+            </li>
+        {% else %}
+            <li class="disabled"><a>&lt;&lt;</a></li>
+        {% endif %}
 
-    {% if last is defined and current != last %}
-        <li>
-            <a href="{{ path(route, query|merge({(pageParameterName): last})) }}" class="next">&gt;&gt;</a>
-        </li>
-    {% endif %}
-</ul>
+        {% for page in pagesInRange %}
+            {% if page != current %}
+                <li><a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a></li>
+            {% else %}
+                <li class="active"><a>{{ page }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if next is defined %}
+            <li>
+                <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">&gt;&gt;</a>
+            </li>
+        {% else %}
+            <li class="disabled"><a>&gt;&gt;</a></li>
+        {% endif %}
+
+        {% if last is defined and current != last %}
+            <li>
+                <a href="{{ path(route, query|merge({(pageParameterName): last})) }}">End</a>
+            </li>
+        {% else %}
+            <li class="disabled"><a>End</a></li>
+        {% endif %}
+    </ul>
+    <div class="page-count">
+        <span>Page {{ current }} sur {{ pagesInRange|length }}</span>
+    </div>
+</div>
 {% endif %}

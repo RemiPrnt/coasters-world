@@ -40,15 +40,20 @@ class NewsController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         if (null !== $id) {
             $news = $em->getRepository('CoastersWorldSiteBundle:News')->find($id);
+            $action = $this->generateUrl('coasters_world_news_edit', array('id' => $id));
         } else {
             $news = new News();
+            $action = $this->generateUrl('coasters_world_news_new');
         }
 
-        $form    = $this->createForm('news_type', $news);
+        $form    = $this->createForm('news_type', $news, array(
+            'action' => $action,
+            'method' => 'POST',
+        ));
         $request = $this->getRequest();
 
         if ('POST' === $request->getMethod()) {
-            $form->bindRequest($request);
+            $form->bind($request);
 
             if ($form->isValid()) {
                 $em->persist($news);

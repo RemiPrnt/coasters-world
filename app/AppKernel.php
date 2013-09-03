@@ -13,6 +13,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 
+            new Gloomy\PagerBundle\GloomyPagerBundle(),
+
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),

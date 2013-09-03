@@ -16,6 +16,9 @@ class Image
     private $file;
     private $temp;
 
+    private $createdAt;
+    private $updatedAt;
+
     /**
      * Get file.
      *
@@ -34,13 +37,15 @@ class Image
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
-        // check if we have an old image path
+        // check if we have an old image path (update)
         if (isset($this->path)) {
             // store the old name to delete after the update
             $this->temp = $this->path;
             $this->path = null;
+            $this->updatedAt = new \DateTime();
         } else {
             $this->path = 'initial';
+            $this->createdAt = $this->updatedAt = new \DateTime();
         }
     }
 
@@ -48,7 +53,7 @@ class Image
     {
         if (null !== $this->getFile()) {
             $filename = sha1(uniqid(mt_rand(), true));
-            $this->name = $filename;
+            //$this->name = $filename;
             $this->path = $filename.'.'.$this->getFile()->guessExtension();
         }
     }
@@ -163,5 +168,79 @@ class Image
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Image
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Image
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+    /**
+     * @var \CoastersWorld\Bundle\SiteBundle\Entity\Coaster
+     */
+    private $coaster;
+
+
+    /**
+     * Set coaster
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
+     * @return Image
+     */
+    public function setCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster = null)
+    {
+        $this->coaster = $coaster;
+    
+        return $this;
+    }
+
+    /**
+     * Get coaster
+     *
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Coaster 
+     */
+    public function getCoaster()
+    {
+        return $this->coaster;
     }
 }

@@ -2,7 +2,8 @@
     <div class="span8">
         <section id="respond">
             <h3><i class="icon-bullhorn"></i> {{ 'comments.add'|trans }}</h3>
-            <form action="{{ path('coasters_world_news_comment_create', {'id': comment.news.id})  }}">
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
                 {{ form_widget(form.body, { 'attr' : {
                     'class': 'input-block-level',
                     'placeholder': 'comments.here'|trans,
@@ -11,8 +12,7 @@
                 }}) }}
                 {{ form_rest(form) }}
                 <button type="submit" id="submit" class="btn btn-large">{{ 'comments.save'|trans }}</button>
-                {#<button type="submit" id="submit" class="btn btn-large">{{ 'comments.reset'|trans }}</button>#}
-            </form>
+            {{ form_end(form) }}
         </section>
     </div>
 </div>

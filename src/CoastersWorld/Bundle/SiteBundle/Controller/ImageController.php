@@ -10,17 +10,24 @@ class ImageController extends Controller
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $images = $em->getRepository('AcmeTestBundle:Image')->findAll();
+        $images = $em->getRepository('CoastersWorldSiteBundle:Image')->findFiveLatestOrderedByDateDesc();
 
-        return $this->render('AcmeTestBundle:Default:list.html.twig', array(
-            'images'      => $images
+        return $this->render('CoastersWorldSiteBundle:Image:list.html.twig', array(
+            'images' => $images
         ));
     }
     public function uploadAction()
     {
         $image = new Image();
         $form = $this->createFormBuilder($image)
+            ->setAction($this->generateUrl('coasters_world_image_upload'))
+            ->setMethod('POST')
+            ->add('name')
             ->add('file')
+            ->add('coaster', 'entity', array(
+                'class' => 'CoastersWorldSiteBundle:Coaster',
+                'required' => false,
+            ))
             ->getForm()
         ;
 
@@ -32,7 +39,7 @@ class ImageController extends Controller
                 $em->persist($image);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('coasters_world_image_upload'));
+                return $this->redirect($this->generateUrl('coasters_world_image_list'));
             }
         }
 

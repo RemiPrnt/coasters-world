@@ -1,4 +1,4 @@
-coasters_world_core_homepage:
+coasters_world_homepage:
     pattern:  /
     defaults: { _controller: CoastersWorldSiteBundle:Default:index }
 
@@ -10,9 +10,22 @@ coasters_world_database_view:
     pattern:  /coaster/view/{slug}
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:view }
 
-coasters_world_database_search_ajax:
+database_search_ajax:
     pattern:  /coaster/search
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:searchAjax }
+
+coasters_world_database_rating_new:
+    pattern:  /coaster/rating/{slug}
+    defaults: { _controller: CoastersWorldSiteBundle:Rating:new }
+    requirements:
+        _method:  POST
+
+coaster_comment_create:
+    pattern:  /coaster/comment/{id}
+    defaults: { _controller: CoastersWorldSiteBundle:CoasterComment:create }
+    requirements:
+        _method:  POST
+        id: \d+
 
 coasters_world_news_list:
     pattern:  /news/list/{page}
@@ -39,10 +52,17 @@ coasters_world_news_comment_create:
         _method:  POST
         id: \d+
 
+
 coasters_world_image_upload:
-    pattern:  /upload
+    pattern:  /image/upload
     defaults: { _controller: CoastersWorldSiteBundle:Image:upload }
 
-coasters_world_image_test:
-    pattern:  /test
-    defaults: { _controller: CoastersWorldSiteBundle:Image:test }
+coasters_world_image_list:
+    pattern:  /image/list
+    defaults: { _controller: CoastersWorldSiteBundle:Image:list }
+
+
+
+counter_list:
+    pattern: /coaster/list
+    defaults: { _controller: CoastersWorldSiteBundle:Counter:list }

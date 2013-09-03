@@ -26,6 +26,10 @@ class NewsType extends AbstractType
                 'property' => 'username',
                 'label' => 'test',
             ))
+            ->add('coaster', 'entity', array(
+                'class' => 'CoastersWorldSiteBundle:Coaster',
+                'required' => false,
+            ))
         ;
     }
 

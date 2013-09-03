@@ -27,7 +27,7 @@
                             <li><a href="sitemap.html">Sitemap</a></li>
                             <li><a href="why.html">Why City Nightlife?</a></li>
                             <li><a href="http://themeforest.net/item/city-nightlife-responsive-multipurpose-theme/4540302">Purchase Now</a></li>
-                            <li><a href="http://www.atomtech.com.br/forum/index.html?p=/categories/city-nightlife" class="visible-desktop" target="_blank">Forum Support</a></li>
+                            <li><a href="{{ path('logout') }}" class="visible-desktop">Logout</a></li>
                         </ul>
                     <!-- End Menu Top -->
                     </div>
@@ -43,28 +43,13 @@
                 <div class="span4">
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="index.html"><img id="logo" src="{{ asset('bundles/coastersworldsite/images/logos/logo_default.png') }}" alt="City Nightlife"></a>
-                        <h2>City Nightlife - Entertainment, Cities Guide and Promotions</h2>
+                        <a href="{{ path('coasters_world_homepage') }}"><img id="logo" src="{{ asset('bundles/coastersworldsite/images/logos/logo_siteCW.jpg') }}" alt="Coasters World"></a>
+                        <h2>Coasters World</h2>
                     </div>
                     <!-- End Logo -->
                 </div>
                 <div class="span8">
-                    <div class="pull-left">
-                        <!-- Search -->
-                        <div class="medium-search">
-                            <div class="search-input">
-                                <form action="#" method="post" class="form-inline">
-                                    <div class="input-append">
-                                        <input name="searchword" maxlength="20" class="inputbox input-xlarge" type="text" size="20" value="" placeholder="What are you looking for?" />
-                                        <button class="btn" data-toggle="tooltip" title="Random Search"><i class="icon-random"></i></button>
-                                        <button class="btn" data-toggle="tooltip" title="Advanced Search"><i class="icon-tasks"></i></button>
-                                        <button class="btn"><i class="icon-search"></i> <span class="hidden-phone">Search</span></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- End Search -->
-                    </div>
+                    <div class="pull-left"><!-- Rien pour l'instant --></div>
                 </div>
             </div>
         </div>
@@ -76,16 +61,19 @@
             <div class="row">
                 <div class="span12">
                     <ul class="menu fading">
-                        <li class="active"><a href="index.html">Accueil</a></li>
+                        <li class="active"><a href="{{ path('coasters_world_homepage') }}">Accueil</a></li>
                         <li><a href="{{ path('coasters_world_news_list') }}">News</a>
                             <ul>
-                                <li><a href="slider-revolution.html"><i class="icon-desktop"></i> News 1</a></li>
-                                <li><a href="camera.html"><i class="icon-desktop"></i> News 2</a></li>
+                                <li><a href="{{ path('coasters_world_news_new') }}"><i class="icon-desktop"></i> Poster une news</a></li>
                             </ul>
                         </li>
-                        <li class="active"><a href="{{ path('coasters_world_database_index') }}">Base de données</a></li>
-                        <li class="active"><a href="index.html">Coasters Counter</a></li>
-                        <li class="active"><a href="index.html">Forum</a></li>
+                        <li><a href="{{ path('coasters_world_database_index') }}">Base de données</a></li>
+                        <li><a href="{{ path('counter_list') }}">Coasters Counter</a></li>
+                        <li><a href="{{ path('coasters_world_image_list') }}">Image</a>
+                            <ul>
+                                <li><a href="{{ path('coasters_world_image_upload') }}"><i class="icon-desktop"></i>Uploader une image</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

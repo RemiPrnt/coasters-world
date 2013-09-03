@@ -17,10 +17,20 @@ class LoadManufacturerData extends AbstractFixture implements OrderedFixtureInte
         $manufacturer = new Manufacturer();
         $manufacturer->setName('CCI');
 
+        $manufacturer2 = new Manufacturer();
+        $manufacturer2->setName('Vekoma');
+
+        $manufacturer3 = new Manufacturer();
+        $manufacturer3->setName('Reverchon');
+
         $manager->persist($manufacturer);
+        $manager->persist($manufacturer2);
+        $manager->persist($manufacturer3);
         $manager->flush();
 
         $this->addReference('manufacturer-cci', $manufacturer);
+        $this->addReference('manufacturer-vekoma', $manufacturer2);
+        $this->addReference('manufacturer-reverchon', $manufacturer3);
     }
 
     /**

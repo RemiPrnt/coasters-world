@@ -61,35 +61,45 @@
                 </dl>
               </div>
               <div class="tab-pane fade in" id="photos">
-              </div>
-              <div class="tab-pane fade in" id="videos">
-              </div>
-              <div class="tab-pane fade in" id="feedbacks">
-                <div class="latest-blog">
-                  <article>
-                    <span class="icon"><i class="icon-quote-left"></i></span>
-                    <h3>Une phrase d'accroche écrit par l'utilisateur !
-                      <small><i class="icon-calendar"></i> 6 mai 2013</small>
-                      <small><i class="icon-pencil"></i> {{ 'news.author'|trans }} Florian</small>
-                    </h3>
-                    <p>Texte de l'avis du rider :
-                    Tout simplement mon meilleur coaster ,un truc indéfinissable !
-                    A tester absolument au dernier rang en fin de journée, une fois qu'il est chaud bouillant et la c'est le voile noir assuré (je conseille la place la extérieure gauche ;) )
-                    Cette helix est d'une intensité ! Et ce loop aussi ! Et ce dernier flat spin "nom de dieu" !
-                    </p>
-                  </article>
-                  <article>
-                    <span class="icon"><i class="icon-quote-left"></i></span>
-                    <h3>Le meilleur wooden coaster français !!
-                      <small>2 mai 2013</small>
-                    </h3>
-                    <p>DEUXIEME AVIS :
-                    Tout simplement mon meilleur coaster ,un truc indéfinissable !
-                    A tester absolument au dernier rang en fin de journée, une fois qu'il est chaud bouillant et la c'est le voile noir assuré (je conseille la place la extérieure gauche ;) )
-                    Cette helix est d'une intensité ! Et ce loop aussi ! Et ce dernier flat spin "nom de dieu" !
-                    </p>
-                  </article>
+
+                <section id="gallery">
+                <div class="gallery">
+                  <div class="row-fluid">
+                    {% for image in coaster.images %}
+                    <div class="span4">
+                      <div class="item">
+                        <article>
+                          <div class="header">
+                            <figure>
+                              <img src="{{ asset('uploads/documents/' ~ image.path) }}" alt="">
+                            </figure>
+                            <div class="overlay-bg"></div>
+                            <div class="overlay">
+                              <ul class="unstyled inline">
+                                <li><a href="{{ asset('uploads/documents/' ~ image.path) }}" rel="prettyPhoto[gallery1]" class="btn-solid btn-solid-mini"><i class="icon-zoom-in"></i> View Larger</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="body">
+                            <h4><a href="gallery-item.html">{{ image.name }}</a></h4>
+                            <span>{{ image.updatedAt|date("d/m/Y") }}</span>
+                            <div class="pull-right">
+                              <a href="gallery-item.html"><i class="icon-heart"></i> 89</a>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
                 </div>
+                </section>
+
+              </div>
+              <div class="tab-pane fade in" id="videos"></div>
+              <div class="tab-pane fade in" id="feedbacks">
+                {% include 'CoastersWorldSiteBundle:Coaster:view_feedback.html.twig'
+                  with { 'comments': coaster.coasterComments, 'id': coaster.id } only %}
               </div>
             </div>
           </div>
@@ -113,10 +123,7 @@
       <div class="widget">
         <div class="simple-box">
           <i class="icon-bullhorn icon-2x icon-round"><span></span></i><h3>Mon vote :</h3>
-                    <form action="{{ path("coasters_world_database_view", { "slug": coaster.slug }) }}" method="post" {{ form_enctype(form) }}>
-            {{ form_widget(form.value) }}
-            {{ form_rest(form) }}
-          </form>
+          {{ render(controller('CoastersWorldSiteBundle:Rating:new', { 'slug': coaster.slug })) }}
         </div>
       </div>
     </aside>
@@ -127,7 +134,12 @@
 
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/jquery.raty.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/jquery.prettyPhoto.min.js') }}"></script>
     <script type="text/javascript">
       jQuery('#status').tooltip();
     </script>
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/vendor/prettyPhoto.css') }}" type="text/css" media="screen" charset="utf-8" />
 {% endblock %}

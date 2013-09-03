@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block stylesheets %}
+{# block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/jquery.fileupload-ui.css') }}">
 {% endblock %}
 
@@ -113,13 +113,32 @@ jQuery(document).ready(function ($) {
     });
 });
 </script>
-{% endblock %}
+{% endblock #}
 
 {% block body %}
-<h1>Upload File</h1>
 
+    <div class="row">
+        <div class="span8">
+            <div class="content">
+                <section class="blog">
+                    <div class="page-header">
+                        <h1>Upload image</h1>
+                    </div>
+                    {{ form_start(form) }}
+
+                        {{ form_rest(form) }}
+                        <button type="submit" id="submit" class="btn btn-large">{{ 'news.save'|trans }}</button>
+                        {#<button type="submit" id="submit" class="btn btn-large">{{ 'news.reset'|trans }}</button>#}
+                    {{ form_end(form) }}
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+
+{#
 <form action="#" method="post" {{ form_enctype(form) }}>
-    {# form_widget(form) #}
 
     <!-- The fileinput-button span is used to style the file input field as button -->
     <span class="btn btn-success fileinput-button">
@@ -139,4 +158,5 @@ jQuery(document).ready(function ($) {
 
     <input type="submit" value="Upload Document" />
 </form>
+#}
 {% endblock %}

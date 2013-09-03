@@ -47,6 +47,11 @@ class Coaster
         $this->ratings = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name . ' (' . $this->park->getName() . ')';
+    }
+
     /**
      * Set name
      *
@@ -236,5 +241,81 @@ class Coaster
     public function getRate()
     {
         return $this->rate;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $images;
+
+
+    /**
+     * Add images
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $images
+     * @return Coaster
+     */
+    public function addImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+    
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $images
+     */
+    public function removeImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $coasterComments;
+
+
+    /**
+     * Add coasterComments
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\CoasterComment $coasterComments
+     * @return Coaster
+     */
+    public function addCoasterComment(\CoastersWorld\Bundle\SiteBundle\Entity\CoasterComment $coasterComments)
+    {
+        $this->coasterComments[] = $coasterComments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove coasterComments
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\CoasterComment $coasterComments
+     */
+    public function removeCoasterComment(\CoastersWorld\Bundle\SiteBundle\Entity\CoasterComment $coasterComments)
+    {
+        $this->coasterComments->removeElement($coasterComments);
+    }
+
+    /**
+     * Get coasterComments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCoasterComments()
+    {
+        return $this->coasterComments;
     }
 }

@@ -1,0 +1,14 @@
+<div class="latest-blog">
+  {% for comment in comments %}
+  <article>
+    <span class="icon"><i class="icon-quote-left"></i></span>
+    <h3>Une phrase d'accroche écrite par l'utilisateur !
+      <small><i class="icon-calendar"></i> {{ comment.publishedAt|date("F jS \\a\\t g:ia") }}</small>
+      <small><i class="icon-pencil"></i> {{ 'news.author'|trans }} {{ comment.author.username }}</small>
+    </h3>
+    <p>{{ comment.body }}</p>
+  </article>
+  {% endfor %}
+</div>
+
+{{ render(controller('CoastersWorldSiteBundle:CoasterComment:new', { 'id': id })) }}

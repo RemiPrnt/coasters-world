@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
     xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
-  <entity name="CoastersWorld\Bundle\SiteBundle\Entity\Coaster" table="coaster">
+  <entity name="CoastersWorld\Bundle\SiteBundle\Entity\Coaster" table="coaster" repository-class="CoastersWorld\Bundle\SiteBundle\Entity\Repository\CoasterRepository">
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
@@ -16,7 +16,9 @@
       <join-column name="park_id" referenced-column-name="id"/>
     </many-to-one>
     <one-to-many field="ratings" target-entity="Rating" mapped-by="coaster"/>
-    <field name="rate" type="decimal" column="rate" precision="2" scale="1" nullable="true"/>
+    <field name="rate" type="decimal" column="rate" precision="5" scale="3" nullable="true"/>
     <many-to-one field="status" target-entity="Status" inversed-by="coasters"/>
+    <one-to-many field="images" target-entity="Image" mapped-by="coaster" />
+    <one-to-many field="coasterComments" target-entity="CoasterComment" mapped-by="coaster"/>
   </entity>
 </doctrine-mapping>

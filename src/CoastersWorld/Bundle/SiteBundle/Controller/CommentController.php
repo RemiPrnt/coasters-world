@@ -21,7 +21,10 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->setNews($news);
         $comment->setAuthor($this->getUser());
-        $form   = $this->createForm(new CommentType(), $comment);
+        $form = $this->createForm(new CommentType(), $comment, array(
+            'action' => $this->generateUrl('coasters_world_news_comment_create', array('id' => $id)),
+            'method' => 'POST',
+        ));
 
         return $this->render('CoastersWorldSiteBundle:Comment:edit.html.twig', array(
             'comment' => $comment,
@@ -38,7 +41,7 @@ class CommentController extends Controller
         $comment->setAuthor($this->getUser());
         $request = $this->getRequest();
         $form    = $this->createForm(new CommentType(), $comment);
-        $form->bindRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
