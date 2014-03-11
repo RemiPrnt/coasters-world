@@ -14,7 +14,7 @@ class NewsController extends Controller
     public function listAction($page)
     {
         $queryNews = $this->getDoctrine()
-            ->getEntityManager()
+            ->getManager()
             ->getRepository('CoastersWorldSiteBundle:News')
             ->findAllOrderedByDateDesc()
         ;
@@ -37,7 +37,7 @@ class NewsController extends Controller
 
     public function editAction($id = null)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         if (null !== $id) {
             $news = $em->getRepository('CoastersWorldSiteBundle:News')->find($id);
             $action = $this->generateUrl('coasters_world_news_edit', array('id' => $id));
@@ -72,7 +72,7 @@ class NewsController extends Controller
     public function viewAction($slug)
     {
         $news = $this->getDoctrine()
-            ->getEntityManager()
+            ->getManager()
             ->getRepository('CoastersWorldSiteBundle:News')
             ->findOneBy(array('slug' => $slug))
         ;
