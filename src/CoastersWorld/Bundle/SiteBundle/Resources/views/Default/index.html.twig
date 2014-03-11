@@ -2,4 +2,84 @@
 
 {% block title %}{{ 'news.title.home'|trans }}{% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+   <div class="row">
+
+        <div class="span8">
+            {% include 'CoastersWorldSiteBundle:News:latest.html.twig' with {'listNews': listNews} only %}
+        </div>
+
+        <div class="span4">
+            <!--Social Media-->
+            <aside>
+                <div class="social-counter">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <div class="facebook-likes">
+                                <a href="http://www.facebook.com/pages/CoastersWorldfr/145773432297" data-toggle="tooltip" title="Likez-nous sur Facebook" target="_blank">
+                                    <i class="icon-facebook"></i>
+                                    <span class="title">Facebook</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="twitter-followers">
+                                <a href="https://twitter.com/CoastersWorld" data-toggle="tooltip" title="Suivez-nous sur Twitter" target="_blank">
+                                    <i class="icon-twitter"></i>
+                                    <span class="title">Twitter</span>
+                                    <span id="twitter-followers"></span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="span4">
+                            <div class="newsletter-subscribers">
+                                <a href="http://forum.coastersworld.fr" data-toggle="tooltip" title="Rejoignez la communauté" target="_blank">
+                                    <i class="icon-comments-alt"></i>
+                                    <span class="title">Forum</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!--End Social Media-->
+            <!-- Last Articles -->
+            <div class="row animated bounceInLeft" style="opacity: 1;">
+                <div class="span4">
+                    <section id="tips-of-the-day">
+                        <div class="article">
+                            <figure>
+                                <div id="flexslider-tips" class="simple-flexslider flexslider" data-animation="slide" data-animationspeed="500">
+                                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                        <ul class="slides unstyled" style="width: 1000%; -webkit-transition: 0.5s; transition: 0.5s; -webkit-transform: translate3d(-740px, 0, 0);">
+                                            <li class="clone" style="width: 370px; float: left; display: block;"><a href="single.php"><img src="http://2.s3.envato.com/files/37503333/gym_071010_17.jpg" alt=""></a></li>
+                                            <li class="" style="width: 370px; float: left; display: block;"><a href="single.php"><img src="http://3.s3.envato.com/files/49114894/2011-12-08-TR-Fitness-04.jpg" alt=""></a></li>
+                                            <li style="width: 370px; float: left; display: block;" class="flex-active-slide"><a href="single.php"><img src="http://3.s3.envato.com/files/48510466/2011-12-08-TR-FitnessTreadmillEndurance-03.jpg" alt=""></a></li>
+                                            <li style="width: 370px; float: left; display: block;" class=""><a href="single.php"><img src="http://2.s3.envato.com/files/37503333/gym_071010_17.jpg" alt=""></a></li>
+                                            <li class="clone" style="width: 370px; float: left; display: block;"><a href="single.php"><img src="http://3.s3.envato.com/files/49114894/2011-12-08-TR-Fitness-04.jpg" alt=""></a></li>
+                                        </ul>
+                                    </div>
+                                    <ol class="flex-control-nav flex-control-paging">
+                                        <li><a class="">1</a></li>
+                                        <li><a class="flex-active">2</a></li>
+                                        <li><a class="">3</a></li>
+                                    </ol>
+                                    <ul class="flex-direction-nav">
+                                        <li><a class="flex-prev" href="#"><i class="icon-chevron-left"></i></a></li>
+                                        <li><a class="flex-next" href="#"><i class="icon-chevron-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </figure>
+                            <h4><a href="single.php"><strong>Nunc congue</strong> metus quis posuere tempor</a></h4>
+                            <p>Esse quibusdam ea deserunt aliquam odit explicabo doloribus. Quo, quos, officia, amet, nisi veritatis omnis nesciunt fugiat consequatur dicta laboriosam doloribus fugit cum optio dolorum pariatur fuga atque deserunt omnis veritatis nesciunt fugiat.</p>
+                            <small><i class="icon-calendar"></i> <time datetime="2013-04-25T09:00:08+00:00">April 25, 2013</time></small>
+                        </div>
+                    </section>
+                </div>
+                <hr class="dotted visible-phone">
+            </div>
+            <!-- End Last Articles -->
+        </div>
+    </div>
+{% endblock %}

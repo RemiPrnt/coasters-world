@@ -6,6 +6,17 @@ use Doctrine\ORM\EntityRepository;
 
 class CoasterRepository extends EntityRepository
 {
+    public function findAllRiddenByUser($idUser)
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->innerJoin('c.users', 'u')
+            ->andWhere('u.id = :idUser')
+            ->setParameter('idUser', $idUser)
+            ->getQuery()
+        ;
+    }
+
     public function searchByNameOrPark($term)
     {
         $qb = $this->createQueryBuilder('c');

@@ -11,6 +11,7 @@
       <gedmo:slug unique="true" fields="title"/>
     </field>
     <field name="body" type="text" column="body" nullable="false"/>
+    <field name="html" type="text" column="html" nullable="false"/>
     <field name="publishedAt" type="datetime" column="published_at" nullable="false"/>
     <many-to-one field="author" target-entity="CoastersWorld\Bundle\SiteBundle\Entity\User"
       nullable="false">

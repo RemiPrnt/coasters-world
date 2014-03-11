@@ -15,6 +15,6 @@
       mapped-by="author"/>
     <one-to-many field="ratings" target-entity="CoastersWorld\Bundle\SiteBundle\Entity\Rating"
       mapped-by="user"/>
-    <many-to-many field="refCoasters" mapped-by="users" target-entity="RefCoaster"/>
+    <many-to-many field="coasters" mapped-by="users" target-entity="Coaster"/>
   </entity>
 </doctrine-mapping>

@@ -399,4 +399,42 @@ class User implements UserInterface, \Serializable
     {
         return $this->refCoasters;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $coasters;
+
+
+    /**
+     * Add coasters
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
+     * @return User
+     */
+    public function addCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
+    {
+        $this->coasters[] = $coasters;
+
+        return $this;
+    }
+
+    /**
+     * Remove coasters
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
+     */
+    public function removeCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
+    {
+        $this->coasters->removeElement($coasters);
+    }
+
+    /**
+     * Get coasters
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCoasters()
+    {
+        return $this->coasters;
+    }
 }

@@ -11,24 +11,15 @@ class NewsType extends AbstractType
     {
         $builder
             ->add('title', 'text', array(
-                'label' => 'test',
+                'label' => 'Titre',
             ))
             ->add('body', 'textarea', array(
-                'label' => 'test',
-            ))
-            ->add('publishedAt', 'datetime', array(
-                'input'  => 'datetime',
-                'widget' => 'choice',
-                'date_format' => 'd/MMMM/y',
-            ))
-            ->add('author', 'entity', array(
-                'class' => 'CoastersWorldSiteBundle:User',
-                'property' => 'username',
-                'label' => 'test',
+                'label' => 'Corps',
             ))
             ->add('coaster', 'entity', array(
                 'class' => 'CoastersWorldSiteBundle:Coaster',
                 'required' => false,
+                'label' => 'Coaster'
             ))
         ;
     }

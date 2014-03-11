@@ -97,4 +97,27 @@ class Tag
     {
         return $this->news;
     }
+
+    /**
+     * Add news
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\News $news
+     * @return Tag
+     */
+    public function addNews(\CoastersWorld\Bundle\SiteBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\News $news
+     */
+    public function removeNews(\CoastersWorld\Bundle\SiteBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
+    }
 }

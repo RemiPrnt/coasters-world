@@ -11,7 +11,7 @@ class DefaultController extends Controller
         $listNews = $this->getDoctrine()
             ->getEntityManager()
             ->getRepository('CoastersWorldSiteBundle:News')
-            ->findTwoLatest()
+            ->findLatest()
         ;
 
         return $this->render('CoastersWorldSiteBundle:Default:index.html.twig', array(

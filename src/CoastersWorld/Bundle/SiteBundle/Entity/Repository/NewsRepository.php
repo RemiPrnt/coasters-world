@@ -15,12 +15,12 @@ class NewsRepository extends EntityRepository
         ;
     }
 
-    public function findTwoLatest()
+    public function findLatest($number = 5)
     {
         return $this
             ->createQueryBuilder('n')
             ->addOrderBy('n.publishedAt', 'DESC')
-            ->setMaxResults(2)
+            ->setMaxResults($number)
             ->getQuery()
             ->getResult()
         ;

@@ -2234,7 +2234,7 @@ aside h2:after {
   display: block;
   width: 100%;
   height: 10px;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 .social-counter a {
   color: #999;
@@ -4728,7 +4728,7 @@ figure:hover .ribbon_icon {
 }
 /* iPhone retina */
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-  
+
 }
 /* Large desktop */
 @media (min-width: 1200px) {

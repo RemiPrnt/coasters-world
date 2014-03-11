@@ -20,9 +20,7 @@
                             </a>
                         </small>
                     </div>
-                    <div class="body">
-                        <p>{{ news.body }}</p>
-                    </div>
+                    <div class="body">{{ news.html|raw }}</div>
                     <hr class="dotted">
                 </div>
             </section>

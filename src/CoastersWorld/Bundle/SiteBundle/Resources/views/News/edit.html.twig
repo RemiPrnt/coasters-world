@@ -2,7 +2,7 @@
 
 {% block title %}{{ 'news.title.create'|trans }}{% endblock %}
 
-{# form_theme form with 'CoastersWorldSiteBundle:Form:fields.html.twig' #}
+{% form_theme form with 'CoastersWorldSiteBundle:Form:fields.html.twig' %}
 
 {% block body %}
     <div class="row">
@@ -13,17 +13,27 @@
                         <h1>{{ 'news.title.create'|trans }}</h1>
                     </div>
                     {{ form_start(form) }}
-                        {{ form_row(form.title) }}
-                        {{ form_row(form.body) }}
-                        {{ form_row(form.publishedAt) }}
-                        {{ form_row(form.author) }}
-                    
+                        {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
+                        {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}
+                        {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
+
                         {{ form_rest(form) }}
                         <button type="submit" id="submit" class="btn btn-large">{{ 'news.save'|trans }}</button>
-                        {#<button type="submit" id="submit" class="btn btn-large">{{ 'news.reset'|trans }}</button>#}
                     {{ form_end(form) }}
                 </section>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery('#news_type_coaster').select2();
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/vendor/prettyPhoto.css') }}" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/select2.css') }}" />
 {% endblock %}

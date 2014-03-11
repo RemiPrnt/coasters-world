@@ -1,0 +1,70 @@
+<div class="page-header">
+    <h2><i class="icon-file-alt"></i> <span>{{ 'news.last'|trans }}</span> {{ 'news.news'|trans }}</h2>
+</div>
+<section id="featured-news">
+    <div class="featured-news">
+        <div class="show-all">
+            <a href="{{ path('coasters_world_news_list') }}"><i class="icon-double-angle-right"></i> {{ 'news.title.home'|trans }}</a>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <!-- Latest Article -->
+                {% for news in listNews[0:1] %}
+                    <figure>
+                        <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}">
+                            <img src="http://placehold.it/370x250" alt="">
+                        </a>
+                    </figure>
+                    <article>
+                        <h4><a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}">{{ news.title }}</a></h4>
+                        <p>Magnam, nihil, repellat, itaque, sapiente eos quo labore quaerat beatae ipsa doloremque placeat quidem impedit corporis magni laudantium ut dolorem quia quas vitae repellendus iusto alias eaque cum? Nisi, placeat, illo, esse officia aliquid quas dolores consequuntur molestiae.
+                            <a href="blog.html"><small><i class="icon-double-angle-right"></i> {{ 'news.read.more'|trans }}</small></a>
+                        </p>
+                        <ul class="unstyled">
+                            <li><small><i class="icon-calendar"></i> {{ news.publishedAt|date("d/m/Y") }}</small></li>
+                            <li><small><i class="icon-user"></i> {{ 'news.author'|trans }} <em>{{ news.author.username }}</em></small></li>
+                        </ul>
+                    </article>
+                {% endfor %}
+                <!-- End Latest Article -->
+            </div>
+            <hr class="dotted visible-phone">
+            <div class="span4">
+                <div class="news-thumbs">
+                    <!-- Four next Articles-->
+                    {% for news in listNews[1:4] %}
+                        <div class="news-item">
+                            <figure>
+                                <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}">
+                                    <img src="http://placehold.it/90x90" alt="">
+                                </a>
+                            </figure>
+                            <article>
+                                <h4>
+                                    <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}">{{ news.title }}</a>
+                                </h4>
+                                <ul class="unstyled hidden-tablet">
+                                    <small>
+                                    <li><i class="icon-time"></i>
+                                        {{ news.publishedAt|date("d/m/Y") }} |
+                                        <i class="icon-user"></i>
+                                        {{ 'news.author'|trans }} <em>{{ news.author.username }}</em>
+                                    </li>
+                                    <li>
+                                        <i class="icon-comments"></i>
+                                        {% transchoice news.comments|length with {'%count%': news.comments|length} %}news.comments{% endtranschoice %} |
+                                        <i class="icon-tag"></i>
+                                        {{ news.coaster.name }}
+                                    </li>
+                                    </small>
+                                </ul>
+                            </article>
+                        </div>
+                    {% endfor %}
+                    <!-- End Four next Articles-->
+                </div>
+            </div>
+        </div>
+    </div>
+<hr class="fadeout">
+</section>

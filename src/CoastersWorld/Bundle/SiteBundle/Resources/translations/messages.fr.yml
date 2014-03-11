@@ -25,15 +25,17 @@ units:
 
 # Translation for news
 news:
+    news: News
     title:
         home: Toutes les news
         create: Rédiger une news
     read:
         more: Lire la suite...
-    author: Ecrit par
+    author: Posté par
     comments: %count% commentaire|%count% commentaires
     retour:
         liste: Toutes les news
+    last: Les dernières
     save: Enregistrer la news
     reset: Effacer
 
@@ -45,6 +47,11 @@ comments:
     save: Poster le commentaire
     reset: Effacer
     here: Ecrivez votre commentaire ici...
+
+# Translation for news
+database:
+    title:
+        home: Base de données
 
 #Translation for login
 login:

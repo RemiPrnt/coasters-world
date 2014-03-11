@@ -23,7 +23,7 @@ class NewsController extends Controller
         $listNews = $paginator->paginate(
             $queryNews,
             $page,
-            1
+            5
         );
 
         if (count($listNews) == 0) {
@@ -37,7 +37,13 @@ class NewsController extends Controller
 
     public function editAction($id = null)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        if (! $this->get('security.context')->isGranted('ROLE_USER')) {
+
+            return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
         if (null !== $id) {
             $news = $em->getRepository('CoastersWorldSiteBundle:News')->find($id);
             $action = $this->generateUrl('coasters_world_news_edit', array('id' => $id));
@@ -46,21 +52,23 @@ class NewsController extends Controller
             $action = $this->generateUrl('coasters_world_news_new');
         }
 
-        $form    = $this->createForm('news_type', $news, array(
+        $news->setAuthor($this->getUser());
+
+        $html = $this->container->get('markdown.parser')->transformMarkdown($news->getBody());
+        $news->setHtml($html);
+
+        $form = $this->createForm('news_type', $news, array(
             'action' => $action,
             'method' => 'POST',
         ));
-        $request = $this->getRequest();
 
-        if ('POST' === $request->getMethod()) {
-            $form->bind($request);
+        $form->handleRequest($this->getRequest());
 
-            if ($form->isValid()) {
-                $em->persist($news);
-                $em->flush();
+        if ($form->isValid()) {
+            $em->persist($news);
+            $em->flush();
 
-                return $this->redirect($this->generateUrl('coasters_world_news_list'));
-            }
+            return $this->redirect($this->generateUrl('coasters_world_news_list'));
         }
 
         return $this->render('CoastersWorldSiteBundle:News:edit.html.twig', array(

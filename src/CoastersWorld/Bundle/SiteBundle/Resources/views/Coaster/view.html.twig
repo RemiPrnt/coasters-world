@@ -126,6 +126,18 @@
           {{ render(controller('CoastersWorldSiteBundle:Rating:new', { 'slug': coaster.slug })) }}
         </div>
       </div>
+      <div class="widget">
+        <div class="simple-box">
+          {% include 'CoastersWorldSiteBundle:Coaster:search.html.twig' %}
+        </div>
+      </div>
+      <div class="widget">
+        <div class="simple-box">
+          {{dump(coaster.id)}}
+          <a href="{{ path('counter_add', {'id': coaster.id}) }}" class="btn btn-large btn-primary disabled">+ 1</a>
+
+        </div>
+      </div>
     </aside>
   </div>
   <!-- End right side -->
@@ -138,8 +150,10 @@
     <script type="text/javascript">
       jQuery('#status').tooltip();
     </script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/select2.min.js') }}"></script>
 {% endblock %}
 
 {% block stylesheets %}
   <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/vendor/prettyPhoto.css') }}" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/select2.css') }}" />
 {% endblock %}

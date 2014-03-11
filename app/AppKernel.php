@@ -16,6 +16,7 @@ class AppKernel extends Kernel
             new Gloomy\PagerBundle\GloomyPagerBundle(),
 
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
 
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 

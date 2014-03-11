@@ -20,7 +20,8 @@
         "sensio/generator-bundle": "2.*",
         "gedmo/doctrine-extensions": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master",
-        "gloomy/pager-bundle": "dev-master"
+        "gloomy/pager-bundle": "dev-master",
+        "knplabs/knp-markdown-bundle": "1.2.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

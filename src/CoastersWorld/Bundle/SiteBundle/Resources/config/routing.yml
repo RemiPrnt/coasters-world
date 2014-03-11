@@ -64,5 +64,9 @@ coasters_world_image_list:
 
 
 counter_list:
-    pattern: /coaster/list
-    defaults: { _controller: CoastersWorldSiteBundle:Counter:list }
+    pattern: /coaster/list/{page}
+    defaults: { _controller: CoastersWorldSiteBundle:Counter:list, page: 1 }
+
+counter_add:
+    pattern: /coaster/add/{id}
+    defaults: { _controller: CoastersWorldSiteBundle:Counter:add }

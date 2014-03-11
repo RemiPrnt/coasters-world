@@ -10,7 +10,7 @@
             <!-- Blog -->
             <section class="blog">
                 <div class="page-header">
-                    <h1>Liste des news</h1>
+                    <h1>{{ 'news.retour.liste'|trans }}</h1>
                 </div>
                 {% for news in listNews %}
                     <div class="item">
@@ -38,7 +38,7 @@
                                     </a>
                                 </h3>
                                 <p class="meta">
-                                    <i class="icon-time"></i> {{ news.publishedAt|date("d/m/Y") }} | <i class="icon-user"></i> by <a href="single.html"><em>{{ news.author.username }}</em></a>
+                                    <i class="icon-time"></i> {{ news.publishedAt|date("d/m/Y") }} | <i class="icon-user"></i> {{ 'news.author'|trans }} <a href="single.html"><em>{{ news.author.username }}</em></a>
                                 </p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam inventore dicta velit tempore alias labore aut iusto fuga non suscipit? Magni cum perspiciatis qui hic cupiditate possimus voluptates enim asperiores rerum doloremque similique amet? Amet ex fuga quo hic quibusdam.</p>
                                 <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}"><i class="icon-circle-arrow-right"></i> {{ 'news.read.more'|trans }}</a>

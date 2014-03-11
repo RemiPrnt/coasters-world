@@ -277,4 +277,32 @@ class News
     {
         return $this->comments;
     }
+    /**
+     * @var string
+     */
+    private $html;
+
+
+    /**
+     * Set html
+     *
+     * @param string $html
+     * @return News
+     */
+    public function setHtml($html)
+    {
+        $this->html = $html;
+
+        return $this;
+    }
+
+    /**
+     * Get html
+     *
+     * @return string 
+     */
+    public function getHtml()
+    {
+        return $this->html;
+    }
 }

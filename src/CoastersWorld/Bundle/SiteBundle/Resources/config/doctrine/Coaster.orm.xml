@@ -20,5 +20,15 @@
     <many-to-one field="status" target-entity="Status" inversed-by="coasters"/>
     <one-to-many field="images" target-entity="Image" mapped-by="coaster" />
     <one-to-many field="coasterComments" target-entity="CoasterComment" mapped-by="coaster"/>
+    <many-to-many field="users" inversed-by="coasters" target-entity="User">
+      <join-table name="coasters_users">
+        <join-columns>
+          <join-column name="coaster_id" referenced-column-name="id" />
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="user_id" referenced-column-name="id" />
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
   </entity>
 </doctrine-mapping>
