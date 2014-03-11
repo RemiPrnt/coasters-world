@@ -9,7 +9,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $listNews = $this->getDoctrine()
-            ->getEntityManager()
+            ->getManager()
             ->getRepository('CoastersWorldSiteBundle:News')
             ->findTwoLatest()
         ;

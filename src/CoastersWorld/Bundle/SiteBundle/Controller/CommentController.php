@@ -44,7 +44,7 @@ class CommentController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
 
             $em->persist($comment);
             $em->flush();
@@ -62,7 +62,7 @@ class CommentController extends Controller
 
     protected function getNews($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $news = $em->getRepository('CoastersWorldSiteBundle:News')->find($id);
 
         return $news;
