@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $listNews = $this->getDoctrine()
+/*        $listNews = $this->getDoctrine()
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:News')
             ->findLatest()
@@ -16,6 +16,6 @@ class DefaultController extends Controller
 
         return $this->render('CoastersWorldSiteBundle:Default:index.html.twig', array(
             'listNews' => $listNews
-        ));
+        ));*/
     }
 }

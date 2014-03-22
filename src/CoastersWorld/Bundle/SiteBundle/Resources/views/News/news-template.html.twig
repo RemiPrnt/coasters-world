@@ -1,0 +1,70 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ 'news.title.home'|trans }}{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+
+		<div class="col-md-9">
+			{% block newscontent %}
+			{% endblock %}
+		</div>
+
+		<div class="col-md-3">
+
+			{% block newssidebar %}
+
+				<aside class="sidebar">
+
+	                <form>
+						<div class="input-group">
+							<input class="form-control" placeholder="Recherche" name="s" id="s" type="text">
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-danger btn-lg"><i class="icon icon-search"></i></button>
+							</span>
+						</div>
+					</form>
+
+	                <hr />
+
+	                <h4>Categories</h4>
+	                <ul class="nav nav-list primary push-bottom">
+	                    <li><a href="#">Europe</a></li>
+	                    <li><a href="#">Amérique</a></li>
+	                    <li><a href="#">Asie</a></li>
+	                    <li><a href="#">Construction</a></li>
+	                    <li><a href="#">Annonce</a></li>
+	                    <li><a href="#">Communauté</a></li>
+	                </ul>
+
+	                <h4>Dernières news</h4>
+	                <ul class="simple-post-list">
+	                	{% for i in 1..5 %}
+	                        <li>
+	                            <div class="post-image">
+	                                <div class="img-thumbnail">
+	                                    <a href="blog-single.html">
+	                                        <img src="http://lorempixel.com/30/30/technics/{{i}}" alt="">
+	                                    </a>
+	                                </div>
+	                            </div>
+	                            <div class="post-info">
+	                                <a href="blog-single.html">Un MegaCoaster à Walibi Belgium</a>
+	                                <div class="post-meta">
+	                                     Jan 10, 2013
+	                                </div>
+	                            </div>
+	                        </li>
+                        {% endfor %}
+                    </ul>
+
+	            </aside>
+
+			{% endblock %}
+
+		</div>
+
+	</div>
+
+{% endblock %}

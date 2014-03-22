@@ -13,24 +13,26 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/vendor/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/vendor/bootstrap-responsive.min.css') }}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/vendor/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/vendor/font-awesome-social.css') }}">
-    <!-- End Font Awesome -->
-    <!-- Menu Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/menu/core.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/menu/lwhite.css') }}">
-    <!-- End Menu Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/ie.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/theme-animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/theme-blog.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/theme-elements.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/theme-responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/theme-shop.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/theme.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/skins/orange.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/test.css') }}">
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/custom.css') }}">
 
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/modernizr.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/jquery-1.9.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/coastersworldsite/css/fonts/font-awesome/css/font-awesome.css') }}">
+
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/modernizr.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/bootstrap.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/custom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/plugins.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/theme.js') }}"></script>
 
     {# stylesheets
         '../app/Resources/public/css/*' output='css/base.css' filter='?yui_css' %}
@@ -47,10 +49,28 @@
     {% block stylesheets %}{% endblock %}
 
 </head>
-<body class="wide">
-    <div class="layout">
+<body>
+
+    <div class="body">
         {% include '::header.html.twig' %}
-        <div class="main">
+        <div role="main" class="main">
+            <section class="page-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="breadcrumb">
+                                <li><a href="#">Les News</a></li>
+                                <li class="active">Accueil</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>Les News</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <div class="container">
                 {% block body %}{% endblock %}
             </div>
@@ -58,7 +78,5 @@
         {% include '::footer.html.twig' %}
     </div>
     {% block javascripts %}{% endblock %}
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/plugins.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/main.js') }}"></script>
 </body>
 </html>

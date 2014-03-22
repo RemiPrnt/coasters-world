@@ -1,6 +1,6 @@
 coasters_world_homepage:
     pattern:  /
-    defaults: { _controller: CoastersWorldSiteBundle:Default:index }
+    defaults: { _controller: CoastersWorldSiteBundle:News:list, page: 1 }
 
 coasters_world_database_index:
     pattern:  /coaster

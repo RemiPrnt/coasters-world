@@ -1,43 +1,1008 @@
-// Avoid `console` errors in browsers that lack a console.
-(function() {
-	var method;
-	var noop = function () {};
-	var methods = [
-		'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-		'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-		'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-		'timeStamp', 'trace', 'warn'
-	];
-	var length = methods.length;
-	var console = (window.console = window.console || {});
+/*
+Plugin Name: 	scrollToTop for jQuery.
+Written by: 	Okler Themes - (http://www.okler.net)
+Version: 		0.1
+*/
 
-	while (length--) {
-		method = methods[length];
+(function($) {
+	$.extend({
 
-		// Only stub undefined methods.
-		if (!console[method]) {
-			console[method] = noop;
+		scrollToTop: function() {
+
+			var _isScrolling = false;
+
+			// Append Button
+			$("body").append($("<a />")
+							.addClass("scroll-to-top")
+							.attr({
+								"href": "#",
+								"id": "scrollToTop"
+							})
+							.append(
+								$("<i />")
+									.addClass("icon icon-chevron-up icon-white")
+							));
+
+			$("#scrollToTop").click(function(e) {
+
+				e.preventDefault();
+				$("body, html").animate({scrollTop : 0}, 500);
+				return false;
+
+			});
+
+			// Show/Hide Button on Window Scroll event.
+			$(window).scroll(function() {
+
+				if(!_isScrolling) {
+
+					_isScrolling = true;
+
+					if($(window).scrollTop() > 150) {
+
+						$("#scrollToTop").stop(true, true).addClass("visible");
+						_isScrolling = false;
+
+					} else {
+
+						$("#scrollToTop").stop(true, true).removeClass("visible");
+						_isScrolling = false;
+
+					}
+
+				}
+
+			});
+
 		}
+
+	});
+})(jQuery);
+
+/*
+Plugin Name: 	BrowserSelector
+Written by: 	Okler Themes - (http://www.okler.net)
+Version: 		0.2
+*/
+
+(function($) {
+	$.extend({
+
+		browserSelector: function() {
+
+			var u = navigator.userAgent,
+				ua = u.toLowerCase(),
+				is = function (t) {
+					return ua.indexOf(t) > -1;
+				},
+				g = 'gecko',
+				w = 'webkit',
+				s = 'safari',
+				o = 'opera',
+				h = document.documentElement,
+				b = [(!(/opera|webtv/i.test(ua)) && /msie\s(\d)/.test(ua)) ? ('ie ie' + parseFloat(navigator.appVersion.split("MSIE")[1])) : is('firefox/2') ? g + ' ff2' : is('firefox/3.5') ? g + ' ff3 ff3_5' : is('firefox/3') ? g + ' ff3' : is('gecko/') ? g : is('opera') ? o + (/version\/(\d+)/.test(ua) ? ' ' + o + RegExp.jQuery1 : (/opera(\s|\/)(\d+)/.test(ua) ? ' ' + o + RegExp.jQuery2 : '')) : is('konqueror') ? 'konqueror' : is('chrome') ? w + ' chrome' : is('iron') ? w + ' iron' : is('applewebkit/') ? w + ' ' + s + (/version\/(\d+)/.test(ua) ? ' ' + s + RegExp.jQuery1 : '') : is('mozilla/') ? g : '', is('j2me') ? 'mobile' : is('iphone') ? 'iphone' : is('ipod') ? 'ipod' : is('mac') ? 'mac' : is('darwin') ? 'mac' : is('webtv') ? 'webtv' : is('win') ? 'win' : is('freebsd') ? 'freebsd' : (is('x11') || is('linux')) ? 'linux' : '', 'js'];
+
+			c = b.join(' ');
+			h.className += ' ' + c;
+
+			var isIE11 = !(window.ActiveXObject) && "ActiveXObject" in window;
+
+			if (isIE11) {
+				$('html').removeClass('gecko').addClass('ie ie11');
+				return;
+			}
+
+		}
+
+	});
+})(jQuery);
+
+/*
+Plugin Name: 	smoothScroll for jQuery.
+Written by: 	Okler Themes - (http://www.okler.net)
+Version: 		0.1
+
+Based on:
+
+	SmoothScroll v1.2.1
+	Licensed under the terms of the MIT license.
+
+	People involved
+	 - Balazs Galambosi (maintainer)
+	 - Patrick Brunner  (original idea)
+	 - Michael Herf     (Pulse Algorithm)
+
+*/
+(function($) {
+	$.extend({
+
+		smoothScroll: function() {
+
+			// Scroll Variables (tweakable)
+			var defaultOptions = {
+
+				// Scrolling Core
+				frameRate        : 60, // [Hz]
+				animationTime    : 700, // [px]
+				stepSize         : 120, // [px]
+
+				// Pulse (less tweakable)
+				// ratio of "tail" to "acceleration"
+				pulseAlgorithm   : true,
+				pulseScale       : 10,
+				pulseNormalize   : 1,
+
+				// Acceleration
+				accelerationDelta : 20,  // 20
+				accelerationMax   : 1,   // 1
+
+				// Keyboard Settings
+				keyboardSupport   : true,  // option
+				arrowScroll       : 50,     // [px]
+
+				// Other
+				touchpadSupport   : true,
+				fixedBackground   : true,
+				excluded          : ""
+			};
+
+			var options = defaultOptions;
+
+			// Other Variables
+			var isExcluded = false;
+			var isFrame = false;
+			var direction = { x: 0, y: 0 };
+			var initDone  = false;
+			var root = document.documentElement;
+			var activeElement;
+			var observer;
+			var deltaBuffer = [ 120, 120, 120 ];
+
+			var key = { left: 37, up: 38, right: 39, down: 40, spacebar: 32,
+						pageup: 33, pagedown: 34, end: 35, home: 36 };
+
+
+			/***********************************************
+			 * INITIALIZE
+			 ***********************************************/
+
+			/**
+			 * Tests if smooth scrolling is allowed. Shuts down everything if not.
+			 */
+			function initTest() {
+
+				var disableKeyboard = false;
+
+				// disable keys for google reader (spacebar conflict)
+				if (document.URL.indexOf("google.com/reader/view") > -1) {
+					disableKeyboard = true;
+				}
+
+				// disable everything if the page is blacklisted
+				if (options.excluded) {
+					var domains = options.excluded.split(/[,\n] ?/);
+					domains.push("mail.google.com"); // exclude Gmail for now
+					for (var i = domains.length; i--;) {
+						if (document.URL.indexOf(domains[i]) > -1) {
+							observer && observer.disconnect();
+							removeEvent("mousewheel", wheel);
+							disableKeyboard = true;
+							isExcluded = true;
+							break;
+						}
+					}
+				}
+
+				// disable keyboard support if anything above requested it
+				if (disableKeyboard) {
+					removeEvent("keydown", keydown);
+				}
+
+				if (options.keyboardSupport && !disableKeyboard) {
+					addEvent("keydown", keydown);
+				}
+			}
+
+			/**
+			 * Sets up scrolls array, determines if frames are involved.
+			 */
+			function init() {
+
+				if (!document.body) return;
+
+				var body = document.body;
+				var html = document.documentElement;
+				var windowHeight = window.innerHeight;
+				var scrollHeight = body.scrollHeight;
+
+				// check compat mode for root element
+				root = (document.compatMode.indexOf('CSS') >= 0) ? html : body;
+				activeElement = body;
+
+				initTest();
+				initDone = true;
+
+				// Checks if this script is running in a frame
+				if (top != self) {
+					isFrame = true;
+				}
+
+				/**
+				 * This fixes a bug where the areas left and right to
+				 * the content does not trigger the onmousewheel event
+				 * on some pages. e.g.: html, body { height: 100% }
+				 */
+				else if (scrollHeight > windowHeight &&
+						(body.offsetHeight <= windowHeight ||
+						 html.offsetHeight <= windowHeight)) {
+
+					// DOMChange (throttle): fix height
+					var pending = false;
+					var refresh = function () {
+						if (!pending && html.scrollHeight != document.height) {
+							pending = true; // add a new pending action
+							setTimeout(function () {
+								html.style.height = document.height + 'px';
+								pending = false;
+							}, 500); // act rarely to stay fast
+						}
+					};
+					html.style.height = 'auto';
+					setTimeout(refresh, 10);
+
+					var config = {
+						attributes: true,
+						childList: true,
+						characterData: false
+					};
+
+					observer = new MutationObserver(refresh);
+					observer.observe(body, config);
+
+					// clearfix
+					if (root.offsetHeight <= windowHeight) {
+						var underlay = document.createElement("div");
+						underlay.style.clear = "both";
+						body.appendChild(underlay);
+					}
+				}
+
+				// gmail performance fix
+				if (document.URL.indexOf("mail.google.com") > -1) {
+					var s = document.createElement("style");
+					s.innerHTML = ".iu { visibility: hidden }";
+					(document.getElementsByTagName("head")[0] || html).appendChild(s);
+				}
+				// facebook better home timeline performance
+				// all the HTML resized images make rendering CPU intensive
+				else if (document.URL.indexOf("www.facebook.com") > -1) {
+					var home_stream = document.getElementById("home_stream");
+					home_stream && (home_stream.style.webkitTransform = "translateZ(0)");
+				}
+				// disable fixed background
+				if (!options.fixedBackground && !isExcluded) {
+					body.style.backgroundAttachment = "scroll";
+					html.style.backgroundAttachment = "scroll";
+				}
+			}
+
+
+			/************************************************
+			 * SCROLLING
+			 ************************************************/
+
+			var que = [];
+			var pending = false;
+			var lastScroll = +new Date;
+
+			/**
+			 * Pushes scroll actions to the scrolling queue.
+			 */
+			function scrollArray(elem, left, top, delay) {
+
+				delay || (delay = 1000);
+				directionCheck(left, top);
+
+				if (options.accelerationMax != 1) {
+					var now = +new Date;
+					var elapsed = now - lastScroll;
+					if (elapsed < options.accelerationDelta) {
+						var factor = (1 + (30 / elapsed)) / 2;
+						if (factor > 1) {
+							factor = Math.min(factor, options.accelerationMax);
+							left *= factor;
+							top  *= factor;
+						}
+					}
+					lastScroll = +new Date;
+				}
+
+				// push a scroll command
+				que.push({
+					x: left,
+					y: top,
+					lastX: (left < 0) ? 0.99 : -0.99,
+					lastY: (top  < 0) ? 0.99 : -0.99,
+					start: +new Date
+				});
+
+				// don't act if there's a pending queue
+				if (pending) {
+					return;
+				}
+
+				var scrollWindow = (elem === document.body);
+
+				var step = function (time) {
+
+					var now = +new Date;
+					var scrollX = 0;
+					var scrollY = 0;
+
+					for (var i = 0; i < que.length; i++) {
+
+						var item = que[i];
+						var elapsed  = now - item.start;
+						var finished = (elapsed >= options.animationTime);
+
+						// scroll position: [0, 1]
+						var position = (finished) ? 1 : elapsed / options.animationTime;
+
+						// easing [optional]
+						if (options.pulseAlgorithm) {
+							position = pulse(position);
+						}
+
+						// only need the difference
+						var x = (item.x * position - item.lastX) >> 0;
+						var y = (item.y * position - item.lastY) >> 0;
+
+						// add this to the total scrolling
+						scrollX += x;
+						scrollY += y;
+
+						// update last values
+						item.lastX += x;
+						item.lastY += y;
+
+						// delete and step back if it's over
+						if (finished) {
+							que.splice(i, 1); i--;
+						}
+					}
+
+					// scroll left and top
+					if (scrollWindow) {
+						window.scrollBy(scrollX, scrollY);
+					}
+					else {
+						if (scrollX) elem.scrollLeft += scrollX;
+						if (scrollY) elem.scrollTop  += scrollY;
+					}
+
+					// clean up if there's nothing left to do
+					if (!left && !top) {
+						que = [];
+					}
+
+					if (que.length) {
+						requestFrame(step, elem, (delay / options.frameRate + 1));
+					} else {
+						pending = false;
+					}
+				};
+
+				// start a new queue of actions
+				requestFrame(step, elem, 0);
+				pending = true;
+			}
+
+
+			/***********************************************
+			 * EVENTS
+			 ***********************************************/
+
+			/**
+			 * Mouse wheel handler.
+			 * @param {Object} event
+			 */
+			function wheel(event) {
+
+				if (!initDone) {
+					init();
+				}
+
+				var target = event.target;
+				var overflowing = overflowingAncestor(target);
+
+				// use default if there's no overflowing
+				// element or default action is prevented
+				if (!overflowing || event.defaultPrevented ||
+					isNodeName(activeElement, "embed") ||
+				   (isNodeName(target, "embed") && /\.pdf/i.test(target.src))) {
+					return true;
+				}
+
+				var deltaX = event.wheelDeltaX || 0;
+				var deltaY = event.wheelDeltaY || 0;
+
+				// use wheelDelta if deltaX/Y is not available
+				if (!deltaX && !deltaY) {
+					deltaY = event.wheelDelta || 0;
+				}
+
+				// check if it's a touchpad scroll that should be ignored
+				if (!options.touchpadSupport && isTouchpad(deltaY)) {
+					return true;
+				}
+
+				// scale by step size
+				// delta is 120 most of the time
+				// synaptics seems to send 1 sometimes
+				if (Math.abs(deltaX) > 1.2) {
+					deltaX *= options.stepSize / 120;
+				}
+				if (Math.abs(deltaY) > 1.2) {
+					deltaY *= options.stepSize / 120;
+				}
+
+				scrollArray(overflowing, -deltaX, -deltaY);
+				event.preventDefault();
+			}
+
+			/**
+			 * Keydown event handler.
+			 * @param {Object} event
+			 */
+			function keydown(event) {
+
+				var target   = event.target;
+				var modifier = event.ctrlKey || event.altKey || event.metaKey ||
+							  (event.shiftKey && event.keyCode !== key.spacebar);
+
+				// do nothing if user is editing text
+				// or using a modifier key (except shift)
+				// or in a dropdown
+				if ( /input|textarea|select|embed/i.test(target.nodeName) ||
+					 target.isContentEditable ||
+					 event.defaultPrevented   ||
+					 modifier ) {
+				  return true;
+				}
+				// spacebar should trigger button press
+				if (isNodeName(target, "button") &&
+					event.keyCode === key.spacebar) {
+				  return true;
+				}
+
+				var shift, x = 0, y = 0;
+				var elem = overflowingAncestor(activeElement);
+				var clientHeight = elem.clientHeight;
+
+				if (elem == document.body) {
+					clientHeight = window.innerHeight;
+				}
+
+				switch (event.keyCode) {
+					case key.up:
+						y = -options.arrowScroll;
+						break;
+					case key.down:
+						y = options.arrowScroll;
+						break;
+					case key.spacebar: // (+ shift)
+						shift = event.shiftKey ? 1 : -1;
+						y = -shift * clientHeight * 0.9;
+						break;
+					case key.pageup:
+						y = -clientHeight * 0.9;
+						break;
+					case key.pagedown:
+						y = clientHeight * 0.9;
+						break;
+					case key.home:
+						y = -elem.scrollTop;
+						break;
+					case key.end:
+						var damt = elem.scrollHeight - elem.scrollTop - clientHeight;
+						y = (damt > 0) ? damt+10 : 0;
+						break;
+					case key.left:
+						x = -options.arrowScroll;
+						break;
+					case key.right:
+						x = options.arrowScroll;
+						break;
+					default:
+						return true; // a key we don't care about
+				}
+
+				scrollArray(elem, x, y);
+				event.preventDefault();
+			}
+
+			/**
+			 * Mousedown event only for updating activeElement
+			 */
+			function mousedown(event) {
+				activeElement = event.target;
+			}
+
+
+			/***********************************************
+			 * OVERFLOW
+			 ***********************************************/
+
+			var cache = {}; // cleared out every once in while
+			setInterval(function () { cache = {}; }, 10 * 1000);
+
+			var uniqueID = (function () {
+				var i = 0;
+				return function (el) {
+					return el.uniqueID || (el.uniqueID = i++);
+				};
+			})();
+
+			function setCache(elems, overflowing) {
+				for (var i = elems.length; i--;)
+					cache[uniqueID(elems[i])] = overflowing;
+				return overflowing;
+			}
+
+			function overflowingAncestor(el) {
+				var elems = [];
+				var rootScrollHeight = root.scrollHeight;
+				do {
+					var cached = cache[uniqueID(el)];
+					if (cached) {
+						return setCache(elems, cached);
+					}
+					elems.push(el);
+					if (rootScrollHeight === el.scrollHeight) {
+						if (!isFrame || root.clientHeight + 10 < rootScrollHeight) {
+							return setCache(elems, document.body); // scrolling root in WebKit
+						}
+					} else if (el.clientHeight + 10 < el.scrollHeight) {
+						overflow = getComputedStyle(el, "").getPropertyValue("overflow-y");
+						if (overflow === "scroll" || overflow === "auto") {
+							return setCache(elems, el);
+						}
+					}
+				} while (el = el.parentNode);
+			}
+
+
+			/***********************************************
+			 * HELPERS
+			 ***********************************************/
+
+			function addEvent(type, fn, bubble) {
+				window.addEventListener(type, fn, (bubble||false));
+			}
+
+			function removeEvent(type, fn, bubble) {
+				window.removeEventListener(type, fn, (bubble||false));
+			}
+
+			function isNodeName(el, tag) {
+				return (el.nodeName||"").toLowerCase() === tag.toLowerCase();
+			}
+
+			function directionCheck(x, y) {
+				x = (x > 0) ? 1 : -1;
+				y = (y > 0) ? 1 : -1;
+				if (direction.x !== x || direction.y !== y) {
+					direction.x = x;
+					direction.y = y;
+					que = [];
+					lastScroll = 0;
+				}
+			}
+
+			var deltaBufferTimer;
+
+			function isTouchpad(deltaY) {
+				if (!deltaY) return;
+				deltaY = Math.abs(deltaY)
+				deltaBuffer.push(deltaY);
+				deltaBuffer.shift();
+				clearTimeout(deltaBufferTimer);
+				var allEquals    = (deltaBuffer[0] == deltaBuffer[1] &&
+									deltaBuffer[1] == deltaBuffer[2]);
+				var allDivisable = (isDivisible(deltaBuffer[0], 120) &&
+									isDivisible(deltaBuffer[1], 120) &&
+									isDivisible(deltaBuffer[2], 120));
+				return !(allEquals || allDivisable);
+			}
+
+			function isDivisible(n, divisor) {
+				return (Math.floor(n / divisor) == n / divisor);
+			}
+
+			var requestFrame = (function () {
+				  return  window.requestAnimationFrame       ||
+						  window.webkitRequestAnimationFrame ||
+						  function (callback, element, delay) {
+							  window.setTimeout(callback, delay || (1000/60));
+						  };
+			})();
+
+			var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+
+			/***********************************************
+			 * PULSE
+			 ***********************************************/
+
+			/**
+			 * Viscous fluid with a pulse for part and decay for the rest.
+			 * - Applies a fixed force over an interval (a damped acceleration), and
+			 * - Lets the exponential bleed away the velocity over a longer interval
+			 * - Michael Herf, http://stereopsis.com/stopping/
+			 */
+			function pulse_(x) {
+				var val, start, expx;
+				// test
+				x = x * options.pulseScale;
+				if (x < 1) { // acceleartion
+					val = x - (1 - Math.exp(-x));
+				} else {     // tail
+					// the previous animation ended here:
+					start = Math.exp(-1);
+					// simple viscous drag
+					x -= 1;
+					expx = 1 - Math.exp(-x);
+					val = start + (expx * (1 - start));
+				}
+				return val * options.pulseNormalize;
+			}
+
+			function pulse(x) {
+				if (x >= 1) return 1;
+				if (x <= 0) return 0;
+
+				if (options.pulseNormalize == 1) {
+					options.pulseNormalize /= pulse_(1);
+				}
+				return pulse_(x);
+			}
+
+			addEvent("mousedown", mousedown);
+			addEvent("mousewheel", wheel);
+			addEvent("load", init);
+
+		}
+
+	});
+})(jQuery);
+
+/*
+Plugin Name: 	waitForImages jQuery Plugin - v1.5.0 - 2013-07-20
+Written by: 	https://github.com/alexanderdickson/waitForImages
+
+*/
+;(function ($) {
+    // Namespace all events.
+    var eventNamespace = 'waitForImages';
+
+    // CSS properties which contain references to images.
+    $.waitForImages = {
+        hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage', 'cursor']
+    };
+
+    // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
+    $.expr[':'].uncached = function (obj) {
+        // Ensure we are dealing with an `img` element with a valid `src` attribute.
+        if (!$(obj).is('img[src!=""]')) {
+            return false;
+        }
+
+        // Firefox's `complete` property will always be `true` even if the image has not been downloaded.
+        // Doing it this way works in Firefox.
+        var img = new Image();
+        img.src = obj.src;
+        return !img.complete;
+    };
+
+    $.fn.waitForImages = function (finishedCallback, eachCallback, waitForAll) {
+
+        var allImgsLength = 0;
+        var allImgsLoaded = 0;
+
+        // Handle options object.
+        if ($.isPlainObject(arguments[0])) {
+            waitForAll = arguments[0].waitForAll;
+            eachCallback = arguments[0].each;
+			// This must be last as arguments[0]
+			// is aliased with finishedCallback.
+            finishedCallback = arguments[0].finished;
+        }
+
+        // Handle missing callbacks.
+        finishedCallback = finishedCallback || $.noop;
+        eachCallback = eachCallback || $.noop;
+
+        // Convert waitForAll to Boolean
+        waitForAll = !! waitForAll;
+
+        // Ensure callbacks are functions.
+        if (!$.isFunction(finishedCallback) || !$.isFunction(eachCallback)) {
+            throw new TypeError('An invalid callback was supplied.');
+        }
+
+        return this.each(function () {
+            // Build a list of all imgs, dependent on what images will be considered.
+            var obj = $(this);
+            var allImgs = [];
+            // CSS properties which may contain an image.
+            var hasImgProperties = $.waitForImages.hasImageProperties || [];
+            // To match `url()` references.
+            // Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
+            var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
+
+            if (waitForAll) {
+
+                // Get all elements (including the original), as any one of them could have a background image.
+                obj.find('*').addBack().each(function () {
+                    var element = $(this);
+
+                    // If an `img` element, add it. But keep iterating in case it has a background image too.
+                    if (element.is('img:uncached')) {
+                        allImgs.push({
+                            src: element.attr('src'),
+                            element: element[0]
+                        });
+                    }
+
+                    $.each(hasImgProperties, function (i, property) {
+                        var propertyValue = element.css(property);
+                        var match;
+
+                        // If it doesn't contain this property, skip.
+                        if (!propertyValue) {
+                            return true;
+                        }
+
+                        // Get all url() of this element.
+                        while (match = matchUrl.exec(propertyValue)) {
+                            allImgs.push({
+                                src: match[2],
+                                element: element[0]
+                            });
+                        }
+                    });
+                });
+            } else {
+                // For images only, the task is simpler.
+                obj.find('img:uncached')
+                    .each(function () {
+                    allImgs.push({
+                        src: this.src,
+                        element: this
+                    });
+                });
+            }
+
+            allImgsLength = allImgs.length;
+            allImgsLoaded = 0;
+
+            // If no images found, don't bother.
+            if (allImgsLength === 0) {
+                finishedCallback.call(obj[0]);
+            }
+
+            $.each(allImgs, function (i, img) {
+
+                var image = new Image();
+
+                // Handle the image loading and error with the same callback.
+                $(image).on('load.' + eventNamespace + ' error.' + eventNamespace, function (event) {
+                    allImgsLoaded++;
+
+                    // If an error occurred with loading the image, set the third argument accordingly.
+                    eachCallback.call(img.element, allImgsLoaded, allImgsLength, event.type == 'load');
+
+                    if (allImgsLoaded == allImgsLength) {
+                        finishedCallback.call(obj[0]);
+                        return false;
+                    }
+
+                });
+
+                image.src = img.src;
+            });
+        });
+    };
+}(jQuery));
+
+/*
+Plugin Name: 	Count To
+Written by: 	Matt Huggins - https://github.com/mhuggins/jquery-countTo
+
+*/
+(function ($) {
+	$.fn.countTo = function (options) {
+		options = options || {};
+
+		return $(this).each(function () {
+			// set options for current element
+			var settings = $.extend({}, $.fn.countTo.defaults, {
+				from:            $(this).data('from'),
+				to:              $(this).data('to'),
+				speed:           $(this).data('speed'),
+				refreshInterval: $(this).data('refresh-interval'),
+				decimals:        $(this).data('decimals')
+			}, options);
+
+			// how many times to update the value, and how much to increment the value on each update
+			var loops = Math.ceil(settings.speed / settings.refreshInterval),
+				increment = (settings.to - settings.from) / loops;
+
+			// references & variables that will change with each update
+			var self = this,
+				$self = $(this),
+				loopCount = 0,
+				value = settings.from,
+				data = $self.data('countTo') || {};
+
+			$self.data('countTo', data);
+
+			// if an existing interval can be found, clear it first
+			if (data.interval) {
+				clearInterval(data.interval);
+			}
+			data.interval = setInterval(updateTimer, settings.refreshInterval);
+
+			// initialize the element with the starting value
+			render(value);
+
+			function updateTimer() {
+				value += increment;
+				loopCount++;
+
+				render(value);
+
+				if (typeof(settings.onUpdate) == 'function') {
+					settings.onUpdate.call(self, value);
+				}
+
+				if (loopCount >= loops) {
+					// remove the interval
+					$self.removeData('countTo');
+					clearInterval(data.interval);
+					value = settings.to;
+
+					if (typeof(settings.onComplete) == 'function') {
+						settings.onComplete.call(self, value);
+					}
+				}
+			}
+
+			function render(value) {
+				var formattedValue = settings.formatter.call(self, value, settings);
+				$self.html(formattedValue);
+			}
+		});
+	};
+
+	$.fn.countTo.defaults = {
+		from: 0,               // the number the element should start at
+		to: 0,                 // the number the element should end at
+		speed: 1000,           // how long it should take to count between the target numbers
+		refreshInterval: 100,  // how often the element should be updated
+		decimals: 0,           // the number of decimal places to show
+		formatter: formatter,  // handler for formatting the value before rendering
+		onUpdate: null,        // callback method for every time the element is updated
+		onComplete: null       // callback method for when the element finishes updating
+	};
+
+	function formatter(value, settings) {
+		return value.toFixed(settings.decimals);
 	}
-}());
+}(jQuery));
 
-// Place any jQuery/helper plugins in here.
+/*
+Plugin Name: 	afterResize.js
+Written by: 	https://github.com/mcshaman/afterResize.js
+Description: 	Simple jQuery plugin designed to emulate an 'after resize' event.
 
-/**
- * tinynav
- *
- * http://tinynav.viljamis.com
- *
- * v1.1 by @viljamis
- */
-;(function(a,i,g){a.fn.tinyNav=function(j){var b=a.extend({active:"selected",header:"",label:""},j);return this.each(function(){g++;var h=a(this),d="tinynav"+g,f=".l_"+d,e=a("<select/>").attr("id",d).addClass("tinynav "+d);if(h.is("ul,ol")){""!==b.header&&e.append(a("<option/>").text(b.header));var c="";h.addClass("l_"+d).find("a").each(function(){c+='<option value="'+a(this).attr("href")+'">';var b;for(b=0;b<a(this).parents("ul, ol").length-1;b++)c+="- ";c+=a(this).text()+"</option>"});e.append(c);
-b.header||e.find(":eq("+a(f+" li").index(a(f+" li."+b.active))+")").attr("selected",!0);e.change(function(){i.location.href=a(this).val()});a(f).after(e);b.label&&e.before(a("<label/>").attr("for",d).addClass("tinynav_label "+d+"_label").append(b.label))}})}})(jQuery,this,0);
+*/
+( function( $ ) {
+	"use strict";
 
-/**
- * jquery.tweet.js
- *
- * See http://tweet.seaofclouds.com/ or https://github.com/seaofclouds/tweet for more info
- *
- * Copyright (c) 2008-2012 Todd Matthews & Steve Purcell
- */
-;(function(factory){if(typeof define==='function'&&define.amd)define(['jquery'],factory);else factory(jQuery)}(function($){$.fn.tweet=function(o){var s=$.extend({username:null,list:null,favorites:false,query:null,avatar_size:null,count:3,fetch:null,page:1,retweets:true,intro_text:null,outro_text:null,join_text:null,auto_join_text_default:" I said, ",auto_join_text_ed:" I ",auto_join_text_ing:" I am ",auto_join_text_reply:" I replied to ",auto_join_text_url:" I was looking at ",loading_text:null,refresh_interval:null,twitter_url:"twitter.com",twitter_api_url:"api.twitter.com",twitter_search_url:"search.twitter.com",template:"{avatar}{time}{join} {text}",comparator:function(tweet1,tweet2){return tweet2.tweet_time-tweet1.tweet_time},filter:function(tweet){return true}},o);var url_regexp=/\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi;function t(template,info){if(typeof template==="string"){var result=template;for(var key in info){var val=info[key];result=result.split('{'+key+'}').join(val===null?'':val)}return result}else return template(info)}$.extend({tweet:{t:t}});function replacer(regex,replacement){return function(){var returning=[];this.each(function(){returning.push(this.replace(regex,replacement))});return $(returning)}}function escapeHTML(s){return s.replace(/</g,"&lt;").replace(/>/g,"^&gt;")}$.fn.extend({linkUser:replacer(/(^|[\W])@(\w+)/gi,"$1<span class=\"at\">@</span><a href=\"http://"+s.twitter_url+"/$2\">$2</a>"),linkHash:replacer(/(?:^| )[\#]+([\w\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u00ff\u0600-\u06ff]+)/gi,' <a href="http://'+s.twitter_search_url+'/search?q=&tag=$1&lang=all'+((s.username&&s.username.length===1&&!s.list)?'&from='+s.username.join("%2BOR%2B"):'')+'" class="tweet_hashtag">#$1</a>'),makeHeart:replacer(/(&lt;)+[3]/gi,"<tt class='heart'>&#x2665;</tt>")});function linkURLs(text,entities){return text.replace(url_regexp,function(match){var url=(/^[a-z]+:/i).test(match)?match:"http://"+match;var text=match;for(var i=0;i<entities.length;++i){var entity=entities[i];if(entity.url===url&&entity.expanded_url){url=entity.expanded_url;text=entity.display_url;break}}return"<a href=\""+escapeHTML(url)+"\">"+escapeHTML(text)+"</a>"})}function parse_date(date_str){return Date.parse(date_str.replace(/^([a-z]{3})( [a-z]{3} \d\d?)(.*)( \d{4})$/i,'$1,$2$4$3'))}function extract_relative_time(date){var toInt=function(val){return parseInt(val,10)};var relative_to=new Date();var delta=toInt((relative_to.getTime()-date)/1000);if(delta<1)delta=0;return{days:toInt(delta/86400),hours:toInt(delta/3600),minutes:toInt(delta/60),seconds:toInt(delta)}}function format_relative_time(time_ago){if(time_ago.days>2)return'about '+time_ago.days+' days ago';if(time_ago.hours>24)return'about a day ago';if(time_ago.hours>2)return'about '+time_ago.hours+' hours ago';if(time_ago.minutes>45)return'about an hour ago';if(time_ago.minutes>2)return'about '+time_ago.minutes+' minutes ago';if(time_ago.seconds>1)return'about '+time_ago.seconds+' seconds ago';return'just now'}function build_auto_join_text(text){if(text.match(/^(@([A-Za-z0-9-_]+)) .*/i)){return s.auto_join_text_reply}else if(text.match(url_regexp)){return s.auto_join_text_url}else if(text.match(/^((\w+ed)|just) .*/im)){return s.auto_join_text_ed}else if(text.match(/^(\w*ing) .*/i)){return s.auto_join_text_ing}else{return s.auto_join_text_default}}function build_api_url(){var proto=('https:'===document.location.protocol?'https:':'http:');var count=(s.fetch===null)?s.count:s.fetch;var common_params='&include_entities=1&callback=?';if(s.list){return proto+"//"+s.twitter_api_url+"/1/"+s.username[0]+"/lists/"+s.list+"/statuses.json?page="+s.page+"&per_page="+count+common_params}else if(s.favorites){return proto+"//"+s.twitter_api_url+"/1/favorites.json?screen_name="+s.username[0]+"&page="+s.page+"&count="+count+common_params}else if(s.query===null&&s.username.length===1){return proto+'//'+s.twitter_api_url+'/1/statuses/user_timeline.json?screen_name='+s.username[0]+'&count='+count+(s.retweets?'&include_rts=1':'')+'&page='+s.page+common_params}else{var query=(s.query||'from:'+s.username.join(' OR from:'));return proto+'//'+s.twitter_search_url+'/search.json?&q='+encodeURIComponent(query)+'&rpp='+count+'&page='+s.page+common_params}}function extract_avatar_url(item,secure){if(secure){return('user'in item)?item.user.profile_image_url_https:extract_avatar_url(item,false).replace(/^http:\/\/[a-z0-9]{1,3}\.twimg\.com\//,"https://s3.amazonaws.com/twitter_production/")}else{return item.profile_image_url||item.user.profile_image_url}}function extract_template_data(item){var o={};o.item=item;o.source=item.source;o.screen_name=item.from_user||item.user.screen_name;o.name=item.from_user_name||item.user.name;o.retweet=typeof(item.retweeted_status)!='undefined';o.tweet_time=parse_date(item.created_at);o.join_text=s.join_text==="auto"?build_auto_join_text(item.text):s.join_text;o.tweet_id=item.id_str;o.twitter_base="http://"+s.twitter_url+"/";o.user_url=o.twitter_base+o.screen_name;o.tweet_url=o.user_url+"/status/"+o.tweet_id;o.reply_url=o.twitter_base+"intent/tweet?in_reply_to="+o.tweet_id;o.retweet_url=o.twitter_base+"intent/retweet?tweet_id="+o.tweet_id;o.favorite_url=o.twitter_base+"intent/favorite?tweet_id="+o.tweet_id;o.retweeted_screen_name=o.retweet&&item.retweeted_status.user.screen_name;o.tweet_relative_time=format_relative_time(extract_relative_time(o.tweet_time));o.entities=item.entities?(item.entities.urls||[]).concat(item.entities.media||[]):[];o.tweet_raw_text=o.retweet?('RT @'+o.retweeted_screen_name+' '+item.retweeted_status.text):item.text;o.tweet_text=$([linkURLs(o.tweet_raw_text,o.entities)]).linkUser().linkHash()[0];o.retweeted_tweet_text=$([linkURLs(item.text,o.entities)]).linkUser().linkHash()[0];o.tweet_text_fancy=$([o.tweet_text]).makeHeart()[0];o.avatar_size=s.avatar_size;o.avatar_url=extract_avatar_url(o.retweet?item.retweeted_status:item,(document.location.protocol==='https:'));o.avatar_screen_name=o.retweet?o.retweeted_screen_name:o.screen_name;o.avatar_profile_url=o.twitter_base+o.avatar_screen_name;o.user=t('<a class="tweet_user" href="{user_url}">{screen_name}</a>',o);o.join=s.join_text?t('<span class="tweet_join">{join_text}</span>',o):'';o.avatar=o.avatar_size?t('<a class="tweet_avatar" href="{avatar_profile_url}"><img src="{avatar_url}" height="{avatar_size}" width="{avatar_size}" alt="{avatar_screen_name}\'s avatar" title="{avatar_screen_name}\'s avatar" border="0"/></a>',o):'';o.time=t('<span class="tweet_time"><a href="{tweet_url}" title="view tweet on twitter">{tweet_relative_time}</a></span>',o);o.text=t('<span class="tweet_text">{tweet_text_fancy}</span>',o);o.retweeted_text=t('<span class="tweet_text">{retweeted_tweet_text}</span>',o);o.reply_action=t('<a class="tweet_action tweet_reply" href="{reply_url}">reply</a>',o);o.retweet_action=t('<a class="tweet_action tweet_retweet" href="{retweet_url}">retweet</a>',o);o.favorite_action=t('<a class="tweet_action tweet_favorite" href="{favorite_url}">favorite</a>',o);return o}function render_tweets(widget,tweets){var list=$('<ul class="tweet_list">');list.append($.map(tweets,function(o){return"<li>"+t(s.template,o)+"</li>"}).join('')).children('li:first').addClass('tweet_first').end().children('li:odd').addClass('tweet_even').end().children('li:even').addClass('tweet_odd');$(widget).empty().append(list);if(s.intro_text)list.before('<p class="tweet_intro">'+s.intro_text+'</p>');if(s.outro_text)list.after('<p class="tweet_outro">'+s.outro_text+'</p>');$(widget).trigger("loaded").trigger((tweets.length===0?"empty":"full"));if(s.refresh_interval){window.setTimeout(function(){$(widget).trigger("tweet:load")},1000*s.refresh_interval)}}function load(widget){var loading=$('<p class="loading">'+s.loading_text+'</p>');if(s.loading_text)$(widget).not(":has(.tweet_list)").empty().append(loading);$.getJSON(build_api_url(),function(data){var tweets=$.map(data.results||data,extract_template_data);tweets=$.grep(tweets,s.filter).sort(s.comparator).slice(0,s.count);$(widget).trigger("tweet:retrieved",[tweets])})}return this.each(function(i,widget){if(s.username&&typeof(s.username)==="string"){s.username=[s.username]}$(widget).unbind("tweet:render").unbind("tweet:retrieved").unbind("tweet:load").bind({"tweet:load":function(){load(widget)},"tweet:retrieved":function(ev,tweets){$(widget).trigger("tweet:render",[tweets])},"tweet:render":function(ev,tweets){render_tweets($(widget),tweets)}}).trigger("tweet:load")})}}));
+	// Define default settings
+	var defaults = {
+		action: function() {},
+		runOnLoad: false,
+		duration: 500
+	};
+
+	// Define global variables
+	var settings = defaults,
+		running = false,
+		start;
+
+	var methods = {};
+
+	// Initial plugin configuration
+	methods.init = function() {
+
+		// Allocate passed arguments to settings based on type
+		for( var i = 0; i <= arguments.length; i++ ) {
+			var arg = arguments[i];
+			switch ( typeof arg ) {
+				case "function":
+					settings.action = arg;
+					break;
+				case "boolean":
+					settings.runOnLoad = arg;
+					break;
+				case "number":
+					settings.duration = arg;
+					break;
+			}
+		}
+
+		// Process each matching jQuery object
+		return this.each(function() {
+
+			if( settings.runOnLoad ) { settings.action(); }
+
+			$(this).resize( function() {
+
+				methods.timedAction.call( this );
+
+			} );
+
+		} );
+	};
+
+	methods.timedAction = function( code, millisec ) {
+
+		var doAction = function() {
+			var remaining = settings.duration;
+
+			if( running ) {
+				var elapse = new Date() - start;
+				remaining = settings.duration - elapse;
+				if( remaining <= 0 ) {
+					// Clear timeout and reset running variable
+					clearTimeout(running);
+					running = false;
+					// Perform user defined function
+					settings.action();
+
+					return;
+				}
+			}
+			wait( remaining );
+		};
+
+		var wait = function( time ) {
+			running = setTimeout( doAction, time );
+		};
+
+		// Define new action starting time
+		start = new Date();
+
+		// Define runtime settings if function is run directly
+		if( typeof millisec === 'number' ) { settings.duration = millisec; }
+		if( typeof code === 'function' ) { settings.action = code; }
+
+		// Only run timed loop if not already running
+		if( !running ) { doAction(); }
+
+	};
+
+
+	$.fn.afterResize = function( method ) {
+
+		if( methods[method] ) {
+			return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ) );
+		} else {
+			return methods.init.apply( this, arguments );
+		}
+
+	};
+
+})(jQuery);

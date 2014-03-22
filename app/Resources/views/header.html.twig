@@ -1,84 +1,43 @@
 <header>
-    <!-- Top Bar -->
-    <div class="top-bar">
+    <div class="container">
+        <h1 class="logo">
+            <a href="{{ path("coasters_world_homepage") }}">
+                <img alt="CoastersWorld" src="{{ asset('bundles/coastersworldsite/img/coastersworld/logoCW-small.png') }}" width="400">
+            </a>
+        </h1>
+    </div>
+    <div class="navbar-collapse nav-main-collapse collapse">
         <div class="container">
-            <div class="row">
-                <div class="span5">
-                    <!-- Social Top -->
-                    <div class="social-top">
-                        <ul class="unstyled">
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Facebook" class="facebook"><i class="icon-facebook"></i></a></li>
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Twitter" class="twitter"><i class="icon-twitter"></i></a></li>
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Google+" class="google-plus"><i class="icon-google-plus"></i></a></li>
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Linkedin" class="linkedin"><i class="icon-linkedin"></i></a></li>
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Pinterest" class="pinterest"><i class="icon-pinterest"></i></a></li>
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Vimeo" class="vimeo"><i class="icon-vimeo"></i></a></li>
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Dribbble" class="dribbble"><i class="icon-dribbble"></i></a></li>
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="Email" class="email"><i class="icon-envelope"></i></a></li>
-                            <li><a href="#" data-placement="bottom" data-toggle="tooltip" title="RSS" class="rss"><i class="icon-rss"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- End Social Top -->
-                </div>
-                <div class="span7 hidden-phone">
-                    <div class="pull-right">
-                        <!-- Menu Top -->
-                        <ul class="menu-top unstyled inline">
-                            <li><a href="sitemap.html">Sitemap</a></li>
-                            <li><a href="why.html">Why City Nightlife?</a></li>
-                            <li><a href="http://themeforest.net/item/city-nightlife-responsive-multipurpose-theme/4540302">Purchase Now</a></li>
-                            <li><a href="{{ path('logout') }}" class="visible-desktop">Logout</a></li>
-                        </ul>
-                    <!-- End Menu Top -->
-                    </div>
-                </div>
+            <div class="social-icons">
+                <ul class="social-icons">
+                    <li class="facebook"><a href="https://www.facebook.com/pages/CoastersWorldfr/145773432297?fref=ts" target="_blank" title="Facebook">Facebook</a></li>
+                    <li class="twitter"><a href="https://twitter.com/CoastersWorld" target="_blank" title="Twitter">Twitter</a></li>
+                </ul>
             </div>
+            <nav class="nav-main mega-menu">
+                <ul class="nav nav-pills nav-main" id="mainMenu">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="{{ path('coasters_world_news_list') }}">
+                            Les News
+                            <i class="icon icon-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('coasters_world_news_new') }}">Poster une news</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Base de données</a></li>
+                    <li><a href="#">Coaster counter</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="{{ path('coasters_world_image_list') }}">
+                            Images
+                            <i class="icon icon-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('coasters_world_image_upload') }}">Poster une image</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
-    <!-- End Top Bar -->
-    <!-- Header -->
-    <div class="header">
-        <div class="container">
-            <div class="row">
-                <div class="span4">
-                    <!-- Logo -->
-                    <div class="logo">
-                        <a href="{{ path('coasters_world_homepage') }}"><img id="logo" src="{{ asset('bundles/coastersworldsite/images/logos/logo_siteCW.jpg') }}" alt="Coasters World"></a>
-                        <h2>Coasters World</h2>
-                    </div>
-                    <!-- End Logo -->
-                </div>
-                <div class="span8">
-                    <div class="pull-left"><!-- Rien pour l'instant --></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Header -->
-    <!-- Navigation -->
-    <nav id="nav" class="navigation lwhite">
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <ul class="menu fading">
-                        <li class="active"><a href="{{ path('coasters_world_homepage') }}">Accueil</a></li>
-                        <li><a href="{{ path('coasters_world_news_list') }}">News</a>
-                            <ul>
-                                <li><a href="{{ path('coasters_world_news_new') }}"><i class="icon-desktop"></i> Poster une news</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="{{ path('coasters_world_database_index') }}">Base de données</a></li>
-                        <li><a href="{{ path('counter_list') }}">Coasters Counter</a></li>
-                        <li><a href="{{ path('coasters_world_image_list') }}">Image</a>
-                            <ul>
-                                <li><a href="{{ path('coasters_world_image_upload') }}"><i class="icon-desktop"></i>Uploader une image</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- End Navigation -->
 </header>
-<!-- End Header -->

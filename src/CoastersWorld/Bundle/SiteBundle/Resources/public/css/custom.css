@@ -1,0 +1,6 @@
+/* Add here all your CSS customizations */
+
+.form-group{margin-bottom: 20px;}
+header nav ul.nav-main ul.dropdown-menu{background-color:#e05048;background-image:none;}
+.btn-primary, .pagination > .active > a{background-color:#e05048;background-image:none;}
+.post-content > p{text-align:justify;}

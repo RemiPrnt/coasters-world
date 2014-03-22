@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="span8">
+        <div class="col-md-12">
             <div class="content">
                 <section class="blog">
                     <div class="page-header">
@@ -18,7 +18,7 @@
                         {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
 
                         {{ form_rest(form) }}
-                        <button type="submit" id="submit" class="btn btn-large">{{ 'news.save'|trans }}</button>
+                        <button type="submit" id="submit" class="btn btn-lg btn-success">{{ 'news.save'|trans }}</button>
                     {{ form_end(form) }}
                 </section>
             </div>

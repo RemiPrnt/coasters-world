@@ -1,93 +1,79 @@
-<footer>
-  <!-- Footer Block -->
-  <div class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="span3">
-          <!-- Logo -->
-          <div class="logo">
-            <a href="index.html"><img id="logo-footer" src="{{ asset('bundles/coastersworldsite/images/logos/logo_footer_default.png') }}" alt="City Nightlife" /></a>
-            <script type="text/javascript">
-              jQuery.noConflict();
-
-              (function($) {
-                $(function() {
-                  $(window).on('resize', function() {
-                    // Logo Footer
-                    $('.footer').each(function() {
-                      if (Modernizr.mq('screen and (min-width: 768px)')) {
-                        var maxHeight = Math.max.apply(null, $(this).find('.row').map(function() {
-                          return $(this).height();
-                        }).get());
-
-                        var logo_height = $(this).find('.logo').height();
-
-                        $(this).find('.logo').css('margin-top', (maxHeight / 2) - (logo_height / 2));
-                      } else {
-                        $(this).find('.logo').removeAttr('style');
-                      }
-                    });
-                  }).resize();
-                });
-              })(jQuery);
-            </script>
-          </div>
-          <!-- End Logo -->
-        </div>
-        <div class="span2">
-          <!-- Menus -->
-          <h3><i class="icon-plus-sign"></i> Register</h3>
-          <ul class="menu-footer unstyled register">
-            <li class="active"><a href="single.html"><i class="icon-plus"></i> Event</a></li>
-            <li><a href="single.html"><i class="icon-plus"></i> Company</a></li>
-          </ul>
-          <!-- End Menus -->
-        </div>
-        <div class="span3">
-          <!-- About us -->
-          <h3><i class="icon-book"></i> About Us</h3>
-          <p>The City Nightlife is a Premium Theme with HTML5, CSS3, jQuery, Sliders, Widgets working together to build your portal site, business site or personal site.</p>
-          <div class="count">
-            <div class="pull-left">
-              <h6><i class="icon-download"></i> Download</h6>
-              <h4>18.110.897</h4>
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="footer-ribon">
+              <span>Get in Touch</span>
             </div>
-            <div class="pull-left">
-              <h6><i class="icon-user"></i> Members</h6>
-              <h4>621.301</h4>
+            <div class="col-md-3">
+              <div class="newsletter">
+                <h4>Newsletter</h4>
+                <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+
+                <div class="alert alert-success hidden" id="newsletterSuccess">
+                  <strong>Success!</strong> You've been added to our email list.
+                </div>
+
+                <div class="alert alert-danger hidden" id="newsletterError"></div>
+
+                <form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="Email Address" name="email" id="email" type="text">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <h4>Latest Tweet</h4>
+              <div id="tweet" class="twitter" data-account-id="">
+                <p>Please wait...</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="contact-details">
+                <h4>Get in touch</h4>
+                <ul class="contact">
+                  <li><p><i class="icon icon-map-marker"></i> <strong>Address:</strong> 1234 Street Name, City Name, United States</p></li>
+                  <li><p><i class="icon icon-phone"></i> <strong>Phone:</strong> (123) 456-7890</p></li>
+                  <li><p><i class="icon icon-envelope"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></p></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <h4>Follow Us</h4>
+              <div class="social-icons">
+                <ul class="social-icons">
+                  <li class="facebook"><a href="http://www.facebook.com/" target="_blank" data-placement="bottom" rel="tooltip" title="Facebook">Facebook</a></li>
+                  <li class="twitter"><a href="http://www.twitter.com/" target="_blank" data-placement="bottom" rel="tooltip" title="Twitter">Twitter</a></li>
+                  <li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" data-placement="bottom" rel="tooltip" title="Linkedin">Linkedin</a></li>
+                </ul>
+              </div>
             </div>
           </div>
-          <!-- End About us -->
         </div>
-        <div class="span4">
-          <!-- Social Widget -->
-          <ul class="social-icons inline">
-            <li><a href="#" data-toggle="tooltip" title="Facebook" class="facebook"><i class="icon-facebook"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="Twitter" class="twitter"><i class="icon-twitter"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="Google+" class="google-plus"><i class="icon-google-plus"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="LinkedIn" class="linkedin"><i class="icon-linkedin"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="Pinterest" class="pinterest"><i class="icon-pinterest"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="GitHub" class="github"><i class="icon-github-alt"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="Vimeo" class="vimeo"><i class="icon-vimeo"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="Dribbble" class="dribbble"><i class="icon-dribbble"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="Email" class="email"><i class="icon-envelope"></i></a></li>
-            <li><a href="#" data-toggle="tooltip" title="RSS" class="rss"><i class="icon-rss"></i></a></li>
-          </ul>
-          <!-- End Social Widget -->
+        <div class="footer-copyright">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-1">
+                <a href="index.html" class="logo">
+                  <img alt="Porto Website Template" class="img-responsive" src="img/logo-footer.png">
+                </a>
+              </div>
+              <div class="col-md-7">
+                <p>© Copyright 2014. All Rights Reserved.</p>
+              </div>
+              <div class="col-md-4">
+                <nav id="sub-menu">
+                  <ul>
+                    <li><a href="page-faq.html">FAQ's</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="contact-us.html">Contact</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Footer Block -->
-  <!-- Copyright -->
-  <div class="copyright">
-    <div class="container">
-      <div class="row">
-        <div class="span5">
-          <p>Copyright &copy; 2013 City Nightlife. <span class="author">Design by <a href="http://www.atomtech.com.br" target="_blank">AtomTech</a>.</span></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Copyright -->
-</footer>
+      </footer>

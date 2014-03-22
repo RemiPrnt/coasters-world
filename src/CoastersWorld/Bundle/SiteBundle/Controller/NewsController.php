@@ -13,6 +13,8 @@ class NewsController extends Controller
 {
     public function listAction($page)
     {
+        //if($page == 1) return $this->redirect($this->generateUrl('coasters_world_homepage'));
+
         $queryNews = $this->getDoctrine()
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:News')

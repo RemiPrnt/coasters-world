@@ -17,6 +17,7 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
         $news = new News();
         $news->setTitle('Titre test !')
             ->setBody('Body test !')
+            ->setHtml("")
             ->setAuthor($this->getReference('user-florian'))
             ->setCoaster($this->getReference('coaster-tdz'))
             ->setPublishedAt(new \DateTime());
