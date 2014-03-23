@@ -1,28 +1,29 @@
 {% block form_row %}
-{% spaceless %}
-    <div class="control-group {% if errors|length > 0 %}error{% endif %}">
-        {{ form_label(form, label|default(null)) }}
-        <div class="controls">
-            {{ form_widget(form) }}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_label(form, label|default(null)) }}
+            {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
             {{ form_errors(form)}}
         </div>
-    </div>
-{% endspaceless %}
+    {% endspaceless %}
 {% endblock form_row %}
 
 {% block form_errors %}
-{% spaceless %}
-    {% if errors|length > 0 %}
-
-    {% for error in errors %}
-    <div class="help-inline">
-      {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
-    </div>
-    {% endfor %}
-
-    {% endif %}
-{% endspaceless %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <div class="alert alert-danger">
+                    {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
 {% endblock form_errors %}
+
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock form_widget_simple %}
 
 {% block rating_widget %}
     {% spaceless %}

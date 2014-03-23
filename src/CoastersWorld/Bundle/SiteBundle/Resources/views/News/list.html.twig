@@ -1,56 +1,62 @@
-{% extends '::base.html.twig' %}
+{% extends 'CoastersWorldSiteBundle:News:news-template.html.twig' %}
 
-{% block title %}{{ 'news.title.home'|trans }}{% endblock %}
+{% block newscontent %}
 
-{% block body %}
-<div class="row">
-    <div class="span8">
-        <!-- Content -->
-        <div class="content">
-            <!-- Blog -->
-            <section class="blog">
-                <div class="page-header">
-                    <h1>{{ 'news.retour.liste'|trans }}</h1>
+    <div class="blog-posts">
+
+        {% for n in listNews %}
+
+            <article class="post post-large">
+                <div class="post-image single">
+                    <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">
+                        <img class="img-thumbnail" src="http://lorempixel.com/848/250/technics" alt="">
+                    </a>
                 </div>
-                {% for news in listNews %}
-                    <div class="item">
-                        <div class="row">
-                            <div class="span3">
-                                <figure>
-                                    <a href="single.html">
-                                        <img src="http://placehold.it/270x182" alt="">
-                                        <div class="icon">
-                                            <i class="icon-play"></i>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <div class="comments-block">
-                                    <small><i class="icon-play-circle"></i> Video</small>
-                                    <div class="pull-right">
-                                        <small><i class="icon-comments"></i> {% transchoice news.comments|length with {'%count%': news.comments|length} %}news.comments{% endtranschoice %}</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="span5">
-                                <h3>
-                                    <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}">
-                                        {{ news.title }}
-                                    </a>
-                                </h3>
-                                <p class="meta">
-                                    <i class="icon-time"></i> {{ news.publishedAt|date("d/m/Y") }} | <i class="icon-user"></i> {{ 'news.author'|trans }} <a href="single.html"><em>{{ news.author.username }}</em></a>
-                                </p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam inventore dicta velit tempore alias labore aut iusto fuga non suscipit? Magni cum perspiciatis qui hic cupiditate possimus voluptates enim asperiores rerum doloremque similique amet? Amet ex fuga quo hic quibusdam.</p>
-                                <a href="{{ path('coasters_world_news_view', {'slug': news.slug})  }}"><i class="icon-circle-arrow-right"></i> {{ 'news.read.more'|trans }}</a>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
 
-                {# display navigation #}
-                {{ knp_pagination_render(listNews) }}
-            </section>
-        </div>
+                <div class="post-date">
+                    <span class="day">{{ n.publishedAt|date("d") }}</span>
+                    <span class="month">
+                        {% if n.publishedAt|date("n") == 1 %}Jan
+                        {% elseif n.publishedAt|date("n") == 2 %}Fev
+                        {% elseif n.publishedAt|date("n") == 3 %}Mars
+                        {% elseif n.publishedAt|date("n") == 4 %}Avril
+                        {% elseif n.publishedAt|date("n") == 5 %}Mai
+                        {% elseif n.publishedAt|date("n") == 6 %}Juin
+                        {% elseif n.publishedAt|date("n") == 7 %}Juil
+                        {% elseif n.publishedAt|date("n") == 8 %}Aout
+                        {% elseif n.publishedAt|date("n") == 9 %}Sept
+                        {% elseif n.publishedAt|date("n") == 10 %}Oct
+                        {% elseif n.publishedAt|date("n") == 11 %}Nov
+                        {% elseif n.publishedAt|date("n") == 12 %}Dec
+                        {% else %}Dev
+                        {% endif %}
+                    </span>
+                </div>
+
+                <div class="post-content">
+
+                    <h2><a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">{{ n.title }}</a></h2>
+                    <p>{{ n.html }}</p>
+                    <div class="post-meta">
+                        <span><i class="icon icon-user"></i> Par <a href="#">{{ n.author.username }}</a> </span>
+                        <span><i class="icon icon-tag"></i>Dans <a href="#">Duis</a>, <a href="#">News</a> </span>
+                        <span><i class="icon icon-comments"></i> <a href="#">{{ n.comments|length }} commentaire(s)</a></span>
+                        <!--<a href="blog-post.html" class="btn btn-xs btn-primary pull-right">Lire la suite...</a>-->
+                    </div>
+
+                </div>
+            </article>
+
+        {% endfor %}
+
+        <ul class="pagination pagination-lg pull-right">
+            <li><a href="#">«</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+
     </div>
-</div>
+
 {% endblock %}

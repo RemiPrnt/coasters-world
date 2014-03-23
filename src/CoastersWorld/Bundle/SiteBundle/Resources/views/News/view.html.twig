@@ -1,35 +1,65 @@
-{% extends '::base.html.twig' %}
+{% extends 'CoastersWorldSiteBundle:News:news-template.html.twig' %}
 
 {% block title %}{{ news.title }}{% endblock %}
 
-{% block body %}
-<div class="row">
-    <div class="span8">
-        <div class="content">
-            <section id="blog">
-                <div class="blog blog-page">
-                    <div class="page-header">
-                        <h1>{{ news.title }}</h1>
-                    </div>
-                    <div class="meta">
-                        <small class="date"><i class="icon-calendar"></i> {{ news.publishedAt|date("d/m/Y") }}</small>
-                        <small><i class="icon-pencil"></i> {{ 'news.author'|trans }} {{ news.author.username }}</small>
-                        <small class="pull-right">
-                            <a href="{{ path('coasters_world_database_view', {'slug': news.coaster.slug})  }}">
-                                <span class="label"><i class="icon-tag"></i>{{ news.coaster.name }}</span>
-                            </a>
-                        </small>
-                    </div>
-                    <div class="body">{{ news.html|raw }}</div>
-                    <hr class="dotted">
+{% block newscontent %}
+
+    <div class="blog-posts single-post">
+
+        <article class="post post-large">
+            <div class="post-image single">
+                <a href="{{ path('coasters_world_news_view', { slug: news.slug }) }}">
+                    <img class="img-thumbnail" src="http://lorempixel.com/848/250/technics" alt="">
+                </a>
+            </div>
+
+            <div class="post-date">
+                <span class="day">{{ news.publishedAt|date("d") }}</span>
+                <span class="month">
+                    {% if news.publishedAt|date("n") == 1 %}Jan
+                    {% elseif news.publishedAt|date("n") == 2 %}Fev
+                    {% elseif news.publishedAt|date("n") == 3 %}Mars
+                    {% elseif news.publishedAt|date("n") == 4 %}Avril
+                    {% elseif news.publishedAt|date("n") == 5 %}Mai
+                    {% elseif news.publishedAt|date("n") == 6 %}Juin
+                    {% elseif news.publishedAt|date("n") == 7 %}Juil
+                    {% elseif news.publishedAt|date("n") == 8 %}Aout
+                    {% elseif news.publishedAt|date("n") == 9 %}Sept
+                    {% elseif news.publishedAt|date("n") == 10 %}Oct
+                    {% elseif news.publishedAt|date("n") == 11 %}Nov
+                    {% elseif news.publishedAt|date("n") == 12 %}Dec
+                    {% else %}Dev
+                    {% endif %}
+                </span>
+            </div>
+
+            <div class="post-content">
+
+                <h2><a href="{{ path('coasters_world_news_view', { slug: news.slug }) }}">{{ news.title }}</a></h2>
+                <p>{{ news.html }}</p>
+                
+                <!-- <div class="addthis_toolbox addthis_default_style " style="float:right">
+                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                    <a class="addthis_button_tweet"></a>
+                </div> -->
+                <!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>-->
+
+                <div class="post-meta">
+                    <span><i class="icon icon-user"></i> Par <a href="#">{{ news.author.username }}</a> </span>
+                    <span><i class="icon icon-tag"></i>Dans <a href="#">Duis</a>, <a href="#">News</a> </span>
+                    <span><i class="icon icon-comments"></i> <a href="#">{{ news.comments|length }} commentaire(s)</a></span>
                 </div>
-            </section>
-        </div>
+
+            </div>
+
+            {% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': news.comments } only %}
+
+            {{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': news.id })) }}
+
+        </article>
+
     </div>
-</div>
 
-{% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': news.comments } only %}
-
-{{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': news.id })) }}
-{# {% include 'CoastersWorldSiteBundle:Comment:edit.html.twig' with { 'comment': comment } %} #}
+    
+    
 {% endblock %}
