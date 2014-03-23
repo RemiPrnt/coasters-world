@@ -95,4 +95,15 @@ class NewsController extends Controller
             'news' => $news
         ));
     }
+
+    public function latestAction($number = 5)
+    {
+        $latestNews = $this->getDoctrine()
+                           ->getManager()
+                           ->getRepository('CoastersWorldSiteBundle:News')
+                           ->findLatest($number);
+        return $this->render('CoastersWorldSiteBundle:News:latest.html.twig', array(
+            'latestNews' => $latestNews
+        ));
+    }
 }
