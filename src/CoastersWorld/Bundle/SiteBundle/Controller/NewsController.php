@@ -13,7 +13,9 @@ class NewsController extends Controller
 {
     public function listAction($page)
     {
-        //if($page == 1) return $this->redirect($this->generateUrl('coasters_world_homepage'));
+        if( $this->getRequest()->getPathInfo() == "/news/list" || 
+            $this->getRequest()->getPathInfo() == "/news/list/1")
+            return $this->redirect($this->generateUrl('coasters_world_homepage'));
 
         $queryNews = $this->getDoctrine()
             ->getManager()
@@ -28,6 +30,7 @@ class NewsController extends Controller
             5
         );
         $listNews->setTemplate('CoastersWorldSiteBundle:News:pagination.html.twig');
+        $listNews->setUsedRoute('coasters_world_news_list');
 
         if (count($listNews) == 0) {
             //@todo exception
