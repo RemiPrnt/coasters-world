@@ -27,6 +27,7 @@ class NewsController extends Controller
             $page,
             5
         );
+        $listNews->setTemplate('CoastersWorldSiteBundle:News:pagination.html.twig');
 
         if (count($listNews) == 0) {
             //@todo exception
