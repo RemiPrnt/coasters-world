@@ -17,17 +17,17 @@
                     <span class="day">{{ n.publishedAt|date("d") }}</span>
                     <span class="month">
                         {% if n.publishedAt|date("n") == 1 %}Jan
-                        {% elseif n.publishedAt|date("n") == 2 %}Fev
+                        {% elseif n.publishedAt|date("n") == 2 %}Fév
                         {% elseif n.publishedAt|date("n") == 3 %}Mars
                         {% elseif n.publishedAt|date("n") == 4 %}Avril
                         {% elseif n.publishedAt|date("n") == 5 %}Mai
                         {% elseif n.publishedAt|date("n") == 6 %}Juin
                         {% elseif n.publishedAt|date("n") == 7 %}Juil
-                        {% elseif n.publishedAt|date("n") == 8 %}Aout
+                        {% elseif n.publishedAt|date("n") == 8 %}Août
                         {% elseif n.publishedAt|date("n") == 9 %}Sept
                         {% elseif n.publishedAt|date("n") == 10 %}Oct
                         {% elseif n.publishedAt|date("n") == 11 %}Nov
-                        {% elseif n.publishedAt|date("n") == 12 %}Dec
+                        {% elseif n.publishedAt|date("n") == 12 %}Déc
                         {% else %}Dev
                         {% endif %}
                     </span>
