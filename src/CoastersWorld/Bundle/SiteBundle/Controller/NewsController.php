@@ -13,8 +13,6 @@ class NewsController extends Controller
 {
     public function listAction($page)
     {
-        //if($page == 1) return $this->redirect($this->generateUrl('coasters_world_homepage'));
-
         $queryNews = $this->getDoctrine()
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:News')
@@ -27,6 +25,8 @@ class NewsController extends Controller
             $page,
             5
         );
+        $listNews->setTemplate('CoastersWorldSiteBundle:News:pagination.html.twig');
+        $listNews->setUsedRoute('coasters_world_news_list');
 
         if (count($listNews) == 0) {
             //@todo exception
@@ -93,6 +93,17 @@ class NewsController extends Controller
 
         return $this->render('CoastersWorldSiteBundle:News:view.html.twig', array(
             'news' => $news
+        ));
+    }
+
+    public function latestAction($number = 5)
+    {
+        $latestNews = $this->getDoctrine()
+                           ->getManager()
+                           ->getRepository('CoastersWorldSiteBundle:News')
+                           ->findLatest($number);
+        return $this->render('CoastersWorldSiteBundle:News:latest.html.twig', array(
+            'latestNews' => $latestNews
         ));
     }
 }

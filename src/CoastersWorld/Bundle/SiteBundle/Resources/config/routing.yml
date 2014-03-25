@@ -27,6 +27,24 @@ coaster_comment_create:
         _method:  POST
         id: \d+
 
+# Redirection de la première page des news vers la page d'accueil du site
+
+coasters_world_news_list_first_page:
+    pattern: /news/list
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: coasters_world_homepage
+        permanent: true
+
+coasters_world_news_list_first_page2:
+    pattern: /news/list/1
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: coasters_world_homepage
+        permanent: true
+
+# /Redirection
+
 coasters_world_news_list:
     pattern:  /news/list/{page}
     defaults: { _controller: CoastersWorldSiteBundle:News:list, page: 1 }

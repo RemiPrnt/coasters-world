@@ -38,26 +38,7 @@
 	                    <li><a href="#">Communauté</a></li>
 	                </ul>
 
-	                <h4>Dernières news</h4>
-	                <ul class="simple-post-list">
-	                	{% for i in 1..5 %}
-	                        <li>
-	                            <div class="post-image">
-	                                <div class="img-thumbnail">
-	                                    <a href="blog-single.html">
-	                                        <img src="http://lorempixel.com/30/30/technics/{{i}}" alt="">
-	                                    </a>
-	                                </div>
-	                            </div>
-	                            <div class="post-info">
-	                                <a href="blog-single.html">Un MegaCoaster à Walibi Belgium</a>
-	                                <div class="post-meta">
-	                                     Jan 10, 2013
-	                                </div>
-	                            </div>
-	                        </li>
-                        {% endfor %}
-                    </ul>
+	                {{ render(controller('CoastersWorldSiteBundle:News:latest', { 'number': 5 })) }}
 
 	            </aside>
 

@@ -1,0 +1,39 @@
+{% if pageCount > 1 %}
+
+    <ul class="pagination pagination-lg pull-right">
+        
+        {% if first is defined and current != first %}
+            <li><a href="{{ path('coasters_world_homepage') }}">&lt;&lt;</a></li>
+        {% endif %}
+
+        {% if previous is defined %}
+            {% if previous == first %}
+                <li><a href="{{ path('coasters_world_homepage') }}">&lt;</a></li>
+            {% else %}
+                <li><a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&lt;</a></li>
+            {% endif %}
+        {% endif %}
+
+        {% for page in pagesInRange %}
+            {% if page != current %}
+                {% if page == first %}
+                    <li><a href="{{ path('coasters_world_homepage') }}">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a></li>
+                {% endif %}
+            {% else %}
+                <li class="active"><a href="#">{{ page }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if next is defined %}
+            <li><a href="{{ path(route, query|merge({(pageParameterName): next})) }}">&gt;</a></li>
+        {% endif %}
+
+        {% if last is defined and current != last %}
+            <li><a href="{{ path(route, query|merge({(pageParameterName): last})) }}">&gt;&gt;</a></li>
+        {% endif %}
+
+    </ul>
+
+{% endif %}
