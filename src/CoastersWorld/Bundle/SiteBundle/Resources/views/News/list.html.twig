@@ -1,5 +1,12 @@
 {% extends 'CoastersWorldSiteBundle:News:news-template.html.twig' %}
 
+{% block page_top_breadcrumb %}
+    <li><a href="#">News</a></li>
+    <li class="active">Les dernières news</li>
+{% endblock %}
+
+{% block page_top_main %}Les dernières news{% endblock %}
+
 {% block newscontent %}
 
     <div class="blog-posts">

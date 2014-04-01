@@ -2,6 +2,13 @@
 
 {% block title %}{{ 'news.title.create'|trans }}{% endblock %}
 
+{% block page_top_breadcrumb %}
+    <li><a href="#">News</a></li>
+    <li class="active">Rédiger une news</li>
+{% endblock %}
+
+{% block page_top_main %}Rédiger une news{% endblock %}
+
 {% form_theme form with 'CoastersWorldSiteBundle:Form:fields.html.twig' %}
 
 {% block body %}
@@ -9,9 +16,6 @@
         <div class="col-md-12">
             <div class="content">
                 <section class="blog">
-                    <div class="page-header">
-                        <h1>{{ 'news.title.create'|trans }}</h1>
-                    </div>
                     {{ form_start(form) }}
                         {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
                         {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}

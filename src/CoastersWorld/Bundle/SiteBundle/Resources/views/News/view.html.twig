@@ -2,6 +2,13 @@
 
 {% block title %}{{ news.title }}{% endblock %}
 
+{% block page_top_breadcrumb %}
+    <li><a href="#">News</a></li>
+    <li class="active">{{ news.title }}</li>
+{% endblock %}
+
+{% block page_top_main %}{{ news.title }}{% endblock %}
+
 {% block newscontent %}
 
     <div class="blog-posts single-post">
