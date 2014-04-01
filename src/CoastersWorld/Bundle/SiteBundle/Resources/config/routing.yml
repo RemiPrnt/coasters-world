@@ -6,6 +6,10 @@ coasters_world_database_index:
     pattern:  /coaster
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:index }
 
+coasters_world_register:
+    pattern:  /inscription
+    defaults: { _controller: CoastersWorldSiteBundle:Security:register }
+
 coasters_world_database_view:
     pattern:  /coaster/view/{slug}
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:view }

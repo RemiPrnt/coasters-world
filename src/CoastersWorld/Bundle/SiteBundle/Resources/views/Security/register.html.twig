@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block page_top_breadcrumb %}
+    <li><a href="#">Espace membres</a></li>
+    <li class="active">Inscription</li>
+{% endblock %}
+
+{% block page_top_main %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            <form method="POST" {{ form_enctype(form) }}>
+                {{ form_widget(form)}}
+                <input type="submit" class="btn btn-lg btn-primary" value="Inscription">
+            </form>
+        </div>
+    </div>
+{% endblock %}

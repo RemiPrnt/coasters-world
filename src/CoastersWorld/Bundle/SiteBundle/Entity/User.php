@@ -43,6 +43,11 @@ class User implements UserInterface, \Serializable
     private $isActive;
 
     /**
+     * @var boolean $isVerified
+     */
+    private $isVerified;
+
+    /**
      * @var integer $id
      */
     private $id;
@@ -66,6 +71,8 @@ class User implements UserInterface, \Serializable
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
+        $this->isVerified = false;
+        $this->createdAt = new \DateTime;
     }
 
     /**
@@ -436,5 +443,28 @@ class User implements UserInterface, \Serializable
     public function getCoasters()
     {
         return $this->coasters;
+    }
+
+    /**
+     * Set isVerified
+     *
+     * @param boolean $isVerified
+     * @return User
+     */
+    public function setIsVerified($isVerified)
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * Get isVerified
+     *
+     * @return boolean 
+     */
+    public function getIsVerified()
+    {
+        return $this->isVerified;
     }
 }
