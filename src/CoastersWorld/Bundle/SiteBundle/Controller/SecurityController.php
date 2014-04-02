@@ -53,8 +53,8 @@ class SecurityController extends Controller
                                         ->encodePassword($user->getPassword(), $user->getSalt()));
                 $em->persist($user);
                 $em->flush();
+                return $this->render('CoastersWorldSiteBundle:Security:registersucceed.html.twig');
             }
-            return $this->render('CoastersWorldSiteBundle:Security:registersucceed.html.twig');
         }
 
         return $this->render('CoastersWorldSiteBundle:Security:register.html.twig', array(
