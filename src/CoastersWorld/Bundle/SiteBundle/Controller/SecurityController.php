@@ -4,8 +4,11 @@ namespace CoastersWorld\Bundle\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 use CoastersWorld\Bundle\SiteBundle\Entity\User;
 use CoastersWorld\Bundle\SiteBundle\Form\Type\UserType;
+
 
 class SecurityController extends Controller
 {
@@ -53,12 +56,32 @@ class SecurityController extends Controller
                                         ->encodePassword($user->getPassword(), $user->getSalt()));
                 $em->persist($user);
                 $em->flush();
-                return $this->render('CoastersWorldSiteBundle:Security:registersucceed.html.twig');
+
+                // Création du message de succès de l'inscription
+                $flashbag = $this->get("session")->getFlashBag();
+                $flashbag->add('register_succeed_username', $user->getUsername());
+                $flashbag->add('register_succeed_email',    $user->getEmail());
+                
+                return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
             }
         }
 
         return $this->render('CoastersWorldSiteBundle:Security:register.html.twig', array(
             'form' => $form->createView(),
+        ));
+    }
+
+    public function registerSucceedAction()
+    {
+        $session = $this->get("session");
+
+        if( !$session->getFlashBag()->has('register_succeed_username') &&
+            !$session->getFlashBag()->has('register_succeed_email') ) // L'utilisateur ne vient pas de s'enregister et tente d'accéder à la page
+            return $this->redirect($this->generateUrl('coasters_world_homepage'));
+
+        return $this->render('CoastersWorldSiteBundle:Security:registersucceed.html.twig', array(
+            'register_succeed_username' => $session->getFlashBag()->get('register_succeed_username')[0],
+            'register_succeed_email'    => $session->getFlashBag()->get('register_succeed_email')[0]
         ));
     }
 }
