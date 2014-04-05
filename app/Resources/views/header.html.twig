@@ -19,15 +19,19 @@
             </div>
             <nav class="nav-main mega-menu">
                 <ul class="nav nav-pills nav-main" id="mainMenu">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="{{ path('coasters_world_homepage') }}">
-                            Les News
-                            <i class="icon icon-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('coasters_world_news_new') }}">Poster une news</a></li>
-                        </ul>
-                    </li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="{{ path('coasters_world_homepage') }}">
+                                Les News
+                                <i class="icon icon-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('coasters_world_news_new') }}">Poster une news</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ path('coasters_world_homepage') }}">Les news</a></li>
+                    {% endif %}
                     <li><a href="#">Base de données</a></li>
                     <li><a href="#">Coaster counter</a></li>
                     <li class="dropdown">
