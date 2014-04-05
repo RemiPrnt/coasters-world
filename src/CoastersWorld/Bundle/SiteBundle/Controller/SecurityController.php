@@ -49,41 +49,39 @@ class SecurityController extends Controller
         if("POST" === $request->getMethod())
         {
             $form->handleRequest($this->getRequest());
-            if($form->isValid())
+
+            $users_repository = $em->getRepository('CoastersWorldSiteBundle:User');
+            $error = false;
+
+            if($users_repository->findBy(array('username' => $user->getUsername())))
             {
-                $users_repository = $em->getRepository('CoastersWorldSiteBundle:User');
-                $error = false;
+                $error = true;
+                $form->get('username')->addError(
+                    new FormError('Ce pseudo est déjà utilisé. Veuillez en choisir un autre.'));
+            }
+            
+            if($users_repository->findBy(array('email' => $user->getEmail())))
+            {
+                $error = true;
+                $form->get('email')->addError(
+                    new FormError('Cette adresse e-mail est déjà liée à un autre compte. Veuillez en choisir une autre.'));
+            }
 
-                if($users_repository->findBy(array('username' => $user->getUsername())))
-                {
-                    $error = true;
-                    $form->get('username')->addError(
-                        new FormError('Ce pseudo est déjà utilisé. Veuillez en choisir un autre.'));
-                }
+            if(!$error && $form->isValid())
+            {
+                $user->setPassword($this->container
+                    ->get('security.encoder_factory')
+                    ->getEncoder($user)
+                    ->encodePassword($user->getPassword(), $user->getSalt()));
+                $em->persist($user);
+                $em->flush();
+
+                // Création du message de succès de l'inscription
+                $flashbag = $this->get("session")->getFlashBag();
+                $flashbag->add('register_succeed_username', $user->getUsername());
+                $flashbag->add('register_succeed_email',    $user->getEmail());
                 
-                if($users_repository->findBy(array('email' => $user->getEmail())))
-                {
-                    $error = true;
-                    $form->get('email')->addError(
-                        new FormError('Cette adresse e-mail est déjà liée à un autre compte. Veuillez en choisir une autre.'));
-                }
-
-                if(!$error)
-                {
-                    $user->setPassword($this->container
-                        ->get('security.encoder_factory')
-                        ->getEncoder($user)
-                        ->encodePassword($user->getPassword(), $user->getSalt()));
-                    $em->persist($user);
-                    $em->flush();
-
-                    // Création du message de succès de l'inscription
-                    $flashbag = $this->get("session")->getFlashBag();
-                    $flashbag->add('register_succeed_username', $user->getUsername());
-                    $flashbag->add('register_succeed_email',    $user->getEmail());
-                    
-                    return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
-                }
+                return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
             }
         }
 
