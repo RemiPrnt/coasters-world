@@ -103,4 +103,26 @@ class SecurityController extends Controller
             'register_succeed_email'    => $session->getFlashBag()->get('register_succeed_email')[0]
         ));
     }
+
+    public function activateAction($userid,$key)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users_repository = $em->getRepository('CoastersWorldSiteBundle:User');
+
+        $user = $users_repository->find($userid);
+
+        if(is_null($user) || $user->getIsVerified())
+            return $this->redirect($this->generateUrl('coasters_world_homepage'));
+
+        if($key === $user->getSalt())
+        {
+            $user->setIsVerified(1);
+            $em->persist($user);
+            $em->flush();
+        }
+
+        return $this->render('CoastersWorldSiteBundle:Security:activate.html.twig', array(
+            'user' => $user
+        ));
+    }
 }
