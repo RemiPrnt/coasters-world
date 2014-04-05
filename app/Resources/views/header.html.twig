@@ -39,6 +39,19 @@
                             <li><a href="{{ path('coasters_world_image_upload') }}">Poster une image</a></li>
                         </ul>
                     </li>
+                    {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="{{ path('coasters_world_homepage') }}">
+                                Mon compte
+                                <i class="icon icon-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ path('login') }}">Connexion</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
