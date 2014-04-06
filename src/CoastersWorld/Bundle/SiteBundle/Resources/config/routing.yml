@@ -1,18 +1,12 @@
+######## Homepage
 coasters_world_homepage:
     pattern:  /
     defaults: { _controller: CoastersWorldSiteBundle:News:list, page: 1 }
 
+######## BDD
 coasters_world_database_index:
     pattern:  /coaster
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:index }
-
-coasters_world_register:
-    pattern:  /inscription
-    defaults: { _controller: CoastersWorldSiteBundle:Security:register }
-
-coasters_world_register_succeed:
-    pattern:  /inscription/succes
-    defaults: { _controller: CoastersWorldSiteBundle:Security:registerSucceed }
 
 coasters_world_database_view:
     pattern:  /coaster/view/{slug}
@@ -35,8 +29,18 @@ coaster_comment_create:
         _method:  POST
         id: \d+
 
-# Redirection de la première page des news vers la page d'accueil du site
+######## User
+coasters_world_register:
+    pattern:  /inscription
+    defaults: { _controller: CoastersWorldSiteBundle:Security:register }
 
+coasters_world_register_succeed:
+    pattern:  /inscription/succes
+    defaults: { _controller: CoastersWorldSiteBundle:Security:registerSucceed }
+
+######## News
+
+# Redirection de la première page des news vers la page d'accueil du site
 coasters_world_news_list_first_page:
     pattern: /news/list
     defaults:
@@ -44,33 +48,36 @@ coasters_world_news_list_first_page:
         route: coasters_world_homepage
         permanent: true
 
-coasters_world_news_list_first_page2:
+coasters_world_news_list_first_page_duplicate:
     pattern: /news/list/1
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: coasters_world_homepage
         permanent: true
 
-# /Redirection
-
+# Liste des news
 coasters_world_news_list:
     pattern:  /news/list/{page}
     defaults: { _controller: CoastersWorldSiteBundle:News:list, page: 1 }
     requirements:
         page: \d+
 
+# Affichage d'une news
 coasters_world_news_view:
     pattern:  /news/view/{slug}
     defaults: { _controller: CoastersWorldSiteBundle:News:view }
 
+# Création d'une news
 coasters_world_news_new:
     pattern:  /news/new
     defaults: { _controller: CoastersWorldSiteBundle:News:edit }
 
+# Modification d'une news
 coasters_world_news_edit:
     pattern:  /news/edit/{id}
     defaults: { _controller: CoastersWorldSiteBundle:News:edit }
 
+# Création d'un commentaire
 coasters_world_news_comment_create:
     pattern:  /news/comment/{id}
     defaults: { _controller: CoastersWorldSiteBundle:Comment:create }
@@ -78,7 +85,7 @@ coasters_world_news_comment_create:
         _method:  POST
         id: \d+
 
-
+######## Image
 coasters_world_image_upload:
     pattern:  /image/upload
     defaults: { _controller: CoastersWorldSiteBundle:Image:upload }
@@ -87,8 +94,7 @@ coasters_world_image_list:
     pattern:  /image/list
     defaults: { _controller: CoastersWorldSiteBundle:Image:list }
 
-
-
+######## Counter
 counter_list:
     pattern: /coaster/list/{page}
     defaults: { _controller: CoastersWorldSiteBundle:Counter:list, page: 1 }
