@@ -47,7 +47,7 @@
                     <div class="post-meta">
                         <span><i class="icon icon-user"></i> Par <a href="#">{{ n.author.username }}</a> </span>
                         <span><i class="icon icon-tag"></i>
-                            <span class="label label-default">{{ n.coaster.name }}</span>
+                            {% if n.coaster is not null %}<span class="label label-default">{{ n.coaster.name }}</span>{% endif %}
                             {% for tag in n.tags %}
                                 <span class="label label-default">{{ tag }}</span>
                             {% endfor %}
