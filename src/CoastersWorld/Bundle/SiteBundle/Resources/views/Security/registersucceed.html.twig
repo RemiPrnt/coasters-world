@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block page_top_breadcrumb %}
+    <li><a href="#">Espace membres</a></li>
+    <li class="active">Inscription réussie</li>
+{% endblock %}
+
+{% block page_top_main %}Inscription réussie !{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+        	<h3>Votre inscription a bien été prise en compte !</h3>
+            <p>Félicitations <b>{{ register_succeed_username }}</b> ! Nous vous avons envoyé un e-mail de confirmation à l'adresse <b>{{ register_succeed_email }}</b>. Veuillez cliquer sur le lien présent dans l'e-mail afin de confirmer votre inscription.</p>
+            <a href="{{ path('coasters_world_homepage') }}" class="btn btn-primary">Retourner à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}

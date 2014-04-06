@@ -2,6 +2,13 @@
 
 {% block title %}{{ 'login.title'|trans }}{% endblock %}
 
+{% block page_top_breadcrumb %}
+    <li><a href="#">Espace membres</a></li>
+    <li class="active">{{ 'login.title'|trans }}</li>
+{% endblock %}
+
+{% block page_top_main %}{{ 'login.title'|trans }}{% endblock %}
+
 {% block body %}
 <section id="login">
     <div class="row">
@@ -9,8 +16,6 @@
             <div class="alert alert-error">{{ error.message }}</div>
         {% endif %}
         <div class="col-md-4">
-                
-            <h2>{{ 'login.title'|trans }}</h2>
             
             <div class="internal-login">
                 <form action="{{ path('login_check') }}" class="form" method="post">
@@ -25,12 +30,15 @@
                         <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'login.password'|trans }}">
                     </div>
                     <div class="form-actions">
-                        <ul class="unstyled">
-                            <li><a href="#">{{ 'login.create_account'|trans }}</a></li>
-                            <li><a href="#">{{ 'login.password_forgot'|trans }}</a></li>
-                        </ul>
+                        
+                        <div class="pull-left">
+                            <button type="submit" class="btn btn-large btn-primary">{{ 'login.title'|trans }}</button>
+                        </div>
                         <div class="pull-right">
-                            <button type="submit" class="btn btn-large">{{ 'login.title'|trans }}</button>
+                            <ul class="unstyled">
+                                <li class="list-unstyled"><a href="{{ path('coasters_world_register') }}">{{ 'login.create_account'|trans }}</a></li>
+                                <li class="list-unstyled"><a href="#">{{ 'login.password_forgot'|trans }}</a></li>
+                            </ul>
                         </div>
                     </div>
                 </form>

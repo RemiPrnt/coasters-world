@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Activation{% endblock %}
+
+{% block page_top_breadcrumb %}
+    <li><a href="#">Espace membres</a></li>
+    <li class="active">Activation</li>
+{% endblock %}
+
+{% block page_top_main %}Activation{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+        	{% if user.isVerified %}
+				<h3>Votre compte est activé !</h3>
+				<p>Vous pouvez désormais utiliser votre compte CoastersWorld pour intéragir avec la communauté.</p>
+				<a href="{{ path('coasters_world_homepage') }}" class="btn btn-default">Retourner à l'accueil</a>
+				<a href="{{ path('login') }}" class="btn btn-primary">Connexion</a>
+			{% else %}
+				<h3>Echec de l'activation</h3>
+				<p>Votre compte n'a pas pu être activé. Cela peut être du au fait que vous ayez cliqué sur un lien comportant une clé d'activation erronée. Veuillez contacter un administrateur pour tenter de résoudre ce problème.</p>
+				<a href="{{ path('coasters_world_homepage') }}" class="btn btn-default">Retourner à l'accueil</a>
+			{% endif %}
+        </div>
+    </div>
+{% endblock %}
