@@ -2,29 +2,17 @@
 
 namespace CoastersWorld\Bundle\SiteBundle\Form\Type;
 
+use CoastersWorld\Bundle\SiteBundle\Form\DataTransformer\TagTransformer;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class NewsType extends AbstractType
+class TagType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $objectManager = $options['om'];
-        $builder
-            ->add('title', 'text', array(
-                'label' => 'Titre',
-            ))
-            ->add('body', 'textarea', array(
-                'label' => 'Corps',
-            ))
-            ->add('coaster', 'entity', array(
-                'class' => 'CoastersWorldSiteBundle:Coaster',
-                'required' => false,
-                'label' => 'Coaster'
-            ))
-            ->add('tags', new TagType(), array('om' => $objectManager))
-        ;
+        $builder->addModelTransformer(new TagTransformer($options['om']));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -37,8 +25,13 @@ class NewsType extends AbstractType
         ));
     }
 
+    public function getParent()
+    {
+        return 'text';
+    }
+
     public function getName()
     {
-        return 'news_type';
+        return 'tag_type';
     }
 }

@@ -246,6 +246,19 @@ class News
     }
 
     /**
+     * Set tags
+     *
+     * @param string $tags
+     * @return News
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
      * Add comments
      *
      * @param \CoastersWorld\Bundle\SiteBundle\Entity\Comment $comments

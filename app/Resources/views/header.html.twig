@@ -50,6 +50,7 @@
                                 <i class="icon icon-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a><i class="icon icon-user"></i> {{ app.user.username }}</a></li>
                                 <li><a href="{{ path('logout') }}">Déconnexion</a></li>
                             </ul>
                         </li>

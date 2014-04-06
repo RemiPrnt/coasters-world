@@ -25,6 +25,9 @@
       </join-columns>
     </many-to-one>
     <many-to-many field="tags" target-entity="Tag" inversed-by="news">
+      <cascade>
+        <persist/>
+      </cascade>
       <join-table name="news_tag">
         <join-columns>
           <join-column name="news_id" referenced-column-name="id"/>

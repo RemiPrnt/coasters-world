@@ -24,6 +24,11 @@ class Tag
      */
     private $news;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * Constructor
      */

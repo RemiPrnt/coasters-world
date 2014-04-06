@@ -12,32 +12,27 @@
 {% form_theme form with 'CoastersWorldSiteBundle:Form:fields.html.twig' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="content">
-                <section class="blog">
-                    {{ form_start(form) }}
-                        {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
-                        {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}
-                        {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
+    <div class="col-md-8">
+        {{ form_start(form) }}
+            {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
+            {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}
+            {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
 
-                        {{ form_rest(form) }}
-                        <button type="submit" id="submit" class="btn btn-lg btn-success">{{ 'news.save'|trans }}</button>
-                    {{ form_end(form) }}
-                </section>
-            </div>
-        </div>
+            {{ form_rest(form) }}
+            <button type="submit" id="submit" class="btn btn-lg btn-success">{{ 'news.save'|trans }}</button>
+        {{ form_end(form) }}
     </div>
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/select2/select2.min.js') }}"></script>
     <script type="text/javascript">
         jQuery('#news_type_coaster').select2();
+        jQuery('#news_type_tags').select2({tags:[{% for tag in tags %}"{{ tag }}",{% endfor %}]});
     </script>
 {% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/vendor/prettyPhoto.css') }}" type="text/css" media="screen" charset="utf-8" />
-  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/select2.css') }}" />
+  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/select2/select2.css') }}" />
+  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/select2-bootstrap-css/select2-bootstrap.css') }}" />
 {% endblock %}

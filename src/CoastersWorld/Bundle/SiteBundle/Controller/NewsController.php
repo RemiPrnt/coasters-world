@@ -44,10 +44,12 @@ class NewsController extends Controller
             return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $om = $this->getDoctrine()->getManager();
+
+        $tags = $om->getRepository('CoastersWorldSiteBundle:Tag')->findAllArray();
 
         if (null !== $id) {
-            $news = $em->getRepository('CoastersWorldSiteBundle:News')->find($id);
+            $news = $om->getRepository('CoastersWorldSiteBundle:News')->find($id);
             $action = $this->generateUrl('coasters_world_news_edit', array('id' => $id));
         } else {
             $news = new News();
@@ -57,6 +59,7 @@ class NewsController extends Controller
         $form = $this->createForm('news_type', $news, array(
             'action' => $action,
             'method' => 'POST',
+            'om' => $om,
         ));
 
         $form->handleRequest($this->getRequest());
@@ -67,8 +70,8 @@ class NewsController extends Controller
             $html = $this->container->get('markdown.parser')->transformMarkdown($news->getBody());
             $news->setHtml($html);
             
-            $em->persist($news);
-            $em->flush();
+            $om->persist($news);
+            $om->flush();
 
             return $this->redirect($this->generateUrl('coasters_world_news_list'));
         }
@@ -76,6 +79,7 @@ class NewsController extends Controller
         return $this->render('CoastersWorldSiteBundle:News:edit.html.twig', array(
             'form' => $form->createView(),
             'news' => $news,
+            'tags' => $tags,
         ));
     }
 
