@@ -39,7 +39,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			this.navMenu();
 
 			// Header Search
-			this.headerSearch();
+			//this.headerSearch();
 
 			// Animations
 			this.animations();
@@ -48,7 +48,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			this.wordRotate();
 
 			// Newsletter
-			this.newsletter();
+			//this.newsletter();
 
 			// Featured Boxes
 			this.featuredBoxes();
@@ -57,7 +57,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			$("a[rel=tooltip]").tooltip();
 
 			// Owl Carousel
-			this.owlCarousel();
+			//this.owlCarousel();
 
 			// Sort
 			this.sort();
@@ -69,7 +69,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			this.latestTweets();
 
 			// Flickr Feed
-			this.flickrFeed();
+			//this.flickrFeed();
 
 			// Lightbox
 			this.lightbox();
@@ -971,7 +971,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 	$(window).load(function () {
 
 		// Sticky Meny
-		Core.stickyMenu();
+		//Core.stickyMenu();
 
 	});
 

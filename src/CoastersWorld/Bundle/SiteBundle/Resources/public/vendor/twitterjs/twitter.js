@@ -10,7 +10,7 @@ var twitterFeed = {
 	options: {
 		id: "",
 		count: 2,
-		URL: "php/twitter-feed.php",
+		URL: "http://localhost/~florian/coasters-world/web/bundles/coastersworldsite/vendor/php/twitter-feed.php",
 		wrapper: "tweet"
 	},
 
