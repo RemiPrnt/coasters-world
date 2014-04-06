@@ -46,14 +46,14 @@ coasters_world_news_list_first_page:
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: coasters_world_homepage
-        permanent: true
+        permanent: false
 
 coasters_world_news_list_first_page_duplicate:
     pattern: /news/list/1
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: coasters_world_homepage
-        permanent: true
+        permanent: false
 
 # Liste des news
 coasters_world_news_list:

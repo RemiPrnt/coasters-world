@@ -1,7 +1,7 @@
 {% extends 'CoastersWorldSiteBundle:News:news-template.html.twig' %}
 
 {% block page_top_breadcrumb %}
-    <li><a href="#">News</a></li>
+    <li><a href="{{ path('coasters_world_news_list_first_page') }}">News</a></li>
     <li class="active">Les dernières news</li>
 {% endblock %}
 
@@ -43,12 +43,14 @@
                 <div class="post-content">
 
                     <h2><a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">{{ n.title }}</a></h2>
-                    <p>{{ n.html }}</p>
+                    <p>{{ n.html|striptags|slice(0,250) }}...</p>
                     <div class="post-meta">
                         <span><i class="icon icon-user"></i> Par <a href="#">{{ n.author.username }}</a> </span>
                         <span><i class="icon icon-tag"></i>Dans <a href="#">Duis</a>, <a href="#">News</a> </span>
                         <span><i class="icon icon-comments"></i> <a href="#">{{ n.comments|length }} commentaire(s)</a></span>
-                        <!--<a href="blog-post.html" class="btn btn-xs btn-primary pull-right">Lire la suite...</a>-->
+                        <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}" class="btn btn-xs btn-primary pull-right">
+                            Lire la suite...
+                        </a>
                     </div>
 
                 </div>
