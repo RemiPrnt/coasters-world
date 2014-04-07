@@ -55,6 +55,11 @@ class News
     private $comments;
 
     /**
+     * @var CoastersWorld\Bundle\SiteBundle\Entity\Image
+     */
+    private $thumbnail;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -317,5 +322,28 @@ class News
     public function getHtml()
     {
         return $this->html;
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $thumbnail
+     * @return News
+     */
+    public function setThumbnail(\CoastersWorld\Bundle\SiteBundle\Entity\Image $thumbnail = null)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnail
+     *
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Image 
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
     }
 }

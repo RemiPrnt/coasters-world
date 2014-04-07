@@ -14,9 +14,14 @@
     <div class="blog-posts single-post">
 
         <article class="post post-large">
+
             <div class="post-image single">
                 <a href="{{ path('coasters_world_news_view', { slug: news.slug }) }}">
-                    <img class="img-thumbnail" src="http://lorempixel.com/848/250/technics" alt="">
+                    {% if news.thumbnail is not null %}
+                        <img class="img-thumbnail" src="{{ app.request.getBasePath() }}{{ images_path }}{{ news.thumbnail.path }}" alt="">
+                    {% else %}
+                        <img class="img-thumbnail" src="http://lorempixel.com/848/250/technics" alt="">
+                    {% endif %}
                 </a>
             </div>
 
@@ -39,7 +44,7 @@
                     {% endif %}
                 </span>
             </div>
-
+            
             <div class="post-content">
 
                 <h2>

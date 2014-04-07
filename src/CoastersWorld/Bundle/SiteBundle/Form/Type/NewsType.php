@@ -23,7 +23,15 @@ class NewsType extends AbstractType
                 'required' => false,
                 'label' => 'Coaster'
             ))
-            ->add('tags', new TagType(), array('om' => $objectManager))
+            ->add('thumbnail', 'entity', array(
+                'class' => 'CoastersWorldSiteBundle:Image',
+                'required' => false,
+                'label' => 'Image à la une'
+            ))
+            ->add('tags', new TagType(), array(
+                'om' => $objectManager,
+                'required' => false
+            ))
         ;
     }
 
