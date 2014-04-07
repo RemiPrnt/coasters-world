@@ -16,7 +16,11 @@
             <article class="post post-large">
                 <div class="post-image single">
                     <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">
-                        <img class="img-thumbnail" src="http://lorempixel.com/848/250/technics" alt="">
+                        {% if n.thumbnail is not null %}
+                            <img class="img-thumbnail" src="{{ app.request.getBasePath() }}/uploads/documents/{{ n.thumbnail.path }}" alt="">
+                        {% else %}
+                            <img class="img-thumbnail" src="http://lorempixel.com/848/250/technics" alt="">
+                        {% endif %}
                     </a>
                 </div>
 

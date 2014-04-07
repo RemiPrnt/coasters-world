@@ -19,6 +19,12 @@ class Image
     private $createdAt;
     private $updatedAt;
 
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * Get file.
      *
