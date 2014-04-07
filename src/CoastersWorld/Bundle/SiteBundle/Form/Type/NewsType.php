@@ -23,7 +23,10 @@ class NewsType extends AbstractType
                 'required' => false,
                 'label' => 'Coaster'
             ))
-            ->add('tags', new TagType(), array('om' => $objectManager))
+            ->add('tags', new TagType(), array(
+                'om' => $objectManager,
+                'required' => false
+            ))
         ;
     }
 
