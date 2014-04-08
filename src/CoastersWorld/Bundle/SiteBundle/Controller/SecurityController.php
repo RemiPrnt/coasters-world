@@ -82,13 +82,7 @@ class SecurityController extends Controller
                 $flashbag->add('register_succeed_email',    $user->getEmail());
 
                 // Envoie de l'email contenant le lien d'activation
-                $this->get('mailer')->send(\Swift_Message::newInstance()
-                    ->setSubject('Activation de votre compte CoastersWorld.fr')
-                    ->setFrom(array('admin@coastersworld.fr' => "CoastersWorld.fr"))
-                    ->setTo($user->getEmail())
-                    ->setBody($this->renderView('CoastersWorldSiteBundle:Security:activationemail.txt.twig', array(
-                        'user' => $user
-                ))));
+                $this->get('coasters_world.mailer')->sendActivationEmail($user);
                 
                 return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
             }
