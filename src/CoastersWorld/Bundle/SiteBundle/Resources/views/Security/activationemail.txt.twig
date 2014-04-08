@@ -1,0 +1,11 @@
+Bonjour {{ user.username }},
+
+Votre inscription sur CoastersWorld.fr a bien été prise en compte.
+
+Afin d'achever la procédure d'inscription, veuillez cliquer sur le lien suivant :
+{{ url('activate', { userid: user.id, key: user.activationKey }) }}
+
+Si le lien ne fonctionne pas, n'hésitez pas à contacter un administrateur à l'adresse suivante : admin@coastersworld.fr
+
+Cordialement,
+L'équipe CoastersWorld

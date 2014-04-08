@@ -28,6 +28,11 @@ class User implements UserInterface, \Serializable
     private $salt;
 
     /**
+     * @var string $activationKey
+     */
+    private $activationKey;
+
+    /**
      * @var string $email
      */
     private $email;
@@ -71,6 +76,7 @@ class User implements UserInterface, \Serializable
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
+        $this->activationKey = md5(uniqid(null, true));
         $this->isVerified = false;
         $this->createdAt = new \DateTime;
     }
@@ -466,5 +472,28 @@ class User implements UserInterface, \Serializable
     public function getIsVerified()
     {
         return $this->isVerified;
+    }
+
+    /**
+     * Set activationKey
+     *
+     * @param string $activationKey
+     * @return User
+     */
+    public function setActivationKey($activationKey)
+    {
+        $this->activationKey = $activationKey;
+
+        return $this;
+    }
+
+    /**
+     * Get activationKey
+     *
+     * @return string 
+     */
+    public function getActivationKey()
+    {
+        return $this->activationKey;
     }
 }

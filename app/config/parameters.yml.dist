@@ -6,13 +6,12 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
-
-    locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    mailer_transport: gmail
+    mailer_host:      smtp.gmail.com
+    mailer_user:      user_gmail_sans_@gmail.com
+    mailer_password:  mdp_gmail
+    locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt
 
 twig:
     globals:
