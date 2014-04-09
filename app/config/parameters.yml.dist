@@ -13,6 +13,11 @@ parameters:
     locale: fr
     secret: ThisTokenIsNotSoSecretChangeIt
 
+    coastersworld.admin_email.address: admin@coastersworld.fr
+    coastersworld.admin_email.name: CoastersWorld.fr
+    coastersworld.mailer.activation.subject: Activation de votre compte CoastersWorld.fr
+
 twig:
     globals:
         images_path: /uploads/documents/
+        coastersworld_admin_email_address: %coastersworld.admin_email.address%
