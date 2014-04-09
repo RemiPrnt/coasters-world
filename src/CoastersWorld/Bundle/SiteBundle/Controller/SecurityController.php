@@ -82,7 +82,7 @@ class SecurityController extends Controller
                 $flashbag->add('register_succeed_email',    $user->getEmail());
 
                 // Envoie de l'email contenant le lien d'activation
-                $this->get('coasters_world.mailer')->sendActivationEmail($user, $this->container->getParameter('coastersworld.mailer.activation.subject'));
+                $this->get('coasters_world.mailer')->sendActivationEmail($user);
                 
                 return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
             }

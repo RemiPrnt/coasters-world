@@ -9,4 +9,4 @@ services:
             - { name: form.type, alias: news_type }
     coasters_world.mailer:
         class:     "%coasters_world.mailer.class%"
-        arguments: ["@mailer", "@templating", "%coastersworldAdminEmailAddress%", "%coastersworldAdminEmailName%"]
+        arguments: ["@mailer", "@templating", "@translator", "%coastersworldAdminEmailAddress%", "%coastersworldAdminEmailName%"]
