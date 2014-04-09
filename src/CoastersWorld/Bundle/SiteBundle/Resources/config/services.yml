@@ -1,8 +1,12 @@
 parameters:
    coasters_world_news.form.news_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\NewsType
+   coasters_world.mailer.class: CoastersWorld\Bundle\SiteBundle\Service\CoastersWorldMailer
 
 services:
     coasters_world_news.form.news_type:
        class: %coasters_world_news.form.news_type.class%
        tags:
             - { name: form.type, alias: news_type }
+    coasters_world.mailer:
+        class:     "%coasters_world.mailer.class%"
+        arguments: ["@mailer", "@templating", "@translator", "%coastersworldAdminEmailAddress%", "%coastersworldAdminEmailName%"]

@@ -61,3 +61,8 @@ login:
     create_account: S'enregistrer
     password_forgot: Mot de passe oublié ?
 
+#CoastersWorld
+coasters_world:
+    mailer:
+        activation:
+            subject: Activation de votre compte CoastersWorld.fr

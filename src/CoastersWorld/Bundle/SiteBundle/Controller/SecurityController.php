@@ -80,6 +80,9 @@ class SecurityController extends Controller
                 $flashbag = $this->get("session")->getFlashBag();
                 $flashbag->add('register_succeed_username', $user->getUsername());
                 $flashbag->add('register_succeed_email',    $user->getEmail());
+
+                // Envoie de l'email contenant le lien d'activation
+                $this->get('coasters_world.mailer')->sendActivationEmail($user);
                 
                 return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
             }
@@ -114,9 +117,10 @@ class SecurityController extends Controller
         if(is_null($user) || $user->getIsVerified())
             return $this->redirect($this->generateUrl('coasters_world_homepage'));
 
-        if($key === $user->getSalt())
+        if($key === $user->getActivationKey())
         {
             $user->setIsVerified(1);
+            $user->setActivationKey(null);
             $em->persist($user);
             $em->flush();
         }

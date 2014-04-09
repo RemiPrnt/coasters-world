@@ -2,12 +2,12 @@
 
 namespace CoastersWorld\Bundle\SiteBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * CoastersWorld\Bundle\SiteBundle\Entity\User
  */
-class User implements UserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable
 {
 
     const ROLE_DEFAULT = 'ROLE_USER';
@@ -28,6 +28,11 @@ class User implements UserInterface, \Serializable
     private $salt;
 
     /**
+     * @var string $activationKey
+     */
+    private $activationKey;
+
+    /**
      * @var string $email
      */
     private $email;
@@ -46,6 +51,11 @@ class User implements UserInterface, \Serializable
      * @var boolean $isVerified
      */
     private $isVerified;
+
+    /**
+     * @var boolean $isLocked
+     */
+    private $isLocked;
 
     /**
      * @var integer $id
@@ -71,7 +81,9 @@ class User implements UserInterface, \Serializable
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
+        $this->activationKey = md5(uniqid(null, true));
         $this->isVerified = false;
+        $this->isLocked = false;
         $this->createdAt = new \DateTime;
     }
 
@@ -467,4 +479,76 @@ class User implements UserInterface, \Serializable
     {
         return $this->isVerified;
     }
+
+    /**
+     * Set activationKey
+     *
+     * @param string $activationKey
+     * @return User
+     */
+    public function setActivationKey($activationKey)
+    {
+        $this->activationKey = $activationKey;
+
+        return $this;
+    }
+
+    /**
+     * Get activationKey
+     *
+     * @return string 
+     */
+    public function getActivationKey()
+    {
+        return $this->activationKey;
+    }
+
+    /**
+     * Set isLocked
+     *
+     * @param boolean $isLocked
+     * @return User
+     */
+    public function setIsLocked($isLocked)
+    {
+        $this->isLocked = $isLocked;
+
+        return $this;
+    }
+
+    /**
+     * Get isLocked
+     *
+     * @return boolean 
+     */
+    public function getIsLocked()
+    {
+        return $this->isLocked;
+    }
+
+
+    /**
+     * SECURITY
+     */
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return !$this->isLocked;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isVerified;
+    }
+
 }
