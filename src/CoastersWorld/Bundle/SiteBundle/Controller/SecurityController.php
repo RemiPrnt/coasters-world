@@ -123,10 +123,28 @@ class SecurityController extends Controller
             $user->setActivationKey(null);
             $em->persist($user);
             $em->flush();
+
+            // Création du message de succès de l'inscription
+            $flashbag = $this->get("session")->getFlashBag();
+            $flashbag->add('activate_succeed_username', $user->getUsername());
+
+            return $this->redirect($this->generateUrl('coasters_world_activate_succeed'));
         }
 
         return $this->render('CoastersWorldSiteBundle:Security:activate.html.twig', array(
             'user' => $user
+        ));
+    }
+
+    public function activateSucceedAction()
+    {
+        $session = $this->get("session");
+
+        if(!$session->getFlashBag()->has('activate_succeed_username')) // L'utilisateur ne vient pas d'activer son compte   et tente d'accéder à la page
+            return $this->redirect($this->generateUrl('coasters_world_homepage'));
+
+        return $this->render('CoastersWorldSiteBundle:Security:activatesucceed.html.twig', array(
+            'activate_succeed_username' => $session->getFlashBag()->get('activate_succeed_username')[0]
         ));
     }
 }
