@@ -81,7 +81,7 @@ class SecurityController extends Controller
                 $flashbag->add('register_succeed_username', $user->getUsername());
                 $flashbag->add('register_succeed_email',    $user->getEmail());
 
-                // Envoie de l'email contenant le lien d'activation
+                // Envoi de l'email contenant le lien d'activation
                 $this->get('coasters_world.mailer')->sendActivationEmail($user);
                 
                 return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
@@ -124,7 +124,7 @@ class SecurityController extends Controller
             $em->persist($user);
             $em->flush();
 
-            // Création du message de succès de l'inscription
+            // Création du message de succès de l'activation
             $flashbag = $this->get("session")->getFlashBag();
             $flashbag->add('activate_succeed_username', $user->getUsername());
 
