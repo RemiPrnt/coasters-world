@@ -49,6 +49,10 @@ coasters_world_activate_succeed:
     pattern:  /activation/succes
     defaults: { _controller: CoastersWorldSiteBundle:Security:activateSucceed }
 
+coasters_world_mot_de_passe_oublie:
+    pattern:  /mot-de-passe-oublie
+    defaults: { _controller: CoastersWorldSiteBundle:Security:motdepasseOublie }
+
 ######## News
 
 # Redirection de la première page des news vers la page d'accueil du site

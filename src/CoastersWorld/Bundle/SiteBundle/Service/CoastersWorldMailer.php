@@ -32,4 +32,9 @@ class CoastersWorldMailer
 			             									    	array('user' => $user)))
         	 );
 	}
+
+	public function sendPasswordResetEmail($user)
+	{
+		
+	}
 }

@@ -147,4 +147,49 @@ class SecurityController extends Controller
             'activate_succeed_username' => $session->getFlashBag()->get('activate_succeed_username')[0]
         ));
     }
+
+    public function motdepasseOublieAction()
+    {
+        $session = $this->get('session');
+        $request = $this->get('request');
+
+        // L'email de changement de mot de passe vient d'être envoyé, affichage d'un message de confirmation
+        if($session->getFlashBag()->has('password_reset_email'))
+            return $this->render('CoastersWorldSiteBundle:Security:motdepasseoublie.html.twig', array(
+                'email' => $session->getFlashBag()->get('password_reset_email')[0]
+            ));
+
+        $form = $this->createFormBuilder()
+                     ->add('email', 'email', array('label' => "Adresse e-mail associée à votre compte"))
+                     ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $user = $this->getDoctrine()
+                         ->getManager()
+                         ->getRepository('CoastersWorldSiteBundle:User')
+                         ->findOneBy(array('email' => $form->getData()['email']));
+
+            if(!is_null($user))
+            {
+                // Création du message de succès de l'envoi du mail de changement de mot de passe
+                $flashbag = $session->getFlashBag()
+                                    ->add('password_reset_email', $user->getEmail());
+
+                // Envoi de l'email contenant le lien vers le formulaire de changement de mot de passe
+                $this->get('coasters_world.mailer')->sendPasswordResetEmail($user);
+                
+                return $this->redirect($this->generateUrl('coasters_world_mot_de_passe_oublie'));
+            }
+
+            $form->get('email')->addError(
+                    new FormError('Cette adresse e-mail n\'est rattachée à aucun compte utilisateur.'));
+        }
+
+        return $this->render('CoastersWorldSiteBundle:Security:motdepasseoublie.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }
