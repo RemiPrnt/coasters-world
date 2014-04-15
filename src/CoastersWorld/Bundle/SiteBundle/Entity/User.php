@@ -33,6 +33,16 @@ class User implements AdvancedUserInterface, \Serializable
     private $activationKey;
 
     /**
+     * @var string $changePasswordKey
+     */
+    private $changePasswordKey;
+
+    /**
+     * @var string $changePasswordDate
+     */
+    private $changePasswordDate;
+
+    /**
      * @var string $email
      */
     private $email;
@@ -551,4 +561,50 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->isVerified;
     }
 
+
+    /**
+     * Set changePasswordKey
+     *
+     * @param string $changePasswordKey
+     * @return User
+     */
+    public function setChangePasswordKey($changePasswordKey)
+    {
+        $this->changePasswordKey = $changePasswordKey;
+
+        return $this;
+    }
+
+    /**
+     * Get changePasswordKey
+     *
+     * @return string 
+     */
+    public function getChangePasswordKey()
+    {
+        return $this->changePasswordKey;
+    }
+
+    /**
+     * Set changePasswordDate
+     *
+     * @param \DateTime $changePasswordDate
+     * @return User
+     */
+    public function setChangePasswordDate($changePasswordDate)
+    {
+        $this->changePasswordDate = $changePasswordDate;
+
+        return $this;
+    }
+
+    /**
+     * Get changePasswordDate
+     *
+     * @return \DateTime 
+     */
+    public function getChangePasswordDate()
+    {
+        return $this->changePasswordDate;
+    }
 }
