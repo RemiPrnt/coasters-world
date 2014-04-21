@@ -21,7 +21,10 @@
         "gedmo/doctrine-extensions": "~2.3",
         "knplabs/knp-paginator-bundle": "~2.3",
         "gloomy/pager-bundle": "~0.9",
-        "knplabs/knp-markdown-bundle": "~1.3"
+        "knplabs/knp-markdown-bundle": "~1.3",
+        "phpunit/phpunit": "4.2.*@dev",
+        "phpunit/phpunit-mock-objects": "2.1.*@dev",
+        "sebastian/comparator": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
