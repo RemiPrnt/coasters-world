@@ -11,10 +11,3 @@ login_check:
 
 logout:
     pattern:   /logout
-
-activate:
-    pattern:   /activation/{userid}-{key}
-    defaults:  { _controller: CoastersWorldSiteBundle:Security:activate }
-    requirements:
-        userid: \d+
-        key: "[a-z0-9]+"

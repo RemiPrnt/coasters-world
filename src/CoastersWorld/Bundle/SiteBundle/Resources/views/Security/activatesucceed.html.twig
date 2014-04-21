@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Activation{% endblock %}
+
+{% block page_top_breadcrumb %}
+    <li><a href="#">Espace membres</a></li>
+    <li class="active">Activation réussie</li>
+{% endblock %}
+
+{% block page_top_main %}Activation réussie !{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+        	<h3>Votre compte est désormais activé !</h3>
+            <p>Félicitations <b>{{ activate_succeed_username }}</b> ! Vous pouvez dès à présent vous connecter et intéragir avec la communauté CoastersWorld.</p>
+            <a href="{{ path('coasters_world_homepage') }}" class="btn btn-primary">Retourner à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}

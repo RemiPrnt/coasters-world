@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Mot de passe oublié{% endblock %}
+
+{% block page_top_breadcrumb %}
+    <li><a href="#">Espace membres</a></li>
+    <li class="active">Mot de passe oublié</li>
+{% endblock %}
+
+{% block page_top_main %}Mot de passe oublié{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            {% if email is defined %}
+                <p>Un e-mail contenant un lien vous permettant de définir un nouveau mot de passe vous a été envoyé à l'adresse <b>{{ email }}</b>.</p>
+                <a href="{{ path('coasters_world_homepage') }}" class="btn btn-primary">Retourner à l'accueil</a>
+            {% elseif form is defined %}
+                <p>Vous avez oublié votre mot de passe ? Pas de problème ! Nous vous envoyons un e-mail contenant un lien vous permettant d'en définir un nouveau.</p>
+                <form method="POST" {{ form_enctype(form) }}>
+                    {{ form_widget(form)}}
+                    <input type="submit" class="btn btn-primary" value="Changer de mot de passe">
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

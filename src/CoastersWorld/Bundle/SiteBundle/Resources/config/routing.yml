@@ -38,6 +38,32 @@ coasters_world_register_succeed:
     pattern:  /inscription/succes
     defaults: { _controller: CoastersWorldSiteBundle:Security:registerSucceed }
 
+coasters_world_activate:
+    pattern:   /activation/{userid}-{key}
+    defaults:  { _controller: CoastersWorldSiteBundle:Security:activate }
+    requirements:
+        userid: \d+
+        key: "[a-z0-9]+"
+
+coasters_world_activate_succeed:
+    pattern:  /activation/succes
+    defaults: { _controller: CoastersWorldSiteBundle:Security:activateSucceed }
+
+coasters_world_mot_de_passe_oublie:
+    pattern:  /mot-de-passe-oublie
+    defaults: { _controller: CoastersWorldSiteBundle:Security:motdepasseOublie }
+
+coasters_world_change_password:
+    pattern:   /changement-mot-de-passe/{userid}-{key}
+    defaults:  { _controller: CoastersWorldSiteBundle:Security:changePassword }
+    requirements:
+        userid: \d+
+        key: "[a-z0-9]+"
+
+coasters_world_change_password_succeed:
+    pattern:  /changement-mot-de-passe/succes
+    defaults: { _controller: CoastersWorldSiteBundle:Security:changePasswordSucceed }
+
 ######## News
 
 # Redirection de la première page des news vers la page d'accueil du site

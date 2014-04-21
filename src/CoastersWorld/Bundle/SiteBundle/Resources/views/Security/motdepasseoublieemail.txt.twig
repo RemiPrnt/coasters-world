@@ -1,0 +1,13 @@
+Bonjour {{ user.username }},
+
+Votre demande de changement de mot de passe sur CoastersWorld.fr a bien été prise en compte.
+
+Afin de lancer la procédure, veuillez visiter le lien suivant :
+{{ url('coasters_world_change_password', { userid: user.id, key: user.changePasswordKey }) }}
+
+Attention : vous disposez d'un délai de {{ coastersworldPasswordChangeTime }} jours à compter de la réception de cet e-mail pour modifier votre mot de passe.
+
+Si le lien ne fonctionne pas, n'hésitez pas à contacter un administrateur à l'adresse suivante : {{ coastersworldAdminEmailAddress }}
+
+Cordialement,
+L'équipe CoastersWorld

@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormError;
 
 use CoastersWorld\Bundle\SiteBundle\Entity\User;
 use CoastersWorld\Bundle\SiteBundle\Form\Type\UserType;
-
+use CoastersWorld\Bundle\SiteBundle\Form\Type\ChangePasswordType;
 
 class SecurityController extends Controller
 {
@@ -81,7 +81,7 @@ class SecurityController extends Controller
                 $flashbag->add('register_succeed_username', $user->getUsername());
                 $flashbag->add('register_succeed_email',    $user->getEmail());
 
-                // Envoie de l'email contenant le lien d'activation
+                // Envoi de l'email contenant le lien d'activation
                 $this->get('coasters_world.mailer')->sendActivationEmail($user);
                 
                 return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
@@ -123,10 +123,142 @@ class SecurityController extends Controller
             $user->setActivationKey(null);
             $em->persist($user);
             $em->flush();
+
+            // Création du message de succès de l'activation
+            $flashbag = $this->get("session")->getFlashBag();
+            $flashbag->add('activate_succeed_username', $user->getUsername());
+
+            return $this->redirect($this->generateUrl('coasters_world_activate_succeed'));
         }
 
         return $this->render('CoastersWorldSiteBundle:Security:activate.html.twig', array(
             'user' => $user
+        ));
+    }
+
+    public function activateSucceedAction()
+    {
+        $session = $this->get("session");
+
+        if(!$session->getFlashBag()->has('activate_succeed_username')) // L'utilisateur ne vient pas d'activer son compte   et tente d'accéder à la page
+            return $this->redirect($this->generateUrl('coasters_world_homepage'));
+
+        return $this->render('CoastersWorldSiteBundle:Security:activatesucceed.html.twig', array(
+            'activate_succeed_username' => $session->getFlashBag()->get('activate_succeed_username')[0]
+        ));
+    }
+
+    public function motdepasseOublieAction()
+    {
+        $session = $this->get('session');
+        $request = $this->get('request');
+
+        // L'email de changement de mot de passe vient d'être envoyé, affichage d'un message de confirmation
+        if($session->getFlashBag()->has('password_reset_email'))
+            return $this->render('CoastersWorldSiteBundle:Security:motdepasseoublie.html.twig', array(
+                'email' => $session->getFlashBag()->get('password_reset_email')[0]
+            ));
+
+        $form = $this->createFormBuilder()
+                     ->add('email', 'email', array('label' => "Adresse e-mail associée à votre compte"))
+                     ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $user = $em->getRepository('CoastersWorldSiteBundle:User')
+                       ->findOneBy(array('email' => $form->getData()['email']));
+
+            if(!is_null($user))
+            {
+                // Génération d'une clé et de la date de validité du changement de mot de passe
+                $user->setChangePasswordKey(md5(uniqid(null,true)));
+                $changePasswordDate = new \DateTime();
+                $changePasswordDate->add(new \DateInterval('P'.$this->container->getParameter('coastersworldPasswordChangeTime').'D'));
+                $user->setChangePasswordDate($changePasswordDate);
+                $em->persist($user);
+                $em->flush();
+
+                // Création du message de succès de l'envoi du mail de changement de mot de passe
+                $flashbag = $session->getFlashBag()
+                                    ->add('password_reset_email', $user->getEmail());
+
+                // Envoi de l'email contenant le lien vers le formulaire de changement de mot de passe
+                $this->get('coasters_world.mailer')->sendPasswordResetEmail($user);
+                
+                return $this->redirect($this->generateUrl('coasters_world_mot_de_passe_oublie'));
+            }
+
+            $form->get('email')->addError(
+                    new FormError('Cette adresse e-mail n\'est rattachée à aucun compte utilisateur.'));
+        }
+
+        return $this->render('CoastersWorldSiteBundle:Security:motdepasseoublie.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    public function changePasswordAction($userid,$key)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users_repository = $em->getRepository('CoastersWorldSiteBundle:User');
+
+        $user = $users_repository->find($userid);
+
+        if(is_null($user))
+            return $this->redirect($this->generateUrl('coasters_world_homepage'));
+
+        if($key != $user->getChangePasswordKey())
+            return $this->render('CoastersWorldSiteBundle:Security:changepassword.html.twig', array(
+                'error' => 'key'
+            ));
+
+        if(new \DateTime > $user->getChangePasswordDate())
+            return $this->render('CoastersWorldSiteBundle:Security:changepassword.html.twig', array(
+                'error' => 'date'
+            ));
+
+        $form = $this->createForm(new ChangePasswordType, $user);
+
+        $request = $this->get('request');
+        if("POST" === $request->getMethod())
+        {
+            $form->handleRequest($this->getRequest());
+
+            $user->setPassword($this->container
+                 ->get('security.encoder_factory')
+                 ->getEncoder($user)
+                 ->encodePassword($user->getPassword(), $user->getSalt()));
+            $user->setChangePasswordKey(null);
+            $user->setChangePasswordDate(null);
+            $em->persist($user);
+            $em->flush();
+
+            // Création du message de succès de l'activation
+            $flashbag = $this->get("session")->getFlashBag();
+            $flashbag->add('change_password_succeed_username', $user->getUsername());
+
+            return $this->redirect($this->generateUrl('coasters_world_change_password_succeed'));
+        }
+
+        return $this->render('CoastersWorldSiteBundle:Security:changepassword.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    public function changePasswordSucceedAction()
+    {
+        $session = $this->get("session");
+
+        // L'utilisateur ne vient pas de modifier sont mot de passe et tente d'accéder à la page
+        if(!$session->getFlashBag()->has('change_password_succeed_username')) 
+            return $this->redirect($this->generateUrl('coasters_world_homepage'));
+
+        return $this->render('CoastersWorldSiteBundle:Security:changepasswordsucceed.html.twig', array(
+            'change_password_succeed_username' => $session->getFlashBag()->get('change_password_succeed_username')[0]
         ));
     }
 }

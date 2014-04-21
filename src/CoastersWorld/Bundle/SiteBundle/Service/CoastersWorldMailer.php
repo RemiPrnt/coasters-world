@@ -32,4 +32,16 @@ class CoastersWorldMailer
 			             									    	array('user' => $user)))
         	 );
 	}
+
+	public function sendPasswordResetEmail($user)
+	{
+		$this->mailer
+			 ->send(\Swift_Message::newInstance()->setSubject($this->translator->trans('coasters_world.mailer.motdepasseoublie.subject'))
+			             						 ->setFrom(array($this->admin_email_address => $this->admin_email_name))
+			             						 ->setTo($user->getEmail())
+			             						 ->setBody($this->templating
+			             									    ->render('CoastersWorldSiteBundle:Security:motdepasseoublieemail.txt.twig', 
+			             									    	array('user' => $user)))
+        	 );
+	}
 }

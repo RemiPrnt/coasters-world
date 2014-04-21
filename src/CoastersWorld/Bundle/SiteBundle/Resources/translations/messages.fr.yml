@@ -66,3 +66,5 @@ coasters_world:
     mailer:
         activation:
             subject: Activation de votre compte CoastersWorld.fr
+        motdepasseoublie:
+            subject: Changement de votre mot de passe CoastersWorld.fr
