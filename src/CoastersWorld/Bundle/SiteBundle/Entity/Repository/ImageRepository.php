@@ -6,12 +6,12 @@ use Doctrine\ORM\EntityRepository;
 
 class ImageRepository extends EntityRepository
 {
-    public function findFiveLatestOrderedByDateDesc()
+    public function findLatestOrderedByDateDesc($number = 5)
     {
         return $this
             ->createQueryBuilder('i')
             ->addOrderBy('i.updatedAt', 'DESC')
-            ->setMaxResults(5)
+            ->setMaxResults($number)
             ->getQuery()
             ->getResult()
         ;
