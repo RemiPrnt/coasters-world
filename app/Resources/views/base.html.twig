@@ -28,6 +28,8 @@
 
     {% block stylesheets %}{% endblock %}
 
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/modernizr.js') }}"></script>
+
 </head>
 <body>
 
@@ -60,8 +62,6 @@
         {% include '::footer.html.twig' %}
     </div>
     
-
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/modernizr.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/bootstrap.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/jquery.easing.js') }}"></script>
@@ -71,8 +71,9 @@
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/custom.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/plugins.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/twitterjs/twitter.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/theme.js') }}"></script>
 
     {% block javascripts %}{% endblock %}
+
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/theme.js') }}"></script>
 </body>
 </html>
