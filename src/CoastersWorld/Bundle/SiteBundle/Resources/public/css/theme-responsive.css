@@ -251,6 +251,11 @@
 		display: none;
 	}
 
+	/* Home Slider */
+	div.slider-container {
+		min-height: 0;
+	}
+
 	/* Thumb Info */
 	a.thumb-info span.thumb-info-title {
 		font-size: 14px;
@@ -282,7 +287,13 @@
 	/* Disable Parallax */
 	.parallax {
 		background-size: auto 100% !important;
-		background-position: 0 0 !important;
+		background-position: 50% 0 !important;
+	}
+
+	/* Video */
+	section.video {
+		background-size: auto 100% !important;
+		background-position: 50% 0 !important;
 	}
 
 	/* Misc */

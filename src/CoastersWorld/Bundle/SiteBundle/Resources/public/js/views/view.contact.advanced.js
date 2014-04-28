@@ -64,6 +64,9 @@ Version: 		1.0
 					captcha: {
 						required: true,
 						captcha: true
+					},
+					'checkboxes[]': {
+						required: true
 					}
 				},
 				highlight: function (element) {
