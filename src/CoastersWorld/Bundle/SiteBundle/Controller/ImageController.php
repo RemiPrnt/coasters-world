@@ -11,7 +11,7 @@ class ImageController extends Controller
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $images = $em->getRepository('CoastersWorldSiteBundle:Image')->findLatestOrderedByDateDesc(5);
+        $images = $em->getRepository('CoastersWorldSiteBundle:Image')->findLatestOrderedByDateDesc(8);
 
         return $this->render('CoastersWorldSiteBundle:Image:list.html.twig', array(
             'images' => $images
@@ -45,8 +45,33 @@ class ImageController extends Controller
         ));
     }
 
-    public function testAction()
+    public function editAction($id)
     {
-        echo '<pre>'; var_dump('TOTO'); exit;
+        $em = $this->getDoctrine()->getManager();
+        $image = $em->getRepository('CoastersWorldSiteBundle:Image')->find($id);
+
+        $form = $this->createFormBuilder($image)
+            ->setAction($this->generateUrl('coasters_world_image_edit', array('id' => $id)))
+            ->setMethod('POST')
+            ->add('name')
+            ->add('coaster')
+            ->add('save', 'submit')
+            ->getForm()
+        ;
+
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->bind($this->getRequest());
+
+            if ($form->isValid()) {
+                $em->persist($image);
+                $em->flush();
+            }
+        }
+
+        return $this->render('CoastersWorldSiteBundle:Image:edit.html.twig', array(
+            'form' => $form->createView(),
+            'image' => $image
+        ));
+
     }
 }

@@ -1,22 +1,30 @@
 {% extends '::base.html.twig' %}
 
+{% block page_top_main %}Dernières images{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/magnific-popup/magnific-popup.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/magnific-popup/magnific-popup.css') }}" media="screen">
+{% endblock %}
+
 {% block body %}
-
     <div class="row">
-        <div class="span8">
-            <div class="content">
-                <section class="blog">
-                    <div class="page-header">
-                        <h1>Dernières images</h1>
+        <ul class="portfolio-list sort-destination lightbox" data-sort-id="portfolio" data-plugin-options='{"delegate": "a", "type": "image", "gallery": {"enabled": true}}'>
+            {% for image in images %}
+                <li class="col-md-3">
+                    <div class="portfolio-item img-thumbnail">
+                        <a class="thumb-info" href="{{ asset('uploads/documents/' ~ image.path) }}">
+                            <img class="img-responsive" width="215" src="{{ asset('uploads/documents/' ~ image.path) }}">
+                            <span class="zoom">
+                                <i class="icon icon-16 icon-white-shadowed icon-search"></i>
+                            </span>
+                        </a>
                     </div>
-                    <ul>
-                    {% for image in images %}
-                    <li><img style="max-width:300px; max-height:200px;" src="{{ asset('uploads/documents/' ~ image.path) }}" alt="{{ image.name }}"/></li>
-                    {% endfor %}
-                    </ul>
-                </section>
-            </div>
-        </div>
+                </li>
+            {% endfor %} 
+        </ul>
     </div>
-
 {% endblock %}
