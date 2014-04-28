@@ -1,7 +1,7 @@
 /*
 Name: 			Core Initializer
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
+Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 */
 
 (function() {
@@ -39,7 +39,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			this.navMenu();
 
 			// Header Search
-			//this.headerSearch();
+			this.headerSearch();
 
 			// Animations
 			this.animations();
@@ -48,7 +48,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			this.wordRotate();
 
 			// Newsletter
-			//this.newsletter();
+			this.newsletter();
 
 			// Featured Boxes
 			this.featuredBoxes();
@@ -57,7 +57,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			$("a[rel=tooltip]").tooltip();
 
 			// Owl Carousel
-			//this.owlCarousel();
+			this.owlCarousel();
 
 			// Sort
 			this.sort();
@@ -69,10 +69,13 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			this.latestTweets();
 
 			// Flickr Feed
-			//this.flickrFeed();
+			this.flickrFeed();
 
 			// Lightbox
 			this.lightbox();
+
+			// Media Element
+			this.mediaElement();
 
 			// Parallax
 			this.parallax();
@@ -196,77 +199,104 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 			if($("body").hasClass("boxed"))
 				return false;
 
-			var header = $("body header:first"),
+			var $this = this,
+				$body = $("body"),
+				header = $("header:first"),
+				headerContainer = header.parent(),
+				menuAfterHeader = (typeof header.data('after-header') !== 'undefined'),
 				headerHeight = header.height(),
+				flatParentItems = $("header.flat-menu ul.nav-main > li > a"),
 				logoWrapper = header.find(".logo"),
 				logo = header.find(".logo img"),
-				logoWidth = logo.width(),
-				logoHeight = logo.height(),
-				$this = this,
-				logoPaddingTop = 28,
-				logoSmallHeight = 40;
+				logoWidth = logo.attr("width"),
+				logoHeight = logo.attr("height"),
+				logoPaddingTop = parseInt(logo.attr("data-sticky-padding") ? logo.attr("data-sticky-padding") : "28"),
+				logoSmallWidth = parseInt(logo.attr("data-sticky-width") ? logo.attr("data-sticky-width") : "82"),
+				logoSmallHeight = parseInt(logo.attr("data-sticky-height") ? logo.attr("data-sticky-height") : "40");
 
-			logo
-				.css("height", logoSmallHeight);
+			if(menuAfterHeader) {
+				headerContainer.css("min-height", header.height());
+			}
 
-			var logoSmallWidth = logo.width();
-
-			logo
-				.css("height", "auto")
-				.css("width", "auto");
-
-			var flatParentItems = $("header.flat-menu ul.nav-main > li > a");
+			$(window).afterResize(function() {
+				headerContainer.css("min-height", header.height());
+			});
 
 			$this.checkStickyMenu = function() {
 
-				if($("body").hasClass("boxed"))
+				if($body.hasClass("boxed") || $(window).width() < 991) {
+					$this.stickyMenuDeactivate();
+					header.removeClass("fixed")
 					return false;
+				}
 
-				if($(window).scrollTop() > ((headerHeight - 15) - logoSmallHeight) && $(window).width() > 991) {
+				if(!menuAfterHeader) {
 
-					if($("body").hasClass("sticky-menu-active"))
-						return false;
+					if($(window).scrollTop() > ((headerHeight - 15) - logoSmallHeight)) {
 
-					logo.stop(true, true);
+						$this.stickyMenuActivate();
 
-					$("body").addClass("sticky-menu-active").css("padding-top", headerHeight);
-					flatParentItems.addClass("sticky-menu-active");
+					} else {
 
-					logoWrapper.addClass("logo-sticky-active");
+						$this.stickyMenuDeactivate();
 
-					logo.animate({
-						width: logoSmallWidth,
-						height: logoSmallHeight,
-						top: logoPaddingTop + "px"
-					}, 200, function() {});
+					}
 
 				} else {
 
-					if($("body").hasClass("sticky-menu-active")) {
+					if($(window).scrollTop() > header.parent().offset().top) {
 
-						$("body").removeClass("sticky-menu-active").css("padding-top", 0);
-						flatParentItems.removeClass("sticky-menu-active");
+						header.addClass("fixed");
 
-						logoWrapper.removeClass("logo-sticky-active");
+					} else {
 
-						logo.animate({
-							width: logoWidth,
-							height: logoHeight,
-							top: "0px"
-						}, 200, function() {
-
-							logo.css({
-								width: "auto",
-								height: "auto"
-							});
-
-						});
+						header.removeClass("fixed");
 
 					}
 
 				}
 
 			}
+
+			$this.stickyMenuActivate = function() {
+
+				if($body.hasClass("sticky-menu-active"))
+					return false;
+
+				logo.stop(true, true);
+
+				$body.addClass("sticky-menu-active").css("padding-top", headerHeight);
+				flatParentItems.addClass("sticky-menu-active");
+
+				logoWrapper.addClass("logo-sticky-active");
+
+				logo.animate({
+					width: logoSmallWidth,
+					height: logoSmallHeight,
+					top: logoPaddingTop + "px"
+				}, 200, function() {});
+
+			}
+
+			$this.stickyMenuDeactivate = function() {
+
+				if($body.hasClass("sticky-menu-active")) {
+
+					$body.removeClass("sticky-menu-active").css("padding-top", 0);
+					flatParentItems.removeClass("sticky-menu-active");
+
+					logoWrapper.removeClass("logo-sticky-active");
+
+					logo.animate({
+						width: logoWidth,
+						height: logoHeight,
+						top: "0px"
+					}, 200);
+
+				}
+
+			}
+
 
 			$(window).on("scroll", function() {
 
@@ -839,6 +869,47 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 
 		},
 
+		mediaElement: function(options) {
+
+			if(typeof(mejs) == "undefined") {
+				return false;
+			}
+
+			$("video:not(.manual)").each(function() {
+
+				var el = $(this);
+
+				var defaults = {
+					defaultVideoWidth: 480,
+					defaultVideoHeight: 270,
+					videoWidth: -1,
+					videoHeight: -1,
+					audioWidth: 400,
+					audioHeight: 30,
+					startVolume: 0.8,
+					loop: false,
+					enableAutosize: true,
+					features: ['playpause','progress','current','duration','tracks','volume','fullscreen'],
+					alwaysShowControls: false,
+					iPadUseNativeControls: false,
+					iPhoneUseNativeControls: false,
+					AndroidUseNativeControls: false,
+					alwaysShowHours: false,
+					showTimecodeFrameCount: false,
+					framesPerSecond: 25,
+					enableKeyboard: true,
+					pauseOtherPlayers: true,
+					keyActions: []
+				}
+
+				var config = $.extend({}, defaults, options, el.data("plugin-options"));
+
+				el.mediaelementplayer(config);
+
+			});
+
+		},
+
 		parallax: function() {
 
 			if(typeof($.stellar) == "undefined") {
@@ -971,7 +1042,7 @@ Version: 		2.7.0 - Fri Feb 21 2014 15:44:30
 	$(window).load(function () {
 
 		// Sticky Meny
-		//Core.stickyMenu();
+		Core.stickyMenu();
 
 	});
 
