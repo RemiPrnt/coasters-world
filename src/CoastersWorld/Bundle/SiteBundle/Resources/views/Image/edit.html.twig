@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block page_top_main %}Edition image{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<div class="col-md-12">
+			<img src="{{ asset('uploads/documents/' ~ image.path) }}">
+		</div>
+	</div>
+    <div class="row">
+        <div class="col-md-8">
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}
