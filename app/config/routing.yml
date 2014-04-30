@@ -11,3 +11,11 @@ login_check:
 
 logout:
     pattern:   /logout
+
+register:
+    pattern:  /inscription
+    defaults: { _controller: CoastersWorldSiteBundle:Security:register }
+
+mot_de_passe_oublie:
+    pattern:  /mot-de-passe-oublie
+    defaults: { _controller: CoastersWorldSiteBundle:Security:motdepasseOublie }
