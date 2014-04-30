@@ -61,6 +61,9 @@ login:
     create_account: S'enregistrer
     password_forgot: Mot de passe oublié ?
 
+"Bad credentials": "Identifiants erronés."
+"User account is disabled.": "Votre compte n'est pas encore activé. Veuillez suivre le lien que nous vous avons envoyé par e-mail lors de votre inscription à l'adresse que vous nous avez fournie."
+
 register:
     form:
         title: Quelques informations
