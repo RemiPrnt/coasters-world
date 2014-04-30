@@ -4,7 +4,11 @@ coasters_world_site:
 
 login:
     pattern:   /login
-    defaults:  { _controller: CoastersWorldSiteBundle:Security:login }
+    defaults:  { _controller: CoastersWorldSiteBundle:Security:login, integrated: false }
+
+login_integrated:
+    pattern:   /login-integrated
+    defaults:  { _controller: CoastersWorldSiteBundle:Security:login, integrated: true }
 
 login_check:
     pattern:   /login_check

@@ -17,7 +17,7 @@ class SecurityController extends Controller
      * loginAction
      * Affiche le formulaire de connexion
      */
-    public function loginAction()
+    public function loginAction($integrated)
     {
         $request = $this->getRequest();
         $session = $request->getSession();
@@ -32,8 +32,11 @@ class SecurityController extends Controller
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
 
+        $view =  '';
+        if($integrated) $view = "integrated";
+
         return $this->render(
-            'CoastersWorldSiteBundle:Security:login.html.twig',
+            'CoastersWorldSiteBundle:Security:login'.$view.'.html.twig',
             array(
                 // last username entered by the user
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
@@ -224,7 +227,7 @@ class SecurityController extends Controller
                 $this->get('coasters_world.mailer')->sendPasswordResetEmail($user);
                 
                 return $this->redirect(
-                    $this->generateUrl('coasters_world_mot_de_passe_oublie')
+                    $this->generateUrl('mot_de_passe_oublie')
                 );
             }
 
