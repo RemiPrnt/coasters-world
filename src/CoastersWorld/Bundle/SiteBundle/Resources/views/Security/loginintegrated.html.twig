@@ -1,21 +1,9 @@
-{% extends '::base.html.twig' %}
-
-{% block title %}{{ 'login.title'|trans }}{% endblock %}
-
-{% block page_top_breadcrumb %}
-    <li><a href="#">Espace membres</a></li>
-    <li class="active">{{ 'login.title'|trans }}</li>
-{% endblock %}
-
-{% block page_top_main %}{{ 'login.title'|trans }}{% endblock %}
-
-{% block body %}
 <section id="login">
     <div class="row">
         {% if error %}
-            <div class="alert alert-error">{{ error.message|trans }}</div>
+            <div class="alert alert-error">{{ error.message }}</div>
         {% endif %}
-        <div class="col-md-4">
+        <div class="col-md-12">
             
             <div class="internal-login">
                 <form action="{{ path('login_check') }}" class="form" method="post">
@@ -44,7 +32,5 @@
                 </form>
             </div>
         </div>
-
     </div>
 </section>
-{% endblock %}
