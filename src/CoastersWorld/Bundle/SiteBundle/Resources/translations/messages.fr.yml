@@ -61,6 +61,21 @@ login:
     create_account: S'enregistrer
     password_forgot: Mot de passe oublié ?
 
+register:
+    form:
+        title: Quelques informations
+        pseudo: Mon pseudo
+        password: Mon mot de passe
+        passwordConfirm: Je confirme mon mot de passe
+        email: Mon adresse email
+        submit: Je m'inscris à Coasters World !
+    site:
+        title: Le site
+        description: Pour tout la documentation et sur notre passion.
+    forum:
+        title: Le forum
+        description: Pour rejoindre notre communauté active.
+
 #CoastersWorld
 coasters_world:
     mailer:

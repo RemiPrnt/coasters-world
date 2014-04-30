@@ -4,18 +4,47 @@
 
 {% block page_top_breadcrumb %}
     <li><a href="#">Espace membres</a></li>
-    <li class="active">Inscription</li>
+    <li class="active">Créer un compte</li>
 {% endblock %}
 
-{% block page_top_main %}Inscription{% endblock %}
+{% block page_top_main %}Créer un compte{% endblock %}
 
 {% block body %}
     <div class="row">
-        <div class="col-md-4">
-            <form method="POST" {{ form_enctype(form) }}>
-                {{ form_widget(form)}}
-                <input type="submit" class="btn btn-lg btn-primary" value="Inscription">
-            </form>
+        <div class="col-md-6">
+            <div class="featured-box featured-box-primary" style="text-align: left;">
+                <div class="box-content">
+                    <h4>{{ 'register.form.title'|trans }}</h4>
+                    <form method="POST" {{ form_enctype(form) }}>
+                        {{ form_widget(form)}}
+                        <input type="submit" class="btn btn-lg btn-primary" value="{{ 'register.form.submit'|trans }}" style="margin: 5px 0 10px 0;">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="col-md-12" style="padding-top: 40px;">
+                <p>L'inscription sur Coasters World est <b>gratuite</b>, ouverte à tous et ne prend que quelques secondes. Elle donne accès à :</p>
+            </div>
+            <div class="col-md-6">
+                <div class="featured-box featured-box-secundary" style="height: 330px;">
+                    <div class="box-content">
+                        <i class="icon-featured icon icon-book"></i>
+                        <h4>{{ 'register.site.title'|trans }}</h4>
+                        <p>{{ 'register.site.description'|trans }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="featured-box featured-box-tertiary" style="height: 330px;">
+                    <div class="box-content">
+                        <i class="icon-featured icon icon-comments-o"></i>
+                        <h4>{{ 'register.forum.title'|trans }}</h4>
+                        <p>{{ 'register.forum.description'|trans }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
