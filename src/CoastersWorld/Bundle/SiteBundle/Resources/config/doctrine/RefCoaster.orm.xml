@@ -5,11 +5,11 @@
       <generator strategy="IDENTITY"/>
     </id>
     <one-to-many field="coasters" target-entity="Coaster" mapped-by="refCoaster"/>
-    <field name="speed" type="smallint" column="speed" nullable="true"/>
-    <field name="height" type="smallint" column="height" nullable="true"/>
-    <field name="length" type="smallint" column="length" nullable="true"/>
+    <field name="speed" type="decimal" column="speed" precision="4" scale="1"  nullable="true"/>
+    <field name="height" type="decimal" column="height" precision="4" scale="1" nullable="true"/>
+    <field name="length" type="decimal" column="length" precision="5" scale="1"  nullable="true"/>
     <field name="inversionNumber" type="smallint" column="inversion_number" nullable="true"/>
-    <field name="gForce" type="decimal" column="g_force" nullable="true"/>
+    <field name="gForce" type="decimal" column="g_force" precision="2" scale="1" nullable="true"/>
     <field name="duration" type="time" column="duration" nullable="true"/>
     <many-to-one field="manufacturer" target-entity="Manufacturer" inversed-by="refCoasters">
       <join-column name="manufacturer_id" referenced-column-name="id"/>

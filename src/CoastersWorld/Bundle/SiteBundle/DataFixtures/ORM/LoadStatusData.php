@@ -42,6 +42,27 @@ class LoadStatusData extends AbstractFixture implements OrderedFixtureInterface
         ;
         $manager->persist($status4);
 
+        $status5 = new Status();
+        $status5
+            ->setName('Démonté')
+            ->setIdTechnical(5)
+        ;
+        $manager->persist($status5);
+
+        $status6 = new Status();
+        $status6
+            ->setName('Annoncé')
+            ->setIdTechnical(6)
+        ;
+        $manager->persist($status6);
+
+        $status7 = new Status();
+        $status7
+            ->setName('Inconnu')
+            ->setIdTechnical(7)
+        ;
+        $manager->persist($status7);
+
         $manager->flush();
 
         $this->addReference('status-open', $status);

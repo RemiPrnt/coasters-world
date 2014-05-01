@@ -4,7 +4,8 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="name" type="string" column="name" length="64" nullable="false"/>
+    <field name="name" type="string" column="name" length="255" nullable="false"/>
+    <field name="website" type="string" column="website" length="255" nullable="true"/>
     <one-to-many field="coasters" target-entity="Coaster" mapped-by="park" />
     <many-to-one field="country" target-entity="Country" inversed-by="parks" />
   </entity>

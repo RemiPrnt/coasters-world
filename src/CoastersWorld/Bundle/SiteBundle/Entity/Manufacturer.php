@@ -97,4 +97,88 @@ class Manufacturer
     {
         return $this->refCoasters;
     }
+    /**
+     * @var string
+     */
+    private $website;
+
+    /**
+     * @var string
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     */
+    private $place;
+
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     * @return Manufacturer
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set phoneNumber
+     *
+     * @param string $phoneNumber
+     * @return Manufacturer
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneNumber
+     *
+     * @return string 
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * Set place
+     *
+     * @param string $place
+     * @return Manufacturer
+     */
+    public function setPlace($place)
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * Get place
+     *
+     * @return string 
+     */
+    public function getPlace()
+    {
+        return $this->place;
+    }
 }

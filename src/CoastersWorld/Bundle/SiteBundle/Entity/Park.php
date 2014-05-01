@@ -125,4 +125,32 @@ class Park
     {
         return $this->country;
     }
+    /**
+     * @var string
+     */
+    private $website;
+
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     * @return Park
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
 }
