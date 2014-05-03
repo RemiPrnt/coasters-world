@@ -8,10 +8,6 @@ coasters_world_database_index:
     pattern:  /coaster
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:index }
 
-coasters_world_database_view:
-    pattern:  /coaster/{slug}
-    defaults: { _controller: CoastersWorldSiteBundle:Coaster:view }
-
 database_search_ajax:
     pattern:  /coaster/search
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:searchAjax }
@@ -28,6 +24,12 @@ coaster_comment_create:
     requirements:
         _method:  POST
         id: \d+
+
+coasters_world_database_view:
+    pattern:  /coaster/{slug}
+    defaults: { _controller: CoastersWorldSiteBundle:Coaster:view }
+    requirements:
+        slug: "[a-z0-9\-]+"
 
 ######## User
 
@@ -61,14 +63,14 @@ coasters_world_change_password_succeed:
 
 # Redirection de la première page des news vers la page d'accueil du site
 coasters_world_news_list_first_page:
-    pattern: /news/list
+    pattern: /news
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: coasters_world_homepage
         permanent: false
 
 coasters_world_news_list_first_page_duplicate:
-    pattern: /news/list/1
+    pattern: /news/page/1
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: coasters_world_homepage
@@ -76,15 +78,10 @@ coasters_world_news_list_first_page_duplicate:
 
 # Liste des news
 coasters_world_news_list:
-    pattern:  /news/list/{page}
+    pattern:  /news/page/{page}
     defaults: { _controller: CoastersWorldSiteBundle:News:list, page: 1 }
     requirements:
         page: \d+
-
-# Affichage d'une news
-coasters_world_news_view:
-    pattern:  /news/view/{slug}
-    defaults: { _controller: CoastersWorldSiteBundle:News:view }
 
 # Création d'une news
 coasters_world_news_new:
@@ -103,6 +100,13 @@ coasters_world_news_comment_create:
     requirements:
         _method:  POST
         id: \d+
+
+# Affichage d'une news
+coasters_world_news_view:
+    pattern:  /news/{slug}
+    defaults: { _controller: CoastersWorldSiteBundle:News:view }
+    requirements:
+        slug: "[a-z0-9\-]+"
 
 ######## Image
 coasters_world_image_upload:

@@ -40,7 +40,6 @@ class NewsController extends Controller
     public function editAction($id = null)
     {
         if (! $this->get('security.context')->isGranted('ROLE_ADMIN')) {
-
             return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
         }
 
@@ -67,13 +66,14 @@ class NewsController extends Controller
         if ($form->isValid()) {
             $news->setAuthor($this->getUser());
 
-            $html = $this->container->get('markdown.parser')->transformMarkdown($news->getBody());
-            $news->setHtml($html);
-            
+            $news->setHtml(
+                $this->container->get('markdown.parser')->transformMarkdown($news->getBody())
+            );
+
             $om->persist($news);
             $om->flush();
 
-            return $this->redirect($this->generateUrl('coasters_world_news_list'));
+            return $this->redirect($this->generateUrl('coasters_world_news_view', array('slug' => $news->getSlug())));
         }
 
         return $this->render('CoastersWorldSiteBundle:News:edit.html.twig', array(
