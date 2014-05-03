@@ -356,4 +356,60 @@ class Coaster
     {
         return $this->users;
     }
+    /**
+     * @var \DateTime
+     */
+    private $openingDate;
+
+    /**
+     * @var \DateTime
+     */
+    private $closingDate;
+
+
+    /**
+     * Set openingDate
+     *
+     * @param \DateTime $openingDate
+     * @return Coaster
+     */
+    public function setOpeningDate($openingDate)
+    {
+        $this->openingDate = $openingDate;
+
+        return $this;
+    }
+
+    /**
+     * Get openingDate
+     *
+     * @return \DateTime 
+     */
+    public function getOpeningDate()
+    {
+        return $this->openingDate;
+    }
+
+    /**
+     * Set closingDate
+     *
+     * @param \DateTime $closingDate
+     * @return Coaster
+     */
+    public function setClosingDate($closingDate)
+    {
+        $this->closingDate = $closingDate;
+
+        return $this;
+    }
+
+    /**
+     * Get closingDate
+     *
+     * @return \DateTime 
+     */
+    public function getClosingDate()
+    {
+        return $this->closingDate;
+    }
 }

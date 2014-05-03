@@ -9,6 +9,8 @@
     <field name="slug" type="string" column="slug" length="64" nullable="false" unique="true">
       <gedmo:slug unique="true" fields="name"/>
     </field>
+    <field name="openingDate" type="date" column="opening_date" nullable="true"/>
+    <field name="closingDate" type="date" column="closing_date" nullable="true"/>
     <many-to-one field="refCoaster" target-entity="RefCoaster" inversed-by="coasters">
       <join-column name="ref_coaster_id" referenced-column-name="id"/>
     </many-to-one>
