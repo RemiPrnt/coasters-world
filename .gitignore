@@ -15,6 +15,7 @@
 
 # Backup entities
 *~
+*.bak
 
 # Composer
 composer.phar
