@@ -30,7 +30,7 @@ security:
                 login_path: /login
             logout:
                 path:   /logout
-                target: /news/list
+                target: /
             anonymous: ~
             remember_me:
                 key:      "%secret%"
