@@ -8,12 +8,6 @@
         <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
             <i class="icon icon-bars"></i>
         </button>
-        <div id="login-box-container">
-            <div id="login-arrow"></div>
-            <div id="login-box">
-                {% include 'CoastersWorldSiteBundle:Security:loginform.html.twig' with {formwidth: 12} %}
-            </div>
-        </div>
     </div>
     <div class="navbar-collapse nav-main-collapse collapse">
         <div class="container">
@@ -62,7 +56,19 @@
                             </ul>
                         </li>
                     {% else %}
-                        <li id="login-link"><a href="{{ path('login') }}">Connexion</a></li>
+                        <li class="dropdown mega-menu-item mega-menu-signin signin">
+                            <a class="dropdown-toggle" href="{{ path('login') }}">
+                                <i class="icon icon-user"></i> Connexion
+                                <i class="icon icon-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="mega-menu-content">
+                                        {% include 'CoastersWorldSiteBundle:Security:loginform.html.twig' with {formwidth: 12} %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
                     {% endif %}
                 </ul>
             </nav>
