@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\FormError;
 
 use CoastersWorld\Bundle\SiteBundle\Entity\User;
-use CoastersWorld\Bundle\SiteBundle\Form\Type\UserType;
+use CoastersWorld\Bundle\SiteBundle\Form\Type\RegisterType;
 use CoastersWorld\Bundle\SiteBundle\Form\Type\ChangePasswordType;
 
 class SecurityController extends Controller
@@ -55,7 +55,7 @@ class SecurityController extends Controller
         $request    = $this->getRequest();
         
         $user = new User();
-        $form = $this->createForm(new UserType, $user);
+        $form = $this->createForm(new RegisterType, $user);
 
         if("POST" === $request->getMethod())
         {
