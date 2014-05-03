@@ -47,30 +47,29 @@ class ImageController extends Controller
 
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-        $image = $em->getRepository('CoastersWorldSiteBundle:Image')->find($id);
+        $om = $this->getDoctrine()->getManager();
+        $image = $om->getRepository('CoastersWorldSiteBundle:Image')->find($id);
+        $tags = $om->getRepository('CoastersWorldSiteBundle:Tag')->findAllArray();
 
-        $form = $this->createFormBuilder($image)
-            ->setAction($this->generateUrl('coasters_world_image_edit', array('id' => $id)))
-            ->setMethod('POST')
-            ->add('name')
-            ->add('coaster')
-            ->add('save', 'submit')
-            ->getForm()
-        ;
+        $form = $this->createForm('image_type', $image, array(
+            'action' => $this->generateUrl('coasters_world_image_edit', array('id' => $id)),
+            'method' => 'POST',
+            'om' => $om,
+        ));
 
         if ($this->getRequest()->isMethod('POST')) {
             $form->bind($this->getRequest());
 
             if ($form->isValid()) {
-                $em->persist($image);
-                $em->flush();
+                $om->persist($image);
+                $om->flush();
             }
         }
 
         return $this->render('CoastersWorldSiteBundle:Image:edit.html.twig', array(
             'form' => $form->createView(),
-            'image' => $image
+            'image' => $image,
+            'tags' => $tags
         ));
 
     }
