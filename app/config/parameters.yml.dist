@@ -11,7 +11,7 @@ parameters:
     mailer_user:      user_gmail_sans_@gmail.com
     mailer_password:  mdp_gmail
     locale: fr
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: Q5Cb5pfSjUogmgf
 
     coastersworldAdminEmailAddress: admin@coastersworld.fr
     coastersworldAdminEmailName: CoastersWorld.fr
