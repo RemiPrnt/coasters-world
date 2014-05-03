@@ -30,8 +30,13 @@ security:
                 login_path: /login
             logout:
                 path:   /logout
-                target: /news/list
+                target: /
             anonymous: ~
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 jours
+                path:     /
+                domain:   ~
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

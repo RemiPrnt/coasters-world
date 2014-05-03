@@ -12,7 +12,7 @@
 {% block body %}
     <div class="row">
         <div class="col-md-6">
-            <div class="featured-box featured-box-primary" style="text-align: left;">
+            <div class="featured-box featured-box-primary" style="text-align: left;" id="register-form-container">
                 <div class="box-content">
                     <h4>{{ 'register.form.title'|trans }}</h4>
                     <form method="POST" {{ form_enctype(form) }}>
@@ -20,6 +20,7 @@
                         <input type="submit" class="btn btn-lg btn-primary" value="{{ 'register.form.submit'|trans }}" style="margin: 5px 0 10px 0;">
                     </form>
                 </div>
+                <div class="tooltip fade top in" style="display:none;"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>
             </div>
         </div>
 

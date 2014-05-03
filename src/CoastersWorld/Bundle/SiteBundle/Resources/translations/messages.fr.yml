@@ -60,6 +60,7 @@ login:
     password: Mot de passe
     create_account: S'enregistrer
     password_forgot: Mot de passe oublié ?
+    remember_me: Se souvenir de moi
 
 "Bad credentials": "Identifiants erronés."
 "User account is disabled.": "Votre compte n'est pas encore activé. Veuillez suivre le lien que nous vous avons envoyé par e-mail lors de votre inscription à l'adresse que vous nous avez fournie."
@@ -67,10 +68,18 @@ login:
 register:
     form:
         title: Quelques informations
-        pseudo: Mon pseudo
-        password: Mon mot de passe
-        passwordConfirm: Je confirme mon mot de passe
-        email: Mon adresse email
+        pseudo: 
+            label: Mon pseudo
+            tooltip: Je choisis un pseudo sous lequel je souhaite apparaitre.
+        password:
+            label: Mon mot de passe
+            tooltip: Je choisis un mot de passe pour me connecter.
+        passwordConfirm:
+            label: Je confirme mon mot de passe
+            tooltip: Je saisis à nouveau mon mot de passe.
+        email:
+            label: Mon adresse email
+            tooltip: Entrez une adresse valide pour confirmer votre compte
         submit: Je m'inscris à Coasters World !
     site:
         title: Le site

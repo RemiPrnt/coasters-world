@@ -11,7 +11,7 @@
         <div id="login-box-container">
             <div id="login-arrow"></div>
             <div id="login-box">
-                {% render path('login_integrated') %}
+                {% include 'CoastersWorldSiteBundle:Security:loginform.html.twig' with {formwidth: 12} %}
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\FormError;
 
 use CoastersWorld\Bundle\SiteBundle\Entity\User;
-use CoastersWorld\Bundle\SiteBundle\Form\Type\UserType;
+use CoastersWorld\Bundle\SiteBundle\Form\Type\RegisterType;
 use CoastersWorld\Bundle\SiteBundle\Form\Type\ChangePasswordType;
 
 class SecurityController extends Controller
@@ -17,7 +17,7 @@ class SecurityController extends Controller
      * loginAction
      * Affiche le formulaire de connexion
      */
-    public function loginAction($integrated)
+    public function loginAction()
     {
         $request = $this->getRequest();
         $session = $request->getSession();
@@ -31,12 +31,9 @@ class SecurityController extends Controller
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
-
-        $view =  '';
-        if($integrated) $view = "integrated";
-
+        
         return $this->render(
-            'CoastersWorldSiteBundle:Security:login'.$view.'.html.twig',
+            'CoastersWorldSiteBundle:Security:login.html.twig',
             array(
                 // last username entered by the user
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
@@ -55,7 +52,7 @@ class SecurityController extends Controller
         $request    = $this->getRequest();
         
         $user = new User();
-        $form = $this->createForm(new UserType, $user);
+        $form = $this->createForm(new RegisterType, $user);
 
         if("POST" === $request->getMethod())
         {
