@@ -12,7 +12,7 @@
 
 {% block body %}
     <div class="row">
-        <ul class="portfolio-list sort-destination lightbox" data-sort-id="portfolio" data-plugin-options='{"delegate": "a", "type": "image", "gallery": {"enabled": true}}'>
+        <ul class="portfolio-list sort-destination lightbox" data-sort-id="portfolio" data-plugin-options='{"delegate": "a.thumb-info", "type": "image", "gallery": {"enabled": true}}'>
         <div class="row">
             {% for image in images %}
                 <li class="col-md-3">
@@ -24,12 +24,15 @@
                             </span>
                         </a>
                     </div>
+                    <div>
+                        <a href="{{ path('coasters_world_image_edit', { id: image.id }) }}">Editer</a>
+                    </div>
                 </li>
                 {% if loop.index is divisibleby(4) %}
                     </div>
                     <div class="row">
                 {% endif %}
-            {% endfor %} 
+            {% endfor %}
         </div>
         </ul>
     </div>

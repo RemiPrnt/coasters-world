@@ -125,4 +125,42 @@ class Tag
     {
         $this->news->removeElement($news);
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $image;
+
+
+    /**
+     * Add image
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $image
+     * @return Tag
+     */
+    public function addImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $image)
+    {
+        $this->image[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $image
+     */
+    public function removeImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $image)
+    {
+        $this->image->removeElement($image);
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }

@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class Image
 {
     private $id;
-    private $name;
     private $path;
 
     private $file;
@@ -19,10 +18,23 @@ class Image
     private $createdAt;
     private $updatedAt;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $tags;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     public function __toString()
     {
-        return $this->name;
+        return 'dont know yet';
     }
 
     /**
@@ -236,17 +248,78 @@ class Image
     public function setCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster = null)
     {
         $this->coaster = $coaster;
-    
+
         return $this;
     }
 
     /**
      * Get coaster
      *
-     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Coaster 
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Coaster
      */
     public function getCoaster()
     {
         return $this->coaster;
+    }
+    /**
+     * @var boolean
+     */
+    private $isVisible;
+
+
+    /**
+     * Set isVisible
+     *
+     * @param boolean $isVisible
+     * @return Image
+     */
+    public function setIsVisible($isVisible)
+    {
+        $this->isVisible = $isVisible;
+
+        return $this;
+    }
+
+    /**
+     * Get isVisible
+     *
+     * @return boolean
+     */
+    public function getIsVisible()
+    {
+        return $this->isVisible;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags
+     * @return Image
+     */
+    public function addTag(\CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags
+     */
+    public function removeTag(\CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

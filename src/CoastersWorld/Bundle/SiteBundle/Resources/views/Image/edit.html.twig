@@ -2,15 +2,33 @@
 
 {% block page_top_main %}Edition image{% endblock %}
 
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/magnific-popup/magnific-popup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/select2/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        jQuery('#image_type_coaster').select2();
+        jQuery('#image_type_tags').select2({tags:[{% for tag in tags %}"{{ tag }}",{% endfor %}]});
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/magnific-popup/magnific-popup.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/select2/select2.css') }}" />
+  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/select2-bootstrap-css/select2-bootstrap.css') }}" />
+{% endblock %}
+
 {% block body %}
-	<div class="row">
-		<div class="col-md-12">
-			<img src="{{ asset('uploads/documents/' ~ image.path) }}">
-		</div>
-	</div>
-    <div class="row">
-        <div class="col-md-8">
-            {{ form(form) }}
-        </div>
+<div class="row">
+    <a class="img-thumbnail lightbox" href="{{ asset('uploads/documents/' ~ image.path) }}" data-plugin-options="{'type':'image'}">
+        <img class="img-responsive" width="215" src="{{ asset('uploads/documents/' ~ image.path) }}">
+        <span class="zoom">
+            <i class="icon icon-16 icon-white-shadowed icon-search"></i>
+        </span>
+    </a>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        {{ form(form) }}
     </div>
+</div>
 {% endblock %}

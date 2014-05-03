@@ -1,5 +1,6 @@
 parameters:
    coasters_world_news.form.news_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\NewsType
+   coasters_world_image.form.image_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\ImageType
    coasters_world.mailer.class: CoastersWorld\Bundle\SiteBundle\Service\CoastersWorldMailer
 
 services:
@@ -7,6 +8,10 @@ services:
        class: %coasters_world_news.form.news_type.class%
        tags:
             - { name: form.type, alias: news_type }
+    coasters_world_image.form.image_type:
+       class: %coasters_world_image.form.image_type.class%
+       tags:
+            - { name: form.type, alias: image_type }
     coasters_world.mailer:
         class:     "%coasters_world.mailer.class%"
         arguments: ["@mailer", "@templating", "@translator", "%coastersworldAdminEmailAddress%", "%coastersworldAdminEmailName%"]
