@@ -52,7 +52,7 @@ class SecurityController extends Controller
         $request    = $this->getRequest();
         
         $user = new User();
-        $form = $this->createForm(new RegisterType, $user);
+        $form = $this->createForm(new RegisterType($this->get('translator')), $user);
 
         if("POST" === $request->getMethod())
         {
