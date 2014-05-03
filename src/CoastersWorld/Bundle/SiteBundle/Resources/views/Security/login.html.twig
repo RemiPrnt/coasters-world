@@ -10,45 +10,5 @@
 {% block page_top_main %}{{ 'login.title'|trans }}{% endblock %}
 
 {% block body %}
-<section id="login">
-    <div class="row">
-        {% if error %}
-            <div class="alert alert-error">{{ error.message|trans }}</div>
-        {% endif %}
-        <div class="col-md-4">
-            
-            <div class="internal-login">
-                <form action="{{ path('login_check') }}" class="form" method="post">
-                    <div class="form-group">
-                        <i class="icon icon-user" style="font-size:18px;margin-right:15px;"></i>
-                        <label>{{ 'login.username'|trans }} :</label>
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" placeholder="{{ 'login.username'|trans }}">    
-                    </div>
-                    <div class="form-group">
-                        <i class="icon icon-key" style="font-size:18px;margin-right:11px;"></i>
-                        <label>{{ 'login.password'|trans }} :</label>
-                        <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'login.password'|trans }}">
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                        <label>{{ 'login.remember_me'|trans }}</label>
-                    </div>
-                    <div class="form-actions">
-                        
-                        <div class="pull-left">
-                            <button type="submit" class="btn btn-large btn-primary">{{ 'login.title'|trans }}</button>
-                        </div>
-                        <div class="pull-right">
-                            <ul class="unstyled">
-                                <li class="list-unstyled"><a href="{{ path('register') }}">{{ 'login.create_account'|trans }}</a></li>
-                                <li class="list-unstyled"><a href="{{ path('mot_de_passe_oublie') }}">{{ 'login.password_forgot'|trans }}</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
-</section>
+    {% include 'CoastersWorldSiteBundle:Security:loginform.html.twig' with {formwidth: 4} %}
 {% endblock %}
