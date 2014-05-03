@@ -14,16 +14,22 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('username',   'text',     array('label' => "register.form.pseudo"))
+        $builder->add('username',   'text',     array(  'label' => "register.form.pseudo.label",
+                                                        'attr' => array(    'rel' => "tooltip",
+                                                                            'data-original-title' => "Je choisis un pseudo sous lequel je souhaite apparaitre.")))
                 ->add('password',   'repeated', array(
                                                     'type' => 'password',
                                                     'invalid_message' => 'Les mots de passe doivent correspondre',
                                                     'options' => array('required' => true),
-                                                    'first_options'  => array('label' => 'register.form.password'),
-                                                    'second_options' => array('label' => 'register.form.passwordConfirm'),
-                                                )
-                )
-                ->add('email',      'email',    array('label' => "register.form.email"))
+                                                    'first_options'  => array(  'label' => 'register.form.password.label',
+                                                                                'attr' => array('rel' => "tooltip",
+                                                                                                'data-original-title' => "Je choisis un mot de passe pour me connecter.")),
+                                                    'second_options' => array(  'label' => 'register.form.passwordConfirm.label',
+                                                                                'attr' => array('rel' => "tooltip",
+                                                                                                'data-original-title' => "Je saisis à nouveau mon mot de passe."))))
+                ->add('email',      'email',    array(  'label' => "register.form.email.label",
+                                                        'attr' => array('rel' => "tooltip",
+                                                                        'data-original-title' => "Entrez une adresse valide pour confirmer votre compte")))
         ;
     }
     
