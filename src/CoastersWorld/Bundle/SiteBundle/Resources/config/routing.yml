@@ -9,7 +9,7 @@ coasters_world_database_index:
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:index }
 
 coasters_world_database_view:
-    pattern:  /coaster/view/{slug}
+    pattern:  /coaster/{slug}
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:view }
 
 database_search_ajax:
