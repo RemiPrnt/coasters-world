@@ -2,11 +2,6 @@
 
 {% block title %}{{ news.title }}{% endblock %}
 
-{% block page_top_breadcrumb %}
-    <li><a href="{{ path('coasters_world_news_list_first_page') }}">News</a></li>
-    <li class="active">{{ news.title }}</li>
-{% endblock %}
-
 {% block page_top_main %}{{ news.title }}{% endblock %}
 
 {% block newscontent %}
