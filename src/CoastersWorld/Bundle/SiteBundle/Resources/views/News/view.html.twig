@@ -43,7 +43,6 @@
             <div class="post-content">
 
                 <h2>
-                    {{ news.title }}
                     {% if is_granted("ROLE_ADMIN") %}
                         <a href="{{ path('coasters_world_news_edit', { id: news.id }) }}" class="btn btn-xs btn-primary">
                             <i class="icon icon-edit"></i>
