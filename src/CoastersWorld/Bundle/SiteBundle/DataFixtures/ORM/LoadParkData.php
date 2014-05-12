@@ -14,16 +14,16 @@ class LoadParkData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $park = new Park();
-        $park
-            ->setName('Parc Astérix')
-            ->setCountry($this->getReference('country-france'))
-        ;
+        // $park = new Park();
+        // $park
+        //     ->setName('Parc Astérix')
+        //     ->setCountry($this->getReference('country-france'))
+        // ;
 
-        $manager->persist($park);
-        $manager->flush();
+        // $manager->persist($park);
+        // $manager->flush();
 
-        $this->addReference('park-asterix', $park);
+        // $this->addReference('park-asterix', $park);
     }
 
     /**

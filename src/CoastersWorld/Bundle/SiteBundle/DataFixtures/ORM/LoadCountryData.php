@@ -14,13 +14,13 @@ class LoadCountryData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $country = new Country();
-        $country->setName('France');
+        // $country = new Country();
+        // $country->setName('France');
 
-        $manager->persist($country);
-        $manager->flush();
+        // $manager->persist($country);
+        // $manager->flush();
 
-        $this->addReference('country-france', $country);
+        // $this->addReference('country-france', $country);
     }
 
     /**
