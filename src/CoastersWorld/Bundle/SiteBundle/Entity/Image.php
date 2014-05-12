@@ -23,6 +23,11 @@ class Image
      */
     private $tags;
 
+        /**
+     * @var boolean
+     */
+    private $isVisible = true;
+
     /**
      * Constructor
      */
@@ -129,7 +134,7 @@ class Image
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/documents';
+        return 'media/image';
     }
 
     /**
@@ -261,10 +266,6 @@ class Image
     {
         return $this->coaster;
     }
-    /**
-     * @var boolean
-     */
-    private $isVisible;
 
 
     /**
