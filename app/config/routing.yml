@@ -19,3 +19,7 @@ register:
 mot_de_passe_oublie:
     pattern:  /mot-de-passe-oublie
     defaults: { _controller: CoastersWorldSiteBundle:Security:motdepasseOublie }
+
+_imagine:
+    resource: .
+    type:     imagine

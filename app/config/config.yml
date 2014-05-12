@@ -75,3 +75,24 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:sliding.html.twig
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
+
+# LiipImagineBundle
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        news:
+            quality: 75
+            filters:
+                thumbnail: { size: [840, 280], mode: outbound }
+                watermark:
+                    image: Resources/public/images/watermark.png
+                    size: 0.25
+                    position: topleft
+        thumb_image:
+            quality: 75
+            filters:
+                thumbnail: { size: [250, 250], mode: outbound }
