@@ -4,13 +4,13 @@
             <div class="alert alert-error">{{ error.message|trans }}</div>
         {% endif %}
         <div class="col-md-{{ formwidth }}">
-            
+
             <div class="internal-login">
                 <form action="{{ path('login_check') }}" class="form" method="post">
                     <div class="form-group">
                         <i class="icon icon-user" style="font-size:18px;margin-right:15px;"></i>
                         <label>{{ 'login.username'|trans }} :</label>
-                        <input type="text" id="username" name="_username" value="{% if last_username is defined and last_username %}{{ last_username }}{% endif %}" class="form-control" placeholder="{{ 'login.username'|trans }}">    
+                        <input type="text" id="username" name="_username" value="{% if last_username is defined and last_username %}{{ last_username }}{% endif %}" class="form-control" placeholder="{{ 'login.username'|trans }}">
                     </div>
                     <div class="form-group">
                         <i class="icon icon-key" style="font-size:18px;margin-right:11px;"></i>
@@ -22,7 +22,7 @@
                         <label>{{ 'login.remember_me'|trans }}</label>
                     </div>
                     <div class="form-actions">
-                        
+
                         <div class="pull-left">
                             <button type="submit" class="btn btn-large btn-primary">{{ 'login.title'|trans }}</button>
                         </div>

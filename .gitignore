@@ -6,6 +6,7 @@
 /web/css/
 /web/js/
 /web/uploads/
+/web/media/
 /app/cache/*
 /app/logs/*
 /vendor/

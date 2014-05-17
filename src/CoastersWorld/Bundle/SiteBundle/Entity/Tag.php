@@ -163,4 +163,19 @@ class Tag
     {
         return $this->image;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $images;
+
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
 }

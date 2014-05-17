@@ -24,8 +24,8 @@
         });
 
         jQuery('#searchCoaster').on("change", function(e) {
-            var uri = "{{ path('coasters_world_database_view', {slug: '+'}) }}";
-            uri = uri.replace('+', jQuery(this).select2('data').slug);
+            var uri = "{{ path('coasters_world_database_view', {slug: '-'}) }}";
+            uri = uri.replace('-', jQuery(this).select2('data').slug);
             window.location.href = uri;
         });
     });

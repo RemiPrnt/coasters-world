@@ -13,9 +13,8 @@
             <div class="post-image single">
                 <a href="{{ path('coasters_world_news_view', { slug: news.slug }) }}">
                     {% if news.thumbnail is not null %}
-                        <img class="img-thumbnail" src="{{ app.request.getBasePath() }}{{ images_path }}{{ news.thumbnail.path }}" alt="">
-                    {% else %}
-                        <img class="img-thumbnail" src="http://lorempixel.com/848/250/technics" alt="">
+                        {% set path = images_path ~ news.thumbnail.path %}
+                        <img class="img-thumbnail" src="{{ (images_path ~ news.thumbnail.path)|imagine_filter('news') }}" alt="">
                     {% endif %}
                 </a>
             </div>
@@ -39,7 +38,7 @@
                     {% endif %}
                 </span>
             </div>
-            
+
             <div class="post-content">
 
                 <h2>
@@ -50,9 +49,9 @@
                         </a>
                     {% endif %}
                 </h2>
-                
+
                 {{ news.html|raw }}
-                
+
                 <!-- <div class="addthis_toolbox addthis_default_style " style="float:right">
                     <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
                     <a class="addthis_button_tweet"></a>
@@ -80,6 +79,6 @@
 
     </div>
 
-    
-    
+
+
 {% endblock %}

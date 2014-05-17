@@ -49,7 +49,12 @@ class Coaster
 
     public function __toString()
     {
-        return $this->name . ' (' . $this->park->getName() . ')';
+        $name = $this->name;
+        // if(is_object($this->park)) {
+        //     $name .= ' (' . $this->park->getName() . ')';
+        // }
+
+        return $name;
     }
 
     /**
@@ -257,7 +262,7 @@ class Coaster
     public function addImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $images)
     {
         $this->images[] = $images;
-    
+
         return $this;
     }
 
@@ -274,7 +279,7 @@ class Coaster
     /**
      * Get images
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getImages()
     {
@@ -295,7 +300,7 @@ class Coaster
     public function addCoasterComment(\CoastersWorld\Bundle\SiteBundle\Entity\CoasterComment $coasterComments)
     {
         $this->coasterComments[] = $coasterComments;
-    
+
         return $this;
     }
 
@@ -312,7 +317,7 @@ class Coaster
     /**
      * Get coasterComments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCoasterComments()
     {
@@ -350,7 +355,7 @@ class Coaster
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
@@ -383,7 +388,7 @@ class Coaster
     /**
      * Get openingDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getOpeningDate()
     {
@@ -406,7 +411,7 @@ class Coaster
     /**
      * Get closingDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getClosingDate()
     {
