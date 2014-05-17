@@ -15,7 +15,7 @@
                             <strong>{{ comment.author.username }}</strong>
                         </span>
                         <p>{{ comment.body }}</p>
-                        <span class="date pull-right">{{ comment.publishedAt|date("F jS \\a\\t g:ia") }}</span>
+                        <span class="date pull-right">{{ comment.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'cccc d MMMM Y à hh:mm') }}</span>
                     </div>
                 </div>
             </li>
