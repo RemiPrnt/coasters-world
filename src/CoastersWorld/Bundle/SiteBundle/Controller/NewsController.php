@@ -104,12 +104,29 @@ class NewsController extends Controller
 
     public function latestAction($number = 5)
     {
-        $latestNews = $this->getDoctrine()
-                           ->getManager()
-                           ->getRepository('CoastersWorldSiteBundle:News')
-                           ->findLatest($number);
-        return $this->render('CoastersWorldSiteBundle:News:latest.html.twig', array(
-            'latestNews' => $latestNews
+        $news = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CoastersWorldSiteBundle:News')
+            ->findLatest($number)
+        ;
+
+        return $this->render('CoastersWorldSiteBundle:News:sidebar.html.twig', array(
+            'news' => $news,
+            'title' => 'news.latest'
+        ));
+    }
+
+    public function mostPopularAction($number = 5)
+    {
+        $news = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CoastersWorldSiteBundle:News')
+            ->findMostPopular($number)
+        ;
+
+        return $this->render('CoastersWorldSiteBundle:News:sidebar.html.twig', array(
+            'news' => $news,
+            'title' => 'news.popular'
         ));
     }
 

@@ -85,6 +85,10 @@ liip_imagine:
                     image: Resources/public/images/watermark.png
                     size: 0.25
                     position: topleft
+        thumb_news:
+            quality: 50
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
         thumb_image:
             quality: 75
             filters:

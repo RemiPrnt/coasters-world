@@ -36,8 +36,11 @@ news:
     retour:
         liste: Toutes les news
     last: Les dernières
-    save: Enregistrer la news
+    save: Enregistrer et publier
+    disable: Désactiver
     reset: Effacer
+    latest: Derniers articles
+    popular: Articles populaires
 
 # Translation for comments
 comments:
@@ -68,7 +71,7 @@ login:
 register:
     form:
         title: Quelques informations
-        pseudo: 
+        pseudo:
             label: Mon pseudo
             tooltip: Je choisis un pseudo sous lequel je souhaite apparaitre.
         password:

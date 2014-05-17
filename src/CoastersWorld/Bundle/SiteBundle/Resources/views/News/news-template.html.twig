@@ -3,19 +3,14 @@
 {% block title %}{{ 'news.title.home'|trans }}{% endblock %}
 
 {% block body %}
-
 	<div class="row">
-
 		<div class="col-md-9">
 			{% block newscontent %}{% endblock %}
 		</div>
 
 		<div class="col-md-3">
-
 			{% block newssidebar %}
-
 				<aside class="sidebar">
-
 	                <form>
 						<div class="input-group">
 							<input class="form-control" placeholder="Recherche" name="s" id="s" type="text">
@@ -24,29 +19,12 @@
 							</span>
 						</div>
 					</form>
-
 	                <hr />
-
-	                <h4>Categories</h4>
-	                <ul class="nav nav-list primary push-bottom">
-	                    <li><a href="#">Europe</a></li>
-	                    <li><a href="#">Amérique</a></li>
-	                    <li><a href="#">Asie</a></li>
-	                    <li><a href="#">Construction</a></li>
-	                    <li><a href="#">Annonce</a></li>
-	                    <li><a href="#">Communauté</a></li>
-	                </ul>
-
-	                {{ render(controller('CoastersWorldSiteBundle:News:latest', { 'number': 5 })) }}
-
+	                {{ render(controller('CoastersWorldSiteBundle:News:mostPopular', { 'number': 3 })) }}
 	            </aside>
-
 			{% endblock %}
-
 		</div>
-
 	</div>
-
 {% endblock %}
 
 {% block javascripts %}
