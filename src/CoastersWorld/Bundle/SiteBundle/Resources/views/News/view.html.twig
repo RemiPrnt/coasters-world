@@ -22,20 +22,7 @@
             <div class="post-date">
                 <span class="day">{{ news.publishedAt|date("d") }}</span>
                 <span class="month">
-                    {% if news.publishedAt|date("n") == 1 %}Jan
-                    {% elseif news.publishedAt|date("n") == 2 %}Fev
-                    {% elseif news.publishedAt|date("n") == 3 %}Mars
-                    {% elseif news.publishedAt|date("n") == 4 %}Avril
-                    {% elseif news.publishedAt|date("n") == 5 %}Mai
-                    {% elseif news.publishedAt|date("n") == 6 %}Juin
-                    {% elseif news.publishedAt|date("n") == 7 %}Juil
-                    {% elseif news.publishedAt|date("n") == 8 %}Aout
-                    {% elseif news.publishedAt|date("n") == 9 %}Sept
-                    {% elseif news.publishedAt|date("n") == 10 %}Oct
-                    {% elseif news.publishedAt|date("n") == 11 %}Nov
-                    {% elseif news.publishedAt|date("n") == 12 %}Dec
-                    {% else %}Dev
-                    {% endif %}
+                    {{ news.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'MMM')|capitalize }}
                 </span>
             </div>
 
