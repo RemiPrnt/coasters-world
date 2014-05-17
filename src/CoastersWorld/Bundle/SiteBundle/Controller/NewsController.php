@@ -2,10 +2,12 @@
 
 namespace CoastersWorld\Bundle\SiteBundle\Controller;
 
-use CoastersWorld\Bundle\SiteBundle\Entity\News;
 use CoastersWorld\Bundle\SiteBundle\Entity\Comment;
+use CoastersWorld\Bundle\SiteBundle\Entity\News;
 use CoastersWorld\Bundle\SiteBundle\Form\Type\CommentType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -109,5 +111,12 @@ class NewsController extends Controller
         return $this->render('CoastersWorldSiteBundle:News:latest.html.twig', array(
             'latestNews' => $latestNews
         ));
+    }
+
+    public function convertMarkdownAction()
+    {
+        $markdown = $this->get('request')->request->get('markdown');
+
+        return new Response($this->container->get('markdown.parser')->transformMarkdown($markdown));
     }
 }

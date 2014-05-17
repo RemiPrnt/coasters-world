@@ -101,6 +101,13 @@ coasters_world_news_comment_create:
         _method:  POST
         id: \d+
 
+# Conversion markdown to html
+cw_news_md_to_html_ajax:
+    pattern:  /news/convert-markdown
+    defaults: { _controller: CoastersWorldSiteBundle:News:convertMarkdown }
+    requirements:
+        _method:  POST
+
 # Affichage d'une news
 coasters_world_news_view:
     pattern:  /news/{slug}

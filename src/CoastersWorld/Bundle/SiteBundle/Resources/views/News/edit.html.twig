@@ -7,15 +7,32 @@
 {% form_theme form with 'CoastersWorldSiteBundle:Form:fields.html.twig' %}
 
 {% block body %}
-    <div class="col-md-8">
-        {{ form_start(form) }}
-            {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
-            {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}
-            {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
+    <div class="row">
+        <div class="col-md-10">
+            <div class="tabs">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#news-form" data-toggle="tab"><i class="icon icon-edit"></i> Formulaire</a>
+                    </li>
+                    <li>
+                        <a href="#news-previ" data-toggle="tab"><i class="icon icon-eye"></i> Prévisualisation</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="news-form" class="tab-pane active">
+                        {{ form_start(form) }}
+                            {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
+                            {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}
+                            {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
 
-            {{ form_rest(form) }}
-            <button type="submit" id="submit" class="btn btn-lg btn-success">{{ 'news.save'|trans }}</button>
-        {{ form_end(form) }}
+                            {{ form_rest(form) }}
+                            <button type="submit" id="submit" class="btn btn-lg btn-success">{{ 'news.save'|trans }}</button>
+                        {{ form_end(form) }}
+                    </div>
+                    <div id="news-previ" class="tab-pane"></div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -24,6 +41,31 @@
     <script type="text/javascript">
         jQuery('#news_type_coaster').select2();
         jQuery('#news_type_tags').select2({tags:[{% for tag in tags %}"{{ tag }}",{% endfor %}]});
+    </script>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            // Prévisualisation HTML
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                if(e.target.hash == '#news-previ') {
+                    var imgLoading = '<img class="center-block" src="{{ asset('bundles/coastersworldsite/vendor/mediaelement/loading.gif') }}" />';
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('cw_news_md_to_html_ajax') }}",
+                        data: { markdown: $('textarea#news_type_body').val() },
+                        beforeSend: function() {
+                            $("#news-previ").html(img);
+                        }
+                    })
+                    .done(function(html) {
+                        $("#news-previ").html(html);
+                    })
+                    .fail(function() {
+                        $("#news-previ").html('Impossible de charger la prévisualisation.');
+                    });
+                }
+            })
+        });
     </script>
 {% endblock %}
 
