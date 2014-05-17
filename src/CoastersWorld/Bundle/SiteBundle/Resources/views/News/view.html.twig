@@ -2,12 +2,18 @@
 
 {% block title %}{{ news.title }}{% endblock %}
 
-{% block page_top_main %}{{ news.title }}{% endblock %}
+{% block page_top_main %}
+    {{ news.title }}
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('coasters_world_news_edit', { id: news.id }) }}" class="btn btn-xs btn-primary">
+            <i class="icon icon-edit"></i>
+            Editer
+        </a>
+    {% endif %}
+{% endblock %}
 
 {% block newscontent %}
-
     <div class="blog-posts single-post">
-
         <article class="post post-large">
 
             <div class="post-image single">
@@ -27,17 +33,6 @@
             </div>
 
             <div class="post-content">
-
-                <h2>
-                    {{ news.title }}
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <a href="{{ path('coasters_world_news_edit', { id: news.id }) }}" class="btn btn-xs btn-primary">
-                            <i class="icon icon-edit"></i>
-                            Editer
-                        </a>
-                    {% endif %}
-                </h2>
-
                 {{ news.html|raw }}
 
                 <!-- <div class="addthis_toolbox addthis_default_style " style="float:right">
@@ -60,7 +55,6 @@
                     {% endif %}
                     <span><i class="icon icon-comments"></i> <a href="#comments">{{ news.comments|length }} commentaire(s)</a></span>
                 </div>
-
             </div>
 
             {% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': news.comments } only %}
@@ -68,9 +62,5 @@
             {{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': news.id })) }}
 
         </article>
-
     </div>
-
-
-
 {% endblock %}
