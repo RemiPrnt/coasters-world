@@ -59,13 +59,17 @@
                 <!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>-->
 
                 <div class="post-meta">
-                    <span><i class="icon icon-user"></i> Par <a href="#">{{ news.author.username }}</a> </span>
-                    <span><i class="icon icon-tag"></i>
-                        <span class="label label-default">{{ news.coaster.name }}</span>
-                        {% for tag in news.tags %}
-                            <span class="label label-default">{{ tag }}</span>
-                        {% endfor %}
-                    </span>
+                    {% if news.author is not null %}
+                        <span><i class="icon icon-user"></i> Par <a href="#">{{ news.author.username }}</a> </span>
+                    {% endif %}
+                    {% if news.coaster is not null %}
+                        <span><i class="icon icon-tag"></i>
+                            <span class="label label-default">{{ news.coaster.name }}</span>
+                            {% for tag in news.tags %}
+                                <span class="label label-default">{{ tag }}</span>
+                            {% endfor %}
+                        </span>
+                    {% endif %}
                     <span><i class="icon icon-comments"></i> <a href="#">{{ news.comments|length }} commentaire(s)</a></span>
                 </div>
 

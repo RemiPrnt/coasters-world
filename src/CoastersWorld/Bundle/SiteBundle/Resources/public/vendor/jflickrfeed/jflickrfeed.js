@@ -19,7 +19,7 @@
 			},
 			cleanDescription: true,
 			useTemplate: true,
-			itemTemplate: '',
+			itemTemplate: '<li><a href="{{image_b}}"><span class="thumbnail"><img alt="{{title}}" src="{{image_s}}" /></span></a></li>',
 			itemCallback: function(){}
 		}, settings);
 
@@ -36,9 +36,13 @@
 		return $(this).each(function(){
 			var $container = $(this);
 			var container = this;
+
 			$.getJSON(url, function(data){
+
 				$.each(data.items, function(i,item){
 					if(i < settings.limit){
+
+						console.log(settings.itemTemplate);
 					
 						// Clean out the Flickr Description
 						if(settings.cleanDescription){
@@ -64,12 +68,12 @@
 						if(settings.useTemplate){
 							var template = settings.itemTemplate;
 							for(var key in item){
-								var rgx = new RegExp('{{' + key + '}}', 'g');
-								template = template.replace(rgx, item[key]);
+								template = template.replace('{{' + key + '}}', item[key]);
 							}
+
 							$container.append(template)
 						}
-						
+
 						//itemCallback
 						settings.itemCallback.call(container, item);
 					}
