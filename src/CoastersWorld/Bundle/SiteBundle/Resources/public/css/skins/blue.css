@@ -28,35 +28,40 @@ p.drop-caps.secundary:first-child:first-letter {
 	background-color: #3680cf;
 }
 
-ul.nav-pills > li.active > a,
+ul.nav-pills > li.active > a {
+	background-color: #3680cf;
+}
+
 ul.nav-pills > li.active > a:hover,
 ul.nav-pills > li.active > a:focus {
 	background-color: #3680cf;
 }
 
-div.sort-source-wrapper .nav > li.active > a,
-div.sort-source-wrapper .nav > li.active > a:hover,
-div.sort-source-wrapper .nav > li.active > a:focus {
+.sort-source-wrapper .nav > li.active > a {
 	color: #3680cf;
 }
 
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus {
-	background-color: #3680cf;
+.sort-source-wrapper .nav > li.active > a:hover,
+.sort-source-wrapper .nav > li.active > a:focus {
+	color: #3680cf;
+}
+
+.pagination > .active a,
+.pagination > .active span,
+.pagination > .active a:hover,
+.pagination > .active span:hover,
+.pagination > .active a:focus,
+.pagination > .active span:focus {
+	background-color: #3680cf !important;
 }
 
 .btn-primary,
 .pagination > .active > a {
-	border-color: #3680cf;
+	border-color: #3680cf !important;
 	color: #ffffff;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #3680cf;
-	border-color: #364dcf #364dcf #243595;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-color: #3680cf;
 }
 
 .btn-primary:hover,
@@ -77,13 +82,9 @@ div.sort-source-wrapper .nav > li.active > a:focus {
 	background-color: #3680cf;
 }
 
-body.boxed div.body {
-	border-top-color: #3680cf;
-}
-
-.highlight_section {
-	background-color: #3680cf;
-	border-color: #2d73be;
+section.highlight {
+	background-color: #3680cf !important;
+	border-color: #2d73be !important;
 }
 
 section.page-top h2 {
@@ -106,31 +107,27 @@ section.page-top.custom-product {
 	border-top-color: #307bca;
 }
 
-div.feature-box div.feature-box-icon {
+.feature-box .feature-box-icon {
 	background-color: #3680cf;
 }
 
-ul.history li div.featured-box div.box-content {
-	border-top-color: #3680cf;
-}
-
-div.feature-box.secundary div.feature-box-icon i.icon {
+.feature-box.secundary .feature-box-icon i.icon {
 	color: #3680cf;
 }
 
-a.thumb-info span.thumb-info-type {
+.thumb-info .thumb-info-type {
 	background-color: #3680cf;
 }
 
-a.thumb-info span.thumb-info-action-icon {
+.thumb-info .thumb-info-action-icon {
 	background-color: #3680cf;
 }
 
-.thumbnail span.zoom {
+.thumb-info-social-icons a {
 	background-color: #3680cf;
 }
 
-span.thumb-info-social-icons a {
+.thumbnail .zoom {
 	background-color: #3680cf;
 }
 
@@ -138,18 +135,39 @@ span.thumb-info-social-icons a {
 	background-color: #3680cf;
 }
 
-div.tabs ul.nav-tabs a,
-div.tabs ul.nav-tabs a:hover {
+.tabs ul.nav-tabs a,
+.tabs ul.nav-tabs a:hover {
 	color: #3680cf;
 }
 
-div.tabs ul.nav-tabs a:hover {
+.tabs ul.nav-tabs a:hover {
 	border-top-color: #3680cf;
 }
 
-div.tabs ul.nav-tabs li.active a {
+.tabs ul.nav-tabs li.active a {
 	border-top-color: #3680cf;
 	color: #3680cf;
+}
+
+.tabs.tabs-bottom ul.nav-tabs li a:hover,
+.tabs.tabs-bottom ul.nav-tabs li.active a,
+.tabs.tabs-bottom ul.nav-tabs li.active a:hover,
+.tabs.tabs-bottom ul.nav-tabs li.active a:focus {
+	border-bottom-color: #3680cf;
+}
+
+.tabs.tabs-vertical.tabs-left ul.nav-tabs li a:hover,
+.tabs.tabs-vertical.tabs-left ul.nav-tabs li.active a,
+.tabs.tabs-vertical.tabs-left ul.nav-tabs li.active a:hover,
+.tabs.tabs-vertical.tabs-left ul.nav-tabs li.active a:focus {
+	border-left-color: #3680cf;
+}
+
+.tabs.tabs-vertical.tabs-right ul.nav-tabs li a:hover,
+.tabs.tabs-vertical.tabs-right ul.nav-tabs li.active a,
+.tabs.tabs-vertical.tabs-right ul.nav-tabs li.active a:hover,
+.tabs.tabs-vertical.tabs-right ul.nav-tabs li.active a:focus {
+	border-right-color: #3680cf;
 }
 
 ul.list.icons li i {
@@ -168,146 +186,114 @@ section.video blockquote i.icon-quote-left {
 	color: #3680cf;
 }
 
-.panel-heading a {
+.panel-group .panel-heading a {
 	color: #3680cf;
 }
 
-header {
-  /* Single Menu */
-  /* Header Darken Top Border */
-  /* Header Version 4 */
-  /* Header Flat Menu */
-  /* Mega Menu */;
+.panel-group.secundary .panel-heading {
+	background-color: #3680cf !important;
 }
 
-header nav ul.nav-main ul.dropdown-menu,
-header nav ul.nav-main li.dropdown.open a.dropdown-toggle,
-header nav ul.nav-main li.active a,
-header nav ul.nav-main li > a:hover,
-header nav ul.nav-main li.dropdown:hover a {
+#header nav ul.nav-main ul.dropdown-menu,
+#header nav ul.nav-main li.dropdown.open .dropdown-toggle,
+#header nav ul.nav-main li.active a,
+#header nav ul.nav-main li > a:hover,
+#header nav ul.nav-main li.dropdown:hover a {
 	color: #FFF;
 	background-color: #3680cf !important;
 }
 
-header nav ul.nav-main ul.dropdown-menu li:hover > a {
+#header nav ul.nav-main ul.dropdown-menu li:hover > a {
 	background-color: #5f9ad9 !important;
 }
 
-header nav ul.nav-main ul.dropdown-menu {
+#header nav ul.nav-main ul.dropdown-menu {
 	color: #ffffff;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	background-color: #3680cf;
-	border-color: #364dcf #364dcf #243595;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-color: #3680cf;
 }
 
-header nav ul.nav-main ul.dropdown-menu:hover {
+#header nav ul.nav-main ul.dropdown-menu:hover {
 	border-color: #4b8dd4;
 	background-color: #4b8dd4;
 }
 
-header nav ul.nav-main ul.dropdown-menu:active,
-header nav ul.nav-main ul.dropdown-menu:focus {
+#header nav ul.nav-main ul.dropdown-menu:active,
+#header nav ul.nav-main ul.dropdown-menu:focus {
 	border-color: #2d73be;
 	background-color: #2d73be;
 }
 
-header nav ul.nav-main li.dropdown:hover ul.dropdown-menu li > a {
+#header nav ul.nav-main li.dropdown:hover ul.dropdown-menu li > a {
 	background: none !important;
 }
 
-header nav ul.nav-main li.dropdown:hover ul.dropdown-menu li > a:hover {
+#header nav ul.nav-main li.dropdown:hover ul.dropdown-menu li > a:hover {
 	background: #4b8dd4 !important;
 }
 
-header.single-menu nav ul.nav-main li.active > a {
+#header.single-menu nav ul.nav-main li.active > a {
 	border-top: 5px solid #3680cf;
 }
 
-header.darken-top-border {
-	border-top: 5px solid #2d73be;
+#header.darken-top-border {
+	border-top: 5px solid #2d73be !important;
 }
 
-header.colored div.header-top {
+#header.colored .header-top {
 	background-color: #3680cf;
 }
 
-header.colored div.header-top ul.nav-top li a:hover {
+#header.colored .header-top ul.nav-top li a:hover {
 	background-color: #4b8dd4 !important;
 }
 
-header.flat-menu nav ul.nav-main li > a,
-header.flat-menu nav ul.nav-main li.active > a {
+#header.flat-menu nav ul.nav-main li > a,
+#header.flat-menu nav ul.nav-main li.active > a {
 	color: #666;
 }
 
-header.flat-menu nav ul.nav-main li.active > a {
+#header.flat-menu nav ul.nav-main li.active > a {
 	color: #3680cf;
 	background-color: transparent !important;
 }
 
-header.flat-menu nav ul.nav-main li > a:hover,
-header.flat-menu nav ul.nav-main li.dropdown:hover a {
+#header.flat-menu nav ul.nav-main li > a:hover,
+#header.flat-menu nav ul.nav-main li.dropdown:hover a {
 	color: #FFF;
 	background-color: #3680cf !important;
 }
 
-header nav.mega-menu ul.nav-main li.mega-menu-item ul.dropdown-menu {
+#header nav.mega-menu ul.nav-main li.mega-menu-item ul.dropdown-menu {
 	border-top-color: #3680cf;
-}
-
-div.slider div.tp-bannertimer {
-	background-color: #3680cf;
-}
-
-div.home-intro p em {
-	color: #5f9ad9;
-}
-
-div.home-concept strong {
-	color: #3680cf;
 }
 
 blockquote.testimonial {
 	background: #4b8dd4;
 }
 
-div.testimonial-arrow-down {
+.testimonial-arrow-down {
 	border-top-color: #4b8dd4;
 }
 
-div.recent-posts div.date span.month,
-article.post div.post-date span.month {
+.featured-box-secundary i.icon-featured {
 	background-color: #3680cf;
 }
 
-div.recent-posts div.date span.day,
-article.post div.post-date span.day {
+.featured-box-secundary h4 {
 	color: #3680cf;
 }
 
-div.shop ul.products li.product .onsale {
-	background-color: #3680cf;
-}
-
-div.featured-box-secundary i.icon-featured,
-div.featured-box-secundary i.image-icon {
-	background-color: #3680cf;
-}
-
-div.featured-box-secundary h4 {
-	color: #3680cf;
-}
-
-div.featured-box-secundary div.box-content {
+.featured-box-secundary .box-content {
 	border-top-color: #3680cf;
 }
 
-div.pricing-table div.most-popular {
+.pricing-table .most-popular {
 	border-color: #3680cf;
 }
 
-div.pricing-table div.most-popular h3 {
+.pricing-table .most-popular h3 {
 	background-color: #3680cf;
 }
 
@@ -317,20 +303,50 @@ section.timeline .timeline-box.right:before {
 	box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #3680cf;
 }
 
-footer div.footer-ribon {
-	background: #3680cf;
+ul.history li .featured-box .box-content {
+	border-top-color: #3680cf;
 }
 
-footer div.footer-ribon:before {
-	border-right-color: #245a95;
+.recent-posts .date .month,
+article.post .post-date .month {
+	background-color: #3680cf;
 }
 
-div.shop ul.products li.product .onsale {
+.recent-posts .date .day,
+article.post .post-date .day {
+	color: #3680cf;
+}
+
+.slider .tp-bannertimer {
+	background-color: #3680cf;
+}
+
+.home-intro p em {
+	color: #5f9ad9;
+}
+
+.home-concept strong {
+	color: #3680cf;
+}
+
+.shop ul.products li.product .onsale {
 	background-color: #3680cf;
 	border-bottom-color: #2a6cb2;
 }
 
-div.shop .star-rating span,
-div.shop .cart-totals tr.total .amount {
+.shop .star-rating span,
+.shop .cart-totals tr.total .amount {
 	color: #3680cf;
+}
+
+#footer .footer-ribbon {
+	background: #3680cf;
+}
+
+#footer .footer-ribbon:before {
+	border-right-color: #245a95;
+}
+
+body.boxed .body {
+	border-top-color: #3680cf;
 }

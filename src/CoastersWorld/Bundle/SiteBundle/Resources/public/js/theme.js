@@ -1,7 +1,7 @@
 /*
 Name: 			Core Initializer
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
+Version: 		3.0.0
 */
 
 (function() {
@@ -87,33 +87,11 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 
 		events: function() {
 
-			// Window Resize
-			$(window).afterResize(function() {
-
-				// Featured Boxes
-				Core.featuredBoxes();
-
-				// Sticky Menu
-				Core.checkStickyMenu();
-
-				// Revolution Slider Fix
-				Core.fixRevolutionSlider();
-
-				// Isotope
-				if($(".isotope").get(0)) {
-					$(".isotope").isotope('reLayout');
-				}
-
-				// Product Info Box
-				Core.productInfoBox();
-
-			});
-
 			// Anchors Position
 			$("a[data-hash]").on("click", function(e) {
 
 				e.preventDefault();
-				var header = $("body header:first"),
+				var header = $("#header"),
 					headerHeight = header.height(),
 					target = $(this).attr("href"),
 					$this = $(this);
@@ -201,11 +179,11 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 
 			var $this = this,
 				$body = $("body"),
-				header = $("header:first"),
+				header = $("#header"),
 				headerContainer = header.parent(),
 				menuAfterHeader = (typeof header.data('after-header') !== 'undefined'),
 				headerHeight = header.height(),
-				flatParentItems = $("header.flat-menu ul.nav-main > li > a"),
+				flatParentItems = $("#header.flat-menu ul.nav-main > li > a"),
 				logoWrapper = header.find(".logo"),
 				logo = header.find(".logo img"),
 				logoWidth = logo.attr("width"),
@@ -476,7 +454,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 						type: "POST",
 						url: $("#newsletterForm").attr("action"),
 						data: {
-							"email": $("#newsletterForm #email").val()
+							"email": $("#newsletterForm #newsletterEmail").val()
 						},
 						dataType: "json",
 						success: function (data) {
@@ -485,7 +463,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 								$("#newsletterSuccess").removeClass("hidden");
 								$("#newsletterError").addClass("hidden");
 
-								$("#newsletterForm #email")
+								$("#newsletterForm #newsletterEmail")
 									.val("")
 									.blur()
 									.closest(".control-group")
@@ -498,7 +476,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 								$("#newsletterError").removeClass("hidden");
 								$("#newsletterSuccess").addClass("hidden");
 
-								$("#newsletterForm #email")
+								$("#newsletterForm #newsletterEmail")
 									.blur()
 									.closest(".control-group")
 									.removeClass("success")
@@ -538,7 +516,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 
 			$("div.featured-box").css("height", "auto");
 
-			$("div.featured-boxes").each(function() {
+			$("div.featured-boxes:not(.manual)").each(function() {
 
 				var wrapper = $(this);
 				var minBoxHeight = 0;
@@ -649,7 +627,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 
 		sort: function() {
 
-			$("ul.sort-source").each(function() {
+			$("ul.sort-source:not(.manual)").each(function() {
 
 				var source = $(this);
 				var destination = $("ul.sort-destination[data-sort-id=" + $(this).attr("data-sort-id") + "]");
@@ -813,7 +791,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 				}
 			});
 
-			$(".lightbox").each(function() {
+			$(".lightbox:not(.manual)").each(function() {
 
 				var el = $(this);
 
@@ -829,7 +807,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 
 		flickrFeed: function(options) {
 
-			$("ul.flickr-feed").each(function() {
+			$("ul.flickr-feed:not(.manual)").each(function() {
 
 				var el = $(this);
 
@@ -837,8 +815,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 					limit: 6,
 					qstrings: {
 						id: ''
-					},
-					itemTemplate: '<li><a href="{{image_b}}"><span class="thumbnail"><img alt="{{title}}" src="{{image_s}}" /></span></a></li>'
+					}
 				}
 
 				var config = $.extend({}, defaults, options, el.data("plugin-options"));
@@ -970,7 +947,7 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 			if($(window).width() > 991) {
 				$(".product-thumb-info").css("min-height", "auto");
 
-				$(".product-thumb-info-list").each(function() {
+				$(".product-thumb-info-list:not(.manual)").each(function() {
 
 					var wrapper = $(this);
 					var minBoxHeight = 0;
@@ -1043,6 +1020,36 @@ Version: 		2.9.0 - Wed Mar 19 2014 16:59:18
 
 		// Sticky Meny
 		//Core.stickyMenu();
+
+		// Window Resize
+		$(window).afterResize(function() {
+
+			// Featured Boxes
+			if(typeof(Core.featuredBoxes) != "undefined") {
+				Core.featuredBoxes();
+			}
+
+			// Sticky Menu
+			if(typeof(Core.checkStickyMenu) != "undefined") {
+				Core.checkStickyMenu();
+			}
+
+			// Revolution Slider Fix
+			if(typeof(Core.fixRevolutionSlider) != "undefined") {
+				Core.fixRevolutionSlider();
+			}
+
+			// Product Info Box
+			if(typeof(Core.productInfoBox) != "undefined") {
+				Core.productInfoBox();
+			}
+
+			// Isotope
+			if($(".isotope").get(0)) {
+				$(".isotope").isotope('reLayout');
+			}
+
+		}, true, 100 );
 
 	});
 

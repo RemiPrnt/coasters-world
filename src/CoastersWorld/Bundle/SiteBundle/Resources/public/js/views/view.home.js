@@ -1,7 +1,7 @@
 /*
 Name: 			View - Home
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		2.0
+Version: 		3.0.0
 */
 
 (function() {
@@ -25,13 +25,16 @@ Version: 		2.0
 		build: function(options) {
 
 			// Circle Slider
-			if($("#fcSlideshow").get(0)) {
-				$("#fcSlideshow").flipshow();
+			if(typeof($.fn.flipshow()) != "undefined") {
+				var circleContainer = $("#fcSlideshow");
+				
+				if(circleContainer.get(0)) {
+					circleContainer.flipshow();
 
-				setInterval( function() {
-					$("#fcSlideshow div.fc-right span:first").click();
-				}, 3000);
-
+					setInterval( function() {
+						circleContainer.data().flipshow._navigate(circleContainer.find("div.fc-right span:first"), "right");
+					}, 3000);				
+				}
 			}
 
 			// Revolution Slider Initialize
