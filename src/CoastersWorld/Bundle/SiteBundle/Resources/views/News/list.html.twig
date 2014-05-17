@@ -43,14 +43,14 @@
                     <h2><a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">{{ n.title }}</a></h2>
                     <p>{{ n.html|striptags|slice(0,250) }}...</p>
                     <div class="post-meta">
-                        <span><i class="icon icon-user"></i> Par <a href="#">{{ n.author.username }}</a> </span>
+                        <span><i class="icon icon-user"></i> Par {{ n.author.username }}</span>
                         <span><i class="icon icon-tag"></i>
                             {% if n.coaster is not null %}<span class="label label-default">{{ n.coaster.name }}</span>{% endif %}
                             {% for tag in n.tags %}
                                 <span class="label label-default">{{ tag }}</span>
                             {% endfor %}
                         </span>
-                        <span><i class="icon icon-comments"></i> <a href="#">{{ n.comments|length }} commentaire(s)</a></span>
+                        <span><i class="icon icon-comments"></i> <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}#comments">{{ n.comments|length }} commentaire(s)</a></span>
                         <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}" class="btn btn-xs btn-primary pull-right">
                             Lire la suite...
                         </a>
