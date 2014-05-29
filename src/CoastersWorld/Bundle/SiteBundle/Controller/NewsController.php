@@ -41,7 +41,7 @@ class NewsController extends Controller
 
     public function editAction($id = null)
     {
-        if (! $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+        if (! $this->get('security.context')->isGranted('ROLE_NEWSER')) {
             return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
         }
 

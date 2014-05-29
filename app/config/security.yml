@@ -3,20 +3,14 @@ security:
         CoastersWorld\Bundle\SiteBundle\Entity\User:
             algorithm:        sha512
 
-        Symfony\Component\Security\Core\User\User: plaintext
-
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_NEWSER:      ROLE_USER
+        ROLE_ADMIN:       ROLE_NEWSER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         administrators:
             entity: { class: CoastersWorldSiteBundle:User, property: username }
-
-        in_memory:
-            memory:
-                users:
-                    florian:  { password: test, roles: [ 'ROLE_USER' ] }
 
     firewalls:
         dev:
