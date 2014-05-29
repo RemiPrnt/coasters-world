@@ -19,8 +19,8 @@
 
 {% block body %}
 <div class="row">
-    <a class="img-thumbnail lightbox" href="{{ asset('media/image/' ~ image.path) }}" data-plugin-options="{'type':'image'}">
-        <img class="img-responsive" width="215" src="{{ ('media/image/' ~ image.path)|imagine_filter('thumb_image') }}">
+    <a class="img-thumbnail lightbox" href="{{ asset(images_path ~ '/' ~ image.path) }}" data-plugin-options="{'type':'image'}">
+        <img class="img-responsive" width="215" src="{{ (images_path ~ '/' ~ image.path)|imagine_filter('thumb_image') }}">
         <span class="zoom">
             <i class="icon icon-16 icon-white-shadowed icon-search"></i>
         </span>

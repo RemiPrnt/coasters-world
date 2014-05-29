@@ -24,9 +24,16 @@
                             {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
                             {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}
                             {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
+                            {{ form_row(form.thumbnail, {'attr': {'class': 'input-block-level'}}) }}
+                            <div id="image-previ">
+                                {% if news.thumbnail %}
+                                    <img class="img-thumbnail" src="{{ (images_path ~ news.thumbnail.path)|imagine_filter('news') }}" alt="">
+                                {% endif %}
+                            </div>
 
                             {{ form_rest(form) }}
-                            <button type="submit" id="submit" class="btn btn-lg btn-success">{{ 'news.save'|trans }}</button>
+                            <input type="submit" value="{{ 'news.save'|trans }}" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+                            <input type="submit" value="{{ 'news.disable'|trans }}" class="btn btn-danger btn-lg" data-loading-text="Loading...">
                         {{ form_end(form) }}
                     </div>
                     <div id="news-previ" class="tab-pane"></div>
@@ -39,8 +46,34 @@
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/select2/select2.min.js') }}"></script>
     <script type="text/javascript">
-        jQuery('#news_type_coaster').select2();
-        jQuery('#news_type_tags').select2({tags:[{% for tag in tags %}"{{ tag }}",{% endfor %}]});
+        $('#news_type_coaster').select2();
+        $('#news_type_tags').select2({tags:[{% for tag in tags %}"{{ tag }}",{% endfor %}]});
+        $('#news_type_thumbnail').select2({
+            placeholder: 'Chercher une image...',
+            minimumInputLength: 2,
+            ajax: {
+                url: "{{ path('cw_image_search_ajax') }}",
+                dataType: 'json',
+                quietMillis: 200,
+                data: function (term, page) {
+                    return {
+                        q: term
+                    };
+                },
+                results: function (data, page) {
+                    return {results: data};
+                }
+            },
+            formatResult: formatImage,
+            formatSelection: function (data) { return data.name },
+        })
+        .on("select2-selecting", function(e) {
+            $('#image-previ').html('<img class="img-thumbnail" src="'+e.object.src_news+'" alt="">');
+        });
+
+        function formatImage (data) {
+            return '<div class="post-image">'+data.name+'<div class="img-thumbnail"><img src="'+data.src_thumb+'" alt="" /></div></div>';
+        }
     </script>
     <script type="text/javascript">
         $( document ).ready(function() {

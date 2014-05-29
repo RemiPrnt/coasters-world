@@ -45,4 +45,17 @@ class NewsRepository extends EntityRepository
             ->getResult()
         ;
     }
+
+    public function searchByTitle($term)
+    {
+        $qb = $this->createQueryBuilder('n');
+
+        return $qb
+            ->select('n.title')
+            ->addSelect('n.id')
+            ->addSelect('n.slug')
+            ->where($qb->expr()->like('n.title', ':identifier'))
+            ->setParameter('identifier', $term)
+        ;
+    }
 }

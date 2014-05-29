@@ -5,6 +5,7 @@ namespace CoastersWorld\Bundle\SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CoastersWorld\Bundle\SiteBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ImageController extends Controller
 {
@@ -71,6 +72,35 @@ class ImageController extends Controller
             'image' => $image,
             'tags' => $tags
         ));
+    }
 
+    public function searchAjaxAction()
+    {
+        $request = $this->getRequest();
+        $term = $request->query->get('q');
+
+        // @todo
+        $term = '%' . $term . '%';
+
+        $qb = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CoastersWorldSiteBundle:Image')
+            ->searchByCoaster($term)
+        ;
+
+        $images = $qb->getQuery()->getArrayResult();
+
+        $prefix = $this->container->getParameter('coastersworldPathImages');
+        $return = array();
+
+        foreach ($images as $image) {
+            $tmp = $image;
+            $tmp['src_thumb'] = $this->get('liip_imagine.cache.manager')->generateUrl($prefix.'/'.$image['path'], 'thumb_news');
+            $tmp['src_news'] = $this->get('liip_imagine.cache.manager')->generateUrl($prefix.'/'.$image['path'], 'news');
+
+            $return[] = $tmp;
+        }
+
+        return new JsonResponse($return);
     }
 }

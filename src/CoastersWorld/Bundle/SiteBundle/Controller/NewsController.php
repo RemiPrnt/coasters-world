@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class NewsController extends Controller
 {
@@ -135,5 +136,22 @@ class NewsController extends Controller
         $markdown = $this->get('request')->request->get('markdown');
 
         return new Response($this->container->get('markdown.parser')->transformMarkdown($markdown));
+    }
+
+    public function searchAction()
+    {
+        $request = $this->getRequest();
+        $term = $request->get('q');
+
+        // @todo
+        $term = '%' . $term . '%';
+
+        $qb = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CoastersWorldSiteBundle:News')
+            ->searchByTitle($term)
+        ;
+
+        return new JsonResponse($qb->getQuery()->getArrayResult());
     }
 }

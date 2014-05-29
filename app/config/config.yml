@@ -26,6 +26,10 @@ twig:
     form:
         resources:
             - 'CoastersWorldSiteBundle:Form:fields.html.twig'
+    globals:
+        images_path: %coastersworldPathImages%
+        coastersworldAdminEmailAddress: %coastersworldAdminEmailAddress%
+        coastersworldPasswordChangeTime: %coastersworldPasswordChangeTime%
 
 services:
     twig.extension.intl:
@@ -73,10 +77,10 @@ knp_paginator:
 liip_imagine:
     resolvers:
        default:
-          web_path: ~
-
+            web_path:
+                cache_prefix: cache
+    driver : imagick
     filter_sets:
-        cache: ~
         news:
             quality: 75
             filters:

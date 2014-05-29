@@ -19,8 +19,7 @@
             <div class="post-image single">
                 <a href="{{ path('coasters_world_news_view', { slug: news.slug }) }}">
                     {% if news.thumbnail is not null %}
-                        {% set path = images_path ~ news.thumbnail.path %}
-                        <img class="img-thumbnail" src="{{ (images_path ~ news.thumbnail.path)|imagine_filter('news') }}" alt="">
+                        <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ news.thumbnail.path)|imagine_filter('news') }}" alt="">
                     {% endif %}
                 </a>
             </div>

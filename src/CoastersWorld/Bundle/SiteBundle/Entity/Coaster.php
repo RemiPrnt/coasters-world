@@ -50,9 +50,9 @@ class Coaster
     public function __toString()
     {
         $name = $this->name;
-        // if(is_object($this->park)) {
-        //     $name .= ' (' . $this->park->getName() . ')';
-        // }
+        if(!is_null($this->park)) {
+            $name .= ' (' . $this->park->getName() . ')';
+        }
 
         return $name;
     }

@@ -147,7 +147,7 @@ class Park
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {

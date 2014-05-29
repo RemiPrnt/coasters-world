@@ -108,12 +108,19 @@ cw_news_md_to_html_ajax:
     requirements:
         _method:  POST
 
+# Recherche de news (ajax)
+cw_news_search_ajax:
+    pattern: /news/search
+    defaults: { _controller: CoastersWorldSiteBundle:News:search }
+    requirements:
+        _method:  POST
+
 # Affichage d'une news
 coasters_world_news_view:
     pattern:  /news/{slug}
     defaults: { _controller: CoastersWorldSiteBundle:News:view }
     requirements:
-        slug: "[a-z0-9\-]+"
+        slug: "[a-z0-9\-§]+"
 
 ######## Image
 coasters_world_image_upload:
@@ -127,6 +134,12 @@ coasters_world_image_list:
 coasters_world_image_edit:
     pattern:  /image/edit/{id}
     defaults: { _controller: CoastersWorldSiteBundle:Image:edit }
+    requirements:
+        id: \d+
+
+cw_image_search_ajax:
+    pattern:  /image/search
+    defaults: { _controller: CoastersWorldSiteBundle:Image:searchAjax }
     requirements:
         id: \d+
 

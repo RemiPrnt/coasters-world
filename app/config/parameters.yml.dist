@@ -18,8 +18,4 @@ parameters:
 
     coastersworldPasswordChangeTime: 3
 
-twig:
-    globals:
-        images_path: /uploads/documents/
-        coastersworldAdminEmailAddress: %coastersworldAdminEmailAddress%
-        coastersworldPasswordChangeTime: %coastersworldPasswordChangeTime%
+    coastersworldPathImages: media/image

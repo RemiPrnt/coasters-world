@@ -17,8 +17,8 @@
             {% for image in images %}
                 <li class="col-md-3">
                     <div class="portfolio-item img-thumbnail">
-                        <a class="thumb-info" href="{{ asset('media/image/' ~ image.path) }}">
-                            <img class="img-responsive" width="215" src="{{ ('media/image/' ~ image.path)|imagine_filter('thumb_image') }}">
+                        <a class="thumb-info" href="{{ asset(images_path ~ '/' ~ image.path) }}">
+                            <img class="img-responsive" width="215" src="{{ (images_path ~ '/' ~ image.path)|imagine_filter('thumb_image') }}">
                             <span class="zoom">
                                 <i class="icon icon-16 icon-white-shadowed icon-search"></i>
                             </span>

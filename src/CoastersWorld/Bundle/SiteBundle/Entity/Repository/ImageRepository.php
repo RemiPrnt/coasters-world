@@ -16,4 +16,18 @@ class ImageRepository extends EntityRepository
             ->getResult()
         ;
     }
+
+    public function searchByCoaster($term)
+    {
+        $qb = $this->createQueryBuilder('i');
+
+        return $qb
+            ->select('i.path')
+            ->addSelect('c.name')
+            ->addSelect('i.id')
+            ->join('i.coaster', 'c')
+            ->where($qb->expr()->like('c.name', ':identifier'))
+            ->setParameter('identifier', $term)
+        ;
+    }
 }
