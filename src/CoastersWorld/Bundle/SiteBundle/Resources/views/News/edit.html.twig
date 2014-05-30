@@ -27,7 +27,7 @@
                             {{ form_row(form.thumbnail, {'attr': {'class': 'input-block-level'}}) }}
                             <div id="image-previ">
                                 {% if news.thumbnail %}
-                                    <img class="img-thumbnail" src="{{ (images_path ~ news.thumbnail.path)|imagine_filter('news') }}" alt="">
+                                    <img class="img-thumbnail" src="{{ (images_path ~ '/'  news.thumbnail.path)|imagine_filter('news') }}" alt="">
                                 {% endif %}
                             </div>
 
