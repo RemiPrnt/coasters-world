@@ -4,7 +4,7 @@
 
 {% block page_top_main %}
     {{ news.title }}
-    {% if is_granted("ROLE_ADMIN") %}
+    {% if is_granted("ROLE_NEWSER") %}
         <a href="{{ path('coasters_world_news_edit', { id: news.id }) }}" class="btn btn-xs btn-primary">
             <i class="icon icon-edit"></i>
             Editer

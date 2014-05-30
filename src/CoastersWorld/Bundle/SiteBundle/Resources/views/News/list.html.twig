@@ -5,11 +5,8 @@
 {% block newscontent %}
 
     <div class="blog-posts">
-
         {% for n in listNews %}
-
             <article class="post post-large">
-
                 <div class="post-image single">
                     <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">
                         {% if n.thumbnail is not null %}
@@ -26,8 +23,17 @@
                 </div>
 
                 <div class="post-content">
-
-                    <h2><a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">{{ n.title }}</a></h2>
+                    <h2>
+                        <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">
+                            {{ n.title }}
+                        </a>
+                        {% if is_granted("ROLE_NEWSER") %}
+                            <a href="{{ path('coasters_world_news_edit', { id: n.id }) }}" class="btn btn-xs btn-primary">
+                                <i class="icon icon-edit"></i>
+                                Editer
+                            </a>
+                        {% endif %}
+                    </h2>
                     <p>{{ n.html|striptags|slice(0,250) }}...</p>
                     <div class="post-meta">
                         <span><i class="icon icon-user"></i> Par {{ n.author.username }}</span>
@@ -42,16 +48,12 @@
                             Lire la suite...
                         </a>
                     </div>
-
                 </div>
             </article>
-
         {% endfor %}
-
         <div class="navigation">
             {{ knp_pagination_render(listNews) }}
         </div>
-
     </div>
 
 {% endblock %}
