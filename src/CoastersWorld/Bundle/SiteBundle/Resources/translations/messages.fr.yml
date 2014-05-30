@@ -82,8 +82,8 @@ register:
             tooltip: Je saisis à nouveau mon mot de passe.
         email:
             label: Mon adresse email
-            tooltip: Entrez une adresse valide pour confirmer votre compte
-        submit: Je m'inscris à Coasters World !
+            tooltip: Je saisis une adresse e-mail valide pour confirmer mon compte
+        submit: Je m'inscris sur Coasters World !
     site:
         title: Le site
         description: Pour tout la documentation et sur notre passion.
