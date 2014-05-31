@@ -25,7 +25,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
-            - 'CoastersWorldSiteBundle:Form:fields.html.twig'
+            - '::fields.html.twig'
     globals:
         images_path: %coastersworldPathImages%
         coastersworldAdminEmailAddress: %coastersworldAdminEmailAddress%
@@ -60,12 +60,6 @@ swiftmailer:
     password:  "%mailer_password%"
     auth_mode: login
     disable_delivery: false
-
-#FOS User Bundle
-fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: CoastersWorld\Bundle\SiteBundle\Entity\User
 
 # Knp Paginator Configuration
 knp_paginator:
