@@ -61,6 +61,12 @@ swiftmailer:
     auth_mode: login
     disable_delivery: false
 
+#FOS User Bundle
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: CoastersWorld\Bundle\SiteBundle\Entity\User
+
 # Knp Paginator Configuration
 knp_paginator:
     page_range: 5
