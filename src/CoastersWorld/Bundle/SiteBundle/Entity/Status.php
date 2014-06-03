@@ -6,30 +6,38 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Status
+ *
+ * @ORM\Table(name="ref_status")
+ * @ORM\Entity
  */
 class Status
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true, nullable=false)
      */
-    private $coasters;
+    private $name;
+
+
 
     /**
-     * Constructor
+     * Get id
+     *
+     * @return integer 
      */
-    public function __construct()
+    public function getId()
     {
-        $this->coasters = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->id;
     }
 
     /**
@@ -48,81 +56,10 @@ class Status
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add coasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
-     * @return Status
-     */
-    public function addCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
-    {
-        $this->coasters[] = $coasters;
-
-        return $this;
-    }
-
-    /**
-     * Remove coasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
-     */
-    public function removeCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
-    {
-        $this->coasters->removeElement($coasters);
-    }
-
-    /**
-     * Get coasters
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCoasters()
-    {
-        return $this->coasters;
-    }
-    /**
-     * @var integer
-     */
-    private $idTechnical;
-
-
-    /**
-     * Set idTechnical
-     *
-     * @param integer $idTechnical
-     * @return Status
-     */
-    public function setIdTechnical($idTechnical)
-    {
-        $this->idTechnical = $idTechnical;
-
-        return $this;
-    }
-
-    /**
-     * Get idTechnical
-     *
-     * @return integer
-     */
-    public function getIdTechnical()
-    {
-        return $this->idTechnical;
     }
 }

@@ -6,21 +6,49 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Park
+ *
+ * @ORM\Table(name="ref_park")
+ * @ORM\Entity
  */
 class Park
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=false, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="website", type="string", length=255, unique=false, nullable=true)
+     */
+    private $website;
+
+    /**
+     * @var \Country
+     *
+     * @ORM\ManyToOne(targetEntity="Country")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="country_id", referencedColumnName="id")
+     * })
+     */
+    private $country;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Coaster", mappedBy="park")
      */
     private $coasters;
 
@@ -30,6 +58,16 @@ class Park
     public function __construct()
     {
         $this->coasters = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -48,7 +86,7 @@ class Park
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -56,13 +94,49 @@ class Park
     }
 
     /**
-     * Get id
+     * Set website
      *
-     * @return integer
+     * @param string $website
+     * @return Park
      */
-    public function getId()
+    public function setWebsite($website)
     {
-        return $this->id;
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set country
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Country $country
+     * @return Park
+     */
+    public function setCountry(\CoastersWorld\Bundle\SiteBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 
     /**
@@ -91,66 +165,10 @@ class Park
     /**
      * Get coasters
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCoasters()
     {
         return $this->coasters;
-    }
-    /**
-     * @var \CoastersWorld\Bundle\SiteBundle\Entity\Country
-     */
-    private $country;
-
-
-    /**
-     * Set country
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Country $country
-     * @return Park
-     */
-    public function setCountry(\CoastersWorld\Bundle\SiteBundle\Entity\Country $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Country
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-    /**
-     * @var string
-     */
-    private $website;
-
-
-    /**
-     * Set website
-     *
-     * @param string $website
-     * @return Park
-     */
-    public function setWebsite($website)
-    {
-        $this->website = $website;
-
-        return $this;
-    }
-
-    /**
-     * Get website
-     *
-     * @return string
-     */
-    public function getWebsite()
-    {
-        return $this->website;
     }
 }

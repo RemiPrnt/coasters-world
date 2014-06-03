@@ -1,7 +1,7 @@
 ######## Homepage
 coasters_world_homepage:
     pattern:  /
-    defaults: { _controller: CoastersWorldSiteBundle:News:list, page: 1 }
+    defaults: { _controller: CoastersWorldSiteBundle:Article:list, page: 1 }
 
 ######## BDD
 coasters_world_database_index:
@@ -79,19 +79,19 @@ coasters_world_news_list_first_page_duplicate:
 # Liste des news
 coasters_world_news_list:
     pattern:  /news/page/{page}
-    defaults: { _controller: CoastersWorldSiteBundle:News:list, page: 1 }
+    defaults: { _controller: CoastersWorldSiteBundle:Article:list, page: 1 }
     requirements:
         page: \d+
 
 # Création d'une news
 coasters_world_news_new:
     pattern:  /news/new
-    defaults: { _controller: CoastersWorldSiteBundle:News:edit }
+    defaults: { _controller: CoastersWorldSiteBundle:Article:edit }
 
 # Modification d'une news
 coasters_world_news_edit:
     pattern:  /news/edit/{id}
-    defaults: { _controller: CoastersWorldSiteBundle:News:edit }
+    defaults: { _controller: CoastersWorldSiteBundle:Article:edit }
 
 # Création d'un commentaire
 coasters_world_news_comment_create:
@@ -104,21 +104,21 @@ coasters_world_news_comment_create:
 # Conversion markdown to html
 cw_news_md_to_html_ajax:
     pattern:  /news/convert-markdown
-    defaults: { _controller: CoastersWorldSiteBundle:News:convertMarkdown }
+    defaults: { _controller: CoastersWorldSiteBundle:Article:convertMarkdown }
     requirements:
         _method:  POST
 
 # Recherche de news (ajax)
 cw_news_search_ajax:
     pattern: /news/search
-    defaults: { _controller: CoastersWorldSiteBundle:News:search }
+    defaults: { _controller: CoastersWorldSiteBundle:Article:search }
     requirements:
         _method:  POST
 
 # Affichage d'une news
 coasters_world_news_view:
     pattern:  /news/{slug}
-    defaults: { _controller: CoastersWorldSiteBundle:News:view }
+    defaults: { _controller: CoastersWorldSiteBundle:Article:view }
     requirements:
         slug: "[a-z0-9\-§]+"
 

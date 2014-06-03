@@ -5,12 +5,12 @@ namespace CoastersWorld\Bundle\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Comment
+ * Feedback
  *
- * @ORM\Table(name="comment")
+ * @ORM\Table(name="feedback")
  * @ORM\Entity
  */
-class Comment
+class Feedback
 {
     /**
      * @var integer
@@ -36,14 +36,14 @@ class Comment
     private $publishedAt;
 
     /**
-     * @var \Article
+     * @var \Coaster
      *
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Coaster")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=false)
+     *   @ORM\JoinColumn(name="coaster_id", referencedColumnName="id", nullable=false)
      * })
      */
-    private $article;
+    private $coaster;
 
     /**
      * @var \User
@@ -53,7 +53,7 @@ class Comment
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * })
      */
-    private $author;
+    private $user;
 
     /**
      * Constructor
@@ -77,7 +77,7 @@ class Comment
      * Set body
      *
      * @param string $body
-     * @return Comment
+     * @return Feedback
      */
     public function setBody($body)
     {
@@ -100,7 +100,7 @@ class Comment
      * Set publishedAt
      *
      * @param \DateTime $publishedAt
-     * @return Comment
+     * @return Feedback
      */
     public function setPublishedAt($publishedAt)
     {
@@ -120,48 +120,48 @@ class Comment
     }
 
     /**
-     * Set article
+     * Set coaster
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Article $article
-     * @return Comment
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
+     * @return Feedback
      */
-    public function setArticle(\CoastersWorld\Bundle\SiteBundle\Entity\Article $article)
+    public function setCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster)
     {
-        $this->article = $article;
+        $this->coaster = $coaster;
 
         return $this;
     }
 
     /**
-     * Get article
+     * Get coaster
      *
-     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Article
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Coaster
      */
-    public function getArticle()
+    public function getCoaster()
     {
-        return $this->article;
+        return $this->coaster;
     }
 
     /**
-     * Set author
+     * Set user
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $author
-     * @return Comment
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $user
+     * @return Feedback
      */
-    public function setAuthor(\CoastersWorld\Bundle\SiteBundle\Entity\User $author)
+    public function setUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $user)
     {
-        $this->author = $author;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get author
+     * Get user
      *
      * @return \CoastersWorld\Bundle\SiteBundle\Entity\User
      */
-    public function getAuthor()
+    public function getUser()
     {
-        return $this->author;
+        return $this->user;
     }
 }

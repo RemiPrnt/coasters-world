@@ -5,7 +5,7 @@ namespace CoastersWorld\Bundle\SiteBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use CoastersWorld\Bundle\SiteBundle\Entity\News;
+use CoastersWorld\Bundle\SiteBundle\Entity\Article;
 
 class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
 {

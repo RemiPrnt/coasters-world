@@ -4,7 +4,7 @@
 
 {% block page_top_main %}Rédiger une news{% endblock %}
 
-{% form_theme form with 'CoastersWorldSiteBundle:Form:fields.html.twig' %}
+{% form_theme form with '::fields.html.twig' %}
 
 {% block body %}
     <div class="row">
@@ -24,10 +24,10 @@
                             {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
                             {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}
                             {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
-                            {{ form_row(form.thumbnail, {'attr': {'class': 'input-block-level'}}) }}
+                            {{ form_row(form.image, {'attr': {'class': 'input-block-level'}}) }}
                             <div id="image-previ">
-                                {% if news.thumbnail %}
-                                    <img class="img-thumbnail" src="{{ (images_path ~ '/'  news.thumbnail.path)|imagine_filter('news') }}" alt="">
+                                {% if news.image %}
+                                    <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ news.image.path)|imagine_filter('news') }}" alt="">
                                 {% endif %}
                             </div>
 

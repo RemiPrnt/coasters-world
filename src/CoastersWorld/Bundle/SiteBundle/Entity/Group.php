@@ -2,30 +2,53 @@
 
 namespace CoastersWorld\Bundle\SiteBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * CoastersWorld\Bundle\SiteBundle\Entity\Group
+ * Group
+ *
+ * @ORM\Table(name="ref_group")
+ * @ORM\Entity
  */
 class Group
 {
     /**
-     * @var string $name
-     */
-    private $name;
-
-    /**
-     * @var string $role
-     */
-    private $role;
-
-    /**
-     * @var integer $id
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true, nullable=false)
      */
-    private $user;
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=255, unique=true, nullable=false)
+     */
+    private $role;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
+     * @ORM\JoinTable(name="group_user",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=false)
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     *   }
+     * )
+     */
+    private $users;
 
     /**
      * Constructor
@@ -33,6 +56,17 @@ class Group
     public function __construct()
     {
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -51,7 +85,7 @@ class Group
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -74,7 +108,7 @@ class Group
     /**
      * Get role
      *
-     * @return string
+     * @return string 
      */
     public function getRole()
     {
@@ -82,45 +116,35 @@ class Group
     }
 
     /**
-     * Get id
+     * Add users
      *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add user
-     *
-     * @param CoastersWorld\Bundle\SiteBundle\Entity\User $user
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $users
      * @return Group
      */
-    public function addUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $user)
+    public function addUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $users)
     {
-        $this->user[] = $user;
+        $this->users[] = $users;
 
         return $this;
     }
 
     /**
-     * Remove user
+     * Remove users
      *
-     * @param CoastersWorld\Bundle\SiteBundle\Entity\User $user
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $users
      */
-    public function removeUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $user)
+    public function removeUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $users)
     {
-        $this->user->removeElement($user);
+        $this->users->removeElement($users);
     }
 
     /**
-     * Get user
+     * Get users
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getUser()
+    public function getUsers()
     {
-        return $this->user;
+        return $this->users;
     }
 }

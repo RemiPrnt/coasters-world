@@ -10,16 +10,16 @@ class CommentController extends Controller
 {
     public function newAction($id)
     {
-        $news = $this->getNews($id);
+        $article = $this->getArticle($id);
 
         if (! $this->get('security.context')->isGranted('ROLE_USER')) {
-            $uri = $this->get('router')->generate('coasters_world_news_view', array('slug' => $news->getSlug()), true);
+            $uri = $this->get('router')->generate('coasters_world_news_view', array('slug' => $article->getSlug()), true);
             $this->getRequest()->getSession()->set('_security.secured_area.target_path', $uri);
             return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
         }
 
         $comment = new Comment();
-        $comment->setNews($news);
+        $comment->setArticle($article);
         $comment->setAuthor($this->getUser());
         $form = $this->createForm(new CommentType(), $comment, array(
             'action' => $this->generateUrl('coasters_world_news_comment_create', array('id' => $id)),
@@ -34,10 +34,10 @@ class CommentController extends Controller
 
     public function createAction($id)
     {
-        $news = $this->getNews($id);
+        $article = $this->getArticle($id);
 
         $comment  = new Comment();
-        $comment->setNews($news);
+        $comment->setArticle($article);
         $comment->setAuthor($this->getUser());
         $request = $this->getRequest();
         $form    = $this->createForm(new CommentType(), $comment);
@@ -50,7 +50,7 @@ class CommentController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('coasters_world_news_view', array(
-                'slug' => $news->getSlug()
+                'slug' => $article->getSlug()
             )));
         }
 
@@ -60,12 +60,12 @@ class CommentController extends Controller
         ));
     }
 
-    protected function getNews($id)
+    protected function getArticle($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository('CoastersWorldSiteBundle:News')->find($id);
+        $article = $em->getRepository('CoastersWorldSiteBundle:Article')->find($id);
 
-        return $news;
+        return $article;
     }
 
 }

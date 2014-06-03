@@ -2,31 +2,81 @@
 
 namespace CoastersWorld\Bundle\SiteBundle\Entity;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Image
+ *
+ * @ORM\Table(name="image")
+ * @ORM\Entity(repositoryClass="CoastersWorld\Bundle\SiteBundle\Entity\Repository\ImageRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Image
 {
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255, unique=true, nullable=false)
+     */
     private $path;
 
-    private $file;
-    private $temp;
-
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", unique=false, nullable=false)
+     */
     private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", unique=false, nullable=false)
+     */
     private $updatedAt;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="visible", type="boolean", unique=false, nullable=false)
+     */
+    private $visible = true;
+
+    /**
+     * @var \Coaster
+     *
+     * @ORM\ManyToOne(targetEntity="Coaster", inversedBy="images")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="coaster_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $coaster;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="images")
+     * @ORM\JoinTable(name="image_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=false)
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
+     *   }
+     * )
      */
     private $tags;
 
-        /**
-     * @var boolean
-     */
-    private $isVisible = true;
+    private $file;
+    private $temp;
 
     /**
      * Constructor
@@ -66,6 +116,10 @@ class Image
         }
     }
 
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
     public function preUpload()
     {
         if (null !== $this->getFile()) {
@@ -75,6 +129,10 @@ class Image
         }
     }
 
+    /**
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
     public function upload()
     {
         if (null === $this->getFile()) {
@@ -96,6 +154,9 @@ class Image
         $this->file = null;
     }
 
+    /**
+     * @ORM\PostRemove
+     */
     public function removeUpload()
     {
         if ($file = $this->getAbsolutePath()) {
@@ -132,26 +193,13 @@ class Image
     }
 
     /**
-     * Set name
+     * Get id
      *
-     * @param string $name
-     * @return Image
+     * @return integer
      */
-    public function setName($name)
+    public function getId()
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
+        return $this->id;
     }
 
     /**
@@ -175,16 +223,6 @@ class Image
     public function getPath()
     {
         return $this->path;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -232,11 +270,29 @@ class Image
     {
         return $this->updatedAt;
     }
-    /**
-     * @var \CoastersWorld\Bundle\SiteBundle\Entity\Coaster
-     */
-    private $coaster;
 
+    /**
+     * Set visible
+     *
+     * @param boolean $visible
+     * @return Image
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    /**
+     * Get visible
+     *
+     * @return boolean
+     */
+    public function getVisible()
+    {
+        return $this->visible;
+    }
 
     /**
      * Set coaster
@@ -259,30 +315,6 @@ class Image
     public function getCoaster()
     {
         return $this->coaster;
-    }
-
-
-    /**
-     * Set isVisible
-     *
-     * @param boolean $isVisible
-     * @return Image
-     */
-    public function setIsVisible($isVisible)
-    {
-        $this->isVisible = $isVisible;
-
-        return $this;
-    }
-
-    /**
-     * Get isVisible
-     *
-     * @return boolean
-     */
-    public function getIsVisible()
-    {
-        return $this->isVisible;
     }
 
     /**

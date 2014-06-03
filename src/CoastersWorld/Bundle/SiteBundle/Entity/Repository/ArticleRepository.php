@@ -4,7 +4,7 @@ namespace CoastersWorld\Bundle\SiteBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class NewsRepository extends EntityRepository
+class ArticleRepository extends EntityRepository
 {
     public function findAllOrderedByDateDesc()
     {
@@ -35,7 +35,7 @@ class NewsRepository extends EntityRepository
             ->addSelect('n.publishedAt')
             ->addSelect('image.path')
             ->addSelect('COUNT(commentaires) as nComments')
-            ->leftJoin('n.thumbnail', 'image')
+            ->leftJoin('n.image', 'image')
             ->innerJoin('n.comments', 'commentaires')
             ->addGroupBy('n.id')
             ->addOrderBy('nComments', 'DESC')

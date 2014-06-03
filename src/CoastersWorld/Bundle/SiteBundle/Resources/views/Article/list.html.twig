@@ -1,4 +1,4 @@
-{% extends 'CoastersWorldSiteBundle:News:news-template.html.twig' %}
+{% extends 'CoastersWorldSiteBundle:Article:article-template.html.twig' %}
 
 {% block page_top_main %}Les dernières news{% endblock %}
 
@@ -9,8 +9,8 @@
             <article class="post post-large">
                 <div class="post-image single">
                     <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">
-                        {% if n.thumbnail is not null %}
-                            <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ n.thumbnail.path)|imagine_filter('news') }}" alt="">
+                        {% if n.image is not null %}
+                            <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ n.image.path)|imagine_filter('news') }}" alt="">
                         {% endif %}
                     </a>
                 </div>

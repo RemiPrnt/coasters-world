@@ -5,36 +5,55 @@ namespace CoastersWorld\Bundle\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CoastersWorld\Bundle\SiteBundle\Entity\Tag
+ * Tag
+ *
+ * @ORM\Table(name="tag")
+ * @ORM\Entity(repositoryClass="CoastersWorld\Bundle\SiteBundle\Entity\Repository\TagRepository")
  */
 class Tag
 {
     /**
-     * @var integer $id
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var string $name
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=32, unique=true, nullable=false)
      */
     private $name;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Image", mappedBy="tags")
      */
-    private $news;
+    private $images;
 
-    public function __toString()
-    {
-        return $this->name;
-    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
+     */
+    private $articles;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->news = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
@@ -71,111 +90,68 @@ class Tag
     }
 
     /**
-     * Add news
+     * Add images
      *
-     * @param CoastersWorld\Bundle\SiteBundle\Entity\News $news
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $images
      * @return Tag
      */
-    public function addNew(\CoastersWorld\Bundle\SiteBundle\Entity\News $news)
+    public function addImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $images)
     {
-        $this->news[] = $news;
+        $this->images[] = $images;
 
         return $this;
     }
 
     /**
-     * Remove news
+     * Remove images
      *
-     * @param CoastersWorld\Bundle\SiteBundle\Entity\News $news
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $images
      */
-    public function removeNew(\CoastersWorld\Bundle\SiteBundle\Entity\News $news)
+    public function removeImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $images)
     {
-        $this->news->removeElement($news);
+        $this->images->removeElement($images);
     }
-
-    /**
-     * Get news
-     *
-     * @return Doctrine\Common\Collections\Collection
-     */
-    public function getNews()
-    {
-        return $this->news;
-    }
-
-    /**
-     * Add news
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\News $news
-     * @return Tag
-     */
-    public function addNews(\CoastersWorld\Bundle\SiteBundle\Entity\News $news)
-    {
-        $this->news[] = $news;
-
-        return $this;
-    }
-
-    /**
-     * Remove news
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\News $news
-     */
-    public function removeNews(\CoastersWorld\Bundle\SiteBundle\Entity\News $news)
-    {
-        $this->news->removeElement($news);
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $image;
-
-
-    /**
-     * Add image
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $image
-     * @return Tag
-     */
-    public function addImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $image)
-    {
-        $this->image[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $image
-     */
-    public function removeImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $image)
-    {
-        $this->image->removeElement($image);
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $images;
-
 
     /**
      * Get images
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Add articles
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Article $articles
+     * @return Tag
+     */
+    public function addArticle(\CoastersWorld\Bundle\SiteBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Article $articles
+     */
+    public function removeArticle(\CoastersWorld\Bundle\SiteBundle\Entity\Article $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }

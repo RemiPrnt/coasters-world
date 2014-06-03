@@ -1,5 +1,5 @@
 parameters:
-   coasters_world_news.form.news_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\NewsType
+   coasters_world_news.form.news_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\ArticleType
    coasters_world_image.form.image_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\ImageType
    coasters_world.mailer.class: CoastersWorld\Bundle\SiteBundle\Service\CoastersWorldMailer
 

@@ -5,31 +5,60 @@ namespace CoastersWorld\Bundle\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CoastersWorld\Bundle\SiteBundle\Entity\Manufacturer
+ * Manufacturer
+ *
+ * @ORM\Table(name="ref_manufacturer")
+ * @ORM\Entity
  */
 class Manufacturer
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true, nullable=false)
      */
-    private $refCoasters;
+    private $name;
 
     /**
-     * Constructor
+     * @var string
+     *
+     * @ORM\Column(name="website", type="string", length=255, unique=false, nullable=true)
      */
-    public function __construct()
+    private $website;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone_number", type="string", length=255, unique=false, nullable=true)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="place", type="string", length=255, unique=false, nullable=true)
+     */
+    private $place;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
     {
-        $this->refCoasters = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->id;
     }
 
     /**
@@ -48,70 +77,12 @@ class Manufacturer
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
         return $this->name;
     }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add refCoasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters
-     * @return Manufacturer
-     */
-    public function addRefCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters)
-    {
-        $this->refCoasters[] = $refCoasters;
-
-        return $this;
-    }
-
-    /**
-     * Remove refCoasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters
-     */
-    public function removeRefCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters)
-    {
-        $this->refCoasters->removeElement($refCoasters);
-    }
-
-    /**
-     * Get refCoasters
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRefCoasters()
-    {
-        return $this->refCoasters;
-    }
-    /**
-     * @var string
-     */
-    private $website;
-
-    /**
-     * @var string
-     */
-    private $phoneNumber;
-
-    /**
-     * @var string
-     */
-    private $place;
-
 
     /**
      * Set website

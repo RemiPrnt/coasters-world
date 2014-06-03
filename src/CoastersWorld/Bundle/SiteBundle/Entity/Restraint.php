@@ -6,30 +6,36 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Restraint
+ *
+ * @ORM\Table(name="ref_restraint")
+ * @ORM\Entity
  */
 class Restraint
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true, nullable=false)
      */
-    private $refCoasters;
+    private $name;
 
     /**
-     * Constructor
+     * Get id
+     *
+     * @return integer 
      */
-    public function __construct()
+    public function getId()
     {
-        $this->refCoasters = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->id;
     }
 
     /**
@@ -48,53 +54,10 @@ class Restraint
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add refCoasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters
-     * @return Restraint
-     */
-    public function addRefCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters)
-    {
-        $this->refCoasters[] = $refCoasters;
-
-        return $this;
-    }
-
-    /**
-     * Remove refCoasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters
-     */
-    public function removeRefCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters)
-    {
-        $this->refCoasters->removeElement($refCoasters);
-    }
-
-    /**
-     * Get refCoasters
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRefCoasters()
-    {
-        return $this->refCoasters;
     }
 }

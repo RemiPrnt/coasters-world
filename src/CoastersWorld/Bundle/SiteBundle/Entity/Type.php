@@ -6,30 +6,52 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Type
+ *
+ * @ORM\Table(name="ref_type")
+ * @ORM\Entity
  */
 class Type
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true, nullable=false)
      */
-    private $refCoasters;
+    private $name;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="ObjectCoaster", mappedBy="types")
+     */
+    private $objectCoasters;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->refCoasters = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->objectCoasters = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -56,45 +78,35 @@ class Type
     }
 
     /**
-     * Get id
+     * Add objectCoasters
      *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add refCoasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoasters
      * @return Type
      */
-    public function addRefCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters)
+    public function addObjectCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoasters)
     {
-        $this->refCoasters[] = $refCoasters;
+        $this->objectCoasters[] = $objectCoasters;
 
         return $this;
     }
 
     /**
-     * Remove refCoasters
+     * Remove objectCoasters
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoasters
      */
-    public function removeRefCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters)
+    public function removeObjectCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoasters)
     {
-        $this->refCoasters->removeElement($refCoasters);
+        $this->objectCoasters->removeElement($objectCoasters);
     }
 
     /**
-     * Get refCoasters
+     * Get objectCoasters
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getRefCoasters()
+    public function getObjectCoasters()
     {
-        return $this->refCoasters;
+        return $this->objectCoasters;
     }
 }

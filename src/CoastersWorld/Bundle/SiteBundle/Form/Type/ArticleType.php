@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class NewsType extends AbstractType
+class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,7 +32,7 @@ class NewsType extends AbstractType
                     ;
                 },
             ))
-            ->add('thumbnail', new ImageNewsType(), array(
+            ->add('image', new ImageNewsType(), array(
                 'required' => false,
                 'label' => 'Image à la une',
                 'om' => $objectManager

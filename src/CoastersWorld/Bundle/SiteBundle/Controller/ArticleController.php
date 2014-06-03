@@ -3,7 +3,7 @@
 namespace CoastersWorld\Bundle\SiteBundle\Controller;
 
 use CoastersWorld\Bundle\SiteBundle\Entity\Comment;
-use CoastersWorld\Bundle\SiteBundle\Entity\News;
+use CoastersWorld\Bundle\SiteBundle\Entity\Article;
 use CoastersWorld\Bundle\SiteBundle\Form\Type\CommentType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,13 +12,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class NewsController extends Controller
+class ArticleController extends Controller
 {
     public function listAction($page)
     {
         $queryNews = $this->getDoctrine()
             ->getManager()
-            ->getRepository('CoastersWorldSiteBundle:News')
+            ->getRepository('CoastersWorldSiteBundle:Article')
             ->findAllOrderedByDateDesc()
         ;
 
@@ -28,14 +28,14 @@ class NewsController extends Controller
             $page,
             5
         );
-        $listNews->setTemplate('CoastersWorldSiteBundle:News:pagination.html.twig');
+        $listNews->setTemplate('CoastersWorldSiteBundle:Article:pagination.html.twig');
         $listNews->setUsedRoute('coasters_world_news_list');
 
         if (count($listNews) == 0) {
             //@todo exception
         }
 
-        return $this->render('CoastersWorldSiteBundle:News:list.html.twig', array(
+        return $this->render('CoastersWorldSiteBundle:Article:list.html.twig', array(
             'listNews' => $listNews
         ));
     }
@@ -51,10 +51,10 @@ class NewsController extends Controller
         $tags = $om->getRepository('CoastersWorldSiteBundle:Tag')->findAllArray();
 
         if (null !== $id) {
-            $news = $om->getRepository('CoastersWorldSiteBundle:News')->find($id);
+            $news = $om->getRepository('CoastersWorldSiteBundle:Article')->find($id);
             $action = $this->generateUrl('coasters_world_news_edit', array('id' => $id));
         } else {
-            $news = new News();
+            $news = new Article();
             $action = $this->generateUrl('coasters_world_news_new');
         }
 
@@ -79,7 +79,7 @@ class NewsController extends Controller
             return $this->redirect($this->generateUrl('coasters_world_news_view', array('slug' => $news->getSlug())));
         }
 
-        return $this->render('CoastersWorldSiteBundle:News:edit.html.twig', array(
+        return $this->render('CoastersWorldSiteBundle:Article:edit.html.twig', array(
             'form' => $form->createView(),
             'news' => $news,
             'tags' => $tags,
@@ -90,15 +90,15 @@ class NewsController extends Controller
     {
         $news = $this->getDoctrine()
             ->getManager()
-            ->getRepository('CoastersWorldSiteBundle:News')
+            ->getRepository('CoastersWorldSiteBundle:Article')
             ->findOneBy(array('slug' => $slug))
         ;
 
         if (count($news) == 0) {
-            throw new NotFoundHttpException("No news was found");
+            throw new NotFoundHttpException("No article was found");
         }
 
-        return $this->render('CoastersWorldSiteBundle:News:view.html.twig', array(
+        return $this->render('CoastersWorldSiteBundle:Article:view.html.twig', array(
             'news' => $news
         ));
     }
@@ -107,11 +107,11 @@ class NewsController extends Controller
     {
         $news = $this->getDoctrine()
             ->getManager()
-            ->getRepository('CoastersWorldSiteBundle:News')
+            ->getRepository('CoastersWorldSiteBundle:Article')
             ->findLatest($number)
         ;
 
-        return $this->render('CoastersWorldSiteBundle:News:sidebar.html.twig', array(
+        return $this->render('CoastersWorldSiteBundle:Article:sidebar.html.twig', array(
             'news' => $news,
             'title' => 'news.latest'
         ));
@@ -121,11 +121,11 @@ class NewsController extends Controller
     {
         $news = $this->getDoctrine()
             ->getManager()
-            ->getRepository('CoastersWorldSiteBundle:News')
+            ->getRepository('CoastersWorldSiteBundle:Article')
             ->findMostPopular($number)
         ;
 
-        return $this->render('CoastersWorldSiteBundle:News:sidebar.html.twig', array(
+        return $this->render('CoastersWorldSiteBundle:Article:sidebar.html.twig', array(
             'news' => $news,
             'title' => 'news.popular'
         ));
@@ -148,7 +148,7 @@ class NewsController extends Controller
 
         $qb = $this->getDoctrine()
             ->getManager()
-            ->getRepository('CoastersWorldSiteBundle:News')
+            ->getRepository('CoastersWorldSiteBundle:Article')
             ->searchByTitle($term)
         ;
 

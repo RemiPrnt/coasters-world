@@ -2,99 +2,151 @@
 
 namespace CoastersWorld\Bundle\SiteBundle\Entity;
 
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * CoastersWorld\Bundle\SiteBundle\Entity\User
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
-class User implements AdvancedUserInterface, \Serializable
+class User implements UserInterface, \Serializable
 {
-
     const ROLE_DEFAULT = 'ROLE_USER';
 
     /**
-     * @var string $username
-     */
-    private $username;
-
-    /**
-     * @var string $password
-     */
-    private $password;
-
-    /**
-     * @var string $salt
-     */
-    private $salt;
-
-    /**
-     * @var string $activationKey
-     */
-    private $activationKey;
-
-    /**
-     * @var string $changePasswordKey
-     */
-    private $changePasswordKey;
-
-    /**
-     * @var string $changePasswordDate
-     */
-    private $changePasswordDate;
-
-    /**
-     * @var string $email
-     */
-    private $email;
-
-    /**
-     * @var \DateTime $createdAt
-     */
-    private $createdAt;
-
-    /**
-     * @var boolean $isActive
-     */
-    private $isActive;
-
-    /**
-     * @var boolean $isVerified
-     */
-    private $isVerified;
-
-    /**
-     * @var boolean $isLocked
-     */
-    private $isLocked;
-
-    /**
-     * @var integer $id
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=32, unique=true, nullable=false)
      */
-    private $group;
+    private $username;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=false)
      */
-    private $comments;
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=32, unique=false, nullable=false)
+     */
+    private $salt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=128, unique=false, nullable=false)
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="activation_key", type="string", length=32, unique=false, nullable=true)
+     */
+    private $activationKey;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="change_password_key", type="string", length=32, unique=false, nullable=true)
+     */
+    private $changePasswordKey;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="change_password_date", type="datetime", unique=false, nullable=true)
+     */
+    private $changePasswordDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", unique=false, nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enabled", type="boolean", nullable=false)
+     */
+    private $enabled;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="verified", type="boolean", nullable=false)
+     */
+    private $verified;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="locked", type="boolean", nullable=false)
+     */
+    private $locked;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Coaster", mappedBy="users")
+     */
+    private $coasters;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
+     */
+    private $groups;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->group = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->isActive = true;
+        $this->coasters = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->enabled = true;
+        $this->verified = false;
+        $this->locked = false;
         $this->salt = md5(uniqid(null, true));
         $this->activationKey = md5(uniqid(null, true));
-        $this->isVerified = false;
-        $this->isLocked = false;
-        $this->createdAt = new \DateTime;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -121,26 +173,26 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set password
+     * Set email
      *
-     * @param string $password
+     * @param string $email
      * @return User
      */
-    public function setPassword($password)
+    public function setEmail($email)
     {
-        $this->password = $password;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get password
+     * Get email
      *
      * @return string
      */
-    public function getPassword()
+    public function getEmail()
     {
-        return $this->password;
+        return $this->email;
     }
 
     /**
@@ -167,26 +219,95 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set email
+     * Set password
      *
-     * @param string $email
+     * @param string $password
      * @return User
      */
-    public function setEmail($email)
+    public function setPassword($password)
     {
-        $this->email = $email;
+        $this->password = $password;
 
         return $this;
     }
 
     /**
-     * Get email
+     * Get password
      *
      * @return string
      */
-    public function getEmail()
+    public function getPassword()
     {
-        return $this->email;
+        return $this->password;
+    }
+
+    /**
+     * Set activationKey
+     *
+     * @param string $activationKey
+     * @return User
+     */
+    public function setActivationKey($activationKey)
+    {
+        $this->activationKey = $activationKey;
+
+        return $this;
+    }
+
+    /**
+     * Get activationKey
+     *
+     * @return string
+     */
+    public function getActivationKey()
+    {
+        return $this->activationKey;
+    }
+
+    /**
+     * Set changePasswordKey
+     *
+     * @param string $changePasswordKey
+     * @return User
+     */
+    public function setChangePasswordKey($changePasswordKey)
+    {
+        $this->changePasswordKey = $changePasswordKey;
+
+        return $this;
+    }
+
+    /**
+     * Get changePasswordKey
+     *
+     * @return string
+     */
+    public function getChangePasswordKey()
+    {
+        return $this->changePasswordKey;
+    }
+
+    /**
+     * Set changePasswordDate
+     *
+     * @param \DateTime $changePasswordDate
+     * @return User
+     */
+    public function setChangePasswordDate($changePasswordDate)
+    {
+        $this->changePasswordDate = $changePasswordDate;
+
+        return $this;
+    }
+
+    /**
+     * Get changePasswordDate
+     *
+     * @return \DateTime
+     */
+    public function getChangePasswordDate()
+    {
+        return $this->changePasswordDate;
     }
 
     /**
@@ -213,69 +334,138 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set isActive
+     * Set enabled
      *
-     * @param boolean $isActive
+     * @param boolean $enabled
      * @return User
      */
-    public function setIsActive($isActive)
+    public function setEnabled($enabled)
     {
-        $this->isActive = $isActive;
+        $this->enabled = $enabled;
 
         return $this;
     }
 
     /**
-     * Get isActive
+     * Get enabled
      *
      * @return boolean
      */
-    public function getIsActive()
+    public function getEnabled()
     {
-        return $this->isActive;
+        return $this->enabled;
     }
 
     /**
-     * Get id
+     * Set verified
      *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add group
-     *
-     * @param CoastersWorld\Bundle\SiteBundle\Entity\Group $group
+     * @param boolean $verified
      * @return User
      */
-    public function addGroup(\CoastersWorld\Bundle\SiteBundle\Entity\Group $group)
+    public function setVerified($verified)
     {
-        $this->group[] = $group;
+        $this->verified = $verified;
 
         return $this;
     }
 
     /**
-     * Remove group
+     * Get verified
      *
-     * @param CoastersWorld\Bundle\SiteBundle\Entity\Group $group
+     * @return boolean
      */
-    public function removeGroup(\CoastersWorld\Bundle\SiteBundle\Entity\Group $group)
+    public function getVerified()
     {
-        $this->group->removeElement($group);
+        return $this->verified;
     }
 
     /**
-     * Get group
+     * Set locked
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @param boolean $locked
+     * @return User
      */
-    public function getGroup()
+    public function setLocked($locked)
     {
-        return $this->group;
+        $this->locked = $locked;
+
+        return $this;
+    }
+
+    /**
+     * Get locked
+     *
+     * @return boolean
+     */
+    public function getLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * Add coasters
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
+     * @return User
+     */
+    public function addCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
+    {
+        $this->coasters[] = $coasters;
+
+        return $this;
+    }
+
+    /**
+     * Remove coasters
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
+     */
+    public function removeCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
+    {
+        $this->coasters->removeElement($coasters);
+    }
+
+    /**
+     * Get coasters
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCoasters()
+    {
+        return $this->coasters;
+    }
+
+    /**
+     * Add groups
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Group $groups
+     * @return User
+     */
+    public function addGroup(\CoastersWorld\Bundle\SiteBundle\Entity\Group $groups)
+    {
+        $this->groups[] = $groups;
+
+        return $this;
+    }
+
+    /**
+     * Remove groups
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Group $groups
+     */
+    public function removeGroup(\CoastersWorld\Bundle\SiteBundle\Entity\Group $groups)
+    {
+        $this->groups->removeElement($groups);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 
     /**
@@ -283,7 +473,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getRoles()
     {
-        foreach ($this->getGroup() as $group) {
+        foreach ($this->getGroups() as $group) {
             $roles[] = $group->getRole();
         }
 
@@ -318,293 +508,5 @@ class User implements AdvancedUserInterface, \Serializable
         list (
             $this->id,
         ) = unserialize($serialized);
-    }
-
-    /**
-     * Add comments
-     *
-     * @param \CoastersWorld\BundleNewsBundle\Entity\Comment $comments
-     * @return User
-     */
-    public function addComment(\CoastersWorld\Bundle\SiteBundle\Entity\Comment $comments)
-    {
-        $this->comments[] = $comments;
-
-        return $this;
-    }
-
-    /**
-     * Remove comments
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Comment $comments
-     */
-    public function removeComment(\CoastersWorld\Bundle\SiteBundle\Entity\Comment $comments)
-    {
-        $this->comments->removeElement($comments);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $ratings;
-
-
-    /**
-     * Add ratings
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Rating $ratings
-     * @return User
-     */
-    public function addRating(\CoastersWorld\Bundle\SiteBundle\Entity\Rating $ratings)
-    {
-        $this->ratings[] = $ratings;
-
-        return $this;
-    }
-
-    /**
-     * Remove ratings
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Rating $ratings
-     */
-    public function removeRating(\CoastersWorld\Bundle\SiteBundle\Entity\Rating $ratings)
-    {
-        $this->ratings->removeElement($ratings);
-    }
-
-    /**
-     * Get ratings
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRatings()
-    {
-        return $this->ratings;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $refCoasters;
-
-
-    /**
-     * Add refCoasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters
-     * @return User
-     */
-    public function addRefCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters)
-    {
-        $this->refCoasters[] = $refCoasters;
-    
-        return $this;
-    }
-
-    /**
-     * Remove refCoasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters
-     */
-    public function removeRefCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\RefCoaster $refCoasters)
-    {
-        $this->refCoasters->removeElement($refCoasters);
-    }
-
-    /**
-     * Get refCoasters
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getRefCoasters()
-    {
-        return $this->refCoasters;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $coasters;
-
-
-    /**
-     * Add coasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
-     * @return User
-     */
-    public function addCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
-    {
-        $this->coasters[] = $coasters;
-
-        return $this;
-    }
-
-    /**
-     * Remove coasters
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
-     */
-    public function removeCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
-    {
-        $this->coasters->removeElement($coasters);
-    }
-
-    /**
-     * Get coasters
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCoasters()
-    {
-        return $this->coasters;
-    }
-
-    /**
-     * Set isVerified
-     *
-     * @param boolean $isVerified
-     * @return User
-     */
-    public function setIsVerified($isVerified)
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    /**
-     * Get isVerified
-     *
-     * @return boolean 
-     */
-    public function getIsVerified()
-    {
-        return $this->isVerified;
-    }
-
-    /**
-     * Set activationKey
-     *
-     * @param string $activationKey
-     * @return User
-     */
-    public function setActivationKey($activationKey)
-    {
-        $this->activationKey = $activationKey;
-
-        return $this;
-    }
-
-    /**
-     * Get activationKey
-     *
-     * @return string 
-     */
-    public function getActivationKey()
-    {
-        return $this->activationKey;
-    }
-
-    /**
-     * Set isLocked
-     *
-     * @param boolean $isLocked
-     * @return User
-     */
-    public function setIsLocked($isLocked)
-    {
-        $this->isLocked = $isLocked;
-
-        return $this;
-    }
-
-    /**
-     * Get isLocked
-     *
-     * @return boolean 
-     */
-    public function getIsLocked()
-    {
-        return $this->isLocked;
-    }
-
-
-    /**
-     * SECURITY
-     */
-
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    public function isAccountNonLocked()
-    {
-        return !$this->isLocked;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    public function isEnabled()
-    {
-        return $this->isVerified;
-    }
-
-
-    /**
-     * Set changePasswordKey
-     *
-     * @param string $changePasswordKey
-     * @return User
-     */
-    public function setChangePasswordKey($changePasswordKey)
-    {
-        $this->changePasswordKey = $changePasswordKey;
-
-        return $this;
-    }
-
-    /**
-     * Get changePasswordKey
-     *
-     * @return string 
-     */
-    public function getChangePasswordKey()
-    {
-        return $this->changePasswordKey;
-    }
-
-    /**
-     * Set changePasswordDate
-     *
-     * @param \DateTime $changePasswordDate
-     * @return User
-     */
-    public function setChangePasswordDate($changePasswordDate)
-    {
-        $this->changePasswordDate = $changePasswordDate;
-
-        return $this;
-    }
-
-    /**
-     * Get changePasswordDate
-     *
-     * @return \DateTime 
-     */
-    public function getChangePasswordDate()
-    {
-        return $this->changePasswordDate;
     }
 }

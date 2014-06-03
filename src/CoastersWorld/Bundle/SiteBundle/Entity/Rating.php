@@ -5,30 +5,65 @@ namespace CoastersWorld\Bundle\SiteBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CoastersWorld\Bundle\SiteBundle\Entity\Rating
+ * Rating
+ *
+ * @ORM\Table(name="rating")
+ * @ORM\Entity
  */
 class Rating
 {
     /**
      * @var integer
-     */
-    private $value;
-
-    /**
-     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @var \CoastersWorld\Bundle\SiteBundle\Entity\Coaster
+     * @var string
+     *
+     * @ORM\Column(name="value", type="decimal", precision=4, scale=3, unique=false, nullable=false)
+     */
+    private $value;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+    /**
+     * @var \Coaster
+     *
+     * @ORM\ManyToOne(targetEntity="Coaster", inversedBy="ratings")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="coaster_id", referencedColumnName="id")
+     * })
      */
     private $coaster;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * Set value
      *
-     * @param integer $value
+     * @param string $value
      * @return Rating
      */
     public function setValue($value)
@@ -41,7 +76,7 @@ class Rating
     /**
      * Get value
      *
-     * @return integer
+     * @return string 
      */
     public function getValue()
     {
@@ -49,13 +84,26 @@ class Rating
     }
 
     /**
-     * Get id
+     * Set user
      *
-     * @return integer
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $user
+     * @return Rating
      */
-    public function getId()
+    public function setUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $user = null)
     {
-        return $this->id;
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**
@@ -74,38 +122,10 @@ class Rating
     /**
      * Get coaster
      *
-     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Coaster
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Coaster 
      */
     public function getCoaster()
     {
         return $this->coaster;
-    }
-    /**
-     * @var \CoastersWorld\Bundle\SiteBundle\Entity\User
-     */
-    private $user;
-
-
-    /**
-     * Set user
-     *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $user
-     * @return Rating
-     */
-    public function setUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \CoastersWorld\Bundle\SiteBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }
