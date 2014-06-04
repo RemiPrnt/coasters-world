@@ -81,19 +81,19 @@ liip_imagine:
                 cache_prefix: cache
     driver : imagick
     filter_sets:
-        news:
-            quality: 75
+        article:
+            quality: 80
             filters:
                 thumbnail: { size: [840, 280], mode: outbound }
-                watermark:
-                    image: Resources/public/images/watermark.png
-                    size: 0.25
-                    position: topleft
-        thumb_news:
+                # watermark:
+                    # image: Resources/public/images/watermark.png
+                    # size: 0.25
+                    # position: topleft
+        thumb_article:
             quality: 50
             filters:
                 thumbnail: { size: [50, 50], mode: outbound }
         thumb_image:
-            quality: 75
+            quality: 80
             filters:
                 thumbnail: { size: [250, 250], mode: outbound }

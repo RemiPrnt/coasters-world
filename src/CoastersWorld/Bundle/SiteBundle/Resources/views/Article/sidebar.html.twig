@@ -6,7 +6,7 @@
                 <div class="post-image">
                     <div class="img-thumbnail">
                         <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">
-                            <img src="{{ (images_path ~ article.path)|imagine_filter('thumb_news') }}" alt="">
+                            <img src="{{ (images_path ~ '/' ~ article.path)|imagine_filter('thumb_article') }}" alt="">
                         </a>
                     </div>
                 </div>

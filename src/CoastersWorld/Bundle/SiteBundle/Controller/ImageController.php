@@ -95,8 +95,8 @@ class ImageController extends Controller
 
         foreach ($images as $image) {
             $tmp = $image;
-            $tmp['src_thumb'] = $this->get('liip_imagine.cache.manager')->generateUrl($prefix.'/'.$image['path'], 'thumb_news');
-            $tmp['src_news'] = $this->get('liip_imagine.cache.manager')->generateUrl($prefix.'/'.$image['path'], 'news');
+            $tmp['src_thumb'] = $this->get('liip_imagine.cache.manager')->generateUrl($prefix.'/'.$image['path'], 'thumb_article');
+            $tmp['src_news'] = $this->get('liip_imagine.cache.manager')->generateUrl($prefix.'/'.$image['path'], 'article');
 
             $return[] = $tmp;
         }
