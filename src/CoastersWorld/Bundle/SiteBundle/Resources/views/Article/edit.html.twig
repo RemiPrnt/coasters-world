@@ -1,10 +1,8 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}{{ 'news.title.create'|trans }}{% endblock %}
+{% block title %}{{ 'article.title.create'|trans }}{% endblock %}
 
-{% block page_top_main %}Rédiger une news{% endblock %}
-
-{% form_theme form with '::fields.html.twig' %}
+{% block page_top_main %}Rédiger un article{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -26,17 +24,17 @@
                             {{ form_row(form.coaster, {'attr': {'class': 'input-block-level'}}) }}
                             {{ form_row(form.image, {'attr': {'class': 'input-block-level'}}) }}
                             <div id="image-previ">
-                                {% if news.image %}
-                                    <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ news.image.path)|imagine_filter('news') }}" alt="">
+                                {% if article.image %}
+                                    <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ article.image.path)|imagine_filter('news') }}" alt="">
                                 {% endif %}
                             </div>
 
                             {{ form_rest(form) }}
-                            <input type="submit" value="{{ 'news.save'|trans }}" class="btn btn-primary btn-lg" data-loading-text="Loading...">
-                            <input type="submit" value="{{ 'news.disable'|trans }}" class="btn btn-danger btn-lg" data-loading-text="Loading...">
+                            <input type="submit" value="{{ 'article.save'|trans }}" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+                            <input type="submit" value="{{ 'article.disable'|trans }}" class="btn btn-danger btn-lg" data-loading-text="Loading...">
                         {{ form_end(form) }}
                     </div>
-                    <div id="news-previ" class="tab-pane"></div>
+                    <div id="article-previ" class="tab-pane"></div>
                 </div>
             </div>
         </div>

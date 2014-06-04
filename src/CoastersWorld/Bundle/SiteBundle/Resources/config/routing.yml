@@ -59,7 +59,7 @@ coasters_world_change_password_succeed:
     pattern:  /changement-mot-de-passe/succes
     defaults: { _controller: CoastersWorldSiteBundle:Security:changePasswordSucceed }
 
-######## News
+######## Article
 
 # Redirection de la première page des news vers la page d'accueil du site
 coasters_world_news_list_first_page:

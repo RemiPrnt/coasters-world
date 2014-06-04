@@ -2,41 +2,41 @@
 
 namespace CoastersWorld\Bundle\SiteBundle\Controller;
 
-use CoastersWorld\Bundle\SiteBundle\Entity\Comment;
 use CoastersWorld\Bundle\SiteBundle\Entity\Article;
+use CoastersWorld\Bundle\SiteBundle\Entity\Comment;
 use CoastersWorld\Bundle\SiteBundle\Form\Type\CommentType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ArticleController extends Controller
 {
     public function listAction($page)
     {
-        $queryNews = $this->getDoctrine()
+        $queryArticle = $this->getDoctrine()
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:Article')
             ->findAllOrderedByDateDesc()
         ;
 
         $paginator = $this->get('knp_paginator');
-        $listNews = $paginator->paginate(
-            $queryNews,
+        $articles = $paginator->paginate(
+            $queryArticle,
             $page,
             5
         );
-        $listNews->setTemplate('CoastersWorldSiteBundle:Article:pagination.html.twig');
-        $listNews->setUsedRoute('coasters_world_news_list');
+        $articles->setTemplate('CoastersWorldSiteBundle:Article:pagination.html.twig');
+        $articles->setUsedRoute('coasters_world_news_list');
 
-        if (count($listNews) == 0) {
-            //@todo exception
+        if (count($articles) == 0) {
+            throw new NotFoundHttpException("No article was found");
         }
 
         return $this->render('CoastersWorldSiteBundle:Article:list.html.twig', array(
-            'listNews' => $listNews
+            'articles' => $articles
         ));
     }
 
@@ -47,18 +47,17 @@ class ArticleController extends Controller
         }
 
         $om = $this->getDoctrine()->getManager();
-
         $tags = $om->getRepository('CoastersWorldSiteBundle:Tag')->findAllArray();
 
         if (null !== $id) {
-            $news = $om->getRepository('CoastersWorldSiteBundle:Article')->find($id);
+            $article = $om->getRepository('CoastersWorldSiteBundle:Article')->find($id);
             $action = $this->generateUrl('coasters_world_news_edit', array('id' => $id));
         } else {
-            $news = new Article();
+            $article = new Article();
             $action = $this->generateUrl('coasters_world_news_new');
         }
 
-        $form = $this->createForm('news_type', $news, array(
+        $form = $this->createForm('news_type', $article, array(
             'action' => $action,
             'method' => 'POST',
             'om' => $om,
@@ -67,66 +66,66 @@ class ArticleController extends Controller
         $form->handleRequest($this->getRequest());
 
         if ($form->isValid()) {
-            $news->setAuthor($this->getUser());
+            $article->setAuthor($this->getUser());
 
-            $news->setHtml(
-                $this->container->get('markdown.parser')->transformMarkdown($news->getBody())
+            $article->setHtml(
+                $this->container->get('markdown.parser')->transformMarkdown($article->getBody())
             );
 
-            $om->persist($news);
+            $om->persist($article);
             $om->flush();
 
-            return $this->redirect($this->generateUrl('coasters_world_news_view', array('slug' => $news->getSlug())));
+            return $this->redirect($this->generateUrl('coasters_world_news_view', array('slug' => $article->getSlug())));
         }
 
         return $this->render('CoastersWorldSiteBundle:Article:edit.html.twig', array(
             'form' => $form->createView(),
-            'news' => $news,
+            'article' => $article,
             'tags' => $tags,
         ));
     }
 
     public function viewAction($slug)
     {
-        $news = $this->getDoctrine()
+        $article = $this->getDoctrine()
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:Article')
             ->findOneBy(array('slug' => $slug))
         ;
 
-        if (count($news) == 0) {
+        if (count($article) == 0) {
             throw new NotFoundHttpException("No article was found");
         }
 
         return $this->render('CoastersWorldSiteBundle:Article:view.html.twig', array(
-            'news' => $news
+            'article' => $article
         ));
     }
 
     public function latestAction($number = 5)
     {
-        $news = $this->getDoctrine()
+        $articles = $this->getDoctrine()
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:Article')
             ->findLatest($number)
         ;
 
         return $this->render('CoastersWorldSiteBundle:Article:sidebar.html.twig', array(
-            'news' => $news,
+            'articles' => $articles,
             'title' => 'news.latest'
         ));
     }
 
     public function mostPopularAction($number = 5)
     {
-        $news = $this->getDoctrine()
+        $articles = $this->getDoctrine()
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:Article')
             ->findMostPopular($number)
         ;
 
         return $this->render('CoastersWorldSiteBundle:Article:sidebar.html.twig', array(
-            'news' => $news,
+            'articles' => $articles,
             'title' => 'news.popular'
         ));
     }

@@ -2,49 +2,48 @@
 
 {% block page_top_main %}Les dernières news{% endblock %}
 
-{% block newscontent %}
-
+{% block articleContent %}
     <div class="blog-posts">
-        {% for n in listNews %}
+        {% for article in articles %}
             <article class="post post-large">
                 <div class="post-image single">
-                    <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">
-                        {% if n.image is not null %}
-                            <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ n.image.path)|imagine_filter('news') }}" alt="">
+                    <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">
+                        {% if article.image is not null %}
+                            <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ article.image.path)|imagine_filter('news') }}" alt="">
                         {% endif %}
                     </a>
                 </div>
 
                 <div class="post-date">
-                    <span class="day">{{ n.publishedAt|date("d") }}</span>
+                    <span class="day">{{ article.publishedAt|date("d") }}</span>
                     <span class="month">
-                        {{ n.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'MMM')|capitalize }}
+                        {{ article.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'MMM')|capitalize }}
                     </span>
                 </div>
 
                 <div class="post-content">
                     <h2>
-                        <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">
-                            {{ n.title }}
+                        <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">
+                            {{ article.title }}
                         </a>
                         {% if is_granted("ROLE_NEWSER") %}
-                            <a href="{{ path('coasters_world_news_edit', { id: n.id }) }}" class="btn btn-xs btn-primary">
+                            <a href="{{ path('coasters_world_news_edit', { id: article.id }) }}" class="btn btn-xs btn-primary">
                                 <i class="icon icon-edit"></i>
                                 Editer
                             </a>
                         {% endif %}
                     </h2>
-                    <p>{{ n.html|striptags|slice(0,250) }}...</p>
+                    <p>{{ article.html|striptags|slice(0,250) }}...</p>
                     <div class="post-meta">
-                        <span><i class="icon icon-user"></i> Par {{ n.author.username }}</span>
+                        <span><i class="icon icon-user"></i> Par {{ article.author.username }}</span>
                         <span><i class="icon icon-tag"></i>
-                            {% if n.coaster is not null %}<span class="label label-default">{{ n.coaster.name }}</span>{% endif %}
-                            {% for tag in n.tags %}
+                            {% if article.coaster is not null %}<span class="label label-default">{{ article.coaster.name }}</span>{% endif %}
+                            {% for tag in article.tags %}
                                 <span class="label label-default">{{ tag }}</span>
                             {% endfor %}
                         </span>
-                        <span><i class="icon icon-comments"></i> <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}#comments">{{ n.comments|length }} commentaire(s)</a></span>
-                        <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}" class="btn btn-xs btn-primary pull-right">
+                        <span><i class="icon icon-comments"></i> <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}#comments">{{ article.comments|length }} commentaire(s)</a></span>
+                        <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}" class="btn btn-xs btn-primary pull-right">
                             Lire la suite...
                         </a>
                     </div>
@@ -52,8 +51,7 @@
             </article>
         {% endfor %}
         <div class="navigation">
-            {{ knp_pagination_render(listNews) }}
+            {{ knp_pagination_render(articles) }}
         </div>
     </div>
-
 {% endblock %}

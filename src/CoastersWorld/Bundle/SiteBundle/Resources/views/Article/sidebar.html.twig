@@ -1,20 +1,20 @@
 <h4>{{ title|trans }}</h4>
 <ul class="simple-post-list">
-	{% for n in news %}
+	{% for article in articles %}
         <li>
-            {% if n.path %}
+            {% if article.path %}
                 <div class="post-image">
                     <div class="img-thumbnail">
-                        <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">
-                            <img src="{{ (images_path ~ n.path)|imagine_filter('thumb_news') }}" alt="">
+                        <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">
+                            <img src="{{ (images_path ~ article.path)|imagine_filter('thumb_news') }}" alt="">
                         </a>
                     </div>
                 </div>
             {% endif %}
             <div class="post-info">
-                <a href="{{ path('coasters_world_news_view', { slug: n.slug }) }}">{{ n.title }}</a>
+                <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">{{ article.title }}</a>
                 <div class="post-meta">
-                	{{ n.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'd MMMM Y')|capitalize }}
+                	{{ article.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'd MMMM Y')|capitalize }}
                 </div>
             </div>
         </li>

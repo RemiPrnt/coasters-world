@@ -1,38 +1,38 @@
 {% extends 'CoastersWorldSiteBundle:Article:article-template.html.twig' %}
 
-{% block title %}{{ news.title }}{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 
 {% block page_top_main %}
-    {{ news.title }}
+    {{ article.title }}
     {% if is_granted("ROLE_NEWSER") %}
-        <a href="{{ path('coasters_world_news_edit', { id: news.id }) }}" class="btn btn-xs btn-primary">
+        <a href="{{ path('coasters_world_news_edit', { id: article.id }) }}" class="btn btn-xs btn-primary">
             <i class="icon icon-edit"></i>
             Editer
         </a>
     {% endif %}
 {% endblock %}
 
-{% block newscontent %}
+{% block articleContent %}
     <div class="blog-posts single-post">
         <article class="post post-large">
 
             <div class="post-image single">
-                <a href="{{ path('coasters_world_news_view', { slug: news.slug }) }}">
-                    {% if news.image is not null %}
-                        <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ news.image.path)|imagine_filter('news') }}" alt="">
+                <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">
+                    {% if article.image is not null %}
+                        <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ article.image.path)|imagine_filter('news') }}" alt="">
                     {% endif %}
                 </a>
             </div>
 
             <div class="post-date">
-                <span class="day">{{ news.publishedAt|date("d") }}</span>
+                <span class="day">{{ article.publishedAt|date("d") }}</span>
                 <span class="month">
-                    {{ news.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'MMM')|capitalize }}
+                    {{ article.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'MMM')|capitalize }}
                 </span>
             </div>
 
             <div class="post-content">
-                {{ news.html|raw }}
+                {{ article.html|raw }}
 
                 <!-- <div class="addthis_toolbox addthis_default_style " style="float:right">
                     <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -41,24 +41,24 @@
                 <!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>-->
 
                 <div class="post-meta">
-                    {% if news.author is not null %}
-                        <span><i class="icon icon-user"></i> Par {{ news.author.username }}</span>
+                    {% if article.author is not null %}
+                        <span><i class="icon icon-user"></i> Par {{ article.author.username }}</span>
                     {% endif %}
-                    {% if news.coaster is not null %}
+                    {% if article.coaster is not null %}
                         <span><i class="icon icon-tag"></i>
-                            <span class="label label-default">{{ news.coaster.name }}</span>
-                            {% for tag in news.tags %}
+                            <span class="label label-default">{{ article.coaster.name }}</span>
+                            {% for tag in article.tags %}
                                 <span class="label label-default">{{ tag }}</span>
                             {% endfor %}
                         </span>
                     {% endif %}
-                    <span><i class="icon icon-comments"></i> <a href="#comments">{{ news.comments|length }} commentaire(s)</a></span>
+                    <span><i class="icon icon-comments"></i> <a href="#comments">{{ article.comments|length }} commentaire(s)</a></span>
                 </div>
             </div>
 
-            {% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': news.comments } only %}
+            {% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': article.comments } only %}
 
-            {{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': news.id })) }}
+            {{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': article.id })) }}
 
         </article>
     </div>
