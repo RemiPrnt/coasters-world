@@ -26,7 +26,7 @@ class ArticleController extends Controller
             5
         );
         $articles->setTemplate('CoastersWorldSiteBundle:Article:pagination.html.twig');
-        $articles->setUsedRoute('coasters_world_news_list');
+        $articles->setUsedRoute('cw_article_list');
 
         if (count($articles) == 0) {
             throw new NotFoundHttpException("No article was found");
@@ -48,10 +48,10 @@ class ArticleController extends Controller
 
         if (null !== $id) {
             $article = $om->getRepository('CoastersWorldSiteBundle:Article')->find($id);
-            $action = $this->generateUrl('coasters_world_news_edit', array('id' => $id));
+            $action = $this->generateUrl('cw_article_edit', array('id' => $id));
         } else {
             $article = new Article();
-            $action = $this->generateUrl('coasters_world_news_new');
+            $action = $this->generateUrl('cw_article_new');
         }
 
         $form = $this->createForm('article_type', $article, array(
@@ -72,7 +72,7 @@ class ArticleController extends Controller
             $om->persist($article);
             $om->flush();
 
-            return $this->redirect($this->generateUrl('coasters_world_news_view', array('slug' => $article->getSlug())));
+            return $this->redirect($this->generateUrl('cw_article_view', array('slug' => $article->getSlug())));
         }
 
         return $this->render('CoastersWorldSiteBundle:Article:edit.html.twig', array(

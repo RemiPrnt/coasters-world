@@ -60,39 +60,39 @@ coasters_world_change_password_succeed:
 
 ######## Article
 # Redirection de la première page des news vers la page d'accueil du site
-coasters_world_news_list_first_page:
+cw_article_list_first_page:
     pattern: /news
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: coasters_world_homepage
         permanent: false
 
-coasters_world_news_list_first_page_duplicate:
+cw_article_list_first_page_duplicate:
     pattern: /news/page/1
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: coasters_world_homepage
         permanent: false
 
-# Liste des news
-coasters_world_news_list:
+# Liste des articles
+cw_article_list:
     pattern:  /news/page/{page}
     defaults: { _controller: CoastersWorldSiteBundle:Article:list, page: 1 }
     requirements:
         page: \d+
 
-# Création d'une news
-coasters_world_news_new:
+# Création d'un article
+cw_article_new:
     pattern:  /news/new
     defaults: { _controller: CoastersWorldSiteBundle:Article:edit }
 
-# Modification d'une news
-coasters_world_news_edit:
+# Modification d'un article
+cw_article_edit:
     pattern:  /news/edit/{id}
     defaults: { _controller: CoastersWorldSiteBundle:Article:edit }
 
 # Création d'un commentaire
-coasters_world_news_comment_create:
+cw_article_comment_create:
     pattern:  /news/comment/{id}
     defaults: { _controller: CoastersWorldSiteBundle:Comment:create }
     requirements:
@@ -100,21 +100,21 @@ coasters_world_news_comment_create:
         id: \d+
 
 # Conversion markdown to html
-cw_news_md_to_html_ajax:
+cw_article_md_to_html_ajax:
     pattern:  /news/convert-markdown
     defaults: { _controller: CoastersWorldSiteBundle:Article:convertMarkdown }
     requirements:
         _method:  POST
 
-# Recherche de news (ajax)
-cw_news_search_ajax:
+# Recherche d'articles (ajax)
+cw_article_search_ajax:
     pattern: /news/search
     defaults: { _controller: CoastersWorldSiteBundle:Article:search }
     requirements:
         _method:  POST
 
-# Affichage d'une news
-coasters_world_news_view:
+# Affichage d'un article
+cw_article_view:
     pattern:  /news/{slug}
     defaults: { _controller: CoastersWorldSiteBundle:Article:view }
     requirements:

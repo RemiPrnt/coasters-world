@@ -5,14 +5,14 @@
             {% if article.path %}
                 <div class="post-image">
                     <div class="img-thumbnail">
-                        <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">
+                        <a href="{{ path('cw_article_view', { slug: article.slug }) }}">
                             <img src="{{ (images_path ~ '/' ~ article.path)|imagine_filter('thumb_article') }}" alt="">
                         </a>
                     </div>
                 </div>
             {% endif %}
             <div class="post-info">
-                <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">{{ article.title }}</a>
+                <a href="{{ path('cw_article_view', { slug: article.slug }) }}">{{ article.title }}</a>
                 <div class="post-meta">
                 	{{ article.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'd MMMM Y')|capitalize }}
                 </div>

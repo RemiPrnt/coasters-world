@@ -82,7 +82,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "{{ path('cw_news_md_to_html_ajax') }}",
+                        url: "{{ path('cw_article_md_to_html_ajax') }}",
                         data: { markdown: $('textarea#article_type_body').val() },
                         beforeSend: function() {
                             $("#article-previ").html(imgLoading);

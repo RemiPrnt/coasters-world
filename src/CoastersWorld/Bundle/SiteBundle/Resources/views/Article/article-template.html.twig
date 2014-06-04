@@ -29,7 +29,7 @@
                 minimumInputLength: 2,
                 data:{ text: "title" },
                 ajax: {
-                    url: "{{ path('cw_news_search_ajax') }}",
+                    url: "{{ path('cw_article_search_ajax') }}",
                     dataType: 'json',
                     type: "POST",
                     quietMillis: 200,
@@ -44,7 +44,7 @@
                 formatSelection: function (data) { return data.title; },
             })
             .on("select2-selecting", function(e) {
-            	var uri = "{{ path('coasters_world_news_view', {slug: '§'}) }}";
+            	var uri = "{{ path('cw_article_view', {slug: '§'}) }}";
                 uri = uri.replace(encodeURI('§'), e.object.slug);
                 window.location.href = uri;
             });

@@ -7,7 +7,7 @@
         {% for article in articles %}
             <article class="post post-large">
                 <div class="post-image single">
-                    <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">
+                    <a href="{{ path('cw_article_view', { slug: article.slug }) }}">
                         {% if article.image is not null %}
                             <img class="img-thumbnail" src="{{ (images_path ~ '/' ~ article.image.path)|imagine_filter('article') }}" alt="">
                         {% endif %}
@@ -23,11 +23,11 @@
 
                 <div class="post-content">
                     <h2>
-                        <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}">
+                        <a href="{{ path('cw_article_view', { slug: article.slug }) }}">
                             {{ article.title }}
                         </a>
                         {% if is_granted("ROLE_NEWSER") %}
-                            <a href="{{ path('coasters_world_news_edit', { id: article.id }) }}" class="btn btn-xs btn-primary">
+                            <a href="{{ path('cw_article_edit', { id: article.id }) }}" class="btn btn-xs btn-primary">
                                 <i class="icon icon-edit"></i>
                                 Editer
                             </a>
@@ -42,8 +42,8 @@
                                 <span class="label label-default">{{ tag }}</span>
                             {% endfor %}
                         </span>
-                        <span><i class="icon icon-comments"></i> <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}#comments">{{ article.comments|length }} commentaire(s)</a></span>
-                        <a href="{{ path('coasters_world_news_view', { slug: article.slug }) }}" class="btn btn-xs btn-primary pull-right">
+                        <span><i class="icon icon-comments"></i> <a href="{{ path('cw_article_view', { slug: article.slug }) }}#comments">{{ article.comments|length }} commentaire(s)</a></span>
+                        <a href="{{ path('cw_article_view', { slug: article.slug }) }}" class="btn btn-xs btn-primary pull-right">
                             Lire la suite...
                         </a>
                     </div>

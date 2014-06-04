@@ -13,7 +13,7 @@ class CommentController extends Controller
         $article = $this->getArticle($id);
 
         if (! $this->get('security.context')->isGranted('ROLE_USER')) {
-            $uri = $this->get('router')->generate('coasters_world_news_view', array('slug' => $article->getSlug()), true);
+            $uri = $this->get('router')->generate('cw_article_view', array('slug' => $article->getSlug()), true);
             $this->getRequest()->getSession()->set('_security.secured_area.target_path', $uri);
 
             return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
@@ -23,7 +23,7 @@ class CommentController extends Controller
         $comment->setArticle($article);
         $comment->setAuthor($this->getUser());
         $form = $this->createForm(new CommentType(), $comment, array(
-            'action' => $this->generateUrl('coasters_world_news_comment_create', array('id' => $id)),
+            'action' => $this->generateUrl('cw_article_comment_create', array('id' => $id)),
             'method' => 'POST',
         ));
 
@@ -50,7 +50,7 @@ class CommentController extends Controller
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('coasters_world_news_view', array(
+            return $this->redirect($this->generateUrl('cw_article_view', array(
                 'slug' => $article->getSlug()
             )));
         }
