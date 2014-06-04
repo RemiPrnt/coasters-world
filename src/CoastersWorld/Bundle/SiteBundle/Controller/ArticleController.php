@@ -3,14 +3,11 @@
 namespace CoastersWorld\Bundle\SiteBundle\Controller;
 
 use CoastersWorld\Bundle\SiteBundle\Entity\Article;
-use CoastersWorld\Bundle\SiteBundle\Entity\Comment;
-use CoastersWorld\Bundle\SiteBundle\Form\Type\CommentType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ArticleController extends Controller
 {

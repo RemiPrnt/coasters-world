@@ -63,7 +63,7 @@ class Park
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +73,7 @@ class Park
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Park
      */
     public function setName($name)
@@ -86,7 +86,7 @@ class Park
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -96,7 +96,7 @@ class Park
     /**
      * Set website
      *
-     * @param string $website
+     * @param  string $website
      * @return Park
      */
     public function setWebsite($website)
@@ -109,7 +109,7 @@ class Park
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -119,7 +119,7 @@ class Park
     /**
      * Set country
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Country $country
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Country $country
      * @return Park
      */
     public function setCountry(\CoastersWorld\Bundle\SiteBundle\Entity\Country $country = null)
@@ -132,7 +132,7 @@ class Park
     /**
      * Get country
      *
-     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Country 
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -142,7 +142,7 @@ class Park
     /**
      * Add coasters
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
      * @return Park
      */
     public function addCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
@@ -165,7 +165,7 @@ class Park
     /**
      * Get coasters
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCoasters()
     {

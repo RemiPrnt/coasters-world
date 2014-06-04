@@ -76,7 +76,7 @@ class Comment
     /**
      * Set body
      *
-     * @param string $body
+     * @param  string  $body
      * @return Comment
      */
     public function setBody($body)
@@ -99,7 +99,7 @@ class Comment
     /**
      * Set publishedAt
      *
-     * @param \DateTime $publishedAt
+     * @param  \DateTime $publishedAt
      * @return Comment
      */
     public function setPublishedAt($publishedAt)
@@ -122,7 +122,7 @@ class Comment
     /**
      * Set article
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Article $article
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Article $article
      * @return Comment
      */
     public function setArticle(\CoastersWorld\Bundle\SiteBundle\Entity\Article $article)
@@ -145,7 +145,7 @@ class Comment
     /**
      * Set author
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $author
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\User $author
      * @return Comment
      */
     public function setAuthor(\CoastersWorld\Bundle\SiteBundle\Entity\User $author)

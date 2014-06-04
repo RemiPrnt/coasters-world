@@ -41,7 +41,7 @@ class Launch
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Launch
      */
     public function setName($name)

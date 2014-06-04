@@ -6,13 +6,12 @@ use CoastersWorld\Bundle\SiteBundle\Entity\Image;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\PersistentCollection;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
 class ImageTransformer implements DataTransformerInterface
 {
-	/**
+    /**
      * @var ObjectManager
      */
     private $om;
@@ -49,7 +48,7 @@ class ImageTransformer implements DataTransformerInterface
         $image = $this->om
             ->getRepository('CoastersWorldSiteBundle:Image')
             ->findOneById($id)
-	   ;
+       ;
 
        return $image;
     }

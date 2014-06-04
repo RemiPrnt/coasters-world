@@ -148,7 +148,7 @@ class Coaster
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string  $name
      * @return Coaster
      */
     public function setName($name)
@@ -171,7 +171,7 @@ class Coaster
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string  $slug
      * @return Coaster
      */
     public function setSlug($slug)
@@ -194,7 +194,7 @@ class Coaster
     /**
      * Set openingDate
      *
-     * @param \DateTime $openingDate
+     * @param  \DateTime $openingDate
      * @return Coaster
      */
     public function setOpeningDate($openingDate)
@@ -217,7 +217,7 @@ class Coaster
     /**
      * Set closingDate
      *
-     * @param \DateTime $closingDate
+     * @param  \DateTime $closingDate
      * @return Coaster
      */
     public function setClosingDate($closingDate)
@@ -240,7 +240,7 @@ class Coaster
     /**
      * Set averageRating
      *
-     * @param string $averageRating
+     * @param  string  $averageRating
      * @return Coaster
      */
     public function setAverageRating($averageRating)
@@ -263,7 +263,7 @@ class Coaster
     /**
      * Set status
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Status $status
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Status $status
      * @return Coaster
      */
     public function setStatus(\CoastersWorld\Bundle\SiteBundle\Entity\Status $status)
@@ -286,7 +286,7 @@ class Coaster
     /**
      * Set park
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Park $park
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Park $park
      * @return Coaster
      */
     public function setPark(\CoastersWorld\Bundle\SiteBundle\Entity\Park $park = null)
@@ -309,7 +309,7 @@ class Coaster
     /**
      * Set objectCoaster
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoaster
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoaster
      * @return Coaster
      */
     public function setObjectCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoaster)
@@ -332,7 +332,7 @@ class Coaster
     /**
      * Add users
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $users
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\User $users
      * @return Coaster
      */
     public function addUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $users)
@@ -365,7 +365,7 @@ class Coaster
     /**
      * Add articles
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Article $articles
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Article $articles
      * @return Coaster
      */
     public function addArticle(\CoastersWorld\Bundle\SiteBundle\Entity\Article $articles)
@@ -398,7 +398,7 @@ class Coaster
     /**
      * Add images
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $images
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Image $images
      * @return Coaster
      */
     public function addImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $images)
@@ -431,7 +431,7 @@ class Coaster
     /**
      * Add ratings
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Rating $ratings
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Rating $ratings
      * @return Coaster
      */
     public function addRating(\CoastersWorld\Bundle\SiteBundle\Entity\Rating $ratings)

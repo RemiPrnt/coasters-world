@@ -76,7 +76,7 @@ class Feedback
     /**
      * Set body
      *
-     * @param string $body
+     * @param  string   $body
      * @return Feedback
      */
     public function setBody($body)
@@ -99,7 +99,7 @@ class Feedback
     /**
      * Set publishedAt
      *
-     * @param \DateTime $publishedAt
+     * @param  \DateTime $publishedAt
      * @return Feedback
      */
     public function setPublishedAt($publishedAt)
@@ -122,7 +122,7 @@ class Feedback
     /**
      * Set coaster
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
      * @return Feedback
      */
     public function setCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster)
@@ -145,7 +145,7 @@ class Feedback
     /**
      * Set user
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $user
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\User $user
      * @return Feedback
      */
     public function setUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $user)

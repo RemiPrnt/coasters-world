@@ -3,8 +3,6 @@
 namespace CoastersWorld\Bundle\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use CoastersWorld\Bundle\SiteBundle\Form\Type\TestType;
-use CoastersWorld\Bundle\SiteBundle\Entity\Rating;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

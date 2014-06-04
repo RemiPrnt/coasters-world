@@ -138,7 +138,6 @@ class User implements UserInterface, \Serializable
         $this->createdAt = new \DateTime();
     }
 
-
     /**
      * Get id
      *
@@ -152,7 +151,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set username
      *
-     * @param string $username
+     * @param  string $username
      * @return User
      */
     public function setUsername($username)
@@ -175,7 +174,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set email
      *
-     * @param string $email
+     * @param  string $email
      * @return User
      */
     public function setEmail($email)
@@ -198,7 +197,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set salt
      *
-     * @param string $salt
+     * @param  string $salt
      * @return User
      */
     public function setSalt($salt)
@@ -221,7 +220,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set password
      *
-     * @param string $password
+     * @param  string $password
      * @return User
      */
     public function setPassword($password)
@@ -244,7 +243,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set activationKey
      *
-     * @param string $activationKey
+     * @param  string $activationKey
      * @return User
      */
     public function setActivationKey($activationKey)
@@ -267,7 +266,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set changePasswordKey
      *
-     * @param string $changePasswordKey
+     * @param  string $changePasswordKey
      * @return User
      */
     public function setChangePasswordKey($changePasswordKey)
@@ -290,7 +289,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set changePasswordDate
      *
-     * @param \DateTime $changePasswordDate
+     * @param  \DateTime $changePasswordDate
      * @return User
      */
     public function setChangePasswordDate($changePasswordDate)
@@ -313,7 +312,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return User
      */
     public function setCreatedAt($createdAt)
@@ -336,7 +335,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set enabled
      *
-     * @param boolean $enabled
+     * @param  boolean $enabled
      * @return User
      */
     public function setEnabled($enabled)
@@ -359,7 +358,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set verified
      *
-     * @param boolean $verified
+     * @param  boolean $verified
      * @return User
      */
     public function setVerified($verified)
@@ -382,7 +381,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set locked
      *
-     * @param boolean $locked
+     * @param  boolean $locked
      * @return User
      */
     public function setLocked($locked)
@@ -405,7 +404,7 @@ class User implements UserInterface, \Serializable
     /**
      * Add coasters
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
      * @return User
      */
     public function addCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)
@@ -438,7 +437,7 @@ class User implements UserInterface, \Serializable
     /**
      * Add groups
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Group $groups
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Group $groups
      * @return User
      */
     public function addGroup(\CoastersWorld\Bundle\SiteBundle\Entity\Group $groups)

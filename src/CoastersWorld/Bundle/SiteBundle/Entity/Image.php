@@ -205,7 +205,7 @@ class Image
     /**
      * Set path
      *
-     * @param string $path
+     * @param  string $path
      * @return Image
      */
     public function setPath($path)
@@ -228,7 +228,7 @@ class Image
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Image
      */
     public function setCreatedAt($createdAt)
@@ -251,7 +251,7 @@ class Image
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Image
      */
     public function setUpdatedAt($updatedAt)
@@ -274,7 +274,7 @@ class Image
     /**
      * Set visible
      *
-     * @param boolean $visible
+     * @param  boolean $visible
      * @return Image
      */
     public function setVisible($visible)
@@ -297,7 +297,7 @@ class Image
     /**
      * Set coaster
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
      * @return Image
      */
     public function setCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster = null)
@@ -320,7 +320,7 @@ class Image
     /**
      * Add tags
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags
      * @return Image
      */
     public function addTag(\CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags)

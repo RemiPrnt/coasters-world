@@ -15,6 +15,7 @@ class CommentController extends Controller
         if (! $this->get('security.context')->isGranted('ROLE_USER')) {
             $uri = $this->get('router')->generate('coasters_world_news_view', array('slug' => $article->getSlug()), true);
             $this->getRequest()->getSession()->set('_security.secured_area.target_path', $uri);
+
             return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
         }
 

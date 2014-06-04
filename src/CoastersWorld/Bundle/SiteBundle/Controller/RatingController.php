@@ -5,8 +5,6 @@ namespace CoastersWorld\Bundle\SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use CoastersWorld\Bundle\SiteBundle\Form\Type\TestType;
 use CoastersWorld\Bundle\SiteBundle\Entity\Rating;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RatingController extends Controller
 {
@@ -15,6 +13,7 @@ class RatingController extends Controller
         if (! $this->get('security.context')->isGranted('ROLE_USER')) {
             $uri = $this->get('router')->generate('coasters_world_database_view', array('slug' => $slug), true);
             $this->getRequest()->getSession()->set('_security.secured_area.target_path', $uri);
+
             return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
         }
 

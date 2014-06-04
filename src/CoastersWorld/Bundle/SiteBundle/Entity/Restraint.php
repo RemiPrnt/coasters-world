@@ -31,7 +31,7 @@ class Restraint
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -41,7 +41,7 @@ class Restraint
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string    $name
      * @return Restraint
      */
     public function setName($name)
@@ -54,7 +54,7 @@ class Restraint
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {

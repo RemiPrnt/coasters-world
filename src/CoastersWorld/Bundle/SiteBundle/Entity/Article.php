@@ -133,7 +133,7 @@ class Article
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string  $title
      * @return Article
      */
     public function setTitle($title)
@@ -156,7 +156,7 @@ class Article
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string  $slug
      * @return Article
      */
     public function setSlug($slug)
@@ -179,7 +179,7 @@ class Article
     /**
      * Set body
      *
-     * @param string $body
+     * @param  string  $body
      * @return Article
      */
     public function setBody($body)
@@ -202,7 +202,7 @@ class Article
     /**
      * Set html
      *
-     * @param string $html
+     * @param  string  $html
      * @return Article
      */
     public function setHtml($html)
@@ -225,7 +225,7 @@ class Article
     /**
      * Set publishedAt
      *
-     * @param \DateTime $publishedAt
+     * @param  \DateTime $publishedAt
      * @return Article
      */
     public function setPublishedAt($publishedAt)
@@ -248,7 +248,7 @@ class Article
     /**
      * Set coaster
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
      * @return Article
      */
     public function setCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster = null)
@@ -271,7 +271,7 @@ class Article
     /**
      * Set image
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $image
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Image $image
      * @return Article
      */
     public function setImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $image = null)
@@ -294,7 +294,7 @@ class Article
     /**
      * Set author
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $author
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\User $author
      * @return Article
      */
     public function setAuthor(\CoastersWorld\Bundle\SiteBundle\Entity\User $author)
@@ -317,7 +317,7 @@ class Article
     /**
      * Add tags
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags
      * @return Article
      */
     public function addTag(\CoastersWorld\Bundle\SiteBundle\Entity\Tag $tags)
@@ -350,7 +350,7 @@ class Article
     /**
      * Add comments
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Comment $comments
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Comment $comments
      * @return Article
      */
     public function addComment(\CoastersWorld\Bundle\SiteBundle\Entity\Comment $comments)

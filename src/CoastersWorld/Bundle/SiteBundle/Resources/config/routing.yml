@@ -32,7 +32,6 @@ coasters_world_database_view:
         slug: "[a-z0-9\-]+"
 
 ######## User
-
 coasters_world_register_succeed:
     pattern:  /inscription/succes
     defaults: { _controller: CoastersWorldSiteBundle:Security:registerSucceed }
@@ -60,7 +59,6 @@ coasters_world_change_password_succeed:
     defaults: { _controller: CoastersWorldSiteBundle:Security:changePasswordSucceed }
 
 ######## Article
-
 # Redirection de la première page des news vers la page d'accueil du site
 coasters_world_news_list_first_page:
     pattern: /news

@@ -43,7 +43,6 @@ class Type
         $this->objectCoasters = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
      * Get id
      *
@@ -57,7 +56,7 @@ class Type
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Type
      */
     public function setName($name)
@@ -80,7 +79,7 @@ class Type
     /**
      * Add objectCoasters
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoasters
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoasters
      * @return Type
      */
     public function addObjectCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\ObjectCoaster $objectCoasters)

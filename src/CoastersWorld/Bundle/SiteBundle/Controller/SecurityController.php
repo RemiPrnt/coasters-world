@@ -31,7 +31,7 @@ class SecurityController extends Controller
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
-        
+
         return $this->render(
             'CoastersWorldSiteBundle:Security:login.html.twig',
             array(
@@ -50,35 +50,31 @@ class SecurityController extends Controller
     {
         $em         = $this->getDoctrine()->getManager();
         $request    = $this->getRequest();
-        
+
         $user = new User();
         $form = $this->createForm(new RegisterType($this->get('translator')), $user);
 
-        if("POST" === $request->getMethod())
-        {
+        if ("POST" === $request->getMethod()) {
             $form->handleRequest($request);
 
             $users_repository = $em->getRepository('CoastersWorldSiteBundle:User');
             $error = false;
 
-            if($users_repository->findBy(array('username' => $user->getUsername())))
-            {
+            if ($users_repository->findBy(array('username' => $user->getUsername()))) {
                 $error = true;
                 $form->get('username')->addError(
                     new FormError('Ce pseudo est déjà utilisé. Veuillez en choisir un autre.')
                 );
             }
-            
-            if($users_repository->findBy(array('email' => $user->getEmail())))
-            {
+
+            if ($users_repository->findBy(array('email' => $user->getEmail()))) {
                 $error = true;
                 $form->get('email')->addError(
                     new FormError('Cette adresse e-mail est déjà liée à un autre compte. Veuillez en choisir une autre.')
                 );
             }
 
-            if(!$error && $form->isValid())
-            {
+            if (!$error && $form->isValid()) {
                 $user->setPassword(
                     $this->container
                          ->get('security.encoder_factory')
@@ -95,7 +91,7 @@ class SecurityController extends Controller
 
                 // Envoi de l'email contenant le lien d'activation
                 $this->get('coasters_world.mailer')->sendActivationEmail($user);
-                
+
                 return $this->redirect($this->generateUrl('coasters_world_register_succeed'));
             }
         }
@@ -116,6 +112,7 @@ class SecurityController extends Controller
         // L'utilisateur ne vient pas de s'enregister et tente d'accéder à la page
         if( !$session->getFlashBag()->has('register_succeed_username') &&
             !$session->getFlashBag()->has('register_succeed_email') )
+
             return $this->redirect(
                 $this->generateUrl('coasters_world_homepage')
             );
@@ -138,10 +135,10 @@ class SecurityController extends Controller
         $user = $users_repository->find($userid);
 
         if(is_null($user) || $user->getIsVerified())
+
             return $this->redirect($this->generateUrl('coasters_world_homepage'));
 
-        if($key === $user->getActivationKey())
-        {
+        if ($key === $user->getActivationKey()) {
             $user->setIsVerified(1);
             $user->setActivationKey(null);
             $em->persist($user);
@@ -169,6 +166,7 @@ class SecurityController extends Controller
 
          // L'utilisateur ne vient pas de s'enregister et tente d'accéder à la page
         if(!$session->getFlashBag()->has('activate_succeed_username'))
+
             return $this->redirect(
                 $this->generateUrl('coasters_world_homepage')
             );
@@ -189,6 +187,7 @@ class SecurityController extends Controller
 
         // L'email de changement de mot de passe vient d'être envoyé, affichage d'un message de confirmation
         if($session->getFlashBag()->has('password_reset_email'))
+
             return $this->render('CoastersWorldSiteBundle:Security:motdepasseoublie.html.twig', array(
                 'email' => $session->getFlashBag()->get('password_reset_email')[0]
             ));
@@ -206,8 +205,7 @@ class SecurityController extends Controller
             $user = $em->getRepository('CoastersWorldSiteBundle:User')
                        ->findOneBy(array('email' => $form->getData()['email']));
 
-            if(!is_null($user))
-            {
+            if (!is_null($user)) {
                 // Génération d'une clé et de la date de validité du changement de mot de passe
                 $user->setChangePasswordKey(md5(uniqid(null,true)));
                 $changePasswordDate = new \DateTime();
@@ -222,7 +220,7 @@ class SecurityController extends Controller
 
                 // Envoi de l'email contenant le lien vers le formulaire de changement de mot de passe
                 $this->get('coasters_world.mailer')->sendPasswordResetEmail($user);
-                
+
                 return $this->redirect(
                     $this->generateUrl('mot_de_passe_oublie')
                 );
@@ -250,16 +248,19 @@ class SecurityController extends Controller
         $user = $users_repository->find($userid);
 
         if(is_null($user))
+
             return $this->redirect(
                 $this->generateUrl('coasters_world_homepage')
             );
 
         if($key != $user->getChangePasswordKey())
+
             return $this->render('CoastersWorldSiteBundle:Security:changepassword.html.twig', array(
                 'error' => 'key'
             ));
 
         if(new \DateTime > $user->getChangePasswordDate())
+
             return $this->render('CoastersWorldSiteBundle:Security:changepassword.html.twig', array(
                 'error' => 'date'
             ));
@@ -267,8 +268,7 @@ class SecurityController extends Controller
         $form = $this->createForm(new ChangePasswordType, $user);
 
         $request = $this->getRequest();
-        if("POST" === $request->getMethod())
-        {
+        if ("POST" === $request->getMethod()) {
             $form->handleRequest($request);
 
             $user->setPassword($this->container
@@ -303,7 +303,8 @@ class SecurityController extends Controller
         $session = $this->getRequest()->getSession();
 
         // L'utilisateur ne vient pas de modifier sont mot de passe et tente d'accéder à la page
-        if(!$session->getFlashBag()->has('change_password_succeed_username')) 
+        if(!$session->getFlashBag()->has('change_password_succeed_username'))
+
             return $this->redirect(
                 $this->generateUrl('coasters_world_homepage')
             );

@@ -58,11 +58,10 @@ class Group
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -72,7 +71,7 @@ class Group
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Group
      */
     public function setName($name)
@@ -85,7 +84,7 @@ class Group
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -95,7 +94,7 @@ class Group
     /**
      * Set role
      *
-     * @param string $role
+     * @param  string $role
      * @return Group
      */
     public function setRole($role)
@@ -108,7 +107,7 @@ class Group
     /**
      * Get role
      *
-     * @return string 
+     * @return string
      */
     public function getRole()
     {
@@ -118,7 +117,7 @@ class Group
     /**
      * Add users
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $users
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\User $users
      * @return Group
      */
     public function addUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $users)
@@ -141,7 +140,7 @@ class Group
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {

@@ -49,12 +49,10 @@ class Manufacturer
      */
     private $place;
 
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -64,7 +62,7 @@ class Manufacturer
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string       $name
      * @return Manufacturer
      */
     public function setName($name)
@@ -77,7 +75,7 @@ class Manufacturer
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -87,7 +85,7 @@ class Manufacturer
     /**
      * Set website
      *
-     * @param string $website
+     * @param  string       $website
      * @return Manufacturer
      */
     public function setWebsite($website)
@@ -100,7 +98,7 @@ class Manufacturer
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -110,7 +108,7 @@ class Manufacturer
     /**
      * Set phoneNumber
      *
-     * @param string $phoneNumber
+     * @param  string       $phoneNumber
      * @return Manufacturer
      */
     public function setPhoneNumber($phoneNumber)
@@ -123,7 +121,7 @@ class Manufacturer
     /**
      * Get phoneNumber
      *
-     * @return string 
+     * @return string
      */
     public function getPhoneNumber()
     {
@@ -133,7 +131,7 @@ class Manufacturer
     /**
      * Set place
      *
-     * @param string $place
+     * @param  string       $place
      * @return Manufacturer
      */
     public function setPlace($place)
@@ -146,7 +144,7 @@ class Manufacturer
     /**
      * Get place
      *
-     * @return string 
+     * @return string
      */
     public function getPlace()
     {

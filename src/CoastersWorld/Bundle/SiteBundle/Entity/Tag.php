@@ -69,7 +69,7 @@ class Tag
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Tag
      */
     public function setName($name)
@@ -92,7 +92,7 @@ class Tag
     /**
      * Add images
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Image $images
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Image $images
      * @return Tag
      */
     public function addImage(\CoastersWorld\Bundle\SiteBundle\Entity\Image $images)
@@ -125,7 +125,7 @@ class Tag
     /**
      * Add articles
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Article $articles
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Article $articles
      * @return Tag
      */
     public function addArticle(\CoastersWorld\Bundle\SiteBundle\Entity\Article $articles)

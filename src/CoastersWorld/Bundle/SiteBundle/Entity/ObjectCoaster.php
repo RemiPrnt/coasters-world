@@ -130,7 +130,6 @@ class ObjectCoaster
         $this->coasters = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
      * Get id
      *
@@ -144,7 +143,7 @@ class ObjectCoaster
     /**
      * Set speed
      *
-     * @param string $speed
+     * @param  string        $speed
      * @return ObjectCoaster
      */
     public function setSpeed($speed)
@@ -167,7 +166,7 @@ class ObjectCoaster
     /**
      * Set height
      *
-     * @param string $height
+     * @param  string        $height
      * @return ObjectCoaster
      */
     public function setHeight($height)
@@ -190,7 +189,7 @@ class ObjectCoaster
     /**
      * Set length
      *
-     * @param string $length
+     * @param  string        $length
      * @return ObjectCoaster
      */
     public function setLength($length)
@@ -213,7 +212,7 @@ class ObjectCoaster
     /**
      * Set inversionNumber
      *
-     * @param integer $inversionNumber
+     * @param  integer       $inversionNumber
      * @return ObjectCoaster
      */
     public function setInversionNumber($inversionNumber)
@@ -236,7 +235,7 @@ class ObjectCoaster
     /**
      * Set gForce
      *
-     * @param string $gForce
+     * @param  string        $gForce
      * @return ObjectCoaster
      */
     public function setGForce($gForce)
@@ -259,7 +258,7 @@ class ObjectCoaster
     /**
      * Set duration
      *
-     * @param \DateTime $duration
+     * @param  \DateTime     $duration
      * @return ObjectCoaster
      */
     public function setDuration($duration)
@@ -282,7 +281,7 @@ class ObjectCoaster
     /**
      * Set restraint
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Restraint $restraint
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Restraint $restraint
      * @return ObjectCoaster
      */
     public function setRestraint(\CoastersWorld\Bundle\SiteBundle\Entity\Restraint $restraint = null)
@@ -305,7 +304,7 @@ class ObjectCoaster
     /**
      * Set manufacturer
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Manufacturer $manufacturer
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Manufacturer $manufacturer
      * @return ObjectCoaster
      */
     public function setManufacturer(\CoastersWorld\Bundle\SiteBundle\Entity\Manufacturer $manufacturer = null)
@@ -328,7 +327,7 @@ class ObjectCoaster
     /**
      * Add launchs
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Launch $launchs
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Launch $launchs
      * @return ObjectCoaster
      */
     public function addLaunch(\CoastersWorld\Bundle\SiteBundle\Entity\Launch $launchs)
@@ -361,7 +360,7 @@ class ObjectCoaster
     /**
      * Add types
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Type $types
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Type $types
      * @return ObjectCoaster
      */
     public function addType(\CoastersWorld\Bundle\SiteBundle\Entity\Type $types)
@@ -394,7 +393,7 @@ class ObjectCoaster
     /**
      * Add coasters
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters
      * @return ObjectCoaster
      */
     public function addCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coasters)

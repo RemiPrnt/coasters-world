@@ -28,12 +28,10 @@ class Status
      */
     private $name;
 
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -43,7 +41,7 @@ class Status
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Status
      */
     public function setName($name)
@@ -56,7 +54,7 @@ class Status
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {

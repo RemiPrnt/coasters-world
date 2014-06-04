@@ -48,12 +48,10 @@ class Rating
      */
     private $coaster;
 
-
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +61,7 @@ class Rating
     /**
      * Set value
      *
-     * @param string $value
+     * @param  string $value
      * @return Rating
      */
     public function setValue($value)
@@ -76,7 +74,7 @@ class Rating
     /**
      * Get value
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {
@@ -86,7 +84,7 @@ class Rating
     /**
      * Set user
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\User $user
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\User $user
      * @return Rating
      */
     public function setUser(\CoastersWorld\Bundle\SiteBundle\Entity\User $user = null)
@@ -99,7 +97,7 @@ class Rating
     /**
      * Get user
      *
-     * @return \CoastersWorld\Bundle\SiteBundle\Entity\User 
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\User
      */
     public function getUser()
     {
@@ -109,7 +107,7 @@ class Rating
     /**
      * Set coaster
      *
-     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
+     * @param  \CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster
      * @return Rating
      */
     public function setCoaster(\CoastersWorld\Bundle\SiteBundle\Entity\Coaster $coaster = null)
@@ -122,7 +120,7 @@ class Rating
     /**
      * Get coaster
      *
-     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Coaster 
+     * @return \CoastersWorld\Bundle\SiteBundle\Entity\Coaster
      */
     public function getCoaster()
     {

@@ -3,7 +3,6 @@
 namespace CoastersWorld\Bundle\SiteBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 class TagRepository extends EntityRepository
 {
