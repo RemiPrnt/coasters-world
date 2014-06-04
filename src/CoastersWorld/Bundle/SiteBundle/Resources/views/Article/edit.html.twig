@@ -10,14 +10,14 @@
             <div class="tabs">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#news-form" data-toggle="tab"><i class="icon icon-edit"></i> Formulaire</a>
+                        <a href="#article-form" data-toggle="tab"><i class="icon icon-edit"></i> Formulaire</a>
                     </li>
                     <li>
-                        <a href="#news-previ" data-toggle="tab"><i class="icon icon-eye"></i> Prévisualisation</a>
+                        <a href="#article-previ" data-toggle="tab"><i class="icon icon-eye"></i> Prévisualisation</a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div id="news-form" class="tab-pane active">
+                    <div id="article-form" class="tab-pane active">
                         {{ form_start(form) }}
                             {{ form_row(form.title, {'attr': {'class': 'input-block-level'}}) }}
                             {{ form_row(form.body, {'attr': {'class': 'input-block-level', 'rows': '15'}}) }}
@@ -44,9 +44,9 @@
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/select2/select2.min.js') }}"></script>
     <script type="text/javascript">
-        $('#news_type_coaster').select2();
-        $('#news_type_tags').select2({tags:[{% for tag in tags %}"{{ tag }}",{% endfor %}]});
-        $('#news_type_thumbnail').select2({
+        $('#article_type_coaster').select2();
+        $('#article_type_tags').select2({tags:[{% for tag in tags %}"{{ tag }}",{% endfor %}]});
+        $('#article_type_thumbnail').select2({
             placeholder: 'Chercher une image...',
             minimumInputLength: 2,
             ajax: {
@@ -66,7 +66,7 @@
             formatSelection: function (data) { return data.name },
         })
         .on("select2-selecting", function(e) {
-            $('#image-previ').html('<img class="img-thumbnail" src="'+e.object.src_news+'" alt="">');
+            $('#image-previ').html('<img class="img-thumbnail" src="'+e.object.src_article+'" alt="">');
         });
 
         function formatImage (data) {
@@ -77,22 +77,22 @@
         $( document ).ready(function() {
             // Prévisualisation HTML
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                if(e.target.hash == '#news-previ') {
+                if(e.target.hash == '#article-previ') {
                     var imgLoading = '<img class="center-block" src="{{ asset('bundles/coastersworldsite/vendor/mediaelement/loading.gif') }}" />';
 
                     $.ajax({
                         type: "POST",
                         url: "{{ path('cw_news_md_to_html_ajax') }}",
-                        data: { markdown: $('textarea#news_type_body').val() },
+                        data: { markdown: $('textarea#article_type_body').val() },
                         beforeSend: function() {
-                            $("#news-previ").html(imgLoading);
+                            $("#article-previ").html(imgLoading);
                         }
                     })
                     .done(function(html) {
-                        $("#news-previ").html(html);
+                        $("#article-previ").html(html);
                     })
                     .fail(function() {
-                        $("#news-previ").html('Impossible de charger la prévisualisation.');
+                        $("#article-previ").html('Impossible de charger la prévisualisation.');
                     });
                 }
             })

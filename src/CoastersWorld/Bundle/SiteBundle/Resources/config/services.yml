@@ -1,13 +1,13 @@
 parameters:
-   coasters_world_news.form.news_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\ArticleType
+   coasters_world_article.form.article_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\ArticleType
    coasters_world_image.form.image_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\ImageType
    coasters_world.mailer.class: CoastersWorld\Bundle\SiteBundle\Service\CoastersWorldMailer
 
 services:
-    coasters_world_news.form.news_type:
-       class: %coasters_world_news.form.news_type.class%
+    coasters_world_article.form.article_type:
+       class: %coasters_world_article.form.article_type.class%
        tags:
-            - { name: form.type, alias: news_type }
+            - { name: form.type, alias: article_type }
     coasters_world_image.form.image_type:
        class: %coasters_world_image.form.image_type.class%
        tags:

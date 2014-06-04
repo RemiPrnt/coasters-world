@@ -54,7 +54,7 @@ class ArticleController extends Controller
             $action = $this->generateUrl('coasters_world_news_new');
         }
 
-        $form = $this->createForm('news_type', $article, array(
+        $form = $this->createForm('article_type', $article, array(
             'action' => $action,
             'method' => 'POST',
             'om' => $om,

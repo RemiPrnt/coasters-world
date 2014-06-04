@@ -9,9 +9,9 @@
 		</div>
 
 		<div class="col-md-3">
-			{% block newssidebar %}
+			{% block articleSidebar %}
 				<aside class="sidebar">
-					<input class="form-control" name="s" id="searchNews" type="text">
+					<input class="form-control" id="articleSidebar" type="text">
 	                <hr />
 	                {{ render(controller('CoastersWorldSiteBundle:Article:mostPopular', { 'number': 3 })) }}
 	            </aside>
@@ -23,33 +23,33 @@
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/select2/select2.min.js') }}"></script>
 	<script type="text/javascript">
-    $(document).ready(function() {
-        $('#searchNews').select2({
-            placeholder: 'Chercher une news...',
-            minimumInputLength: 2,
-            data:{ text: "title" },
-            ajax: {
-                url: "{{ path('cw_news_search_ajax') }}",
-                dataType: 'json',
-                type: "POST",
-                quietMillis: 200,
-                data: function (term, page) {
-                    return {q: term};
+        $(document).ready(function() {
+            $('#articleSidebar').select2({
+                placeholder: 'Chercher une news...',
+                minimumInputLength: 2,
+                data:{ text: "title" },
+                ajax: {
+                    url: "{{ path('cw_news_search_ajax') }}",
+                    dataType: 'json',
+                    type: "POST",
+                    quietMillis: 200,
+                    data: function (term, page) {
+                        return {q: term};
+                    },
+                    results : function(data, page) {
+    		            return {results: data};
+    		        }
                 },
-                results : function(data, page) {
-		            return {results: data};
-		        }
-            },
-            formatResult: function (data) { return data.title; },
-            formatSelection: function (data) { return data.title; },
-        })
-        .on("select2-selecting", function(e) {
-        	var uri = "{{ path('coasters_world_news_view', {slug: '§'}) }}";
-            uri = uri.replace(encodeURI('§'), e.object.slug);
-            window.location.href = uri;
+                formatResult: function (data) { return data.title; },
+                formatSelection: function (data) { return data.title; },
+            })
+            .on("select2-selecting", function(e) {
+            	var uri = "{{ path('coasters_world_news_view', {slug: '§'}) }}";
+                uri = uri.replace(encodeURI('§'), e.object.slug);
+                window.location.href = uri;
+            });
         });
-    });
-</script>
+    </script>
 {% endblock %}
 
 {% block stylesheets %}

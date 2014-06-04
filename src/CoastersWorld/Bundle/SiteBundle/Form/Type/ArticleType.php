@@ -56,6 +56,6 @@ class ArticleType extends AbstractType
 
     public function getName()
     {
-        return 'news_type';
+        return 'article_type';
     }
 }
