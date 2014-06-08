@@ -58,4 +58,17 @@ class ArticleRepository extends EntityRepository
             ->setParameter('identifier', $term)
         ;
     }
+
+    public function findByTagId($id)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        return $qb
+            ->select('a')
+            ->innerJoin('a.tags', 't')
+            //->addSelect('t.id')
+            ->where($qb->expr()->like('t.id', ':identifier'))
+            ->setParameter('identifier', $id)
+        ;
+    }
 }

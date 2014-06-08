@@ -1,6 +1,6 @@
 {% extends 'CoastersWorldSiteBundle:Article:article-template.html.twig' %}
 
-{% block page_top_main %}Les dernières news{% endblock %}
+{% block page_top_main %}{{ title }}{% endblock %}
 
 {% block articleContent %}
     <div class="blog-posts">
@@ -39,7 +39,9 @@
                         <span><i class="icon icon-tag"></i>
                             {% if article.coaster is not null %}<span class="label label-default">{{ article.coaster.name }}</span>{% endif %}
                             {% for tag in article.tags %}
-                                <span class="label label-default">{{ tag }}</span>
+                                <a href="{{ path('cw_article_tag', { slug: tag.name, id: tag.id }) }}">
+                                    <span class="label label-default">{{ tag }}</span>
+                                </a>
                             {% endfor %}
                         </span>
                         <span><i class="icon icon-comments"></i> <a href="{{ path('cw_article_view', { slug: article.slug }) }}#comments">{{ article.comments|length }} commentaire(s)</a></span>

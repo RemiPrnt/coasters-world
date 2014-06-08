@@ -113,6 +113,21 @@ cw_article_search_ajax:
     requirements:
         _method:  POST
 
+cw_article_tag_first_page:
+    pattern:  /news/tag/{slug}/{id}
+    defaults: { _controller: CoastersWorldSiteBundle:Article:listTag }
+    requirements:
+        slug: "[a-zA-Z0-9\-§]+"
+        id: "\d+"
+
+cw_article_tag:
+    pattern:  /news/tag/{slug}/{id}/page/{page}
+    defaults: { _controller: CoastersWorldSiteBundle:Article:listTag, page: 1 }
+    requirements:
+        slug: "[a-zA-Z0-9\-§]+"
+        id: "\d+"
+        page: "\d+"
+
 # Affichage d'un article
 cw_article_view:
     pattern:  /news/{slug}

@@ -33,7 +33,8 @@ class ArticleController extends Controller
         }
 
         return $this->render('CoastersWorldSiteBundle:Article:list.html.twig', array(
-            'articles' => $articles
+            'articles' => $articles,
+            'title' => $this->get('translator')->trans('article.title.last')
         ));
     }
 
@@ -149,5 +150,32 @@ class ArticleController extends Controller
         ;
 
         return new JsonResponse($qb->getQuery()->getArrayResult());
+    }
+
+    public function listTagAction($slug, $id, $page = 1)
+    {
+        $queryArticle = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CoastersWorldSiteBundle:Article')
+            ->findByTagId($id)
+        ;
+
+        $paginator = $this->get('knp_paginator');
+        $articles = $paginator->paginate(
+            $queryArticle,
+            $page,
+            5
+        );
+        $articles->setTemplate('CoastersWorldSiteBundle:Article:pagination.html.twig');
+        $articles->setUsedRoute('cw_article_tag');
+
+        if (count($articles) == 0) {
+            throw new NotFoundHttpException("No article was found");
+        }
+
+        return $this->render('CoastersWorldSiteBundle:Article:list.html.twig', array(
+            'articles' => $articles,
+            'title' => $slug
+        ));
     }
 }

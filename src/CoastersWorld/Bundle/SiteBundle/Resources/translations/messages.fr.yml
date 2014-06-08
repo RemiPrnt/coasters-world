@@ -23,12 +23,13 @@ units:
     length: m
     force: G
 
-# Translation for news
-news:
-    news: News
+# Translation for articles
+article:
+    article: News
     title:
         home: Toutes les news
         create: Rédiger une news
+        last: Les dernières news
     read:
         more: Lire la suite...
     author: Posté par
