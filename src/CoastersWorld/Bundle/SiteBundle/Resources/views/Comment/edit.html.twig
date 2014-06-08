@@ -2,12 +2,14 @@
     <h3>{{ 'comments.add'|trans }}</h3>
     {{ form_start(form) }}
         {{ form_errors(form) }}
-        {{ form_row(form.body, { 'attr' : {
-            'class': 'form-control',
-            'placeholder': 'comments.here'|trans,
-            'cols': '40',
-            'rows': '5'
-        }}) }}
+        <div class="form-group">
+            {{ form_widget(form.body, { 'attr' : {
+                'class': 'form-control',
+                'placeholder': 'comments.here'|trans,
+                'cols': '40',
+                'rows': '5'
+            }}) }}
+        </div>
         {{ form_rest(form) }}
         <input type="submit" value="{{ 'comments.save'|trans }}" class="btn btn-primary btn-lg" data-loading-text="Loading...">
     {{ form_end(form) }}

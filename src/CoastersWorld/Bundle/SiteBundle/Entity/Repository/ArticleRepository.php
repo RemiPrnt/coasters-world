@@ -48,13 +48,17 @@ class ArticleRepository extends EntityRepository
 
     public function searchByTitle($term)
     {
-        $qb = $this->createQueryBuilder('n');
+        $qb = $this->createQueryBuilder('a');
 
         return $qb
-            ->select('n.title')
-            ->addSelect('n.id')
-            ->addSelect('n.slug')
-            ->where($qb->expr()->like('n.title', ':identifier'))
+            ->select('a.title')
+            ->addSelect('a.id')
+            ->addSelect('a.slug')
+            ->innerJoin('a.tags', 't')
+            ->where($qb->expr()->like('a.title', ':identifier'))
+            ->orWhere($qb->expr()->like('a.body', ':identifier'))
+            ->orWhere($qb->expr()->like('t.name', ':identifier'))
+            ->addOrderBy('a.publishedAt', 'DESC')
             ->setParameter('identifier', $term)
         ;
     }
@@ -66,7 +70,6 @@ class ArticleRepository extends EntityRepository
         return $qb
             ->select('a')
             ->innerJoin('a.tags', 't')
-            //->addSelect('t.id')
             ->where($qb->expr()->like('t.id', ':identifier'))
             ->setParameter('identifier', $id)
         ;
