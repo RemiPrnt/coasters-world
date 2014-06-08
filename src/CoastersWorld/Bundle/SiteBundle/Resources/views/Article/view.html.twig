@@ -30,14 +30,6 @@
             </div>
 
             <div class="post-content">
-                {{ article.html|raw }}
-
-                <!-- <div class="addthis_toolbox addthis_default_style " style="float:right">
-                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                    <a class="addthis_button_tweet"></a>
-                </div> -->
-                <!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>-->
-
                 <div class="post-meta">
                     {% if article.author is not null %}
                         <span><i class="icon icon-user"></i> Par {{ article.author.username }}</span>
@@ -52,12 +44,21 @@
                     {% endif %}
                     <span><i class="icon icon-comments"></i> <a href="#comments">{{ article.comments|length }} commentaire(s)</a></span>
                 </div>
+
+                {{ article.html|raw }}
+
+                <!-- <div class="addthis_toolbox addthis_default_style " style="float:right">
+                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                    <a class="addthis_button_tweet"></a>
+                </div> -->
+                <!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>-->
+
+                {%  if article.comments|length > 0 %}
+                    {% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': article.comments } only %}
+                {% endif %}
+
+                {{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': article.id })) }}
             </div>
-
-            {% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': article.comments } only %}
-
-            {{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': article.id })) }}
-
         </article>
     </div>
 {% endblock %}

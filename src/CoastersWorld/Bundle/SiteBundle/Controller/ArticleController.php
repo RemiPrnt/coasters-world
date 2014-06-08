@@ -124,7 +124,7 @@ class ArticleController extends Controller
 
         return $this->render('CoastersWorldSiteBundle:Article:sidebar.html.twig', array(
             'articles' => $articles,
-            'title' => 'news.popular'
+            'title' => 'article.popular'
         ));
     }
 

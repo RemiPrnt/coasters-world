@@ -309,12 +309,12 @@ ul.history li .featured-box .box-content {
 
 .recent-posts .date .month,
 article.post .post-date .month {
-	background-color: #3680cf;
+	background-color: #ff9933;
 }
 
 .recent-posts .date .day,
 article.post .post-date .day {
-	color: #3680cf;
+	color: #ff9933;
 }
 
 .slider .tp-bannertimer {
