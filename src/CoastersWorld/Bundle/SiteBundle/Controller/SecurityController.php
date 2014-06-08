@@ -110,12 +110,14 @@ class SecurityController extends Controller
         $session = $this->getRequest()->getSession();
 
         // L'utilisateur ne vient pas de s'enregister et tente d'accéder à la page
-        if( !$session->getFlashBag()->has('register_succeed_username') &&
-            !$session->getFlashBag()->has('register_succeed_email') )
+        if(!$session->getFlashBag()->has('register_succeed_username') &&
+            !$session->getFlashBag()->has('register_succeed_email'))
 
             return $this->redirect(
                 $this->generateUrl('coasters_world_homepage')
             );
+
+
 
         return $this->render('CoastersWorldSiteBundle:Security:registersucceed.html.twig', array(
             'register_succeed_username' => $session->getFlashBag()->get('register_succeed_username')[0],
