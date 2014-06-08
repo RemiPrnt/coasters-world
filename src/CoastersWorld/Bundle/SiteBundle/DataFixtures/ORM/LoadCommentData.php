@@ -17,7 +17,7 @@ class LoadCommentData extends AbstractFixture implements OrderedFixtureInterface
         $comment = new Comment();
         $comment->setBody('Test commentaire.')
             ->setAuthor($this->getReference('user-benj'))
-            ->setNews($this->getReference('news1'))
+            ->setArticle($this->getReference('article1'))
             ->setPublishedAt(new \DateTime());
 
         $manager->persist($comment);

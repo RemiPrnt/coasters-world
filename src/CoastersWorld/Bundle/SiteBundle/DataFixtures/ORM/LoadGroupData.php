@@ -35,6 +35,13 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
 
         $manager->persist($groupUser);
 
+        $groupNewser = new Group();
+        $groupNewser->setName('Newser');
+        $groupNewser->setRole('ROLE_NEWSER');
+        $groupNewser->addUser($this->getReference('user-admin'));
+
+        $manager->persist($groupNewser);
+
         $manager->flush();
     }
 

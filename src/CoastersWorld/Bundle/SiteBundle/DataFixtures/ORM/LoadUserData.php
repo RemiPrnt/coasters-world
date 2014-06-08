@@ -41,8 +41,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
         $userFlorian->setEmail('florian@coastersworld.fr');
         $userFlorian->setCreatedAt(new \DateTime());
-        $userFlorian->setIsActive(1);
-        $userFlorian->setIsVerified(1);
+        $userFlorian->setEnabled(1);
+        $userFlorian->setVerified(1);
 
         $manager->persist($userFlorian);
         $this->addReference('user-florian', $userFlorian);
@@ -59,8 +59,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
         $userBenj->setEmail('benj@gmail.com');
         $userBenj->setCreatedAt(new \DateTime());
-        $userBenj->setIsActive(1);
-        $userBenj->setIsVerified(1);
+        $userBenj->setEnabled(1);
+        $userBenj->setVerified(1);
 
         $manager->persist($userBenj);
         $this->addReference('user-benj', $userBenj);
@@ -77,8 +77,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
         $userAdmin->setEmail('test@coastersworld.fr');
         $userAdmin->setCreatedAt(new \DateTime());
-        $userAdmin->setIsActive(1);
-        $userAdmin->setIsVerified(1);
+        $userAdmin->setEnabled(1);
+        $userAdmin->setVerified(1);
 
         $manager->persist($userAdmin);
         $this->addReference('user-admin', $userAdmin);
