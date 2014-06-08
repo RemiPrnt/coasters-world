@@ -135,6 +135,16 @@ class Coaster
         $this->ratings = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString()
+    {
+        $name = $this->name;
+        if(!is_null($this->park)) {
+            $name .= ' (' . $this->park->getName() . ')';
+        }
+
+        return $name;
+    }
+
     /**
      * Get id
      *
