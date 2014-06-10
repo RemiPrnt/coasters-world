@@ -42,7 +42,9 @@
                             {% endfor %}
                         </span>
                     {% endif %}
-                    <span><i class="icon icon-comments"></i> <a href="#comments">{{ article.comments|length }} commentaire(s)</a></span>
+                    <span><i class="icon icon-comments"></i>
+                        <a href="#comments">{% transchoice article.comments|length with {'%count%': article.comments|length} %}comments.number{% endtranschoice %}</a>
+                    </span>
                 </div>
 
                 {{ article.html|raw }}
@@ -53,11 +55,13 @@
                 </div> -->
                 <!--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>-->
 
-                {%  if article.comments|length > 0 %}
-                    {% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': article.comments } only %}
-                {% endif %}
+                <div id="comments">
+                    {%  if article.comments|length > 0 %}
+                        {% include 'CoastersWorldSiteBundle:Comment:list.html.twig' with { 'comments': article.comments } only %}
+                    {% endif %}
 
-                {{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': article.id })) }}
+                    {{ render(controller('CoastersWorldSiteBundle:Comment:new', { 'id': article.id })) }}
+                </div>
             </div>
         </article>
     </div>

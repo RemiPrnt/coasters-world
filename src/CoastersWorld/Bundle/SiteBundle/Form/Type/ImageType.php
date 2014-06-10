@@ -2,6 +2,7 @@
 
 namespace CoastersWorld\Bundle\SiteBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,13 +16,20 @@ class ImageType extends AbstractType
             ->add('coaster', 'entity', array(
                 'class' => 'CoastersWorldSiteBundle:Coaster',
                 'required' => false,
-                'label' => 'Coaster'
+                'label' => 'Coaster',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->leftjoin('c.park', 'p')
+                        ->addSelect('p')
+                        ->orderBy('c.name', 'ASC')
+                        ->addOrderBy('p.name', 'ASC')
+                    ;
+                },
             ))
             ->add('tags', new TagType(), array(
                 'om' => $objectManager,
                 'required' => false
             ))
-            ->add('save', 'submit')
         ;
     }
 

@@ -46,7 +46,7 @@
     <script type="text/javascript">
         $('#article_type_coaster').select2();
         $('#article_type_tags').select2({tags:[{% for tag in tags %}"{{ tag }}",{% endfor %}]});
-        $('#article_type_thumbnail').select2({
+        $('#article_type_image').select2({
             placeholder: 'Chercher une image...',
             minimumInputLength: 2,
             ajax: {

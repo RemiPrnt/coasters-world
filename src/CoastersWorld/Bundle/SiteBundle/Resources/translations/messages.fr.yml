@@ -45,7 +45,7 @@ article:
 
 # Translation for comments
 comments:
-    number: '{0} Pas de commentaire|{1} %count% commentaire :|]1,Inf] %count% commentaires :'
+    number: '{0} Poster un commentaire|{1} %count% commentaire|]1,Inf] %count% commentaires'
     reply: Répondre
     add: Ajouter un commentaire
     save: Poster le commentaire

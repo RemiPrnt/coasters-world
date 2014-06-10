@@ -1,6 +1,6 @@
-<div class="post-block post-comments clearfix" id="comments">
+<div class="post-block post-comments clearfix">
 
-    <h3><i class="icon icon-comments"></i>{% transchoice comments|length with {'%count%': comments|length} %}comments.number{% endtranschoice %}</h3>
+    <h3><i class="icon icon-comments"></i> {% transchoice comments|length with {'%count%': comments|length} %}comments.number{% endtranschoice %}</h3>
 
     <ul class="comments">
         {% for comment in comments %}

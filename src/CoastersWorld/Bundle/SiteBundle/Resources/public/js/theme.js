@@ -1,10 +1,10 @@
 /*
 Name: 			Core Initializer
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		3.0.0
+Version: 		3.1.0
 */
 
-(function() {
+(function($) {
 
 	"use strict";
 
@@ -25,15 +25,15 @@ Version: 		3.0.0
 		build: function() {
 
 			// Adds browser version on html class.
-			$.browserSelector();
+			//$.browserSelector();
 
 			// Adds window smooth scroll on chrome.
 			if($("html").hasClass("chrome")) {
-				$.smoothScroll();
+				//$.smoothScroll();
 			}
 
 			// Scroll to Top Button.
-			$.scrollToTop();
+			//$.scrollToTop();
 
 			// Nav Menu
 			this.navMenu();
@@ -42,22 +42,22 @@ Version: 		3.0.0
 			//this.headerSearch();
 
 			// Animations
-			this.animations();
+			//this.animations();
 
 			// Word Rotate
-			//this.wordRotate();
+			this.wordRotate();
 
 			// Newsletter
 			//this.newsletter();
 
 			// Featured Boxes
-			//this.featuredBoxes();
+			this.featuredBoxes();
 
 			// Tooltips
 			$("a[rel=tooltip]").tooltip();
 
 			// Owl Carousel
-			//this.owlCarousel();
+			this.owlCarousel();
 
 			// Sort
 			this.sort();
@@ -69,7 +69,7 @@ Version: 		3.0.0
 			this.latestTweets();
 
 			// Flickr Feed
-			//this.flickrFeed();
+			this.flickrFeed();
 
 			// Lightbox
 			this.lightbox();
@@ -108,6 +108,12 @@ Version: 		3.0.0
 
 			$("body").waitForImages(function() {
 				Core.productInfoBox();
+			});
+
+			$(window).afterResize(function() {
+				if(typeof(Core.productInfoBox) != "undefined") {
+					Core.productInfoBox();
+				}
 			});
 
 		},
@@ -666,7 +672,7 @@ Version: 		3.0.0
 							});
 
 							if(window.location.hash != "" || filter.replace(".","") != "*") {
-								self.location = "#" + filter.replace(".","");
+								window.location.hash = filter.replace(".","");
 							}
 
 							return false;
@@ -945,7 +951,7 @@ Version: 		3.0.0
 		productInfoBox: function() {
 
 			if($(window).width() > 991) {
-				$(".product-thumb-info").css("min-height", "auto");
+				$(".product-thumb-info").css("height", "auto");
 
 				$(".product-thumb-info-list:not(.manual)").each(function() {
 
@@ -961,7 +967,7 @@ Version: 		3.0.0
 
 				});
 			} else {
-				$(".product-thumb-info").css("min-height", "auto");
+				$(".product-thumb-info").css("height", "auto");
 			}
 
 		},
@@ -1019,7 +1025,7 @@ Version: 		3.0.0
 	$(window).load(function () {
 
 		// Sticky Meny
-		//Core.stickyMenu();
+		Core.stickyMenu();
 
 		// Window Resize
 		$(window).afterResize(function() {
@@ -1053,4 +1059,4 @@ Version: 		3.0.0
 
 	});
 
-})();
+})(jQuery);
