@@ -64,6 +64,8 @@ class ImageController extends Controller
             if ($form->isValid()) {
                 $om->persist($image);
                 $om->flush();
+
+                return $this->redirect($this->generateUrl('coasters_world_image_list'));
             }
         }
 
