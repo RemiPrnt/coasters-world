@@ -38,7 +38,9 @@
                         <span><i class="icon icon-tag"></i>
                             <span class="label label-default">{{ article.coaster.name }}</span>
                             {% for tag in article.tags %}
-                                <span class="label label-default">{{ tag }}</span>
+                                <a href="{{ path('cw_article_tag', { slug: tag.name, id: tag.id }) }}">
+                                    <span class="label label-default">{{ tag }}</span>
+                                </a>
                             {% endfor %}
                         </span>
                     {% endif %}
