@@ -33,7 +33,7 @@ class CoasterController extends Controller
     public function searchAjaxAction()
     {
         $request = $this->getRequest();
-        $term = $request->query->get('q');
+        $term = $request->get('q');
 
         // @todo
         $term = '%' . $term . '%';
@@ -42,6 +42,7 @@ class CoasterController extends Controller
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:Coaster')
             ->searchByNameOrPark($term)
+            ->setMaxResults(15)
         ;
 
         return new JsonResponse($qb->getQuery()->getArrayResult());

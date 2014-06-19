@@ -2,12 +2,45 @@
 
 {% block title %}{{ 'database.title.home'|trans }}{% endblock %}
 
-{% block body %}{% include 'CoastersWorldSiteBundle:Coaster:search.html.twig' %}{% endblock %}
+{% block body %}
+    <input type="text" id="searchCoaster" style="width:300px"/>
+{% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/select2/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/select2/select2_locale_fr.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#searchCoaster').select2({
+                placeholder: 'Chercher un coaster...',
+                minimumInputLength: 2,
+                data:{ text: "name" },
+                ajax: {
+                    url: "{{ path('database_search_ajax') }}",
+                    dataType: 'json',
+                    type: "POST",
+                    quietMillis: 200,
+                    data: function (term, page) {
+                        return {q: term};
+                    },
+                    results : function(data, page) {
+                        return {results: data};
+                    }
+                },
+                formatResult: function (data) {
+                    return "<div class='select2-user-result'><i class='icon icon-tag'></i> " + data.name + ', ' + data.park.name + "</div>";
+                }
+            })
+            .on("select2-selecting", function(e) {
+                var uri = "{{ path('coasters_world_database_view', {slug: '§'}) }}";
+                uri = uri.replace(encodeURI('§'), e.object.slug);
+                window.location.href = uri;
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/select2-bootstrap-css/select2-bootstrap.css') }}" />
 {% endblock %}

@@ -29,7 +29,7 @@ coasters_world_database_view:
     pattern:  /coaster/{slug}
     defaults: { _controller: CoastersWorldSiteBundle:Coaster:view }
     requirements:
-        slug: "[a-z0-9\-]+"
+        slug: "[a-z0-9\-§]+"
 
 ######## User
 coasters_world_register_succeed:
