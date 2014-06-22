@@ -125,6 +125,13 @@ class Coaster
     private $ratings;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Feedback", mappedBy="coaster")
+     */
+    private $feedbacks;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -469,5 +476,39 @@ class Coaster
     public function getRatings()
     {
         return $this->ratings;
+    }
+
+    /**
+     * Add feedbacks
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Feedback $feedbacks
+     *
+     * @return Coaster
+     */
+    public function addFeedback(\CoastersWorld\Bundle\SiteBundle\Entity\Feedback $feedbacks)
+    {
+        $this->feedbacks[] = $feedbacks;
+
+        return $this;
+    }
+
+    /**
+     * Remove feedbacks
+     *
+     * @param \CoastersWorld\Bundle\SiteBundle\Entity\Feedback $feedbacks
+     */
+    public function removeFeedback(\CoastersWorld\Bundle\SiteBundle\Entity\Feedback $feedbacks)
+    {
+        $this->feedbacks->removeElement($feedbacks);
+    }
+
+    /**
+     * Get feedbacks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFeedbacks()
+    {
+        return $this->feedbacks;
     }
 }

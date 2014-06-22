@@ -18,9 +18,9 @@ coasters_world_database_rating_new:
     requirements:
         _method:  POST
 
-coaster_comment_create:
+feedback_create:
     pattern:  /coaster/comment/{id}
-    defaults: { _controller: CoastersWorldSiteBundle:CoasterComment:create }
+    defaults: { _controller: CoastersWorldSiteBundle:Feedback:create }
     requirements:
         _method:  POST
         id: \d+

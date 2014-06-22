@@ -38,11 +38,11 @@
     <div id="rating_number"></div>
 
     <script type="text/javascript">
-      jQuery(function() {
-        jQuery('#rating_number').raty({
-            starOff: '{{ asset('bundles/coastersworldsite/images/star-off-big.png') }}',
-            starOn: '{{ asset('bundles/coastersworldsite/images/star-on-big.png') }}',
-            starHalf: '{{ asset('bundles/coastersworldsite/images/star-half-big.png') }}',
+      $(function() {
+        $('#rating_number').raty({
+            starOff: '{{ asset('bundles/coastersworldsite/vendor/jquery-raty/images/star-off.png') }}',
+            starOn: '{{ asset('bundles/coastersworldsite/vendor/jquery-raty/images/star-on.png') }}',
+            starHalf: '{{ asset('bundles/coastersworldsite/vendor/jquery-raty/images/star-half.png') }}',
             half: true,
             size: 24,
             target:  '#{{id}}',
@@ -50,7 +50,7 @@
             targetKeep: true,
             score: {{value ? value : '0'}},
             click: function() {
-                jQuery(this).closest("form").submit();
+                $(this).closest("form").submit();
             },
             width: false
         });

@@ -3,10 +3,10 @@
 namespace CoastersWorld\Bundle\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use CoastersWorld\Bundle\SiteBundle\Form\Type\CoasterCommentType;
-use CoastersWorld\Bundle\SiteBundle\Entity\CoasterComment;
+use CoastersWorld\Bundle\SiteBundle\Form\Type\FeedbackType;
+use CoastersWorld\Bundle\SiteBundle\Entity\Feedback;
 
-class CoasterCommentController extends Controller
+class FeedbackController extends Controller
 {
     public function newAction($id)
     {
@@ -19,11 +19,11 @@ class CoasterCommentController extends Controller
             return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
         }
 
-        $comment = new CoasterComment();
+        $comment = new Feedback();
         $comment->setCoaster($coaster);
-        $comment->setAuthor($this->getUser());
-        $form = $this->createForm(new CoasterCommentType(), $comment, array(
-            'action' => $this->generateUrl('coaster_comment_create', array('id' => $id)),
+        $comment->setUser($this->getUser());
+        $form = $this->createForm(new FeedbackType(), $comment, array(
+            'action' => $this->generateUrl('feedback_create', array('id' => $id)),
             'method' => 'POST',
         ));
 
@@ -37,11 +37,11 @@ class CoasterCommentController extends Controller
     {
         $coaster = $this->getCoaster($id);
 
-        $comment  = new CoasterComment();
+        $comment  = new Feedback();
         $comment->setCoaster($coaster);
-        $comment->setAuthor($this->getUser());
+        $comment->setUser($this->getUser());
         $request = $this->getRequest();
-        $form    = $this->createForm(new CoasterCommentType(), $comment);
+        $form    = $this->createForm(new FeedbackType(), $comment);
         $form->bind($request);
 
         if ($form->isValid()) {

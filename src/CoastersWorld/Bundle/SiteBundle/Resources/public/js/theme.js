@@ -25,7 +25,7 @@ Version: 		3.1.0
 		build: function() {
 
 			// Adds browser version on html class.
-			//$.browserSelector();
+			$.browserSelector();
 
 			// Adds window smooth scroll on chrome.
 			if($("html").hasClass("chrome")) {

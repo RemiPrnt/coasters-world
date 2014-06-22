@@ -1,14 +1,22 @@
-<div class="latest-blog">
-  {% for comment in comments %}
-  <article>
-    <span class="icon"><i class="icon-quote-left"></i></span>
-    <h3>Une phrase d'accroche écrite par l'utilisateur !
-      <small><i class="icon-calendar"></i> {{ comment.publishedAt|date("F jS \\a\\t g:ia") }}</small>
-      <small><i class="icon-pencil"></i> {{ 'news.author'|trans }} {{ comment.author.username }}</small>
-    </h3>
-    <p>{{ comment.body }}</p>
-  </article>
-  {% endfor %}
-</div>
+<h3><i class="icon icon-comments"></i> {% transchoice comments|length with {'%count%': comments|length} %}comments.number{% endtranschoice %}</h3>
+<ul class="comments">
+    {% for comment in comments %}
+        <li>
+            <div class="comment">
+                <div class="img-thumbnail">
+                    <img class="avatar" alt="" src="{{ asset('bundles/coastersworldsite/img/avatar.jpg') }}">
+                </div>
+                <div class="comment-block">
+                    <div class="comment-arrow"></div>
+                    <span class="comment-by">
+                        <strong>{{ comment.user.username }}</strong>
+                    </span>
+                    <p>{{ comment.body|nl2br }}</p>
+                    <span class="date pull-right">{{ comment.publishedAt|localizeddate('none', 'none', app.request.locale, null, 'cccc d MMMM Y à hh:mm') }}</span>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
 
-{{ render(controller('CoastersWorldSiteBundle:CoasterComment:new', { 'id': id })) }}
+{{ render(controller('CoastersWorldSiteBundle:Feedback:new', { 'id': id })) }}

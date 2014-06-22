@@ -56,7 +56,7 @@ class RatingController extends Controller
                 $rate = ($rate / $i) * 2;
                 //$rate = round($rate, 1);
 
-                $coaster->setRate($rate);
+                $coaster->setAverageRating($rate);
                 $em->persist($coaster);
 
                 $em->flush();
@@ -68,7 +68,6 @@ class RatingController extends Controller
         }
 
         return $this->render('CoastersWorldSiteBundle:Coaster:rating.html.twig', array(
-            'comment' => $comment,
             'form' => $form->createView()
         ));
     }

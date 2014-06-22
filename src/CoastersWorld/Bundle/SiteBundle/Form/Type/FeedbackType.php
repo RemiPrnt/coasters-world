@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CoasterCommentType extends AbstractType
+class FeedbackType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -18,12 +18,12 @@ class CoasterCommentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CoastersWorld\Bundle\SiteBundle\Entity\CoasterComment'
+            'data_class' => 'CoastersWorld\Bundle\SiteBundle\Entity\Feedback'
         ));
     }
 
     public function getName()
     {
-        return 'coastersworld_bundle_coastercommenttype';
+        return 'cw_feedback';
     }
 }

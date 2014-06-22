@@ -3,64 +3,84 @@
 {% block title %}{{ coaster.name }}{% endblock %}
 
 {% block body %}
-<div class="row">
-  <div class="span12">
-    <div class="page-header">
-      <h1>
-        <i id="status" data-toggle='tooltip' title="{{ coaster.status.name }}"
-          class={% if coaster.status.idTechnical == 1 %}"icon-ok-sign"
-          {% elseif coaster.status.idTechnical == 2 %}"icon-lock"
-          {% elseif coaster.status.idTechnical == 3 %}"icon-wrench"
-          {% elseif coaster.status.idTechnical == 4 %}"icon-share-alt"
-          {% else %}"icon-question-sign"{% endif %}
-        >
-        </i>
+    <h1>
+        <a rel="tooltip" href="#" data-original-title="{{ coaster.status.name }}">
+            <i id="status" data-toggle='tooltip' title=""
+                class={% if coaster.status.id == 1 %}"icon icon-check-circle"
+                {% elseif coaster.status.id == 2 %}"icon icon-lock"
+                {% elseif coaster.status.id == 3 %}"icon icon-wrench"
+                {% elseif coaster.status.id == 4 %}"icon icon-share"
+                {% else %}"icon-question-circle"{% endif %}
+            >
+            </i>
+        </a>
         {{ coaster.name }}
         <small>{{ coaster.park.name }}, {{ coaster.park.country.name }}</small>
-      </h1>
+    </h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="tabs">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#caracs" data-toggle="tab"><i class="icon icon-cogs"></i> {{ 'tab.caracteristics'|trans }}</a>
+                    </li>
+                    <li><a href="#photos" data-toggle="tab"><i class="icon icon-camera"></i> {{ 'tab.photos'|trans }}</a></li>
+                    <li><a href="#videos" data-toggle="tab"><i class="icon icon-video-camera"></i> {{ 'tab.videos'|trans }}</a></li>
+                    <li><a href="#feedbacks" data-toggle="tab"><i class="icon icon-group"></i> {{ 'tab.feedbacks'|trans }}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="caracs" class="tab-pane active">
+                        <dl class="dl-horizontal">
+                            <dt>{% spaceless %}{{ 'info.type'|trans }}</dt>
+                            <dd>
+                                {% for type in coaster.objectCoaster.types %}
+                                {{ type.name }} {% if not loop.last %}|{% endif %}
+                                {% endfor %}
+                                {% endspaceless %}
+                            </dd>
+                            <dt>{{ 'info.manufacturer'|trans }}</dt>
+                            <dd>{{ coaster.objectCoaster.manufacturer.name }}</dd>
+                            <dt>{{ 'info.speed'|trans }}</dt>
+                            <dd>{{ coaster.objectCoaster.speed }} {{ 'units.speed'|trans }}</dd>
+                            <dt>{{ 'info.height'|trans }}</dt>
+                            <dd>{{ coaster.objectCoaster.height }} {{ 'units.length'|trans }}</dd>
+                            <dt>{{ 'info.length'|trans }}</dt>
+                            <dd>{{ coaster.objectCoaster.length }} {{ 'units.length'|trans }}</dd>
+                            <dt>{{ 'info.inversion_number'|trans }}</dt>
+                            <dd>{{ coaster.objectCoaster.inversionNumber }}</dd>
+                            <dt>{{ 'info.g_force'|trans }}</dt>
+                            <dd>{{ coaster.objectCoaster.gForce }} {{ 'units.force'|trans }}</dd>
+                            <dt>{{ 'info.duration'|trans }}</dt>
+                            <dd>{{ coaster.objectCoaster.duration|date("i\\m\\i\\n s\\s") }}</dd>
+                            <dt>{{ 'info.configuration'|trans }}</dt>
+                            <dd>|{{ coaster.objectCoaster.restraint.name|default('-') }}</dd>
+                        </dl>
+                    </div>
+                    <div id="photos" class="tab-pane"></div>
+                    <div id="videos" class="tab-pane"></div>
+                    <div id="feedbacks" class="tab-pane">
+                        {% include 'CoastersWorldSiteBundle:Coaster:view_feedback.html.twig'
+                        with { 'comments': coaster.feedbacks, 'id': coaster.id } only %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="featured-box featured-box-primary">
+                <div class="box-content">
+                    <h4>{{ 'rating.mark'|trans }}</h4>
+                    <div class="text-center"><h4>{{ coaster.averageRating|number_format(1, ',') }} / 10</h4></div>
+                    <h3><i class="icon icon-bullhorn"></i> Mon vote :</h3>
+                    {{ render(controller('CoastersWorldSiteBundle:Rating:new', { 'slug': coaster.slug })) }}
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- Left side -->
-  <div class="span8">
-    <div class="content">
-      <div class="page">
-        <div id="tab">
-          <div class="bs-docs-example">
-            <!-- Tabs Widget -->
-            <ul id="tabs" class="tabs nav nav-tabs">
-              <li class="active"><a href="#caracs" data-toggle="tab"><i class="icon-cogs"></i> {{ 'tab.caracteristics'|trans }}</a></li>
-              <li><a href="#photos" data-toggle="tab"><i class="icon-camera"></i> {{ 'tab.photos'|trans }}</a></li>
-              <li><a href="#videos" data-toggle="tab"><i class="icon-facetime-video"></i> {{ 'tab.videos'|trans }}</a></li>
-              <li><a href="#feedbacks" data-toggle="tab"><i class="icon-group"></i> {{ 'tab.feedbacks'|trans }}</a></li>
-            </ul>
-            <div id="tabsContent" class="tab-content">
-              <div class="tab-pane fade in active" id="caracs">
-                <dl class="dl-horizontal">
-                  <dt>{% spaceless %}{{ 'info.type'|trans }}</dt>
-                  <dd>{% for type in coaster.refCoaster.types %}
-                    {{ type.name }} {% if not loop.last %}|{% endif %}
-                    {% endfor %}
-                    {% endspaceless %}
-                  </dd>
-                  <dt>{{ 'info.manufacturer'|trans }}</dt>
-                  <dd>{{ coaster.refCoaster.manufacturer.name|default('-') }}</dd>
-                  <dt>{{ 'info.speed'|trans }}</dt>
-                  <dd>{{ coaster.refCoaster.speed }} {{ 'units.speed'|trans }}</dd>
-                  <dt>{{ 'info.height'|trans }}</dt>
-                  <dd>{{ coaster.refCoaster.height }} {{ 'units.length'|trans }}</dd>
-                  <dt>{{ 'info.length'|trans }}</dt>
-                  <dd>{{ coaster.refCoaster.length }} {{ 'units.length'|trans }}</dd>
-                  <dt>{{ 'info.inversion_number'|trans }}</dt>
-                  <dd>{{ coaster.refCoaster.inversionNumber }}</dd>
-                  <dt>{{ 'info.g_force'|trans }}</dt>
-                  <dd>{{ coaster.refCoaster.gForce }} {{ 'units.force'|trans }}</dd>
-                  <dt>{{ 'info.duration'|trans }}</dt>
-                  <dd>{{ coaster.refCoaster.duration|date("i\\m\\i\\n s\\s") }}</dd>
-                  <dt>{{ 'info.configuration'|trans }}</dt>
-                  <dd>|{{ coaster.refCoaster.restraint.name|default('-') }}</dd>
-                </dl>
-              </div>
-              <div class="tab-pane fade in" id="photos">
+{% endblock %}
+
+
+{#
 
                 <section id="gallery">
                 <div class="gallery">
@@ -99,7 +119,7 @@
               <div class="tab-pane fade in" id="videos"></div>
               <div class="tab-pane fade in" id="feedbacks">
                 {% include 'CoastersWorldSiteBundle:Coaster:view_feedback.html.twig'
-                  with { 'comments': coaster.coasterComments, 'id': coaster.id } only %}
+                  with { 'comments': coaster.feedbacks, 'id': coaster.id } only %}
               </div>
             </div>
           </div>
@@ -142,18 +162,14 @@
   </div>
   <!-- End right side -->
 </div>
-{% endblock %}
+#}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/jquery.raty.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/jquery.prettyPhoto.min.js') }}"></script>
-    <script type="text/javascript">
-      jQuery('#status').tooltip();
-    </script>
-    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/js/vendor/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/jquery-raty/jquery.raty.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/coastersworldsite/vendor/select2/select2.min.js') }}"></script>
 {% endblock %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/vendor/prettyPhoto.css') }}" type="text/css" media="screen" charset="utf-8" />
-  <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/css/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/coastersworldsite/vendor/select2-bootstrap-css/select2-bootstrap.css') }}" />
 {% endblock %}
