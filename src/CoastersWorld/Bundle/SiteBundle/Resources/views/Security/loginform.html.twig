@@ -1,7 +1,7 @@
 <section id="login">
     <div class="row">
         {% if error is defined and error %}
-            <div class="alert alert-error">{{ error.message|trans }}</div>
+            <div class="alert alert-danger">{{ error.message|trans }}</div>
         {% endif %}
         <div class="col-md-{{ formwidth }}">
 
