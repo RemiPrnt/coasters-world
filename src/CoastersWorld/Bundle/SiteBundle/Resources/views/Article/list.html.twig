@@ -3,6 +3,11 @@
 {% block page_top_main %}{{ title }}{% endblock %}
 
 {% block articleContent %}
+
+    {% if logout_success is defined and logout_success %}
+        <div class="alert alert-success">{{ logout_success }}</div>
+    {% endif %}
+
     <div class="blog-posts">
         {% for article in articles %}
             <article class="post post-large">

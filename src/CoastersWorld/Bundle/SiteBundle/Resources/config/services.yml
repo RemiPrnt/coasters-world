@@ -2,6 +2,7 @@ parameters:
    coasters_world_article.form.article_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\ArticleType
    coasters_world_image.form.image_type.class: CoastersWorld\Bundle\SiteBundle\Form\Type\ImageType
    coasters_world.mailer.class: CoastersWorld\Bundle\SiteBundle\Service\CoastersWorldMailer
+   coasters_world.logouthandler.class: CoastersWorld\Bundle\SiteBundle\Service\CoastersWorldLogoutHandler
 
 services:
     coasters_world_article.form.article_type:
@@ -15,3 +16,6 @@ services:
     coasters_world.mailer:
         class:     "%coasters_world.mailer.class%"
         arguments: ["@mailer", "@templating", "@translator", "%coastersworldAdminEmailAddress%", "%coastersworldAdminEmailName%"]
+    coasters_world.logouthandler:
+        class:     "%coasters_world.logouthandler.class%"
+        arguments: ["@session", "@translator"]

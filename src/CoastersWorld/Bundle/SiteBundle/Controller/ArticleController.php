@@ -32,9 +32,17 @@ class ArticleController extends Controller
             throw new NotFoundHttpException("No article was found");
         }
 
+        // Récupération du message de déconnexion
+        $logout_success = null;
+        if($this->getRequest()->getSession()->getFlashBag()->has('logout_success'))
+        {
+            $logout_success = $this->getRequest()->getSession()->getFlashBag()->get('logout_success')[0];
+        }
+
         return $this->render('CoastersWorldSiteBundle:Article:list.html.twig', array(
             'articles' => $articles,
-            'title' => $this->get('translator')->trans('article.title.last')
+            'title' => $this->get('translator')->trans('article.title.last'),
+            'logout_success' => $logout_success
         ));
     }
 

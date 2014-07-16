@@ -25,6 +25,8 @@ security:
             logout:
                 path:   /logout
                 target: /
+                success_handler: coasters_world.logouthandler
+                invalidate_session: false
             anonymous: ~
             remember_me:
                 key:      "%secret%"
