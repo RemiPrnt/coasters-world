@@ -18,4 +18,4 @@ services:
         arguments: ["@mailer", "@templating", "@translator", "%coastersworldAdminEmailAddress%", "%coastersworldAdminEmailName%"]
     coasters_world.logouthandler:
         class:     "%coasters_world.logouthandler.class%"
-        arguments: ["@session", "@translator"]
+        arguments: ["@router", "@translator"]
