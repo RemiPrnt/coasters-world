@@ -30,6 +30,7 @@ article:
         home: Toutes les news
         create: Rédiger une news
         last: Les dernières news
+        remove: Supprimer une news
     read:
         more: Lire la suite...
     author: Posté par
@@ -39,6 +40,10 @@ article:
     last: Les dernières
     save: Enregistrer et publier
     disable: Désactiver
+    cancel: Annuler
+    edit: Editer
+    remove: Supprimer
+    remove_success: L'article "%title%" a bien été supprimé.
     reset: Effacer
     latest: Derniers articles
     popular: Articles populaires

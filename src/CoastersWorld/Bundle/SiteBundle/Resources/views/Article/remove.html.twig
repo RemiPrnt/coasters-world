@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ 'article.title.remove'|trans }}{% endblock %}
+
+{% block page_top_main %}{{ 'article.title.remove'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <p>Êtes-vous sûr de vouloir supprimer l'article <b>"{{ article.title }}"</b> ?</p>
+            <a href="{{ path('cw_article_view', { slug: article.slug }) }}" class="btn btn-default" style="float:left;margin-right:10px;">{{ 'article.cancel'|trans }}</a>
+            {{ form_start(form) }}
+                {{ form_widget(form.remove, { 'attr': {'class': 'btn btn-danger'}, 'label': 'article.remove' }) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

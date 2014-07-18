@@ -11,6 +11,7 @@ class ArticleRepository extends EntityRepository
         return $this
             ->createQueryBuilder('n')
             ->addOrderBy('n.publishedAt', 'DESC')
+            ->where('n.active = true')
             ->getQuery()
         ;
     }

@@ -8,6 +8,10 @@
         <div class="alert alert-success">{{ logout_success }}</div>
     {% endif %}
 
+    {% if article_remove_success is defined and article_remove_success %}
+        <div class="alert alert-success">{{ article_remove_success }}</div>
+    {% endif %}
+
     <div class="blog-posts">
         {% for article in articles %}
             <article class="post post-large">
@@ -34,7 +38,13 @@
                         {% if is_granted("ROLE_NEWSER") %}
                             <a href="{{ path('cw_article_edit', { id: article.id }) }}" class="btn btn-xs btn-primary">
                                 <i class="icon icon-edit"></i>
-                                Editer
+                                {{ 'article.edit'|trans }}
+                            </a>
+                        {% endif %}
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="{{ path('cw_article_remove', { id: article.id }) }}" class="btn btn-xs btn-danger">
+                                <i class="icon icon-trash-o"></i>
+                                {{ 'article.remove'|trans }}
                             </a>
                         {% endif %}
                     </h2>

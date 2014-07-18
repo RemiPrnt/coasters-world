@@ -91,6 +91,11 @@ cw_article_edit:
     pattern:  /news/edit/{id}
     defaults: { _controller: CoastersWorldSiteBundle:Article:edit }
 
+# Suppression d'un article
+cw_article_remove:
+    pattern:  /news/remove/{id}
+    defaults: { _controller: CoastersWorldSiteBundle:Article:remove }
+
 # Création d'un commentaire
 cw_article_comment_create:
     pattern:  /news/comment/{id}

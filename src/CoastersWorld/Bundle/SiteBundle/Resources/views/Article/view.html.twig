@@ -7,8 +7,14 @@
     {% if is_granted("ROLE_NEWSER") %}
         <a href="{{ path('cw_article_edit', { id: article.id }) }}" class="btn btn-xs btn-primary">
             <i class="icon icon-edit"></i>
-            Editer
+            {{ 'article.edit'|trans }}
         </a>
+        {% if is_granted("ROLE_ADMIN") %}
+            <a href="{{ path('cw_article_remove', { id: article.id }) }}" class="btn btn-xs btn-danger">
+                <i class="icon icon-trash-o"></i>
+                {{ 'article.remove'|trans }}
+            </a>
+        {% endif %}
     {% endif %}
 {% endblock %}
 

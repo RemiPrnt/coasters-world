@@ -111,6 +111,13 @@ class Article
     private $comments;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=false)
+     */
+    private $active;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -118,6 +125,7 @@ class Article
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->publishedAt = new \DateTime();
+        $this->active = true;
     }
 
     /**
@@ -378,5 +386,29 @@ class Article
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set active.
+     *
+     * @param boolean $active
+     *
+     * @return Article
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    
+        return $this;
+    }
+
+    /**
+     * Get active.
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

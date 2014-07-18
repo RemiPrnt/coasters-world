@@ -32,17 +32,25 @@ class ArticleController extends Controller
             throw new NotFoundHttpException("No article was found");
         }
 
-        // Récupération du message de déconnexion
+        // Récupération du message de succès de déconnexion
         $logout_success = null;
         if($this->getRequest()->getSession()->getFlashBag()->has('logout_success'))
         {
             $logout_success = $this->getRequest()->getSession()->getFlashBag()->get('logout_success')[0];
         }
 
+        // Récupération du message de succès de suppression
+        $article_remove_success = null;
+        if($this->getRequest()->getSession()->getFlashBag()->has('article_remove_success'))
+        {
+            $article_remove_success = $this->getRequest()->getSession()->getFlashBag()->get('article_remove_success')[0];
+        }
+
         return $this->render('CoastersWorldSiteBundle:Article:list.html.twig', array(
             'articles' => $articles,
             'title' => $this->get('translator')->trans('article.title.last'),
-            'logout_success' => $logout_success
+            'logout_success' => $logout_success,
+            'article_remove_success' => $article_remove_success
         ));
     }
 
@@ -91,12 +99,68 @@ class ArticleController extends Controller
         ));
     }
 
+    public function removeAction($id)
+    {
+        // L'utilisateur doit être administrateur pour supprimer une news
+        if (! $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            return $this->render('CoastersWorldSiteBundle:Security:redirectLogin.html.twig');
+        }
+
+        // Récupération de la news à supprimer
+        $om = $this->getDoctrine()->getManager();
+        $article = $om->getRepository('CoastersWorldSiteBundle:Article')->findOneBy(array(
+            'id' => $id,
+            'active' => true
+        ));
+
+        // La news n'existe pas, affichage d'une erreur
+        if (!$article) {
+          throw $this->createNotFoundException('Aucun article n\'a été trouvée pour l\'id : '.$id);
+        }
+
+        // Création d'un formulaire de confirmation
+        $form = $this->createFormBuilder($article)
+                     ->add('remove', 'submit')
+                     ->getForm();
+
+        $form->handleRequest($this->getRequest());
+
+        // Confirmation de la suppression, l'article est désactivé (mais gardé en BDD)
+        if ($form->isValid()) {
+
+            // Mise à jour de l'article en BDD
+            $article->setActive(false);
+            $om->persist($article);
+            $om->flush();
+
+            // Création d'un message de succès
+            $this->getRequest()
+                 ->getSession()
+                 ->getFlashBag()
+                 ->add('article_remove_success', $this->get('translator')->trans(
+                    'article.remove_success',
+                    array('%title%' => $article->getTitle())
+                 ));
+
+            return $this->redirect($this->generateUrl('coasters_world_homepage'));
+        }
+        
+        // Affichage d'un formulaire de confirmation
+        return $this->render('CoastersWorldSiteBundle:Article:remove.html.twig', array(
+            'article' => $article,
+            'form' => $form->createView()
+        ));
+    }
+
     public function viewAction($slug)
     {
         $article = $this->getDoctrine()
             ->getManager()
             ->getRepository('CoastersWorldSiteBundle:Article')
-            ->findOneBy(array('slug' => $slug))
+            ->findOneBy(array(
+                'slug' => $slug,
+                'active' => true
+            ))
         ;
 
         if (count($article) == 0) {
